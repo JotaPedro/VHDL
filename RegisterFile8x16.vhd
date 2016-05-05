@@ -61,6 +61,9 @@ architecture Behavioral of RegisterFile8x16 is
 	signal Or_gate_r5: STD_LOGIC;
 	signal Or_gate_r6: STD_LOGIC;
 	signal Or_gate_r7: STD_LOGIC;
+	signal irrelevant: STD_LOGIC;
+	Signal Q_out_r7: bit_16;
+	Signal B_adder: bit_16;
 	
 	--signal result_adder_pc: bit_16;
 	--result_adder_pc <= (PC + bit_pc_add);
@@ -76,7 +79,6 @@ architecture Behavioral of RegisterFile8x16 is
 		
 	--Falta implementar o somador do PC e os multiplexers2-1 dos R5,R6,R7.
 begin
-
 	Input_Data_Mplex16bit_r5(0) <= DestData;
 	Input_Data_Mplex16bit_r5(1) <= Q_out(7);
 	Input_Data_Mplex16bit_r6(0) <= DestData;
@@ -88,9 +90,20 @@ begin
 	Or_gate_r5 <= (enabler_register(5) or RFC(1));
 	Or_gate_r6 <= (enabler_register(6) or RFC(2));
 	Or_gate_r7 <= (enabler_register(7) or RFC(3));
+	B_adder <= ("0000000000000010");
 
-
-
+	Adder:
+		for i in 0 to 15 generate
+			FAx: FullAdder PORT MAP(
+				Ax		=> Q_out(7)(i),
+				Bx		=> B_adder(i),
+				Cin	=> '0',
+				Sx		=> Q_out_r7(i),
+				Cout	=> irrelevant,
+				Op		=> '0'
+		);
+		end generate Adder;
+		
 	decoder: component Decoder3_8 port map(
 			AddrSD_port => addressSD,
          Enable_port => RFC(0),
@@ -145,7 +158,7 @@ begin
 			enable => Or_gate_r5,
          clk => clock,
          clr => '0', --só deve ser activado para o PSW e PC
-         d => DestData,
+         d => Input_Data_r5,
          q => Q_out(5) --para fazer um Bus de Buses. Pesquisar.
 	);
 	--registos
@@ -153,7 +166,7 @@ begin
 			enable => Or_gate_r6,
          clk => clock,
          clr => CL, --só deve ser activado para o PSW e PC
-         d => DestData,
+         d => Input_Data_r6,
          q => Q_out(6) --para fazer um Bus de Buses. Pesquisar.
 	);-- replicar para os restantes registos.
 	
@@ -162,7 +175,7 @@ begin
 			enable => Or_gate_r7,
          clk => clock,
          clr => CL, --só deve ser activado para o PSW e PC
-         d => DestData,
+         d => Input_Data_r7,
          q => Q_out(7) --para fazer um Bus de Buses. Pesquisar.
 	);	
 ----------------------------------------------------------------------------------
