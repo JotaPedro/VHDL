@@ -193,6 +193,12 @@ package pds16_types is
            Output : out  bit_16);
 	end component;
 	
+	component MBR is
+    Port ( enable : in  STD_LOGIC;
+			  d : in  STD_LOGIC_VECTOR (15 downto 0);
+           q : out  STD_LOGIC_VECTOR (15 downto 0));
+	end component;
+	
 --  type <new_type> is
 --    record
 --        <type_name>        : std_logic_vector( 7 downto 0);
