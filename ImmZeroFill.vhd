@@ -29,7 +29,7 @@ use work.pds16_types.ALL;
 --use UNISIM.VComponents.all;
 
 entity ImmZeroFill is
-    Port ( LSB : in  STD_LOGIC; --O QUE É ISTO?????
+    Port ( LSB : in  STD_LOGIC_VECTOR(7 downto 0);
            SelImm : in  STD_LOGIC;
            Output : out  bit_16;
            Input : in  STD_LOGIC_VECTOR(7 downto 0)
@@ -37,9 +37,17 @@ entity ImmZeroFill is
 end ImmZeroFill;
 
 architecture Behavioral of ImmZeroFill is
-
 begin
 
+process(Input, SelImm)
+	begin
+	if SelImm = '0' then
+		Output <= Input & (7 downto 0 => '0');
+		else if SelImm = '1' then
+			Output <= Input & LSB;
+		end if;
+	end if;
+end process;
 
 end Behavioral;
 

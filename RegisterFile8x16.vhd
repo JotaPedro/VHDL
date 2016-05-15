@@ -91,7 +91,11 @@ begin
 	Or_gate_r6 <= (enabler_register(6) or RFC(2));
 	Or_gate_r7 <= (enabler_register(7) or RFC(3));
 	B_adder <= ("0000000000000010");
-
+	
+	
+	--PC não avança, será que é porque é necessário um process sensivel ao PC? Se sim, começa a dar erro de syntax.
+--	process(PC)
+--		begin
 	Adder:
 		for i in 0 to 15 generate
 			FAx: FullAdder PORT MAP(
@@ -103,6 +107,7 @@ begin
 				Op		=> '0'
 		);
 		end generate Adder;
+--	end process;
 		
 	decoder: component Decoder3_8 port map(
 			AddrSD_port => addressSD,
