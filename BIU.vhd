@@ -50,9 +50,9 @@ entity BIU is
            RDY : in  STD_LOGIC;
            BRQ : in  STD_LOGIC;
            BGT_in : in  STD_LOGIC;
-			  BGT_out : in  STD_LOGIC;
+			  BGT_out : out  STD_LOGIC;
            RESOUT : out  STD_LOGIC;
-           DataIn : out  STD_LOGIC);
+           DataIn : out  STD_LOGIC_VECTOR (15 downto 0));
 end BIU;
 
 architecture Behavioral of BIU is
@@ -65,9 +65,9 @@ begin
 
 		
 	MBR: MBR PORT MAP( 
-		enable <= RD,--: in  STD_LOGIC;
-		d <= AD,--: in  bit_16;
-		q <= DataIn--: out  bit_16
+		enable => RD,--: in  STD_LOGIC;
+		d => AD,--: in  bit_16;
+		q => DataIn--: out  bit_16
 	);
 	
 	Mplex_DataOut_input(0) <= DataOut(15 downto 8);
@@ -75,9 +75,9 @@ begin
 	Data_to_mem <= x"00" & DataOut(7 downto 0);
 	
 	Mplex_DataOut: Mplex8bit_2to1 PORT MAP(
-		Input <= Mplex_DataOut_input,--: in  bit_8_array(1 downto 0);
-      Sel <= BusCtr(0),--: in  STD_LOGIC;
-      Output <= Data_to_mem(15 downto 8)--: out  bit_8
+		Input => Mplex_DataOut_input,--: in  bit_8_array(1 downto 0);
+      Sel => BusCtr(0),--: in  STD_LOGIC;
+      Output => Data_to_mem(15 downto 8)--: out  bit_8
 	);
 		
 	S0_out <= S0_in;
@@ -85,22 +85,22 @@ begin
 	BGT_out <= BGT_in;
 
 	RDY_flipflop: DFlipFlop PORT MAP(
-		D <= RDY,
-      Q <= Sync(1),--Sync(RDY)
-      Clk <= Clock,
-      CL <= '0'
+		D => RDY,
+      Q => Sync(1),--Sync(RDY)
+      Clk => Clock,
+      CL => '0'
 	);
 	BRQ_flipflop: DFlipFlop PORT MAP(
-		D <= BRQ,
-      Q <= Sync(0),--Sync(BRQ)
-      Clk <= Clock,
-      CL <= '0'
+		D => BRQ,
+      Q => Sync(0),--Sync(BRQ)
+      Clk => Clock,
+      CL => '0'
 	);
 	ALE_flipflop: DFlipFlop PORT MAP(
-		D <= BusCtr(3),--BusCtr(ALE)
-      Q <= ALE_flipflop_output,
-      Clk <= Clock,
-      CL <= '0'
+		D => BusCtr(3),--BusCtr(ALE)
+      Q => ALE_flipflop_output,
+      Clk => Clock,
+      CL => '0'
 	);
 	ALE <= BusCtr(3) AND (NOT ALE_flipflop_output);
 
