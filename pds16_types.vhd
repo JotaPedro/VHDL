@@ -199,6 +199,103 @@ package pds16_types is
            q : out  STD_LOGIC_VECTOR (15 downto 0));
 	end component;
 	
+	component InstReg is
+	 Port ( Input : in  STD_LOGIC;
+           EIR : in  STD_LOGIC;
+           Output : out  STD_LOGIC;
+           Clk : in  STD_LOGIC);
+	end component;
+
+	component ImmZeroFill is
+	 Port ( LSB : in  STD_LOGIC_VECTOR(7 downto 0);
+           SelImm : in  STD_LOGIC;
+           Output : out  bit_16;
+           Input : in  STD_LOGIC_VECTOR(7 downto 0));
+	end component;
+	
+	component HiZeroFill is
+    Port ( Input : in  STD_LOGIC;
+           Output : out  STD_LOGIC);
+	end component;
+	
+	component Control is
+	 Port ( 	WL 			: in  STD_LOGIC;
+				Flags 		: in  STD_LOGIC_VECTOR(2 downto 0);-- 0-Zero 1-Carry 2-GE
+				OpCode 	: in  STD_LOGIC_VECTOR(6 downto 0);-- bits de 15 a 9
+				INTP 		: in  STD_LOGIC;
+				Clock 		: in  STD_LOGIC;
+				CL 			: in  STD_LOGIC;
+				Sync 		: in  STD_LOGIC_VECTOR(1 downto 0); -- 0- BRQ, 1-RDY
+				BusCtr 	: out  STD_LOGIC_VECTOR(3 downto 0); -- 0-WrByte, 1-DataOut, 2-Addr, 3-ALE
+				RFC 		: out  STD_LOGIC_VECTOR(4 downto 0);
+				ALUC 		: out  STD_LOGIC_VECTOR(2 downto 0);
+				SelAddr 	: out  STD_LOGIC_VECTOR(1 downto 0);
+				SelData	: out  STD_LOGIC_VECTOR(1 downto 0);
+				Sellmm 	: out  STD_LOGIC;
+				RD 			: out	 STD_LOGIC; -- ACTIVE LOW
+				WR			: out  STD_LOGIC_VECTOR(1 downto 0); -- 0-WRL, 1-WRH
+				BGT			: out	 STD_LOGIC;
+				S0 			: out	 STD_LOGIC;
+				S1 			: out	 STD_LOGIC;
+				EIR			: out	 STD_LOGIC);
+	end component;
+	
+	component BIU is
+	 Port ( Clock : in  STD_LOGIC;
+           CL : in  STD_LOGIC;
+           Addr : in  STD_LOGIC_VECTOR(14 downto 0);--Addr 15 downto 1
+           DataOut : in  STD_LOGIC_VECTOR(15 downto 0);
+           BusCtr : in  STD_LOGIC_VECTOR(3 downto 0);-- 0-WrByte, 1-DataOut, 2-Addr, 3-Ale
+           Sync : out  STD_LOGIC_VECTOR(1 downto 0);-- 0- BRQ, 1-RDY
+           AD : inout  STD_LOGIC_VECTOR(15 downto 0);
+           ALE : out  STD_LOGIC;
+           S0_in : in  STD_LOGIC;
+           S1_in : in  STD_LOGIC;
+			  S0_out : out  STD_LOGIC;
+           S1_out : out  STD_LOGIC;
+           RD : in  STD_LOGIC;
+           WRL : in  STD_LOGIC;
+           WRH : in  STD_LOGIC;
+			  nRD : out  STD_LOGIC;
+			  nWRL : out  STD_LOGIC;
+           nWRH : out  STD_LOGIC;
+           RDY : in  STD_LOGIC;
+           BRQ : in  STD_LOGIC;
+           BGT_in : in  STD_LOGIC;
+			  BGT_out : out  STD_LOGIC;
+           RESOUT : out  STD_LOGIC;
+           DataIn : out  STD_LOGIC_VECTOR (15 downto 0));
+	end component;
+	
+	component Data_Processor is
+	 Port ( Const : in  STD_LOGIC_VECTOR(7 downto 0);
+           OpB : in  bit_16;
+           OpA : in  bit_16;
+           CYin : in  STD_LOGIC;
+           Ctr : in  STD_LOGIC_VECTOR(2 downto 0);
+			  Func : in  STD_LOGIC_VECTOR(5 downto 0);--IR10 , 11, 12, 13, 14, 15
+           Result : out  bit_16;
+           FlagsOut : out  STD_LOGIC_VECTOR(3 downto 0)--P,Z,CyBw,GE
+			  );
+	end component;
+	
+	component RegisterFile8x16 is
+	 Port ( clock : in  STD_LOGIC;
+           addressSD : in  STD_LOGIC_VECTOR(2 downto 0);
+           flags : in  STD_LOGIC_VECTOR(3 downto 0); -- 0-Zero 1-Carry 2-GE 3-Parity
+           RFC : in  STD_LOGIC_VECTOR (4 downto 0); -- como é que os bits estão distribuidos? 1-enablers 2-mplexr5 3-mplexr6 4-mplexr7 5-mplexAddrA
+           CL : in  STD_LOGIC;
+           addrA : in  STD_LOGIC_VECTOR(2 downto 0);
+           addrB : in  STD_LOGIC_VECTOR(2 downto 0);
+           DestData : in  bit_16;
+           flags_output : out  STD_LOGIC_VECTOR(2 downto 0); -- 0-Zero 1-Carry 2-GE
+           PC : inout  bit_16;
+           Output_A : out  bit_16;
+           Output_B : out  bit_16;
+           Output_Sc : out  bit_16
+			  );
+	end component;
+	
 --  type <new_type> is
 --    record
 --        <type_name>        : std_logic_vector( 7 downto 0);

@@ -30,7 +30,7 @@ use pds16_types.ALL;
 
 entity Control is
     Port ( WL 			: in  STD_LOGIC;
-           Flags 		: in  STD_LOGIC_VECTOR(3 downto 0);-- 0-Zero 1-Carry 2-GE 3-Parity
+           Flags 		: in  STD_LOGIC_VECTOR(2 downto 0);-- 0-Zero 1-Carry 2-GE
            OpCode 	: in  STD_LOGIC_VECTOR(6 downto 0);-- bits de 15 a 9
            INTP 		: in  STD_LOGIC;
            Clock 		: in  STD_LOGIC;
@@ -57,7 +57,7 @@ architecture Behavioral of Control is
 	signal CurrentState, NewState : STATE_TYPE;
 	type INSTRUCTION_TYPE is (LDI, LDIH, LD_Direct, LD_IndConst, LD_Indexed, ST_Direct, ST_IndConst, ST_Indexed, Aritmetic, Aritmetic_Const, Logic, Shifts, JZ, JNZ, JC, JNC, JMP, JMPL, NOP, IRET);
 	signal CurrentInst : INSTRUCTION_TYPE;
-	signal loadstoremem : STD_LOGIC; sinal que indica que a operação em uso é load/store com acesso à memoria.
+	signal loadstoremem : STD_LOGIC; --sinal que indica que a operação em uso é load/store com acesso à memoria.
 	
 begin
 
@@ -303,14 +303,17 @@ begin
 							'1' when (CurrentState = SExecution) and (CurrentInst = Logic) and (OpCode(0)=0)	else
 							'0' when (CurrentState = SExecution) and (CurrentInst = Logic) and (OpCode(0)=1)	else
 							'1' when (CurrentState = SExecution) and (CurrentInst = Shifts) 	else
-							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = JZ) and (Flags(0)=1) else
-							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = JNZ) and (Flags(0)=0) else
-							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = JC) and (Flags(1)=1) else
-							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = JNC) and (Flags(1)=0) else
+							'1' when (CurrentState = SExecution) and (CurrentInst = JZ) and (Flags(0)=1) else
+							'1' when (CurrentState = SExecution) and (CurrentInst = JNZ) and (Flags(0)=0) else
+							'1' when (CurrentState = SExecution) and (CurrentInst = JC) and (Flags(1)=1) else
+							'1' when (CurrentState = SExecution) and (CurrentInst = JNC) and (Flags(1)=0) else
+							'1' when (CurrentState = SExecution) and (CurrentInst = JMP) else
+							'1' when (CurrentState = SExecution) and (CurrentInst = JMPL) else
+							
 --							'1' when (CurrentState = SFetch_Decod) and (OpCode(6 downto 5)='00') and (OpCode(4 downto 3) = '00')	else --LDI & LDIH
 							'0';
 --mplexr5 -Link						
-		RFC(1)		<= 	 else
+		RFC(1)		<= '1' when (CurrentState = SFetch_Decod) and (CurrentInst = JMPL) else
 							'0';
 --mplexr6 -flags
 		RFC(2)		<= '1' when (CurrentState = SExecution) and (CurrentInst = Aritmetic) and (OpCode(1)=0)	else
@@ -340,6 +343,8 @@ begin
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JNZ) and (Flags(0)=0) else
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JC) and (Flags(1)=1) else
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JNC) and (Flags(1)=0) else
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JMP) else
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JMPL) else
 							'0';
 							
 		ALUC(0)		<= '0' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_IndConst) and (OpCode(1)=0)	else -- Word
@@ -358,6 +363,8 @@ begin
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JNZ) and (Flags(0)=0) else
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JC) and (Flags(1)=1) else
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JNC) and (Flags(1)=0) else
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JMP) else
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JMPL) else
 							'0';
 							
 		ALUC(1)		<= '1' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_IndConst) and (OpCode(1)=0)	else -- Word
@@ -376,6 +383,8 @@ begin
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JNZ) and (Flags(0)=0) else
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JC) and (Flags(1)=1) else
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JNC) and (Flags(1)=0) else
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JMP) else
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JMPL) else
 							'0';
 							
 		ALUC(2)		<= '0' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_IndConst) and (OpCode(1)=0)	else -- Word
@@ -394,6 +403,8 @@ begin
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JNZ) and (Flags(0)=0) else
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JC) and (Flags(1)=1) else
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JNC) and (Flags(1)=0) else
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JMP) else
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JMPL) else
 							'0';
 							
 		SelAddr		<= '00' when (CurrentState = SFetch_Addr) 											else
@@ -416,10 +427,12 @@ begin
 							'1' when (CurrentState = SExecution) and (CurrentInst = Aritmetic_Const) 	else
 							'1' when (CurrentState = SExecution) and (CurrentInst = Logic) 	else
 							'1' when (CurrentState = SExecution) and (CurrentInst = Shifts) 	else
-							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = JZ) and (Flags(0)=1) else --Confirmar possivel problema da mudança das flags antes de se terminar o JZ
-							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = JNZ) and (Flags(0)=0) else
-							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = JC) and (Flags(1)=1) else
-							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = JNC) and (Flags(1)=0) else
+							'1' when (CurrentState = SExecution) and (CurrentInst = JZ) and (Flags(0)=1) else --Confirmar possivel problema da mudança das flags antes de se terminar o JZ
+							'1' when (CurrentState = SExecution) and (CurrentInst = JNZ) and (Flags(0)=0) else
+							'1' when (CurrentState = SExecution) and (CurrentInst = JC) and (Flags(1)=1) else
+							'1' when (CurrentState = SExecution) and (CurrentInst = JNC) and (Flags(1)=0) else
+							'1' when (CurrentState = SExecution) and (CurrentInst = JMP) else
+							'1' when (CurrentState = SExecution) and (CurrentInst = JMPL) else
 --							'0' when (CurrentState = SFetch_Decod) and (OpCode(6 downto 5)='00') and (OpCode(4 downto 3) = '00')	else --LDI & LDIH
 							'0';
 							
@@ -432,10 +445,12 @@ begin
 							'1' when (CurrentState = SExecution) and (CurrentInst = Aritmetic_Const) 	else
 							'1' when (CurrentState = SExecution) and (CurrentInst = Logic) 	else
 							'1' when (CurrentState = SExecution) and (CurrentInst = Shifts) 	else
-							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = JZ) and (Flags(0)=1) else --Confirmar possivel problema da mudança das flags antes de se terminar o JZ
-							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = JNZ) and (Flags(0)=0) else
-							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = JC) and (Flags(1)=1) else
-							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = JNC) and (Flags(1)=0) else
+							'1' when (CurrentState = SExecution) and (CurrentInst = JZ) and (Flags(0)=1) else --Confirmar possivel problema da mudança das flags antes de se terminar o JZ
+							'1' when (CurrentState = SExecution) and (CurrentInst = JNZ) and (Flags(0)=0) else
+							'1' when (CurrentState = SExecution) and (CurrentInst = JC) and (Flags(1)=1) else
+							'1' when (CurrentState = SExecution) and (CurrentInst = JNC) and (Flags(1)=0) else
+							'1' when (CurrentState = SExecution) and (CurrentInst = JMP) else
+							'1' when (CurrentState = SExecution) and (CurrentInst = JMPL) else
 							'0';
 							
 		Sellmm		<= '0' when (CurrentState = SFetch_Decod) and (CurrentInst = LDI) 		else

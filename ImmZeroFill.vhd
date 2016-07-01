@@ -42,9 +42,9 @@ begin
 process(Input, SelImm)
 	begin
 	if SelImm = '0' then
-		Output <= Input & (7 downto 0 => '0');
+		Output <= (15 downto 8 => '0') & Input; --LDI
 		else if SelImm = '1' then
-			Output <= Input & LSB;
+			Output <= Input & LSB; --LDIH
 		end if;
 	end if;
 end process;

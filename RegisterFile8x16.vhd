@@ -31,13 +31,13 @@ use work.pds16_types.ALL;
 entity RegisterFile8x16 is
     Port ( clock : in  STD_LOGIC;
            addressSD : in  STD_LOGIC_VECTOR(2 downto 0);
-           flags : in  STD_LOGIC_VECTOR(3 downto 0);
+           flags : in  STD_LOGIC_VECTOR(3 downto 0); -- 0-Zero 1-Carry 2-GE 3-Parity
            RFC : in  STD_LOGIC_VECTOR (4 downto 0); -- como é que os bits estão distribuidos? 1-enablers 2-mplexr5 3-mplexr6 4-mplexr7 5-mplexAddrA
            CL : in  STD_LOGIC;
            addrA : in  STD_LOGIC_VECTOR(2 downto 0);
            addrB : in  STD_LOGIC_VECTOR(2 downto 0);
            DestData : in  bit_16;
-           flags_output : out  STD_LOGIC_VECTOR(2 downto 0);
+           flags_output : out  STD_LOGIC_VECTOR(2 downto 0); -- 0-Zero 1-Carry 2-GE
            PC : inout  bit_16;
            Output_A : out  bit_16;
            Output_B : out  bit_16;
