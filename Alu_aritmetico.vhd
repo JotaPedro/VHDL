@@ -33,13 +33,14 @@ entity Alu_aritmetico is
            B : in  STD_LOGIC_VECTOR(15 downto 0);
            Cin : in  STD_LOGIC;
            Result : out  STD_LOGIC_VECTOR(15 downto 0);
-           Flags_out : out  STD_LOGIC_VECTOR(1 downto 0);
+           Flags_out : out  STD_LOGIC_VECTOR(1 downto 0);-- 0-GE, 1-Carry
 			  Op : in STD_LOGIC);
 end Alu_aritmetico;
 
 architecture Behavioral of Alu_aritmetico is
 Signal Carry: STD_LOGIC_VECTOR(16 downto 0);
 Signal B_xor: STD_LOGIC_VECTOR(15 downto 0);
+Signal NotOp: STD_LOGIC;
 begin
 	process(A,B)
 		begin
@@ -54,6 +55,9 @@ begin
 --		for i in 0 to 15 generate
 --			B_xor(i) <= B(i) xor Op;
 --		end generate Sub;
+
+		NotOp <= (not Op); --Porque o Operador está invertido na implementação do somador. 0-Sub 1-Add;
+		
 		Adder:
 		for i in 0 to 15 generate
 			FAx: FullAdder PORT MAP(
@@ -62,9 +66,10 @@ begin
 				Cin	=> Carry(i),
 				Sx		=> Result(i),
 				Cout	=> Carry(i+1),
-				Op		=> Op
+				Op		=> NotOp --Porque o Operador está invertido na implementação do somador. 0-Sub 1-Add
 		);
 		end generate Adder;
+		--Falta implementar o IR12 para escolher a afectação do Carry in na operação escolhida.
 		Flags_out(1) <= Carry(16);
 
 end Behavioral;

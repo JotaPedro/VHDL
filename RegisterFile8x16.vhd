@@ -38,7 +38,7 @@ entity RegisterFile8x16 is
            addrB : in  STD_LOGIC_VECTOR(2 downto 0);
            DestData : in  bit_16;
            flags_output : out  STD_LOGIC_VECTOR(2 downto 0); -- 0-Zero 1-Carry 2-GE
-           PC : inout  bit_16;
+           PC : out  bit_16;
            Output_A : out  bit_16;
            Output_B : out  bit_16;
            Output_Sc : out  bit_16
@@ -84,31 +84,38 @@ begin
 	Input_Data_Mplex16bit_r6(0) <= DestData;
 	Input_Data_Mplex16bit_r6(1) <= ("000000000000" & flags);
 	Input_Data_Mplex16bit_r7(0) <= DestData;
-	Input_Data_Mplex16bit_r7(1) <= Q_out(7);
+	Input_Data_Mplex16bit_r7(1) <= Q_out_r7;
 	Input_Data_Mplex3bit(0) <= addrA;
 	Input_Data_Mplex3bit(1) <= addressSD;
 	Or_gate_r5 <= (enabler_register(5) or RFC(1));
 	Or_gate_r6 <= (enabler_register(6) or RFC(2));
 	Or_gate_r7 <= (enabler_register(7) or RFC(3));
-	B_adder <= ("0000000000000010");
+	--B_adder <= ("0000000000000010");
+	PC <= Q_out(7);
 	
 	
 	--PC não avança, será que é porque é necessário um process sensivel ao PC? Se sim, começa a dar erro de syntax.
---	process(PC)
+--	process(RFC(3))
 --		begin
-	Adder:
-		for i in 0 to 15 generate
-			FAx: FullAdder PORT MAP(
-				Ax		=> Q_out(7)(i),
-				Bx		=> B_adder(i),
-				Cin	=> '0',
-				Sx		=> Q_out_r7(i),
-				Cout	=> irrelevant,
-				Op		=> '0'
-		);
-		end generate Adder;
+--	Adder:
+--		for i in 0 to 15 generate
+--			FAx: FullAdder PORT MAP(
+--				Ax		=> Q_out(7)(i),
+--				Bx		=> B_adder(i),
+--				Cin	=> '0',
+--				Sx		=> Q_out_r7(i),
+--				Cout	=> irrelevant,
+--				Op		=> '0'
+--		);
+--		end generate Adder;
 --	end process;
-		
+
+	PCAdder: component PC_Adder port map(
+			A => Q_out(7),
+			B => "0000000000000010",
+			Result => Q_out_r7
+	);
+
 	decoder: component Decoder3_8 port map(
 			AddrSD_port => addressSD,
          Enable_port => RFC(0),

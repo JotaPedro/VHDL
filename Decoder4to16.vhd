@@ -59,6 +59,11 @@ begin
             when X"F"   => decoder_out <= X"8000";
             when others => decoder_out <= X"0000";
 			end case;
+			--report "Decoder Enable 1";
+		else if(Enable ='0') then
+					decoder_out <= X"0000";
+					--report "Decoder Enable 0";
+				end if;
 		end if;
 	end process;
 end Behavioral;

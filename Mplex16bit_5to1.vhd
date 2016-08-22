@@ -21,7 +21,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
-use pds16_types.ALL;
+use work.pds16_types.ALL;
 
 ---- Uncomment the following library declaration if instantiating
 ---- any Xilinx primitives in this code.

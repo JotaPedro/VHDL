@@ -44,11 +44,12 @@ begin
 		begin
 				if clr = '1' then				--esta parte do código só vai servir para
 					q <= (others => '0');	--os registos PSW e PC
-					else if clk'event and clk ='1' then
-							if enable = '1' then
-								q <= d;
-							end if;
-					end if;
+--				else if clk'event and clk ='1' then
+				else if rising_edge(clk) then
+						if enable = '1' then
+							q <= d;
+						end if;
+				end if;
 				end if;
 		end process;
 end Behavioral;

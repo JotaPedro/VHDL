@@ -39,7 +39,8 @@ end FullAdder;
 architecture Behavioral of FullAdder is
 begin
 --O bit op serve para escolher sub ou add.
-	Sx		 <= Ax xor Bx xor Cin;
-	Cout	 <=((Ax xor op) and Bx) or ((Ax xor op) and Cin) or (Bx and Cin);
+	Sx		 <= (Ax xor Bx) xor Cin;
+	Cout	 <= (((not Op) and (not Ax)) and (Cin or Bx)) or (Op and Ax and (Cin or Bx)) or (Bx and Cin);--Op=0 Sub
+	--Cout	 <=((Ax xor op) and Bx) or ((Ax xor op) and Cin) or (Bx and Cin);
 end Behavioral;
 

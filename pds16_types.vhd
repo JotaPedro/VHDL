@@ -34,6 +34,12 @@ package pds16_types is
 			  Op : in STD_LOGIC);
 	end Component;
 	
+	Component PC_Adder is
+    Port ( A : in  STD_LOGIC_VECTOR(15 downto 0);
+           B : in  STD_LOGIC_VECTOR(15 downto 0);
+           Result : out  STD_LOGIC_VECTOR(15 downto 0));
+	end Component;
+	
 	Component Adder16bit is
     Port ( A : in  STD_LOGIC_VECTOR(15 downto 0);
            B : in  STD_LOGIC_VECTOR(15 downto 0);
@@ -107,14 +113,13 @@ package pds16_types is
 	
 	Component Or_tree is
     Port ( Input : in  STD_LOGIC_VECTOR(15 downto 0);
-           Output : inout  STD_LOGIC_VECTOR(15 downto 0);
-			  enable : in STD_LOGIC
+           Output : buffer  STD_LOGIC_VECTOR(15 downto 0)
 		);
 	end Component;
 	
 	Component Barrel_shift is
     Port ( A : in  bit_16;
-           B : inout  STD_LOGIC_VECTOR(3 downto 0);
+           B : in  STD_LOGIC_VECTOR(3 downto 0);
            Output : out  bit_16;
            Ctl_3bit : in  STD_LOGIC_VECTOR(2 downto 0); --IR10 , 11, 12
            Cy : out  STD_LOGIC);
@@ -122,7 +127,7 @@ package pds16_types is
 	
 	Component Mplex4to1 is
     Port ( Input : in  STD_LOGIC_VECTOR(3 downto 0);
-           Sel : in  STD_LOGIC;
+           Sel : in  STD_LOGIC_VECTOR(1 downto 0);
            Output : out  STD_LOGIC);
 	end Component;
 	
@@ -294,6 +299,33 @@ package pds16_types is
            Output_B : out  bit_16;
            Output_Sc : out  bit_16
 			  );
+	end component;
+	
+	component Shifter_Sel_mplex2to1 is
+    Port ( Decoder_1 : in  STD_LOGIC_VECTOR(15 downto 0);
+           Decoder_2 : in  STD_LOGIC_VECTOR(15 downto 0);
+           Mp2to1_sel : out  STD_LOGIC_VECTOR(15 downto 0));
+	end component;
+	
+	component BnB is
+    Port ( B : in  STD_LOGIC_VECTOR(3 downto 0);
+           IR11 : in  STD_LOGIC;
+           B_negativo : out  STD_LOGIC_VECTOR(3 downto 0));
+	end component;
+	
+	component Block_Mplex16to1 is
+	 Port ( A : in  bit_16;
+           Mp2to1_in : out  bit_16;
+           B_negativo : in  STD_LOGIC_VECTOR(3 downto 0));
+	end component;
+	
+	component Block_Mplex2to1 is
+    Port ( Input1 : in  STD_LOGIC_VECTOR(15 downto 0);
+			  Input2 : in STD_LOGIC;
+           Output : out  STD_LOGIC_VECTOR(15 downto 0);
+			  Output_Carry: out STD_LOGIC;
+           Sel : in  STD_LOGIC_VECTOR(15 downto 0);
+			  ir11 : in STD_LOGIC);
 	end component;
 	
 --  type <new_type> is

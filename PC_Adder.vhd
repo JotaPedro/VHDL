@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    23:15:55 04/18/2016 
+-- Create Date:    23:34:04 07/28/2016 
 -- Design Name: 
--- Module Name:    Mplex2to1 - Behavioral 
+-- Module Name:    PC_Adder - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -21,23 +21,32 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
+use work.pds16_types.ALL;
 
 ---- Uncomment the following library declaration if instantiating
 ---- any Xilinx primitives in this code.
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity Mplex2to1 is
-    Port ( Input : in  STD_LOGIC_VECTOR(1 downto 0);
-           Output : out  STD_LOGIC;
-           Sel : in  STD_LOGIC);
-end Mplex2to1;
+entity PC_Adder is
+    Port ( A : in  STD_LOGIC_VECTOR(15 downto 0);
+           B : in  STD_LOGIC_VECTOR(15 downto 0);
+           Result : out  STD_LOGIC_VECTOR(15 downto 0));
+end PC_Adder;
 
-architecture Behavioral of Mplex2to1 is
+architecture Behavioral of PC_Adder is
+Signal Carry: STD_LOGIC_VECTOR(16 downto 0);
 begin
-
-Output <= Input(0) WHEN Sel ='0' ELSE 
-            Input(1);
-				
+		Carry(0)<= '0';
+		Adder:
+		for i in 0 to 15 generate
+			FAx: FullAdder PORT MAP(
+				Ax		=> A(i),
+				Bx		=> B(i),
+				Cin	=> Carry(i),
+				Sx		=> Result(i),
+				Cout	=> Carry(i+1),
+				Op		=> '1'
+		);
+		end generate Adder;
 end Behavioral;
-

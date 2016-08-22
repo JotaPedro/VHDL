@@ -41,17 +41,15 @@ begin
 			if Enable_port = '1' then
 				case AddrSD_port is
 					--Será que posso passar um array para uma variavel normal?
-					when "000" => Output_port(0) <= '1';
-					when "001" => Output_port(1) <= '1';
-					when "010" => Output_port(2) <= '1';
-					when "011" => Output_port(3) <= '1';
-					when "100" => Output_port(4) <= '1';
-					when "101" => Output_port(5) <= '1';
-					when "110" => Output_port(6) <= '1';
-					when "111" => Output_port(7) <= '1';
-					when others => Output_port(0) <= '1';
-					--este ultimo caso "others" é para contemplar os outros 8 casos por linha
-					--que podem existir, pois o tipo STD_LOGIC pode ter 9 estados.
+					when "000" => Output_port <= (0 => '1', others => '0');
+					when "001" => Output_port <= (1 => '1', others => '0');
+					when "010" => Output_port <= (2 => '1', others => '0');
+					when "011" => Output_port <= (3 => '1', others => '0');
+					when "100" => Output_port <= (4 => '1', others => '0');
+					when "101" => Output_port <= (5 => '1', others => '0');
+					when "110" => Output_port <= (6 => '1', others => '0');
+					when "111" => Output_port <= (7 => '1', others => '0');
+					when others=> Output_port <= (0 => '1', others => '0');
 				end case;
 			end if;
 	end process;
