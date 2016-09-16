@@ -95,7 +95,7 @@ begin
 
 			Decoder4to16_1: Decoder4to16 PORT MAP( 
 				Sel => B,
-				Enable => Decoder_1_enable,--IR11 & NOT IR12 (apenas activo no SHR)   				old--ctl_3bit(0),--IR10
+				Enable => ctl_3bit(0),--Decoder_1_enable,--IR11 & NOT IR12 (apenas activo no SHR)   				old--ctl_3bit(0),--IR10
 				decoder_out => Decoder_1_out
 			);
 			Decoder4to16_2: Decoder4to16 PORT MAP( 

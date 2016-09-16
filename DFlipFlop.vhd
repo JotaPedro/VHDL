@@ -37,7 +37,7 @@ end DFlipFlop;
 architecture Behavioral of DFlipFlop is
 begin
 
-process (Clk,CL)
+process (Clk,CL,D)
 begin
 	if CL='1' then
 		Q <= '0';

@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    16:06:48 04/29/2016 
+-- Create Date:    16:35:23 08/30/2016 
 -- Design Name: 
--- Module Name:    MBR - Behavioral 
+-- Module Name:    Tristate - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -21,26 +21,24 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
+use work.pds16_types.ALL;
 
 ---- Uncomment the following library declaration if instantiating
 ---- any Xilinx primitives in this code.
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity MBR is
-    Port ( enable : in  STD_LOGIC;
-			  d : in  STD_LOGIC_VECTOR (15 downto 0);
-           q : out  STD_LOGIC_VECTOR (15 downto 0));
-end MBR;
+entity Tristate is
+    Port ( Input : in  bit_16;
+           Enable : in  STD_LOGIC;
+           Output : out  bit_16);
+end Tristate;
 
-architecture Behavioral of MBR is
+architecture Behavioral of Tristate is
+
 begin
-	process(enable,d)
-		begin
-			if enable = '1' then
-				q <= d;
-			end if;
-	end process;
+
+	Output	<= Input when (Enable='1') else (others=>'Z');
 
 end Behavioral;
 

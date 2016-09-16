@@ -55,7 +55,7 @@ architecture Behavioral of Control is
 
 	type STATE_TYPE is (SReset, SFetch_Addr, SFetch_Inst, SFetch_Decod, SExecution, SExec_Addr, SExec_RW, SInterrupt, SBreak, SHold_Fetch, SHold_Exec, SWait_Fetch, SWait_Exec);
 	signal CurrentState, NewState : STATE_TYPE;
-	type INSTRUCTION_TYPE is (LDI, LDIH, LD_Direct, LD_IndConst, LD_Indexed, ST_Direct, ST_IndConst, ST_Indexed, Aritmetic, Aritmetic_Const, Logic, Shifts, JZ, JNZ, JC, JNC, JMP, JMPL, NOP, IRET);
+	type INSTRUCTION_TYPE is (LDI, LDIH, LD_Direct, LD_IndConst, LD_Indexed, ST_Direct, ST_IndConst, ST_Indexed, Aritmetic, Aritmetic_Const, Logic, Shifts, Jumps, JZ, JNZ, JC, JNC, JMP, JMPL, NOP, IRET);
 	signal CurrentInst : INSTRUCTION_TYPE;
 	signal loadstoremem : STD_LOGIC; --sinal que indica que a operação em uso é load/store com acesso à memoria.
 	
@@ -96,7 +96,7 @@ begin
 	 process (CL, Sync, INTP,  CurrentState)
     begin
         if (CL = '1') then
-            CurrentState <= SReset;
+            NewState <= SReset; --se Clear for activo, o estado seguinte é o Reset.
         else
             case (CurrentState) is
 			
@@ -190,6 +190,7 @@ begin
 
 	 
 	 Inst_Decode: --ATENÇÂO!!!! CORRIGIR A INTRODUÇÂO DOS JZ,JC,ETC!!!!
+	 --Tenho de introduzir este código no outro process, pois não posso ter dois processos com o mesmo sinal a ser afectado (CurrentState).
 	 process (CurrentState)
     begin
         if (CurrentState = SFetch_Decod) then
@@ -198,29 +199,30 @@ begin
 --			signal CurrentInst : INSTRUCTION_TYPE;
 		  --OpCode 	: in  STD_LOGIC_VECTOR(6 downto 0);-- bits de 15 a 9
 		  
-            case (OpCode(6 downto 5)) is
-					when (00)=>
+            case (OpCode(6 downto 2)) is
+--					when ("00)=>
 						-- is Data transfer
-						case(OpCode(4 downto 2)) is
-							when(000)=> CurrentInst	<=	LDI; --LDI
-							when(001)=> CurrentInst	<=	LDIH;  --LDIH
-							when(010)=> CurrentInst	<=	;  --LD_direct,LD_indconst,LD_Indexed
-							when(110)=> CurrentInst	<=	;  --ST_direct,ST_indconst,ST_Indexed
-						end case;
+--						case(OpCode(4 downto 2)) is
+					when("00000")=> CurrentInst	<=	LDI; --LDI
+					when("00001")=> CurrentInst	<=	LDIH;  --LDIH
+					when("00010")=> CurrentInst	<=	;  --LD_direct,LD_indconst,LD_Indexed
+					when("110")=> CurrentInst	<=	;  --ST_direct,ST_indconst,ST_Indexed
+--				end case;
 						
-					when (01)=>
+					when ("01")=>
 						-- is Jumps, nop and iret
 						if(OpCode(4)='0') then
 							 CurrentInst	<=	Jumps; --JMPs condicionais
 						end if;
 						case(OpCode(4 downto 2)) is
-							when(100)=> CurrentInst	<=	JMP;  --JMP
-							when(101)=> CurrentInst	<=	JMPL;  --JMPL
-							when(110)=> CurrentInst	<=	IRET;  --IRET
-							when(111)=> CurrentInst	<=	NOP;  --NOP
+							when("100")=> CurrentInst	<=	JMP;  --JMP
+							when("101")=> CurrentInst	<=	JMPL;  --JMPL
+							when("110")=> CurrentInst	<=	IRET;  --IRET
+							when("111")=> CurrentInst	<=	NOP;  --NOP
+							when others=> CurrentInst	<=	NOP;  --NOP
 						end case;
 										
-					when (10)=>
+					when ("10")=>
 						-- is Aritmetic
 						if(OpCode(4)='0') then
 							 CurrentInst	<=	Aritmetic; --Aritmetic
@@ -229,7 +231,7 @@ begin
 							end if;
 						end if;
 						
-					when (11)=>
+					when ("11")=>
 						-- is Logic and shifts
 						if(OpCode(4)='0') then
 							 CurrentInst	<=	Logic; --Logic
@@ -238,7 +240,9 @@ begin
 							end if;
 						end if;
 						
-				end case;		
+				end case;
+			end if;
+	end process;
 							
     ---------------------------------------------------------------------------
     -- Signal assignment statements for 
@@ -256,18 +260,18 @@ begin
 --Aritmetic, Aritmetic_Const, Logic, Shifts, JZ, JNZ, JC, JNC, JMP, JMPL, NOP, IRET);
 
 -- 0-WrByte	 
-		BusCtr(0)	<= '0' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_Direct) and (OpCode(1)=0)		else -- Word
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_IndConst) and (OpCode(1)=0)	else -- Word
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_Indexed) and (OpCode(1)=0)	else -- Word
-							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_Direct) and (OpCode(1)=1)		else -- Byte
-							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_IndConst) and (OpCode(1)=1)	else -- Byte
-							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_Indexed) and (OpCode(1)=1)	else -- Byte
+		BusCtr(0)	<= '0' when ((CurrentState = SFetch_Decod) and (CurrentInst = ST_Direct) and (OpCode(1)='0'))		else -- Word
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_IndConst) and (OpCode(1)='0')	else -- Word
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_Indexed) and (OpCode(1)='0')	else -- Word
+							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_Direct) and (OpCode(1)='1')		else -- Byte
+							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_IndConst) and (OpCode(1)='1')	else -- Byte
+							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_Indexed) and (OpCode(1)='1')	else -- Byte
 --							OpCode(1) when (CurrentState = SExecution or SExec_RW) and (OpCode(4)='1') else	--store
 							'0';
 -- 1-DataOut							
-		BusCtr(1)	<= '1' when (CurrentState = SExec_RW) and (CurrentInst = ST_Direct) and (OpCode(1)=0)		else 
-							'1' when (CurrentState = SExec_RW) and (CurrentInst = ST_IndConst) and (OpCode(1)=1)	else 
-							'1' when (CurrentState = SExec_RW) and (CurrentInst = ST_Indexed) and (OpCode(1)=0)		else 
+		BusCtr(1)	<= '1' when (CurrentState = SExec_RW) and (CurrentInst = ST_Direct) and (OpCode(1)='0')		else 
+							'1' when (CurrentState = SExec_RW) and (CurrentInst = ST_IndConst) and (OpCode(1)='1')	else 
+							'1' when (CurrentState = SExec_RW) and (CurrentInst = ST_Indexed) and (OpCode(1)='0')		else 
 --							'0' when (CurrentState = SExec_RW) and (OpCode(4)='0')	 		else	--load
 							'0';
 -- 2-Addr							
@@ -297,16 +301,16 @@ begin
 							'1' when (CurrentState = SExecution) and (CurrentInst = LD_Direct) 	else
 							'1' when (CurrentState = SExecution) and (CurrentInst = LD_IndConst) else
 							'1' when (CurrentState = SExecution) and (CurrentInst = LD_Indexed) 	else
-							'1' when (CurrentState = SExecution) and (CurrentInst = Aritmetic) and (OpCode(0)=0)	else
-							'0' when (CurrentState = SExecution) and (CurrentInst = Aritmetic) and (OpCode(0)=1)	else
+							'1' when (CurrentState = SExecution) and (CurrentInst = Aritmetic) and (OpCode(0)='0')	else
+							'0' when (CurrentState = SExecution) and (CurrentInst = Aritmetic) and (OpCode(0)='1')	else
 							'1' when (CurrentState = SExecution) and (CurrentInst = Aritmetic_Const) 	else
-							'1' when (CurrentState = SExecution) and (CurrentInst = Logic) and (OpCode(0)=0)	else
-							'0' when (CurrentState = SExecution) and (CurrentInst = Logic) and (OpCode(0)=1)	else
+							'1' when (CurrentState = SExecution) and (CurrentInst = Logic) and (OpCode(0)='0')	else
+							'0' when (CurrentState = SExecution) and (CurrentInst = Logic) and (OpCode(0)='1')	else
 							'1' when (CurrentState = SExecution) and (CurrentInst = Shifts) 	else
-							'1' when (CurrentState = SExecution) and (CurrentInst = JZ) and (Flags(0)=1) else
-							'1' when (CurrentState = SExecution) and (CurrentInst = JNZ) and (Flags(0)=0) else
-							'1' when (CurrentState = SExecution) and (CurrentInst = JC) and (Flags(1)=1) else
-							'1' when (CurrentState = SExecution) and (CurrentInst = JNC) and (Flags(1)=0) else
+							'1' when (CurrentState = SExecution) and (CurrentInst = JZ) and (Flags(0)='1') else
+							'1' when (CurrentState = SExecution) and (CurrentInst = JNZ) and (Flags(0)='0') else
+							'1' when (CurrentState = SExecution) and (CurrentInst = JC) and (Flags(1)='1') else
+							'1' when (CurrentState = SExecution) and (CurrentInst = JNC) and (Flags(1)='0') else
 							'1' when (CurrentState = SExecution) and (CurrentInst = JMP) else
 							'1' when (CurrentState = SExecution) and (CurrentInst = JMPL) else
 							
@@ -316,19 +320,19 @@ begin
 		RFC(1)		<= '1' when (CurrentState = SFetch_Decod) and (CurrentInst = JMPL) else
 							'0';
 --mplexr6 -flags
-		RFC(2)		<= '1' when (CurrentState = SExecution) and (CurrentInst = Aritmetic) and (OpCode(1)=0)	else
-							'0' when (CurrentState = SExecution) and (CurrentInst = Aritmetic) and (OpCode(1)=1)	else
-							'1' when (CurrentState = SExecution) and (CurrentInst = Aritmetic_Const) and (OpCode(1)=0)	else
-							'0' when (CurrentState = SExecution) and (CurrentInst = Aritmetic_Const) and (OpCode(1)=1)	else
-							'1' when (CurrentState = SExecution) and (CurrentInst = Logic) and (OpCode(1)=0)	else
-							'0' when (CurrentState = SExecution) and (CurrentInst = Logic) and (OpCode(1)=1)	else
+		RFC(2)		<= '1' when (CurrentState = SExecution) and (CurrentInst = Aritmetic) and (OpCode(1)='0')	else
+							'0' when (CurrentState = SExecution) and (CurrentInst = Aritmetic) and (OpCode(1)='1')	else
+							'1' when (CurrentState = SExecution) and (CurrentInst = Aritmetic_Const) and (OpCode(1)='0')	else
+							'0' when (CurrentState = SExecution) and (CurrentInst = Aritmetic_Const) and (OpCode(1)='1')	else
+							'1' when (CurrentState = SExecution) and (CurrentInst = Logic) and (OpCode(1)='0')	else
+							'0' when (CurrentState = SExecution) and (CurrentInst = Logic) and (OpCode(1)='1')	else
 							'1' when (CurrentState = SExecution) and (CurrentInst = Shifts) 	else
 							'0';
 --mplexr7 -PC							
-		RFC(3)		<= '1' when (CurrentState = SFetch_Decod) and (CurrentInst = JZ) and (Flags(0)=0) else
-							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = JNZ) and (Flags(0)=1) else
-							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = JC) and (Flags(1)=0) else
-							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = JNC) and (Flags(1)=1) else
+		RFC(3)		<= '1' when (CurrentState = SFetch_Decod) and (CurrentInst = JZ) and (Flags(0)='0') else
+							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = JNZ) and (Flags(0)='1') else
+							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = JC) and (Flags(1)='0') else
+							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = JNC) and (Flags(1)='1') else
 							'0';
 --mplexAddrA	
 		RFC(4)		<= '0' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_IndConst)	else
@@ -339,84 +343,84 @@ begin
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = Aritmetic_Const) 	else
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = Logic) 	else
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = Shifts) 	else
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JZ) and (Flags(0)=1) else
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JNZ) and (Flags(0)=0) else
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JC) and (Flags(1)=1) else
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JNC) and (Flags(1)=0) else
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JZ) and (Flags(0)='1') else
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JNZ) and (Flags(0)='0') else
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JC) and (Flags(1)='1') else
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JNC) and (Flags(1)='0') else
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JMP) else
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JMPL) else
 							'0';
 							
-		ALUC(0)		<= '0' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_IndConst) and (OpCode(1)=0)	else -- Word
-							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_IndConst) and (OpCode(1)=1)	else -- Byte
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_Indexed) and (OpCode(1)=0)	else -- Word
-							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_Indexed) and (OpCode(1)=1)	else -- Byte
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_IndConst) and (OpCode(1)=0)	else -- Word
-							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_IndConst) and (OpCode(1)=1)	else -- Byte
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_Indexed) and (OpCode(1)=0)	else -- Word
-							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_Indexed) and (OpCode(1)=1)	else -- Byte
+		ALUC(0)		<= '0' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_IndConst) and (OpCode(1)='0')	else -- Word
+							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_IndConst) and (OpCode(1)='1')	else -- Byte
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_Indexed) and (OpCode(1)='0')	else -- Word
+							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_Indexed) and (OpCode(1)='1')	else -- Byte
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_IndConst) and (OpCode(1)='0')	else -- Word
+							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_IndConst) and (OpCode(1)='1')	else -- Byte
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_Indexed) and (OpCode(1)='0')	else -- Word
+							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_Indexed) and (OpCode(1)='1')	else -- Byte
 							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = Aritmetic)								else
 							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = Aritmetic_Const) 	else
 							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = Logic) 	else
 							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = Shifts) 	else
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JZ) and (Flags(0)=1) else
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JNZ) and (Flags(0)=0) else
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JC) and (Flags(1)=1) else
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JNC) and (Flags(1)=0) else
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JZ) and (Flags(0)='1') else
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JNZ) and (Flags(0)='0') else
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JC) and (Flags(1)='1') else
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JNC) and (Flags(1)='0') else
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JMP) else
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JMPL) else
 							'0';
 							
-		ALUC(1)		<= '1' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_IndConst) and (OpCode(1)=0)	else -- Word
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_IndConst) and (OpCode(1)=1)	else -- Byte
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_Indexed) and (OpCode(1)=0)	else -- Word
-							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_Indexed) and (OpCode(1)=1)	else -- Byte
-							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_IndConst) and (OpCode(1)=0)	else -- Word
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_IndConst) and (OpCode(1)=1)	else -- Byte
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_Indexed) and (OpCode(1)=0)	else -- Word
-							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_Indexed) and (OpCode(1)=1)	else -- Byte
+		ALUC(1)		<= '1' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_IndConst) and (OpCode(1)='0')	else -- Word
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_IndConst) and (OpCode(1)='1')	else -- Byte
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_Indexed) and (OpCode(1)='0')	else -- Word
+							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_Indexed) and (OpCode(1)='1')	else -- Byte
+							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_IndConst) and (OpCode(1)='0')	else -- Word
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_IndConst) and (OpCode(1)='1')	else -- Byte
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_Indexed) and (OpCode(1)='0')	else -- Word
+							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_Indexed) and (OpCode(1)='1')	else -- Byte
 							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = Aritmetic)								else
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = Aritmetic_Const) 	else
 							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = Logic) 	else
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = Shifts) 	else
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JZ) and (Flags(0)=1) else
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JNZ) and (Flags(0)=0) else
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JC) and (Flags(1)=1) else
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JNC) and (Flags(1)=0) else
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JZ) and (Flags(0)='1') else
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JNZ) and (Flags(0)='0') else
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JC) and (Flags(1)='1') else
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JNC) and (Flags(1)='0') else
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JMP) else
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JMPL) else
 							'0';
 							
-		ALUC(2)		<= '0' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_IndConst) and (OpCode(1)=0)	else -- Word
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_IndConst) and (OpCode(1)=1)	else -- Byte
-							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_Indexed) and (OpCode(1)=0)	else -- Word
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_Indexed) and (OpCode(1)=1)	else -- Byte
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_IndConst) and (OpCode(1)=0)	else -- Word
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_IndConst) and (OpCode(1)=1)	else -- Byte
-							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_Indexed) and (OpCode(1)=0)	else -- Word
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_Indexed) and (OpCode(1)=1)	else -- Byte
+		ALUC(2)		<= '0' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_IndConst) and (OpCode(1)='0')	else -- Word
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_IndConst) and (OpCode(1)='1')	else -- Byte
+							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_Indexed) and (OpCode(1)='0')	else -- Word
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_Indexed) and (OpCode(1)='1')	else -- Byte
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_IndConst) and (OpCode(1)='0')	else -- Word
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_IndConst) and (OpCode(1)='1')	else -- Byte
+							'1' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_Indexed) and (OpCode(1)='0')	else -- Word
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_Indexed) and (OpCode(1)='1')	else -- Byte
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = Aritmetic)								else
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = Aritmetic_Const) 	else
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = Logic) 	else
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = Shifts) 	else
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JZ) and (Flags(0)=1) else
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JNZ) and (Flags(0)=0) else
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JC) and (Flags(1)=1) else
-							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JNC) and (Flags(1)=0) else
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JZ) and (Flags(0)='1') else
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JNZ) and (Flags(0)='0') else
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JC) and (Flags(1)='1') else
+							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JNC) and (Flags(1)='0') else
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JMP) else
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = JMPL) else
 							'0';
 							
-		SelAddr		<= '00' when (CurrentState = SFetch_Addr) 											else
-							'10' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_Direct)	else
-							'01' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_IndConst)	else
-							'01' when (CurrentState = SFetch_Decod) and (CurrentInst = LD_Indexed)	else
-							'10' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_Direct)	else
-							'01' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_IndConst)	else
-							'01' when (CurrentState = SFetch_Decod) and (CurrentInst = ST_Indexed)	else
---							'01' when (CurrentState = SExec_Addr) and (OpCode(3 downto 2)='11') 	else --indexado
---							'10' when (CurrentState = SExec_Addr) 											else --direct
-							'00';
+		SelAddr		<= "00" when (CurrentState = SFetch_Addr) 											else
+							"10" when (CurrentState = SFetch_Decod) and (CurrentInst = LD_Direct)	else
+							"01" when (CurrentState = SFetch_Decod) and (CurrentInst = LD_IndConst)	else
+							"01" when (CurrentState = SFetch_Decod) and (CurrentInst = LD_Indexed)	else
+							"10" when (CurrentState = SFetch_Decod) and (CurrentInst = ST_Direct)	else
+							"01" when (CurrentState = SFetch_Decod) and (CurrentInst = ST_IndConst)	else
+							"01" when (CurrentState = SFetch_Decod) and (CurrentInst = ST_Indexed)	else
+--							"01" when (CurrentState = SExec_Addr) and (OpCode(3 downto 2)='11') 	else --indexado
+--							"10" when (CurrentState = SExec_Addr) 											else --direct
+							"00";
 							
 		SelData(0)	<= '0' when (CurrentState = SFetch_Decod) and (CurrentInst = LDI) 		else
 							'0' when (CurrentState = SFetch_Decod) and (CurrentInst = LDIH) 		else
@@ -427,10 +431,10 @@ begin
 							'1' when (CurrentState = SExecution) and (CurrentInst = Aritmetic_Const) 	else
 							'1' when (CurrentState = SExecution) and (CurrentInst = Logic) 	else
 							'1' when (CurrentState = SExecution) and (CurrentInst = Shifts) 	else
-							'1' when (CurrentState = SExecution) and (CurrentInst = JZ) and (Flags(0)=1) else --Confirmar possivel problema da mudança das flags antes de se terminar o JZ
-							'1' when (CurrentState = SExecution) and (CurrentInst = JNZ) and (Flags(0)=0) else
-							'1' when (CurrentState = SExecution) and (CurrentInst = JC) and (Flags(1)=1) else
-							'1' when (CurrentState = SExecution) and (CurrentInst = JNC) and (Flags(1)=0) else
+							'1' when (CurrentState = SExecution) and (CurrentInst = JZ) and (Flags(0)='1') else --Confirmar possivel problema da mudança das flags antes de se terminar o JZ
+							'1' when (CurrentState = SExecution) and (CurrentInst = JNZ) and (Flags(0)='0') else
+							'1' when (CurrentState = SExecution) and (CurrentInst = JC) and (Flags(1)='1') else
+							'1' when (CurrentState = SExecution) and (CurrentInst = JNC) and (Flags(1)='0') else
 							'1' when (CurrentState = SExecution) and (CurrentInst = JMP) else
 							'1' when (CurrentState = SExecution) and (CurrentInst = JMPL) else
 --							'0' when (CurrentState = SFetch_Decod) and (OpCode(6 downto 5)='00') and (OpCode(4 downto 3) = '00')	else --LDI & LDIH
@@ -445,10 +449,10 @@ begin
 							'1' when (CurrentState = SExecution) and (CurrentInst = Aritmetic_Const) 	else
 							'1' when (CurrentState = SExecution) and (CurrentInst = Logic) 	else
 							'1' when (CurrentState = SExecution) and (CurrentInst = Shifts) 	else
-							'1' when (CurrentState = SExecution) and (CurrentInst = JZ) and (Flags(0)=1) else --Confirmar possivel problema da mudança das flags antes de se terminar o JZ
-							'1' when (CurrentState = SExecution) and (CurrentInst = JNZ) and (Flags(0)=0) else
-							'1' when (CurrentState = SExecution) and (CurrentInst = JC) and (Flags(1)=1) else
-							'1' when (CurrentState = SExecution) and (CurrentInst = JNC) and (Flags(1)=0) else
+							'1' when (CurrentState = SExecution) and (CurrentInst = JZ) and (Flags(0)='1') else --Confirmar possivel problema da mudança das flags antes de se terminar o JZ
+							'1' when (CurrentState = SExecution) and (CurrentInst = JNZ) and (Flags(0)='0') else
+							'1' when (CurrentState = SExecution) and (CurrentInst = JC) and (Flags(1)='1') else
+							'1' when (CurrentState = SExecution) and (CurrentInst = JNC) and (Flags(1)='0') else
 							'1' when (CurrentState = SExecution) and (CurrentInst = JMP) else
 							'1' when (CurrentState = SExecution) and (CurrentInst = JMPL) else
 							'0';
@@ -467,22 +471,22 @@ begin
 --							'1' when (CurrentState = SExec_RW) and (OpCode(4)='0')	 		else	--load
 							'0';
 --LOW														
-		WR(0)			<= '0' when (CurrentState = SExec_RW) and (CurrentInst = ST_Direct) and (OpCode(1)=0)		else -- Word
-							'1' when (CurrentState = SExec_RW) and (CurrentInst = ST_Direct) and (OpCode(1)=1)		else -- Byte
-							'0' when (CurrentState = SExec_RW) and (CurrentInst = ST_IndConst) and (OpCode(1)=0)	else -- Word
-							'1' when (CurrentState = SExec_RW) and (CurrentInst = ST_IndConst) and (OpCode(1)=1)	else -- Byte
-							'0' when (CurrentState = SExec_RW) and (CurrentInst = ST_Indexed) and (OpCode(1)=0)		else -- Word
-							'1' when (CurrentState = SExec_RW) and (CurrentInst = ST_Indexed) and (OpCode(1)=1)		else -- Byte
+		WR(0)			<= '0' when (CurrentState = SExec_RW) and (CurrentInst = ST_Direct) and (OpCode(1)='0')		else -- Word
+							'1' when (CurrentState = SExec_RW) and (CurrentInst = ST_Direct) and (OpCode(1)='1')		else -- Byte
+							'0' when (CurrentState = SExec_RW) and (CurrentInst = ST_IndConst) and (OpCode(1)='0')	else -- Word
+							'1' when (CurrentState = SExec_RW) and (CurrentInst = ST_IndConst) and (OpCode(1)='1')	else -- Byte
+							'0' when (CurrentState = SExec_RW) and (CurrentInst = ST_Indexed) and (OpCode(1)='0')		else -- Word
+							'1' when (CurrentState = SExec_RW) and (CurrentInst = ST_Indexed) and (OpCode(1)='1')		else -- Byte
 --							'1' when (CurrentState = SExec_RW) and (OpCode(4)='1') and (OpCode(1)='0')	else
 --							'0' when (CurrentState = SExec_RW) and (OpCode(4)='1') and (OpCode(1)='1')	else
 							'0';
 --HIGH
-		WR(1)			<= '1' when (CurrentState = SExec_RW) and (CurrentInst = ST_Direct) and (OpCode(1)=0)		else -- Word
-							'0' when (CurrentState = SExec_RW) and (CurrentInst = ST_Direct) and (OpCode(1)=1)		else -- Byte
-							'1' when (CurrentState = SExec_RW) and (CurrentInst = ST_IndConst) and (OpCode(1)=0)	else -- Word
-							'0' when (CurrentState = SExec_RW) and (CurrentInst = ST_IndConst) and (OpCode(1)=1)	else -- Byte
-							'1' when (CurrentState = SExec_RW) and (CurrentInst = ST_Indexed) and (OpCode(1)=0)		else -- Word
-							'0' when (CurrentState = SExec_RW) and (CurrentInst = ST_Indexed) and (OpCode(1)=1)		else -- Byte
+		WR(1)			<= '1' when (CurrentState = SExec_RW) and (CurrentInst = ST_Direct) and (OpCode(1)='0')		else -- Word
+							'0' when (CurrentState = SExec_RW) and (CurrentInst = ST_Direct) and (OpCode(1)='1')		else -- Byte
+							'1' when (CurrentState = SExec_RW) and (CurrentInst = ST_IndConst) and (OpCode(1)='0')	else -- Word
+							'0' when (CurrentState = SExec_RW) and (CurrentInst = ST_IndConst) and (OpCode(1)='1')	else -- Byte
+							'1' when (CurrentState = SExec_RW) and (CurrentInst = ST_Indexed) and (OpCode(1)='0')		else -- Word
+							'0' when (CurrentState = SExec_RW) and (CurrentInst = ST_Indexed) and (OpCode(1)='1')		else -- Byte
 --							'1' when (CurrentState = SExec_RW) and (OpCode(4)='1') and (OpCode(1)='1')	else
 --							'0' when (CurrentState = SExec_RW) and (OpCode(4)='1') and (OpCode(1)='0')	else
 							'0';
@@ -513,7 +517,7 @@ begin
 		EIR			<= '1' when (CurrentState = SFetch_Inst)											else
 							'0';
 			
-		loadstoremem<= '1' when (CurrentState = SFetch_Decod) and (OpCode(6 downto 5)='00') and (OpCode(4 downto 2) = '010')	else --LDI
+		loadstoremem<= '1' when ((CurrentState = SFetch_Decod) and (OpCode(6 downto 5)="00") and (OpCode(4 downto 2) = "010"))	else --LDI
 							'0';
 
 

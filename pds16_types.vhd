@@ -190,7 +190,7 @@ package pds16_types is
 	component Mplex8bit_2to1 is
     Port ( Input : in  bit_8_array(1 downto 0);
            Sel : in  STD_LOGIC;
-           Output : out  bit_8);
+           Output : out  bit_16);
 	end component;
 	
 	component DirZeroFill is
@@ -326,6 +326,12 @@ package pds16_types is
 			  Output_Carry: out STD_LOGIC;
            Sel : in  STD_LOGIC_VECTOR(15 downto 0);
 			  ir11 : in STD_LOGIC);
+	end component;
+	
+	component Tristate is
+    Port ( Input : in  bit_16;
+           Enable : in  STD_LOGIC;
+           Output : out  bit_16);
 	end component;
 	
 --  type <new_type> is

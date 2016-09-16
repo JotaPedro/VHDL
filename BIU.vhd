@@ -60,11 +60,47 @@ architecture Behavioral of BIU is
 	Signal ALE_flipflop_output: STD_LOGIC;
 	Signal Data_to_mem: bit_16;
 	Signal Mplex_DataOut_input: bit_8_array(1 downto 0);
+	Signal TS_DataOut_Enable: STD_LOGIC;
+	Signal TS_Addr_Enable: STD_LOGIC;
+	Signal TS_Addr_Input: bit_16;
 	
 begin
-
+	
+	-- init var & sig
+	TS_Addr_Enable 	<= (BusCtr(2) and (not BGT_in));
+	TS_DataOut_Enable	<= (BusCtr(1) and (not BGT_in));
+	TS_Addr_Input		<= Addr & '0';
+--	TS_MBR_Enable		<= ;
+	ALE <= (BusCtr(3) AND (NOT ALE_flipflop_output));
+	RESOUT <= CL; --será que deve ser assim?
+	S0_out <= S0_in;
+	S1_out <= S1_in;
+	BGT_out <= BGT_in;
+	
+	-- Tri-State Buffer control
+	-- Data_to_mem input :
+	--AD <= Data_to_mem when (WRL = '1' or WRH = '1') else (others=>'Z');	
+	
+	TS_DataOut: Tristate PORT MAP(
+		Input => Data_to_mem,
+      Enable => TS_DataOut_Enable,
+      Output => AD
+	);
+	
+	TS_Addr: Tristate PORT MAP(
+		Input => TS_Addr_Input,
+      Enable => TS_Addr_Enable,
+      Output => AD
+	);
+	
+--vou introduzir outro tristate para quando se faz o Read????. AD 0_15 => MBR
+--	TS_MBR: Tristate PORT MAP(
+--		Input => ,
+--      Enable => TS_MBR_Enable,
+--      Output => AD
+--	);
 		
-	MBR: MBR PORT MAP( 
+	MBR1: MBR PORT MAP( 
 		enable => RD,--: in  STD_LOGIC;
 		d => AD,--: in  bit_16;
 		q => DataIn--: out  bit_16
@@ -72,17 +108,19 @@ begin
 	
 	Mplex_DataOut_input(0) <= DataOut(15 downto 8);
 	Mplex_DataOut_input(1) <= DataOut(7 downto 0);
-	Data_to_mem <= x"00" & DataOut(7 downto 0);
+	--Data_to_mem <= x"00" & DataOut(7 downto 0); Isto era o quê?
 	
 	Mplex_DataOut: Mplex8bit_2to1 PORT MAP(
 		Input => Mplex_DataOut_input,--: in  bit_8_array(1 downto 0);
       Sel => BusCtr(0),--: in  STD_LOGIC;
-      Output => Data_to_mem(15 downto 8)--: out  bit_8
+      Output => Data_to_mem--: out  bit_16
 	);
-		
-	S0_out <= S0_in;
-	S1_out <= S1_in;
-	BGT_out <= BGT_in;
+	
+--	Mplex_DataOut: Mplex8bit_2to1 PORT MAP(
+--		Input => Mplex_DataOut_input,--: in  bit_8_array(1 downto 0);
+--      Sel => BusCtr(0),--: in  STD_LOGIC;
+--      Output => Data_to_mem(15 downto 8)--: out  bit_8
+--	);
 
 	RDY_flipflop: DFlipFlop PORT MAP(
 		D => RDY,
@@ -102,22 +140,35 @@ begin
       Clk => Clock,
       CL => '0'
 	);
-	ALE <= BusCtr(3) AND (NOT ALE_flipflop_output);
 
 
 	
-	process(BGT_in,BusCtr(2),BusCtr(1))
+--	process(BGT_in,BusCtr(2),BusCtr(1))
+--		begin
+--			if BusCtr(2)='1' and BGT_in='0' then -- BusCtr(2)-Addr
+--				AD <= Addr & '0';
+--				else if BusCtr(1)='1' and BGT_in='0' then -- BusCtr(1)-DataOut
+--					AD <= Data_to_mem;
+--				end if;
+--			end if;
+----			if BGT_in='0' then
+----				nRD  <= NOT RD;
+----				nWRH <= NOT WRH;
+----				nWRL <= NOT WRL;
+----				else if BGT_in='1' then
+----					nWRH <= 'Z';
+----					nWRL <= 'Z';
+----					nRD  <= 'Z';
+----				end if;
+----			end if;
+--	end process;
+	
+	process(RD,WRH,WRL,BGT_in)
 		begin
-			if BusCtr(2)='1' and BGT_in='0' then
-				AD <= Addr & '0';
-			end if;
-			if BusCtr(1)='1' and BGT_in='0' then
-				AD <= Data_to_mem;
-			end if;
 			if BGT_in='0' then
+				nRD  <= NOT RD;
 				nWRH <= NOT WRH;
 				nWRL <= NOT WRL;
-				nRD  <= NOT RD;
 				else if BGT_in='1' then
 					nWRH <= 'Z';
 					nWRL <= 'Z';
@@ -125,8 +176,6 @@ begin
 				end if;
 			end if;
 	end process;
-			
-			
 			
 --	process(BGT_in)
 --		begin

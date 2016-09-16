@@ -2,15 +2,15 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   18:09:52 08/06/2016
+-- Create Date:   22:00:49 08/27/2016
 -- Design Name:   
--- Module Name:   C:/Documents and Settings/Administrator/My Documents/Dropbox/Documentos Universidade/SV1516/projecto/Trabalho/vhdl1/TB_Barrel_shift.vhd
+-- Module Name:   C:/Documents and Settings/Administrator/My Documents/Dropbox/Documentos Universidade/SV1516/projecto/Trabalho/vhdl1/TB_ImmZeroFill.vhd
 -- Project Name:  vhdl1
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
 -- 
--- VHDL Test Bench Created by ISE for module: Barrel_shift
+-- VHDL Test Bench Created by ISE for module: ImmZeroFill
 -- 
 -- Dependencies:
 -- 
@@ -30,55 +30,48 @@ USE ieee.std_logic_1164.ALL;
 USE ieee.std_logic_unsigned.all;
 USE ieee.numeric_std.ALL;
  
-ENTITY TB_Barrel_shift IS
-END TB_Barrel_shift;
+ENTITY TB_ImmZeroFill IS
+END TB_ImmZeroFill;
  
-ARCHITECTURE behavior OF TB_Barrel_shift IS 
+ARCHITECTURE behavior OF TB_ImmZeroFill IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT Barrel_shift
+    COMPONENT ImmZeroFill
     PORT(
-         A : IN  std_logic_vector(15 downto 0);
-         B : IN  std_logic_vector(3 downto 0);
+         LSB : IN  std_logic_vector(7 downto 0);
+         SelImm : IN  std_logic;
          Output : OUT  std_logic_vector(15 downto 0);
-         Ctl_3bit : IN  std_logic_vector(2 downto 0);
-         Cy : OUT  std_logic
+         Input : IN  std_logic_vector(7 downto 0)
         );
     END COMPONENT;
     
 
    --Inputs
-   signal A1 : std_logic_vector(15 downto 0) := (others => '0');
-   signal Ctl_3bit1 : std_logic_vector(2 downto 0) := (others => '0');
-   signal B1 : std_logic_vector(3 downto 0):= (others => '0');
+   signal LSB1 : std_logic_vector(7 downto 0) := (others => '0');
+   signal SelImm1 : std_logic;-- := '0';
+   signal Input1 : std_logic_vector(7 downto 0) := (others => '0');
 
  	--Outputs
    signal Output1 : std_logic_vector(15 downto 0);
-   signal Cy1 : std_logic;
  
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: Barrel_shift PORT MAP (
-          A => A1,
-          B => B1,
+   uut: ImmZeroFill PORT MAP (
+          LSB => LSB1,
+          SelImm => SelImm1,
           Output => Output1,
-          Ctl_3bit => Ctl_3bit1,--IR10 , 11, 12
-          Cy => Cy1
+          Input => Input1
         );
 
    -- Stimulus process
    stim_proc: process
-   begin
-      A1 <= ("1000000000001000");
-		Ctl_3bit1 <= ("100"); -- ROTATEnSHIFT, RIGHTnLEFT, SIN;
-		B1 <= ("0001");
-		wait for 1 ns;
-		A1 <= ("1000000000001000");
-		Ctl_3bit1 <= ("100"); -- ROTATEnSHIFT, RIGHTnLEFT, SIN;
-		B1 <= ("0001");
-      wait;
+   begin		
+		SelImm1	<= '0';
+		LSB1		<= "11111111";
+		Input1	<= "00000001";
+		wait;
    end process;
 
 END;
