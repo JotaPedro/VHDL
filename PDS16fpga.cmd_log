@@ -1,0 +1,1 @@
+xst -intstyle ise -ifn "F:/Projecto/github repo/VHDL/PDS16fpga.xst" -ofn "F:/Projecto/github repo/VHDL/PDS16fpga.syr" 

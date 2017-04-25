@@ -1,0 +1,163 @@
+Release 14.7 - xst P.20131013 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.27 secs
+ 
+--> Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.27 secs
+ 
+--> Reading design: PDS16fpga.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+	9.1) Device utilization summary
+	9.2) Partition Resource Summary
+	9.3) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "PDS16fpga.prj"
+Input Format                       : mixed
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "PDS16fpga"
+Output Format                      : NGC
+Target Device                      : xc3s500e-4-fg320
+
+---- Source Options
+Top Module Name                    : PDS16fpga
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Mux Style                          : Auto
+Decoder Extraction                 : YES
+Priority Encoder Extraction        : Yes
+Shift Register Extraction          : YES
+Logical Shifter Extraction         : YES
+XOR Collapsing                     : YES
+ROM Style                          : Auto
+Mux Extraction                     : Yes
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Multiplier Style                   : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 100000
+Add Generic Clock Buffer(BUFG)     : 24
+Register Duplication               : YES
+Slice Packing                      : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Yes
+Use Synchronous Set                : Yes
+Use Synchronous Reset              : Yes
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Keep Hierarchy                     : No
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+Verilog 2001                       : YES
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+WARNING:HDLParsers:3607 - Unit work/nbit_register is now defined in a different file.  It was defined in "F:/Projecto/github repo/VHDL/nbit_register.vhd", and is now defined in "F:/Projecto/github repo/VHDL/nbit_register_synthesis.vhd".
+Compiling vhdl file "F:/Projecto/github repo/VHDL/pds16_types.vhd" in Library work.
+Architecture pds16_types of Entity pds16_types is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Mplex2to1.vhd" in Library work.
+Entity <Mplex2to1> compiled.
+Entity <Mplex2to1> (Architecture <Behavioral>) compiled.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Or_tree.vhd" in Library work.
+Entity <Or_tree> compiled.
+Entity <Or_tree> (Architecture <Behavioral>) compiled.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Mplex16to1.vhd" in Library work.
+Entity <Mplex16to1> compiled.
+Entity <Mplex16to1> (Architecture <Behavioral>) compiled.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/FullAdder.vhd" in Library work.
+Architecture behavioral of Entity fulladder is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/BnB.vhd" in Library work.
+Entity <BnB> compiled.
+Entity <BnB> (Architecture <Behavioral>) compiled.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Block_Mplex16to1.vhd" in Library work.
+Entity <Block_Mplex16to1> compiled.
+Entity <Block_Mplex16to1> (Architecture <Behavioral>) compiled.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Shifter_Sel_mplex2to1.vhd" in Library work.
+Entity <Shifter_Sel_mplex2to1> compiled.
+Entity <Shifter_Sel_mplex2to1> (Architecture <Behavioral>) compiled.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Block_Mplex2to1.vhd" in Library work.
+Entity <Block_Mplex2to1> compiled.
+Entity <Block_Mplex2to1> (Architecture <Behavioral>) compiled.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Decoder4to16.vhd" in Library work.
+Entity <Decoder4to16> compiled.
+Entity <Decoder4to16> (Architecture <Behavioral>) compiled.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Alu_logico.vhd" in Library work.
+Entity <Alu_logico> compiled.
+Entity <Alu_logico> (Architecture <Behavioral>) compiled.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Barrel_shift.vhd" in Library work.
+Entity <Barrel_shift> compiled.
+Entity <Barrel_shift> (Architecture <Behavioral>) compiled.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Alu_aritmetico.vhd" in Library work.
+Entity <Alu_aritmetico> compiled.
+Entity <Alu_aritmetico> (Architecture <Behavioral>) compiled.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Mplex4to1.vhd" in Library work.
+Entity <Mplex4to1> compiled.
+Entity <Mplex4to1> (Architecture <Behavioral>) compiled.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Mplex16bit_2to1.vhd" in Library work.
+Architecture behavioral of Entity mplex16bit_2to1 is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/PC_Adder.vhd" in Library work.
+Architecture behavioral of Entity pc_adder is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Decoder3_8.vhd" in Library work.
+Architecture behavioral of Entity decoder3_8 is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/nbit_register_synthesis.vhd" in Library work.
+ERROR:HDLParsers:3014 - "F:/Projecto/github repo/VHDL/nbit_register_synthesis.vhd" Line 39. Library unit VPKG is not available in library UNISIM.
+--> 
+
+Total memory usage is 258224 kilobytes
+
+Number of errors   :    1 (   0 filtered)
+Number of warnings :    1 (   0 filtered)
+Number of infos    :    0 (   0 filtered)
+

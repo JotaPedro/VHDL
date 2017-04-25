@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IMPORTANT: This is an internal file that has been generated
+     by the Xilinx ISE software.  Any direct editing or
+     changes made to this file may result in unpredictable
+     behavior or data corruption.  It is strongly advised that
+     users do not edit the contents of this file. -->
+<messages>
+<msg type="warning" file="HDLParsers" num="3607" delta="new" >Unit <arg fmt="%s" index="1">work/nbit_register</arg> is now defined in a different file.  It was defined in &quot;<arg fmt="%s" index="2">F:/Projecto/github repo/VHDL/nbit_register.vhd</arg>&quot;, and is now defined in &quot;<arg fmt="%s" index="3">F:/Projecto/github repo/VHDL/nbit_register_synthesis.vhd</arg>&quot;.
+</msg>
+
+<msg type="error" file="HDLParsers" num="3014" delta="new" >&quot;<arg fmt="%s" index="1">F:/Projecto/github repo/VHDL/nbit_register_synthesis.vhd</arg>&quot; Line <arg fmt="%d" index="2">39</arg>. Library unit <arg fmt="%s" index="3">VPKG</arg> is not available in library <arg fmt="%s" index="4">UNISIM</arg>.
+</msg>
+
+</messages>
+

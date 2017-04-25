@@ -1,0 +1,68 @@
+Release 14.7 - xst P.20131013 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> Parameter TMPDIR set to F:/Projecto/github repo/VHDL/xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.11 secs
+ 
+--> Parameter xsthdpdir set to F:/Projecto/github repo/VHDL/xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.11 secs
+ 
+--> WARNING:Xst:3164 - Option "-debug" found multiple times in the command line. Only the first occurence is considered.
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "F:/Projecto/github repo/VHDL/pds16_types.vhd" in Library work.
+Architecture pds16_types of Entity pds16_types is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Mplex2to1.vhd" in Library work.
+Architecture behavioral of Entity mplex2to1 is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Or_tree.vhd" in Library work.
+Architecture behavioral of Entity or_tree is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Mplex16to1.vhd" in Library work.
+Architecture behavioral of Entity mplex16to1 is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/FullAdder.vhd" in Library work.
+Architecture behavioral of Entity fulladder is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/BnB.vhd" in Library work.
+Architecture behavioral of Entity bnb is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Block_Mplex16to1.vhd" in Library work.
+Architecture behavioral of Entity block_mplex16to1 is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Shifter_Sel_mplex2to1.vhd" in Library work.
+Architecture behavioral of Entity shifter_sel_mplex2to1 is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Block_Mplex2to1.vhd" in Library work.
+Architecture behavioral of Entity block_mplex2to1 is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Decoder4to16.vhd" in Library work.
+Architecture behavioral of Entity decoder4to16 is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Alu_logico.vhd" in Library work.
+Architecture behavioral of Entity alu_logico is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Barrel_shift.vhd" in Library work.
+Architecture behavioral of Entity barrel_shift is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Alu_aritmetico.vhd" in Library work.
+Architecture behavioral of Entity alu_aritmetico is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Mplex4to1.vhd" in Library work.
+Architecture behavioral of Entity mplex4to1 is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Mplex16bit_2to1.vhd" in Library work.
+Architecture behavioral of Entity mplex16bit_2to1 is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/PC_Adder.vhd" in Library work.
+Architecture behavioral of Entity pc_adder is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Decoder3_8.vhd" in Library work.
+Architecture behavioral of Entity decoder3_8 is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/nbit_register_synthesis.vhd" in Library work.
+ERROR:HDLParsers:3014 - "F:/Projecto/github repo/VHDL/nbit_register_synthesis.vhd" Line 39. Library unit VPKG is not available in library UNISIM.
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.45 secs
+ 
+--> 
+
+Total memory usage is 240016 kilobytes
+
+Number of errors   :    1 (   0 filtered)
+Number of warnings :    1 (   0 filtered)
+Number of infos    :    0 (   0 filtered)
+

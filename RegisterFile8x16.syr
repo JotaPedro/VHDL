@@ -1,0 +1,535 @@
+Release 14.7 - xst P.20131013 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.10 secs
+ 
+--> Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.10 secs
+ 
+--> Reading design: RegisterFile8x16.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Compilation
+  3) Design Hierarchy Analysis
+  4) HDL Analysis
+  5) HDL Synthesis
+     5.1) HDL Synthesis Report
+  6) Advanced HDL Synthesis
+     6.1) Advanced HDL Synthesis Report
+  7) Low Level Synthesis
+  8) Partition Report
+  9) Final Report
+	9.1) Device utilization summary
+	9.2) Partition Resource Summary
+	9.3) TIMING REPORT
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "RegisterFile8x16.prj"
+Input Format                       : mixed
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "RegisterFile8x16"
+Output Format                      : NGC
+Target Device                      : xc3s500e-4-fg320
+
+---- Source Options
+Top Module Name                    : RegisterFile8x16
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Mux Style                          : Auto
+Decoder Extraction                 : YES
+Priority Encoder Extraction        : Yes
+Shift Register Extraction          : YES
+Logical Shifter Extraction         : YES
+XOR Collapsing                     : YES
+ROM Style                          : Auto
+Mux Extraction                     : Yes
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Multiplier Style                   : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 100000
+Add Generic Clock Buffer(BUFG)     : 24
+Register Duplication               : YES
+Slice Packing                      : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Yes
+Use Synchronous Set                : Yes
+Use Synchronous Reset              : Yes
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 1
+Keep Hierarchy                     : No
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+Verilog 2001                       : YES
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Compilation                              *
+=========================================================================
+Compiling vhdl file "F:/Projecto/github repo/VHDL/pds16_types.vhd" in Library work.
+Architecture pds16_types of Entity pds16_types is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/FullAdder.vhd" in Library work.
+Architecture behavioral of Entity fulladder is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/PC_Adder.vhd" in Library work.
+Architecture behavioral of Entity pc_adder is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Decoder3_8.vhd" in Library work.
+Architecture behavioral of Entity decoder3_8 is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/nbit_register.vhd" in Library work.
+Architecture behavioral of Entity nbit_register is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Mplex16bit_8to1.vhd" in Library work.
+Architecture behavioral of Entity mplex16bit_8to1 is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Mplex3bit_2to1.vhd" in Library work.
+Architecture behavioral of Entity mplex3bit_2to1 is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/Mplex16bit_2to1.vhd" in Library work.
+Architecture behavioral of Entity mplex16bit_2to1 is up to date.
+Compiling vhdl file "F:/Projecto/github repo/VHDL/RegisterFile8x16.vhd" in Library work.
+Architecture behavioral of Entity registerfile8x16 is up to date.
+
+=========================================================================
+*                     Design Hierarchy Analysis                         *
+=========================================================================
+Analyzing hierarchy for entity <RegisterFile8x16> in library <work> (architecture <behavioral>).
+
+Analyzing hierarchy for entity <PC_Adder> in library <work> (architecture <behavioral>).
+
+Analyzing hierarchy for entity <Decoder3_8> in library <work> (architecture <behavioral>).
+
+Analyzing hierarchy for entity <nbit_register> in library <work> (architecture <behavioral>) with generics.
+	N = 16
+
+Analyzing hierarchy for entity <Mplex16bit_8to1> in library <work> (architecture <behavioral>).
+
+Analyzing hierarchy for entity <Mplex3bit_2to1> in library <work> (architecture <behavioral>).
+
+Analyzing hierarchy for entity <Mplex16bit_2to1> in library <work> (architecture <behavioral>).
+
+Analyzing hierarchy for entity <FullAdder> in library <work> (architecture <behavioral>).
+
+
+=========================================================================
+*                            HDL Analysis                               *
+=========================================================================
+Analyzing Entity <RegisterFile8x16> in library <work> (Architecture <behavioral>).
+Entity <RegisterFile8x16> analyzed. Unit <RegisterFile8x16> generated.
+
+Analyzing Entity <PC_Adder> in library <work> (Architecture <behavioral>).
+Entity <PC_Adder> analyzed. Unit <PC_Adder> generated.
+
+Analyzing Entity <FullAdder> in library <work> (Architecture <behavioral>).
+Entity <FullAdder> analyzed. Unit <FullAdder> generated.
+
+Analyzing Entity <Decoder3_8> in library <work> (Architecture <behavioral>).
+INFO:Xst:1561 - "F:/Projecto/github repo/VHDL/Decoder3_8.vhd" line 51: Mux is complete : default of case is discarded
+Entity <Decoder3_8> analyzed. Unit <Decoder3_8> generated.
+
+Analyzing generic Entity <nbit_register> in library <work> (Architecture <behavioral>).
+	N = 16
+Entity <nbit_register> analyzed. Unit <nbit_register> generated.
+
+Analyzing Entity <Mplex16bit_8to1> in library <work> (Architecture <behavioral>).
+INFO:Xst:1561 - "F:/Projecto/github repo/VHDL/Mplex16bit_8to1.vhd" line 54: Mux is complete : default of case is discarded
+Entity <Mplex16bit_8to1> analyzed. Unit <Mplex16bit_8to1> generated.
+
+Analyzing Entity <Mplex3bit_2to1> in library <work> (Architecture <behavioral>).
+INFO:Xst:1561 - "F:/Projecto/github repo/VHDL/Mplex3bit_2to1.vhd" line 48: Mux is complete : default of case is discarded
+Entity <Mplex3bit_2to1> analyzed. Unit <Mplex3bit_2to1> generated.
+
+Analyzing Entity <Mplex16bit_2to1> in library <work> (Architecture <behavioral>).
+INFO:Xst:1561 - "F:/Projecto/github repo/VHDL/Mplex16bit_2to1.vhd" line 48: Mux is complete : default of case is discarded
+Entity <Mplex16bit_2to1> analyzed. Unit <Mplex16bit_2to1> generated.
+
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Performing bidirectional port resolution...
+
+Synthesizing Unit <Decoder3_8>.
+    Related source file is "F:/Projecto/github repo/VHDL/Decoder3_8.vhd".
+WARNING:Xst:737 - Found 8-bit latch for signal <Output_port>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+    Found 1-of-8 decoder for signal <Output_port$mux0001> created at line 42.
+    Summary:
+	inferred   1 Decoder(s).
+Unit <Decoder3_8> synthesized.
+
+
+Synthesizing Unit <nbit_register>.
+    Related source file is "F:/Projecto/github repo/VHDL/nbit_register.vhd".
+    Found 16-bit register for signal <q>.
+    Summary:
+	inferred  16 D-type flip-flop(s).
+Unit <nbit_register> synthesized.
+
+
+Synthesizing Unit <Mplex16bit_8to1>.
+    Related source file is "F:/Projecto/github repo/VHDL/Mplex16bit_8to1.vhd".
+    Found 16-bit 8-to-1 multiplexer for signal <Output_port>.
+    Summary:
+	inferred  16 Multiplexer(s).
+Unit <Mplex16bit_8to1> synthesized.
+
+
+Synthesizing Unit <Mplex3bit_2to1>.
+    Related source file is "F:/Projecto/github repo/VHDL/Mplex3bit_2to1.vhd".
+Unit <Mplex3bit_2to1> synthesized.
+
+
+Synthesizing Unit <Mplex16bit_2to1>.
+    Related source file is "F:/Projecto/github repo/VHDL/Mplex16bit_2to1.vhd".
+Unit <Mplex16bit_2to1> synthesized.
+
+
+Synthesizing Unit <FullAdder>.
+    Related source file is "F:/Projecto/github repo/VHDL/FullAdder.vhd".
+    Found 1-bit xor3 for signal <Sx>.
+    Summary:
+	inferred   1 Xor(s).
+Unit <FullAdder> synthesized.
+
+
+Synthesizing Unit <PC_Adder>.
+    Related source file is "F:/Projecto/github repo/VHDL/PC_Adder.vhd".
+WARNING:Xst:646 - Signal <Carry<16>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+Unit <PC_Adder> synthesized.
+
+
+Synthesizing Unit <RegisterFile8x16>.
+    Related source file is "F:/Projecto/github repo/VHDL/RegisterFile8x16.vhd".
+WARNING:Xst:1306 - Output <flags_output> is never assigned.
+WARNING:Xst:1780 - Signal <irrelevant> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <bit_pc_add> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:1780 - Signal <B_adder> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
+Unit <RegisterFile8x16> synthesized.
+
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# Registers                                            : 8
+ 16-bit register                                       : 8
+# Latches                                              : 1
+ 8-bit latch                                           : 1
+# Multiplexers                                         : 3
+ 16-bit 8-to-1 multiplexer                             : 3
+# Decoders                                             : 1
+ 1-of-8 decoder                                        : 1
+# Xors                                                 : 16
+ 1-bit xor3                                            : 16
+
+=========================================================================
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# Registers                                            : 128
+ Flip-Flops                                            : 128
+# Latches                                              : 1
+ 8-bit latch                                           : 1
+# Multiplexers                                         : 3
+ 16-bit 8-to-1 multiplexer                             : 3
+# Decoders                                             : 1
+ 1-of-8 decoder                                        : 1
+# Xors                                                 : 16
+ 1-bit xor3                                            : 16
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+
+Optimizing unit <RegisterFile8x16> ...
+
+Optimizing unit <nbit_register> ...
+
+Optimizing unit <PC_Adder> ...
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block RegisterFile8x16, actual ratio is 3.
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 128
+ Flip-Flops                                            : 128
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Final Report                               *
+=========================================================================
+Final Results
+RTL Top Level Output File Name     : RegisterFile8x16.ngr
+Top Level Output File Name         : RegisterFile8x16
+Output Format                      : NGC
+Optimization Goal                  : Speed
+Keep Hierarchy                     : No
+
+Design Statistics
+# IOs                              : 103
+
+Cell Usage :
+# BELS                             : 425
+#      GND                         : 1
+#      LUT2                        : 17
+#      LUT3                        : 235
+#      LUT3_D                      : 2
+#      LUT4                        : 20
+#      LUT4_D                      : 1
+#      LUT4_L                      : 3
+#      MUXF5                       : 98
+#      MUXF6                       : 48
+# FlipFlops/Latches                : 136
+#      FDCE                        : 128
+#      LD                          : 8
+# Clock Buffers                    : 2
+#      BUFGP                       : 2
+# IO Buffers                       : 98
+#      IBUF                        : 34
+#      OBUF                        : 64
+=========================================================================
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 3s500efg320-4 
+
+ Number of Slices:                      182  out of   4656     3%  
+ Number of Slice Flip Flops:            136  out of   9312     1%  
+ Number of 4 input LUTs:                278  out of   9312     2%  
+ Number of IOs:                         103
+ Number of bonded IOBs:                 100  out of    232    43%  
+ Number of GCLKs:                         2  out of     24     8%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+TIMING REPORT
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+-----------------------------------+------------------------+-------+
+Clock Signal                       | Clock buffer(FF name)  | Load  |
+-----------------------------------+------------------------+-------+
+RFC<0>                             | BUFGP                  | 8     |
+clock                              | BUFGP                  | 128   |
+-----------------------------------+------------------------+-------+
+
+Asynchronous Control Signals Information:
+----------------------------------------
+------------------------------------------+------------------------+-------+
+Control Signal                            | Buffer(FF name)        | Load  |
+------------------------------------------+------------------------+-------+
+Input_Data_Mplex16bit_r6<1><10>(XST_GND:G)| NONE(r0/q_0)           | 96    |
+CL                                        | IBUF                   | 32    |
+------------------------------------------+------------------------+-------+
+
+Timing Summary:
+---------------
+Speed Grade: -4
+
+   Minimum period: 5.906ns (Maximum Frequency: 169.319MHz)
+   Minimum input arrival time before clock: 4.772ns
+   Maximum output required time after clock: 6.797ns
+   Maximum combinational path delay: 9.917ns
+
+Timing Detail:
+--------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'clock'
+  Clock period: 5.906ns (frequency: 169.319MHz)
+  Total number of paths / destination ports: 171 / 32
+-------------------------------------------------------------------------
+Delay:               5.906ns (Levels of Logic = 4)
+  Source:            r7/q_9 (FF)
+  Destination:       r7/q_15 (FF)
+  Source Clock:      clock rising
+  Destination Clock: clock rising
+
+  Data Path: r7/q_9 to r7/q_15
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDCE:C->Q             8   0.591   0.932  r7/q_9 (r7/q_9)
+     LUT3_D:I0->O          2   0.704   0.482  PCAdder/Adder[7].FAx/Mxor_Sx_xo<0>11_SW0 (N22)
+     LUT4:I2->O            6   0.704   0.673  PCAdder/Adder[10].FAx/Mxor_Sx_xo<0>11 (PCAdder/N61)
+     LUT4_L:I3->LO         1   0.704   0.104  mplexr7/Output_port<14>10 (mplexr7/Output_port<14>10)
+     LUT4:I3->O            1   0.704   0.000  mplexr7/Output_port<14>39 (Input_Data_r7<14>)
+     FDCE:D                    0.308          r7/q_14
+    ----------------------------------------
+    Total                      5.906ns (3.715ns logic, 2.191ns route)
+                                       (62.9% logic, 37.1% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'RFC<0>'
+  Total number of paths / destination ports: 24 / 8
+-------------------------------------------------------------------------
+Offset:              3.680ns (Levels of Logic = 2)
+  Source:            addressSD<0> (PAD)
+  Destination:       decoder/Output_port_1 (LATCH)
+  Destination Clock: RFC<0> falling
+
+  Data Path: addressSD<0> to decoder/Output_port_1
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            73   1.218   1.450  addressSD_0_IBUF (addressSD_0_IBUF)
+     LUT3:I0->O            1   0.704   0.000  decoder/Mdecod_Output_port_mux000151 (decoder/Output_port_mux0001<2>)
+     LD:D                      0.308          decoder/Output_port_5
+    ----------------------------------------
+    Total                      3.680ns (2.230ns logic, 1.450ns route)
+                                       (60.6% logic, 39.4% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'clock'
+  Total number of paths / destination ports: 238 / 176
+-------------------------------------------------------------------------
+Offset:              4.772ns (Levels of Logic = 3)
+  Source:            RFC<3> (PAD)
+  Destination:       r7/q_12 (FF)
+  Destination Clock: clock rising
+
+  Data Path: RFC<3> to r7/q_12
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            22   1.218   1.339  RFC_3_IBUF (RFC_3_IBUF)
+     LUT3:I0->O            1   0.704   0.499  mplexr7/Output_port<8>_SW1 (N8)
+     LUT4:I1->O            1   0.704   0.000  mplexr7/Output_port<8> (Input_Data_r7<8>)
+     FDCE:D                    0.308          r7/q_8
+    ----------------------------------------
+    Total                      4.772ns (2.934ns logic, 1.838ns route)
+                                       (61.5% logic, 38.5% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'clock'
+  Total number of paths / destination ports: 400 / 64
+-------------------------------------------------------------------------
+Offset:              6.797ns (Levels of Logic = 4)
+  Source:            r7/q_13 (FF)
+  Destination:       Output_A<13> (PAD)
+  Source Clock:      clock rising
+
+  Data Path: r7/q_13 to Output_A<13>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDCE:C->Q            11   0.591   0.968  r7/q_13 (r7/q_13)
+     LUT3:I2->O            1   0.704   0.000  Multiplexer_Sc/Mmux_Output_port_44 (Multiplexer_Sc/Mmux_Output_port_44)
+     MUXF5:I1->O           1   0.321   0.000  Multiplexer_Sc/Mmux_Output_port_3_f5_3 (Multiplexer_Sc/Mmux_Output_port_3_f54)
+     MUXF6:I1->O           1   0.521   0.420  Multiplexer_Sc/Mmux_Output_port_2_f6_3 (Output_Sc_13_OBUF)
+     OBUF:I->O                 3.272          Output_Sc_13_OBUF (Output_Sc<13>)
+    ----------------------------------------
+    Total                      6.797ns (5.409ns logic, 1.388ns route)
+                                       (79.6% logic, 20.4% route)
+
+=========================================================================
+Timing constraint: Default path analysis
+  Total number of paths / destination ports: 560 / 48
+-------------------------------------------------------------------------
+Delay:               9.917ns (Levels of Logic = 6)
+  Source:            addressSD<0> (PAD)
+  Destination:       Output_A<15> (PAD)
+
+  Data Path: addressSD<0> to Output_A<15>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            73   1.218   1.310  addressSD_0_IBUF (addressSD_0_IBUF)
+     LUT3:I2->O           64   0.704   1.447  mplexAddrA/Output_port<0>1 (selector_mplexaddrA<0>)
+     LUT3:I0->O            1   0.704   0.000  Multiplexer_A/Mmux_Output_port_4 (Multiplexer_A/Mmux_Output_port_4)
+     MUXF5:I1->O           1   0.321   0.000  Multiplexer_A/Mmux_Output_port_3_f5 (Multiplexer_A/Mmux_Output_port_3_f5)
+     MUXF6:I1->O           1   0.521   0.420  Multiplexer_A/Mmux_Output_port_2_f6 (Output_A_0_OBUF)
+     OBUF:I->O                 3.272          Output_A_0_OBUF (Output_A<0>)
+    ----------------------------------------
+    Total                      9.917ns (6.740ns logic, 3.177ns route)
+                                       (68.0% logic, 32.0% route)
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 5.00 secs
+Total CPU time to Xst completion: 5.47 secs
+ 
+--> 
+
+Total memory usage is 262996 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :    6 (   0 filtered)
+Number of infos    :    4 (   0 filtered)
+

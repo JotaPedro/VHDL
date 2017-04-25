@@ -1,0 +1,388 @@
+--------------------------------------------------------------------------------
+Release 14.7 Trace  (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+F:\Xilinx_ISE_DS_Win_14.7\14.7\ISE_DS\ISE\bin\nt64\unwrapped\trce.exe -intstyle
+ise -v 3 -s 4 -n 3 -fastpaths -xml RegisterFile8x16.twx RegisterFile8x16.ncd -o
+RegisterFile8x16.twr RegisterFile8x16.pcf
+
+Design file:              RegisterFile8x16.ncd
+Physical constraint file: RegisterFile8x16.pcf
+Device,package,speed:     xc3s500e,fg320,-4 (PRODUCTION 1.27 2013-10-13)
+Report level:             verbose report
+
+Environment Variable      Effect 
+--------------------      ------ 
+NONE                      No environment variables were set
+--------------------------------------------------------------------------------
+
+INFO:Timing:2698 - No timing constraints found, doing default enumeration.
+INFO:Timing:3412 - To improve timing, see the Timing Closure User Guide (UG612).
+INFO:Timing:2752 - To get complete path coverage, use the unconstrained paths 
+   option. All paths that are not constrained will be reported in the 
+   unconstrained paths section(s) of the report.
+INFO:Timing:3339 - The clock-to-out numbers in this timing report are based on 
+   a 50 Ohm transmission line loading model.  For the details of this model, 
+   and for more information on accounting for different loading conditions, 
+   please see the device datasheet.
+INFO:Timing:3390 - This architecture does not support a default System Jitter 
+   value, please add SYSTEM_JITTER constraint to the UCF to modify the Clock 
+   Uncertainty calculation.
+INFO:Timing:3389 - This architecture does not support 'Discrete Jitter' and 
+   'Phase Error' calculations, these terms will be zero in the Clock 
+   Uncertainty calculation.  Please make appropriate modification to 
+   SYSTEM_JITTER to account for the unsupported Discrete Jitter and Phase 
+   Error.
+
+
+
+Data Sheet report:
+-----------------
+All values displayed in nanoseconds (ns)
+
+Setup/Hold to clock RFC<0>
+------------+------------+------------+------------------+--------+
+            |Max Setup to|Max Hold to |                  | Clock  |
+Source      | clk (edge) | clk (edge) |Internal Clock(s) | Phase  |
+------------+------------+------------+------------------+--------+
+addressSD<0>|    2.808(F)|   -0.523(F)|RFC_0_BUFGP       |   0.000|
+addressSD<1>|    2.580(F)|   -0.284(F)|RFC_0_BUFGP       |   0.000|
+addressSD<2>|    3.091(F)|   -0.496(F)|RFC_0_BUFGP       |   0.000|
+------------+------------+------------+------------------+--------+
+
+Setup/Hold to clock clock
+------------+------------+------------+------------------+--------+
+            |Max Setup to|Max Hold to |                  | Clock  |
+Source      | clk (edge) | clk (edge) |Internal Clock(s) | Phase  |
+------------+------------+------------+------------------+--------+
+DestData<0> |    1.764(R)|    0.645(R)|clock_BUFGP       |   0.000|
+DestData<1> |    1.859(R)|    0.660(R)|clock_BUFGP       |   0.000|
+DestData<2> |    2.380(R)|    1.006(R)|clock_BUFGP       |   0.000|
+DestData<3> |    2.252(R)|    1.520(R)|clock_BUFGP       |   0.000|
+DestData<4> |    1.331(R)|    1.007(R)|clock_BUFGP       |   0.000|
+DestData<5> |    1.087(R)|    1.054(R)|clock_BUFGP       |   0.000|
+DestData<6> |    2.835(R)|    0.378(R)|clock_BUFGP       |   0.000|
+DestData<7> |    2.069(R)|    0.428(R)|clock_BUFGP       |   0.000|
+DestData<8> |    3.478(R)|    0.612(R)|clock_BUFGP       |   0.000|
+DestData<9> |    3.582(R)|   -0.421(R)|clock_BUFGP       |   0.000|
+DestData<10>|    2.320(R)|    1.015(R)|clock_BUFGP       |   0.000|
+DestData<11>|    2.889(R)|    0.138(R)|clock_BUFGP       |   0.000|
+DestData<12>|    2.283(R)|    0.371(R)|clock_BUFGP       |   0.000|
+DestData<13>|    2.496(R)|    0.599(R)|clock_BUFGP       |   0.000|
+DestData<14>|    1.677(R)|    0.849(R)|clock_BUFGP       |   0.000|
+DestData<15>|    2.009(R)|    0.336(R)|clock_BUFGP       |   0.000|
+RFC<1>      |    8.217(R)|    0.532(R)|clock_BUFGP       |   0.000|
+RFC<2>      |    7.364(R)|    0.852(R)|clock_BUFGP       |   0.000|
+RFC<3>      |    4.306(R)|    0.483(R)|clock_BUFGP       |   0.000|
+flags<0>    |    0.818(R)|    0.566(R)|clock_BUFGP       |   0.000|
+flags<1>    |    1.435(R)|    0.073(R)|clock_BUFGP       |   0.000|
+flags<2>    |    1.121(R)|    0.323(R)|clock_BUFGP       |   0.000|
+flags<3>    |    0.680(R)|    0.675(R)|clock_BUFGP       |   0.000|
+------------+------------+------------+------------------+--------+
+
+Clock clock to Pad
+-------------+------------+------------------+--------+
+             | clk (edge) |                  | Clock  |
+Destination  |   to PAD   |Internal Clock(s) | Phase  |
+-------------+------------+------------------+--------+
+Output_A<0>  |   12.441(R)|clock_BUFGP       |   0.000|
+Output_A<1>  |   12.121(R)|clock_BUFGP       |   0.000|
+Output_A<2>  |   11.490(R)|clock_BUFGP       |   0.000|
+Output_A<3>  |   11.000(R)|clock_BUFGP       |   0.000|
+Output_A<4>  |   10.796(R)|clock_BUFGP       |   0.000|
+Output_A<5>  |   11.859(R)|clock_BUFGP       |   0.000|
+Output_A<6>  |    9.973(R)|clock_BUFGP       |   0.000|
+Output_A<7>  |   10.726(R)|clock_BUFGP       |   0.000|
+Output_A<8>  |   11.540(R)|clock_BUFGP       |   0.000|
+Output_A<9>  |   11.490(R)|clock_BUFGP       |   0.000|
+Output_A<10> |   11.369(R)|clock_BUFGP       |   0.000|
+Output_A<11> |   11.018(R)|clock_BUFGP       |   0.000|
+Output_A<12> |   11.188(R)|clock_BUFGP       |   0.000|
+Output_A<13> |   11.825(R)|clock_BUFGP       |   0.000|
+Output_A<14> |   11.334(R)|clock_BUFGP       |   0.000|
+Output_A<15> |   11.714(R)|clock_BUFGP       |   0.000|
+Output_B<0>  |   17.403(R)|clock_BUFGP       |   0.000|
+Output_B<1>  |   17.199(R)|clock_BUFGP       |   0.000|
+Output_B<2>  |   12.534(R)|clock_BUFGP       |   0.000|
+Output_B<3>  |   12.382(R)|clock_BUFGP       |   0.000|
+Output_B<4>  |   11.733(R)|clock_BUFGP       |   0.000|
+Output_B<5>  |   12.177(R)|clock_BUFGP       |   0.000|
+Output_B<6>  |   12.111(R)|clock_BUFGP       |   0.000|
+Output_B<7>  |   12.681(R)|clock_BUFGP       |   0.000|
+Output_B<8>  |   12.182(R)|clock_BUFGP       |   0.000|
+Output_B<9>  |   12.196(R)|clock_BUFGP       |   0.000|
+Output_B<10> |   11.520(R)|clock_BUFGP       |   0.000|
+Output_B<11> |   11.191(R)|clock_BUFGP       |   0.000|
+Output_B<12> |   12.329(R)|clock_BUFGP       |   0.000|
+Output_B<13> |   12.278(R)|clock_BUFGP       |   0.000|
+Output_B<14> |   12.158(R)|clock_BUFGP       |   0.000|
+Output_B<15> |   12.775(R)|clock_BUFGP       |   0.000|
+Output_Sc<0> |   11.671(R)|clock_BUFGP       |   0.000|
+Output_Sc<1> |   11.843(R)|clock_BUFGP       |   0.000|
+Output_Sc<2> |   11.776(R)|clock_BUFGP       |   0.000|
+Output_Sc<3> |   11.313(R)|clock_BUFGP       |   0.000|
+Output_Sc<4> |   11.598(R)|clock_BUFGP       |   0.000|
+Output_Sc<5> |   12.519(R)|clock_BUFGP       |   0.000|
+Output_Sc<6> |   10.525(R)|clock_BUFGP       |   0.000|
+Output_Sc<7> |   10.339(R)|clock_BUFGP       |   0.000|
+Output_Sc<8> |   12.984(R)|clock_BUFGP       |   0.000|
+Output_Sc<9> |   11.608(R)|clock_BUFGP       |   0.000|
+Output_Sc<10>|   11.534(R)|clock_BUFGP       |   0.000|
+Output_Sc<11>|   11.186(R)|clock_BUFGP       |   0.000|
+Output_Sc<12>|   12.206(R)|clock_BUFGP       |   0.000|
+Output_Sc<13>|   11.404(R)|clock_BUFGP       |   0.000|
+Output_Sc<14>|   12.337(R)|clock_BUFGP       |   0.000|
+Output_Sc<15>|   12.439(R)|clock_BUFGP       |   0.000|
+PC<0>        |    9.945(R)|clock_BUFGP       |   0.000|
+PC<1>        |    8.877(R)|clock_BUFGP       |   0.000|
+PC<2>        |   11.041(R)|clock_BUFGP       |   0.000|
+PC<3>        |    8.048(R)|clock_BUFGP       |   0.000|
+PC<4>        |    8.540(R)|clock_BUFGP       |   0.000|
+PC<5>        |   11.257(R)|clock_BUFGP       |   0.000|
+PC<6>        |    8.147(R)|clock_BUFGP       |   0.000|
+PC<7>        |   10.320(R)|clock_BUFGP       |   0.000|
+PC<8>        |   10.489(R)|clock_BUFGP       |   0.000|
+PC<9>        |   10.328(R)|clock_BUFGP       |   0.000|
+PC<10>       |    9.422(R)|clock_BUFGP       |   0.000|
+PC<11>       |    9.790(R)|clock_BUFGP       |   0.000|
+PC<12>       |    8.352(R)|clock_BUFGP       |   0.000|
+PC<13>       |    7.970(R)|clock_BUFGP       |   0.000|
+PC<14>       |    8.486(R)|clock_BUFGP       |   0.000|
+PC<15>       |    8.083(R)|clock_BUFGP       |   0.000|
+-------------+------------+------------------+--------+
+
+Clock to Setup on destination clock clock
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+RFC<0>         |         |    5.890|         |         |
+clock          |    5.454|         |         |         |
+---------------+---------+---------+---------+---------+
+
+Pad to Pad
+---------------+---------------+---------+
+Source Pad     |Destination Pad|  Delay  |
+---------------+---------------+---------+
+RFC<4>         |Output_A<0>    |   13.790|
+RFC<4>         |Output_A<1>    |   13.489|
+RFC<4>         |Output_A<2>    |   12.292|
+RFC<4>         |Output_A<3>    |   12.508|
+RFC<4>         |Output_A<4>    |   10.710|
+RFC<4>         |Output_A<5>    |   11.372|
+RFC<4>         |Output_A<6>    |   11.376|
+RFC<4>         |Output_A<7>    |   12.596|
+RFC<4>         |Output_A<8>    |   11.146|
+RFC<4>         |Output_A<9>    |   10.924|
+RFC<4>         |Output_A<10>   |    9.034|
+RFC<4>         |Output_A<11>   |    8.962|
+RFC<4>         |Output_A<12>   |   10.942|
+RFC<4>         |Output_A<13>   |   11.111|
+RFC<4>         |Output_A<14>   |   10.117|
+RFC<4>         |Output_A<15>   |   10.747|
+addrA<0>       |Output_A<0>    |   11.649|
+addrA<0>       |Output_A<1>    |   11.078|
+addrA<0>       |Output_A<2>    |   11.531|
+addrA<0>       |Output_A<3>    |   11.127|
+addrA<0>       |Output_A<4>    |   10.761|
+addrA<0>       |Output_A<5>    |   10.701|
+addrA<0>       |Output_A<6>    |   11.430|
+addrA<0>       |Output_A<7>    |   12.650|
+addrA<0>       |Output_A<8>    |   11.200|
+addrA<0>       |Output_A<9>    |   10.928|
+addrA<0>       |Output_A<10>   |    9.088|
+addrA<0>       |Output_A<11>   |    9.016|
+addrA<0>       |Output_A<12>   |   10.996|
+addrA<0>       |Output_A<13>   |   11.165|
+addrA<0>       |Output_A<14>   |   10.171|
+addrA<0>       |Output_A<15>   |   10.801|
+addrA<1>       |Output_A<0>    |   13.083|
+addrA<1>       |Output_A<1>    |   12.812|
+addrA<1>       |Output_A<2>    |   11.743|
+addrA<1>       |Output_A<3>    |   11.959|
+addrA<1>       |Output_A<4>    |   10.258|
+addrA<1>       |Output_A<5>    |   11.364|
+addrA<1>       |Output_A<6>    |   10.754|
+addrA<1>       |Output_A<7>    |   11.938|
+addrA<1>       |Output_A<8>    |    9.989|
+addrA<1>       |Output_A<9>    |   10.916|
+addrA<1>       |Output_A<10>   |    8.750|
+addrA<1>       |Output_A<11>   |    8.564|
+addrA<1>       |Output_A<12>   |    9.747|
+addrA<1>       |Output_A<13>   |   10.969|
+addrA<1>       |Output_A<14>   |    9.838|
+addrA<1>       |Output_A<15>   |    9.992|
+addrA<2>       |Output_A<0>    |   13.706|
+addrA<2>       |Output_A<1>    |   13.405|
+addrA<2>       |Output_A<2>    |   12.208|
+addrA<2>       |Output_A<3>    |   12.424|
+addrA<2>       |Output_A<4>    |   10.626|
+addrA<2>       |Output_A<5>    |   11.280|
+addrA<2>       |Output_A<6>    |   11.056|
+addrA<2>       |Output_A<7>    |   11.733|
+addrA<2>       |Output_A<8>    |   10.004|
+addrA<2>       |Output_A<9>    |   10.491|
+addrA<2>       |Output_A<10>   |    7.832|
+addrA<2>       |Output_A<11>   |    8.079|
+addrA<2>       |Output_A<12>   |    9.480|
+addrA<2>       |Output_A<13>   |   10.736|
+addrA<2>       |Output_A<14>   |    9.752|
+addrA<2>       |Output_A<15>   |   10.026|
+addrB<0>       |Output_B<0>    |   18.138|
+addrB<0>       |Output_B<1>    |   18.335|
+addrB<0>       |Output_B<2>    |   13.786|
+addrB<0>       |Output_B<3>    |   13.351|
+addrB<0>       |Output_B<4>    |   11.637|
+addrB<0>       |Output_B<5>    |   12.218|
+addrB<0>       |Output_B<6>    |   11.320|
+addrB<0>       |Output_B<7>    |   11.172|
+addrB<0>       |Output_B<8>    |    8.554|
+addrB<0>       |Output_B<9>    |   10.199|
+addrB<0>       |Output_B<10>   |    8.250|
+addrB<0>       |Output_B<11>   |    7.907|
+addrB<0>       |Output_B<12>   |    9.935|
+addrB<0>       |Output_B<13>   |   11.140|
+addrB<0>       |Output_B<14>   |   10.419|
+addrB<0>       |Output_B<15>   |   10.709|
+addrB<1>       |Output_B<0>    |   18.131|
+addrB<1>       |Output_B<1>    |   18.352|
+addrB<1>       |Output_B<2>    |   13.311|
+addrB<1>       |Output_B<3>    |   12.347|
+addrB<1>       |Output_B<4>    |   11.641|
+addrB<1>       |Output_B<5>    |   11.845|
+addrB<1>       |Output_B<6>    |   10.677|
+addrB<1>       |Output_B<7>    |   10.745|
+addrB<1>       |Output_B<8>    |    8.662|
+addrB<1>       |Output_B<9>    |   10.152|
+addrB<1>       |Output_B<10>   |    7.920|
+addrB<1>       |Output_B<11>   |    8.015|
+addrB<1>       |Output_B<12>   |    9.581|
+addrB<1>       |Output_B<13>   |   10.136|
+addrB<1>       |Output_B<14>   |    9.845|
+addrB<1>       |Output_B<15>   |   10.222|
+addrB<2>       |Output_B<0>    |   17.057|
+addrB<2>       |Output_B<1>    |   17.277|
+addrB<2>       |Output_B<2>    |   12.520|
+addrB<2>       |Output_B<3>    |   11.708|
+addrB<2>       |Output_B<4>    |   10.183|
+addrB<2>       |Output_B<5>    |   11.046|
+addrB<2>       |Output_B<6>    |    9.991|
+addrB<2>       |Output_B<7>    |   10.067|
+addrB<2>       |Output_B<8>    |    8.403|
+addrB<2>       |Output_B<9>    |    9.510|
+addrB<2>       |Output_B<10>   |    7.435|
+addrB<2>       |Output_B<11>   |    7.550|
+addrB<2>       |Output_B<12>   |    9.055|
+addrB<2>       |Output_B<13>   |    9.493|
+addrB<2>       |Output_B<14>   |    9.310|
+addrB<2>       |Output_B<15>   |    9.592|
+addressSD<0>   |Output_A<0>    |   11.756|
+addressSD<0>   |Output_A<1>    |   11.185|
+addressSD<0>   |Output_A<2>    |   11.638|
+addressSD<0>   |Output_A<3>    |   11.234|
+addressSD<0>   |Output_A<4>    |   10.868|
+addressSD<0>   |Output_A<5>    |   10.808|
+addressSD<0>   |Output_A<6>    |   11.537|
+addressSD<0>   |Output_A<7>    |   12.757|
+addressSD<0>   |Output_A<8>    |   11.307|
+addressSD<0>   |Output_A<9>    |   11.035|
+addressSD<0>   |Output_A<10>   |    9.195|
+addressSD<0>   |Output_A<11>   |    9.123|
+addressSD<0>   |Output_A<12>   |   11.103|
+addressSD<0>   |Output_A<13>   |   11.272|
+addressSD<0>   |Output_A<14>   |   10.278|
+addressSD<0>   |Output_A<15>   |   10.908|
+addressSD<0>   |Output_Sc<0>   |   10.595|
+addressSD<0>   |Output_Sc<1>   |   10.954|
+addressSD<0>   |Output_Sc<2>   |    9.980|
+addressSD<0>   |Output_Sc<3>   |   10.625|
+addressSD<0>   |Output_Sc<4>   |   10.724|
+addressSD<0>   |Output_Sc<5>   |   10.479|
+addressSD<0>   |Output_Sc<6>   |   10.108|
+addressSD<0>   |Output_Sc<7>   |    9.559|
+addressSD<0>   |Output_Sc<8>   |   10.271|
+addressSD<0>   |Output_Sc<9>   |    9.272|
+addressSD<0>   |Output_Sc<10>  |    8.855|
+addressSD<0>   |Output_Sc<11>  |    8.906|
+addressSD<0>   |Output_Sc<12>  |    9.675|
+addressSD<0>   |Output_Sc<13>  |    9.748|
+addressSD<0>   |Output_Sc<14>  |    9.708|
+addressSD<0>   |Output_Sc<15>  |   10.446|
+addressSD<1>   |Output_A<0>    |   13.032|
+addressSD<1>   |Output_A<1>    |   12.761|
+addressSD<1>   |Output_A<2>    |   11.692|
+addressSD<1>   |Output_A<3>    |   11.908|
+addressSD<1>   |Output_A<4>    |   10.207|
+addressSD<1>   |Output_A<5>    |   11.313|
+addressSD<1>   |Output_A<6>    |   10.703|
+addressSD<1>   |Output_A<7>    |   11.887|
+addressSD<1>   |Output_A<8>    |    9.938|
+addressSD<1>   |Output_A<9>    |   10.865|
+addressSD<1>   |Output_A<10>   |    8.699|
+addressSD<1>   |Output_A<11>   |    8.513|
+addressSD<1>   |Output_A<12>   |    9.696|
+addressSD<1>   |Output_A<13>   |   10.918|
+addressSD<1>   |Output_A<14>   |    9.787|
+addressSD<1>   |Output_A<15>   |    9.941|
+addressSD<1>   |Output_Sc<0>   |   11.904|
+addressSD<1>   |Output_Sc<1>   |   12.216|
+addressSD<1>   |Output_Sc<2>   |   10.580|
+addressSD<1>   |Output_Sc<3>   |   10.818|
+addressSD<1>   |Output_Sc<4>   |   10.601|
+addressSD<1>   |Output_Sc<5>   |   10.308|
+addressSD<1>   |Output_Sc<6>   |    9.393|
+addressSD<1>   |Output_Sc<7>   |    9.533|
+addressSD<1>   |Output_Sc<8>   |   10.114|
+addressSD<1>   |Output_Sc<9>   |    9.420|
+addressSD<1>   |Output_Sc<10>  |    8.272|
+addressSD<1>   |Output_Sc<11>  |    8.301|
+addressSD<1>   |Output_Sc<12>  |    9.810|
+addressSD<1>   |Output_Sc<13>  |    9.071|
+addressSD<1>   |Output_Sc<14>  |    9.879|
+addressSD<1>   |Output_Sc<15>  |    9.199|
+addressSD<2>   |Output_A<0>    |   13.369|
+addressSD<2>   |Output_A<1>    |   13.068|
+addressSD<2>   |Output_A<2>    |   11.871|
+addressSD<2>   |Output_A<3>    |   12.087|
+addressSD<2>   |Output_A<4>    |   10.289|
+addressSD<2>   |Output_A<5>    |   10.943|
+addressSD<2>   |Output_A<6>    |   10.719|
+addressSD<2>   |Output_A<7>    |   11.396|
+addressSD<2>   |Output_A<8>    |    9.667|
+addressSD<2>   |Output_A<9>    |   10.154|
+addressSD<2>   |Output_A<10>   |    7.495|
+addressSD<2>   |Output_A<11>   |    7.742|
+addressSD<2>   |Output_A<12>   |    9.143|
+addressSD<2>   |Output_A<13>   |   10.399|
+addressSD<2>   |Output_A<14>   |    9.415|
+addressSD<2>   |Output_A<15>   |    9.689|
+addressSD<2>   |Output_Sc<0>   |   11.178|
+addressSD<2>   |Output_Sc<1>   |   11.738|
+addressSD<2>   |Output_Sc<2>   |   11.111|
+addressSD<2>   |Output_Sc<3>   |   11.334|
+addressSD<2>   |Output_Sc<4>   |   10.134|
+addressSD<2>   |Output_Sc<5>   |   10.613|
+addressSD<2>   |Output_Sc<6>   |    8.976|
+addressSD<2>   |Output_Sc<7>   |    9.369|
+addressSD<2>   |Output_Sc<8>   |   10.710|
+addressSD<2>   |Output_Sc<9>   |    9.659|
+addressSD<2>   |Output_Sc<10>  |    8.757|
+addressSD<2>   |Output_Sc<11>  |    8.768|
+addressSD<2>   |Output_Sc<12>  |    9.423|
+addressSD<2>   |Output_Sc<13>  |    9.407|
+addressSD<2>   |Output_Sc<14>  |   10.281|
+addressSD<2>   |Output_Sc<15>  |    8.986|
+---------------+---------------+---------+
+
+
+Analysis completed Thu Apr 13 15:27:56 2017 
+--------------------------------------------------------------------------------
+
+Trace Settings:
+-------------------------
+Trace Settings 
+
+Peak Memory Usage: 179 MB
+
+
+
