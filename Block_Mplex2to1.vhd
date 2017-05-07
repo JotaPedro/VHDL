@@ -43,7 +43,7 @@ begin
 
 			Mplex_generate:
 			for i in 0 to 15 generate
-				Mplex: Mplex2to1 PORT MAP( 
+				Mplex: Mux_2in PORT MAP( 
 					Input(0) => Input1(i),
 					Input(1) => Input2,
 					Output => Output(i),
@@ -51,7 +51,7 @@ begin
 				);
 			end generate;
 			
-			Mplex_Carry: Mplex2to1 PORT MAP( 
+			Mplex_Carry: Mux_2in PORT MAP( 
 				Input(0) => Input1(0),
 				Input(1) => Input1(15),
 				Output => Output_Carry,
