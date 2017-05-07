@@ -1,0 +1,4 @@
+vhdl isim_temp "pds16_types.vhd"
+vhdl isim_temp "Mux_16In.vhd"
+vhdl isim_temp "Block_Mplex16to1.vhd"
+vhdl isim_temp "Block_Mplex16to1_TB.vhd"

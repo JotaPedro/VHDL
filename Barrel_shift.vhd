@@ -49,6 +49,15 @@ Signal Decoder_1_out: STD_LOGIC_VECTOR(15 downto 0):= (others => '0');
 Signal Decoder_2_out: STD_LOGIC_VECTOR(15 downto 0):= (others => '0');
 Signal Decoder_1_enable: STD_LOGIC;
 
+
+	component Mux_2in is
+		 Port ( Input: in STD_LOGIC_VECTOR(1 downto 0);
+				  Output: out STD_LOGIC;
+				  Sel: in STD_LOGIC
+				 );
+	end component;
+
+
 begin
 
 		---------------------Bloco B/-B------------------------------
@@ -94,7 +103,7 @@ begin
 			Decoder_1_enable <= (ctl_3bit(1) and not ctl_3bit(2)); --Criei este Signal para evitar o erro gerado pelo compilador. (Enable is not a static signal);
 
 			Decoder_1: Decoder_16out PORT MAP( 
-				Enable => ctl_3bit(0),--Decoder_1_enable,--IR11 & NOT IR12 (apenas activo no SHR)   				old--ctl_3bit(0),--IR10
+				Enable => Decoder_1_enable, --ctl_3bit(0),--Decoder_1_enable,--IR11 & NOT IR12 (apenas activo no SHR)   				old--ctl_3bit(0),--IR10
 				Sel => B,
 				Output => Decoder_1_out
 			);

@@ -1,0 +1,3 @@
+vhdl work "pds16_types.vhd"
+vhdl work "BnB.vhd"
+vhdl work "BnB_TB.vhd"

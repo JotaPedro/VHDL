@@ -39,8 +39,16 @@ end Block_Mplex2to1;
 
 architecture Behavioral of Block_Mplex2to1 is
 
-begin
+	component Mux_2in is
+		 Port ( Input: in STD_LOGIC_VECTOR(1 downto 0);
+				  Output: out STD_LOGIC;
+				  Sel: in STD_LOGIC
+				 );
+	end component;
+	--está aqui o componente pq estava a dar erro de compilação não faço ideia pq.
 
+begin
+			
 			Mplex_generate:
 			for i in 0 to 15 generate
 				Mplex: Mux_2in PORT MAP( 

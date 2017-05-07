@@ -22,17 +22,16 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity Mux_2in is
-    Port ( In0 : in  STD_LOGIC;
-           In1 : in  STD_LOGIC;
-			  Sel : in  STD_LOGIC;
-           Output : out  STD_LOGIC
+    Port ( Input: in  STD_LOGIC_VECTOR(1 downto 0);
+			  Output: out  STD_LOGIC;
+			  Sel: in  STD_LOGIC
 			 );
 end Mux_2in;
 
 architecture Behavioral of Mux_2in is
 begin
 
-	Output <= ((In0 and (not Sel)) or (In1 and Sel));
+	Output <= ((Input(0) and (not Sel)) or (Input(1) and Sel));
 
 end Behavioral;
 

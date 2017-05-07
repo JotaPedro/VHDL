@@ -92,29 +92,49 @@ package pds16_types is
            Output : out  bit_16);
 	end Component;
 	
-	Component Mplex16to1 is
-    Port ( Input : in  bit_16;
-           Sel : in  STD_LOGIC_VECTOR(3 downto 0);
-           Output : out  STD_LOGIC);
-	end Component;
-	
-	Component Mplex2to1 is
-    Port ( Input : in  STD_LOGIC_VECTOR(1 downto 0);
-           Output : out  STD_LOGIC;
-           Sel : in  STD_LOGIC);
-	end Component;
-	
-	Component Decoder4to16 is
-    Port ( Sel : in  STD_LOGIC_VECTOR(3 downto 0);
-           Enable : in  STD_LOGIC;
-           decoder_out : out  STD_LOGIC_VECTOR(15 downto 0)
-	 );
-	end Component;
-	
-	Component Or_tree is
-    Port ( Input : in  STD_LOGIC_VECTOR(15 downto 0);
-           Output : buffer  STD_LOGIC_VECTOR(15 downto 0)
-		);
+--	Component Mplex16to1 is
+--    Port ( Input : in  bit_16;
+--           Sel : in  STD_LOGIC_VECTOR(3 downto 0);
+--           Output : out  STD_LOGIC);
+--	end Component;
+--	
+--	Component Mplex2to1 is
+--    Port ( Input : in  STD_LOGIC_VECTOR(1 downto 0);
+--           Output : out  STD_LOGIC;
+--           Sel : in  STD_LOGIC);
+--	end Component;
+--	
+--	Component Decoder4to16 is
+--    Port ( Sel : in  STD_LOGIC_VECTOR(3 downto 0);
+--           Enable : in  STD_LOGIC;
+--           decoder_out : out  STD_LOGIC_VECTOR(15 downto 0)
+--	 );
+--	end Component;
+
+	component Mux_2in is
+		 Port ( Input: in STD_LOGIC_VECTOR(1 downto 0);
+				  Output: out STD_LOGIC;
+				  Sel: in STD_LOGIC
+				 );
+	end component;
+
+	component Mux_16in is
+		 Port ( In0 : in  STD_LOGIC_VECTOR(15 downto 0);
+				  Sel : in  STD_LOGIC_VECTOR(3 downto 0);
+				  Output : out  STD_LOGIC
+				 );
+	end component;
+
+	component Shifter_Sel_mplex2to1 is
+		 Port ( Decoder_1 : in  STD_LOGIC_VECTOR(15 downto 0);
+				  Decoder_2 : in  STD_LOGIC_VECTOR(15 downto 0);
+				  Mp2to1_sel : out  STD_LOGIC_VECTOR(15 downto 0));
+	end component;
+
+	component Or_tree is
+		 Port ( Input : in  STD_LOGIC_VECTOR(15 downto 0);
+				  Output : buffer  STD_LOGIC_VECTOR(15 downto 0)
+			);
 	end Component;
 	
 	Component Barrel_shift is
@@ -151,7 +171,7 @@ package pds16_types is
 		Port ( 
 			enable : in  STD_LOGIC;
          clk : in  STD_LOGIC;
-         clr : in  STD_LOGIC; --só deve ser activado para o PSW e PC
+         clr : in  STD_LOGIC; --sï¿½ deve ser activado para o PSW e PC
          d : in  bit_16;
          q : out  bit_16
 		);
@@ -176,7 +196,7 @@ package pds16_types is
 	component Sel_andgatesTree 
 		port(
 			Func : in  STD_LOGIC_VECTOR(5 downto 0);
-         Oper : out  STD_LOGIC_VECTOR(3 downto 0);--Vou incluir o bit13, pois é usado no interior da alu.
+         Oper : out  STD_LOGIC_VECTOR(3 downto 0);--Vou incluir o bit13, pois ï¿½ usado no interior da alu.
          LnA : out  STD_LOGIC
 		);
 	end component;
@@ -288,7 +308,7 @@ package pds16_types is
 	 Port ( clock : in  STD_LOGIC;
            addressSD : in  STD_LOGIC_VECTOR(2 downto 0);
            flags : in  STD_LOGIC_VECTOR(3 downto 0); -- 0-Zero 1-Carry 2-GE 3-Parity
-           RFC : in  STD_LOGIC_VECTOR (4 downto 0); -- como é que os bits estão distribuidos? 1-enablers 2-mplexr5 3-mplexr6 4-mplexr7 5-mplexAddrA
+           RFC : in  STD_LOGIC_VECTOR (4 downto 0); -- como ï¿½ que os bits estï¿½o distribuidos? 1-enablers 2-mplexr5 3-mplexr6 4-mplexr7 5-mplexAddrA
            CL : in  STD_LOGIC;
            addrA : in  STD_LOGIC_VECTOR(2 downto 0);
            addrB : in  STD_LOGIC_VECTOR(2 downto 0);
@@ -301,11 +321,11 @@ package pds16_types is
 			  );
 	end component;
 	
-	component Shifter_Sel_mplex2to1 is
-    Port ( Decoder_1 : in  STD_LOGIC_VECTOR(15 downto 0);
-           Decoder_2 : in  STD_LOGIC_VECTOR(15 downto 0);
-           Mp2to1_sel : out  STD_LOGIC_VECTOR(15 downto 0));
-	end component;
+--	component Shifter_Sel_mplex2to1 is
+--    Port ( Decoder_1 : in  STD_LOGIC_VECTOR(15 downto 0);
+--           Decoder_2 : in  STD_LOGIC_VECTOR(15 downto 0);
+--           Mp2to1_sel : out  STD_LOGIC_VECTOR(15 downto 0));
+--	end component;
 	
 	component BnB is
     Port ( B : in  STD_LOGIC_VECTOR(3 downto 0);
@@ -327,6 +347,20 @@ package pds16_types is
            Sel : in  STD_LOGIC_VECTOR(15 downto 0);
 			  ir11 : in STD_LOGIC);
 	end component;
+
+component Decoder_16out is
+    Port ( Enable : in  STD_LOGIC;
+			  Sel 	: in  STD_LOGIC_VECTOR(3 downto 0);
+           Output : out  STD_LOGIC_VECTOR(15 downto 0)
+			 );
+end component;
+
+--component BnB is
+--    Port ( OpB : in  STD_LOGIC_VECTOR(3 downto 0);
+--           IR : in  STD_LOGIC; -- IR(11)
+--           R_OpB : out  STD_LOGIC_VECTOR(15 downto 0)
+--			 );
+--end component;
 	
 	component Tristate is
     Port ( Input : in  bit_16;
