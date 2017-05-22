@@ -30,8 +30,7 @@ package pds16_types is
            Bx : in  STD_LOGIC;
            Cin : in  STD_LOGIC;
            Sx : out  STD_LOGIC;
-           Cout : out  STD_LOGIC;
-			  Op : in STD_LOGIC);
+           Cout : out  STD_LOGIC);
 	end Component;
 	
 	Component PC_Adder is
@@ -116,6 +115,12 @@ package pds16_types is
 				  Output: out STD_LOGIC;
 				  Sel: in STD_LOGIC
 				 );
+	end component;
+	
+	component Mux_4in is
+	Port ( Input : in  STD_LOGIC_VECTOR(3 downto 0);
+          Sel : in  STD_LOGIC_VECTOR(1 downto 0);
+          Output : out  STD_LOGIC);
 	end component;
 
 	component Mux_16in is

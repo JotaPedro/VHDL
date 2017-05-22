@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    18:21:58 04/27/2017 
+-- Create Date:    16:34:11 05/10/2017 
 -- Design Name: 
--- Module Name:    Mux_4in - Behavioral 
+-- Module Name:    FullAdderV2 - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -29,21 +29,19 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity Mux_4in is
-	Port ( Input : in  STD_LOGIC_VECTOR(3 downto 0);
-          Sel : in  STD_LOGIC_VECTOR(1 downto 0);
-          Output : out  STD_LOGIC);
-end Mux_4in;
+entity FullAdderV2 is
+    Port ( Ax : in  STD_LOGIC;
+           Bx : in  STD_LOGIC;
+           Cin : in  STD_LOGIC;
+           Sx : out  STD_LOGIC;
+           Cout : out  STD_LOGIC
+			  );
+end FullAdderV2;
 
-architecture Behavioral of Mux_4in is
+architecture Behavioral of FullAdderV2 is
 
 begin
-
-	Output <=	(Input(0)  and (not Sel(0)) and (not Sel(1)) )or
-					(Input(1)  and (	   Sel(0)) and (not Sel(1)) )or
-					(Input(2)  and (not Sel(0)) and (	  Sel(1)) )or
-					(Input(3)  and (	   Sel(0)) and (	  Sel(1)) )
-					;
-
+	Sx		 <= (Ax xor Bx) xor Cin;
+	Cout	 <= (Ax and Bx) or (Cin and Ax) or (Cin and Bx);
 end Behavioral;
 

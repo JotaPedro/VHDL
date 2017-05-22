@@ -30,8 +30,9 @@ end Mux_2in;
 
 architecture Behavioral of Mux_2in is
 begin
-
+	process(Input,Sel)
+	begin
 	Output <= ((Input(0) and (not Sel)) or (Input(1) and Sel));
-
+	end process;
 end Behavioral;
 

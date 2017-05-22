@@ -38,7 +38,8 @@ end Decoder_16out;
 
 architecture Behavioral of Decoder_16out is
 begin
-
+		process(Enable,Sel)
+		begin
 		Output(0) <= ( Enable and (not Sel(0)) and (not Sel(1)) and (not Sel(2))and (not Sel(3)));
 		Output(1) <= ( Enable and (	 Sel(0)) and (not Sel(1)) and (not Sel(2))and (not Sel(3)) );
 		Output(2) <= ( Enable and (not Sel(0)) and (	   Sel(1)) and (not Sel(2))and (not Sel(3)) );
@@ -55,6 +56,7 @@ begin
 		Output(13)<= ( Enable and (    Sel(0)) and (not Sel(1)) and (	  Sel(2))and (	   Sel(3)) );
 		Output(14)<= ( Enable and (not Sel(0)) and (	   Sel(1)) and (	  Sel(2))and (	   Sel(3)) );
 		Output(15)<= ( Enable and (    Sel(0)) and (	   Sel(1)) and (	  Sel(2))and (	   Sel(3)) );
-					
+		end process;
+		
 end Behavioral;
 

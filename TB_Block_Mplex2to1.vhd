@@ -2,10 +2,10 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   19:18:20 08/11/2016
+-- Create Date:   15:00:33 05/08/2017
 -- Design Name:   
--- Module Name:   C:/Documents and Settings/Administrator/My Documents/Dropbox/Documentos Universidade/SV1516/projecto/Trabalho/vhdl1/TB_Block_Mplex2to1.vhd
--- Project Name:  vhdl1
+-- Module Name:   F:/Projecto/github repo/VHDL/TB_Block_Mplex2to1.vhd
+-- Project Name:  work
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
@@ -27,8 +27,10 @@
 --------------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
-USE ieee.std_logic_unsigned.all;
-USE ieee.numeric_std.ALL;
+ 
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--USE ieee.numeric_std.ALL;
  
 ENTITY TB_Block_Mplex2to1 IS
 END TB_Block_Mplex2to1;
@@ -42,35 +44,49 @@ ARCHITECTURE behavior OF TB_Block_Mplex2to1 IS
          Input1 : IN  std_logic_vector(15 downto 0);
          Input2 : IN  std_logic;
          Output : OUT  std_logic_vector(15 downto 0);
-         Sel : IN  std_logic_vector(15 downto 0)
+         Output_Carry : OUT  std_logic;
+         Sel : IN  std_logic_vector(15 downto 0);
+         ir11 : IN  std_logic
         );
     END COMPONENT;
     
 
    --Inputs
-   signal Input11 : std_logic_vector(15 downto 0) := (others => '0');
-   signal Input21 : std_logic := '0';
-   signal Sel1 : std_logic_vector(15 downto 0) := (others => '0');
+   signal Input1 : std_logic_vector(15 downto 0) := (others => '0');
+   signal Input2 : std_logic := '0';
+   signal Sel : std_logic_vector(15 downto 0) := (others => '0');
+   signal ir11 : std_logic := '0';
 
  	--Outputs
-   signal Output1 : std_logic_vector(15 downto 0);
+   signal Output : std_logic_vector(15 downto 0);
+   signal Output_Carry : std_logic;
+   -- No clocks detected in port list. Replace <clock> below with 
+   -- appropriate port name 
  
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
    uut: Block_Mplex2to1 PORT MAP (
-          Input1 => Input11,
-          Input2 => Input21,
-          Output => Output1,
-          Sel => Sel1
+          Input1 => Input1,
+          Input2 => Input2,
+          Output => Output,
+          Output_Carry => Output_Carry,
+          Sel => Sel,
+          ir11 => ir11
         );
- 
+
    -- Stimulus process
    stim_proc: process
    begin		
-      Input11 	<= ("0000000000000001");
-		Input21 	<= '0';
-		Sel1		<= ("1001001001001000");
+      -- hold reset state for 100 ns.
+      wait for 100 ns;
+		Input1 	<= "0000000000000000";
+		Input2 	<= '0';
+		Sel 		<= "0000000000000000";
+		ir11 		<= '0';
+		wait for 100 ns;
+      -- insert stimulus here 
+
       wait;
    end process;
 

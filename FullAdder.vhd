@@ -32,15 +32,14 @@ entity FullAdder is
            Bx : in  STD_LOGIC;
            Cin : in  STD_LOGIC;
            Sx : out  STD_LOGIC;
-           Cout : out  STD_LOGIC;
-			  Op : in STD_LOGIC);
+           Cout : out  STD_LOGIC
+			  );
 end FullAdder;
 
 architecture Behavioral of FullAdder is
+
 begin
---O bit op serve para escolher sub ou add.
-	Sx		 <= (Ax xor Bx) xor Cin;
-	Cout	 <= (((not Op) and (not Ax)) and (Cin or Bx)) or (Op and Ax and (Cin or Bx)) or (Bx and Cin);--Op=0 Sub
-	--Cout	 <=((Ax xor op) and Bx) or ((Ax xor op) and Cin) or (Bx and Cin);
+	Sx		 <= ((Ax xor Bx) xor Cin);
+	Cout	 <= ((Ax and Bx) or (Cin and Ax) or (Cin and Bx));
 end Behavioral;
 

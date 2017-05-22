@@ -17,6 +17,12 @@
 -- Additional Comments: 
 --
 ----------------------------------------------------------------------------------
+-- Para implementar (no register file):
+-- Não afectar PSW quando se faz operações de processamento de dados e o bit "f" está activo. --IR10
+
+-- Para implementar:
+-- Flag de borrow, só activa quando não há borrow. Confirmar.
+----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
@@ -85,7 +91,7 @@ begin
 		Input_mp_carry(2) <= CyBw;
 		Input_mp_carry(3) <= Output_shifter_Cy;
 		Sel_mp_carry <= LnA & Oper(3);
-		Mp_carry: Mplex4to1 PORT MAP(
+		Mp_carry: Mux_4in PORT MAP(
 			Input => Input_mp_carry,
 			Sel => Sel_mp_carry,-- IR14, 13
 			Output => flags(1) --CyBw

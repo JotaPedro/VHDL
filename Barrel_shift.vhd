@@ -48,6 +48,12 @@ Signal B_negativo: STD_LOGIC_VECTOR(3 downto 0):=(others => '0');
 Signal Decoder_1_out: STD_LOGIC_VECTOR(15 downto 0):= (others => '0');
 Signal Decoder_2_out: STD_LOGIC_VECTOR(15 downto 0):= (others => '0');
 Signal Decoder_1_enable: STD_LOGIC;
+Signal Decoder_2_enable: STD_LOGIC;
+Signal Cy_interno: STD_LOGIC;
+Signal Mplex_RC_CY_A15_sel: STD_LOGIC;
+Signal Mplex_RC_CY_A15_out: STD_LOGIC;
+Signal Mplex16to1_A: STD_LOGIC_VECTOR(15 downto 0);
+Signal Mplex_IR12_IR10_CY_out: STD_LOGIC;
 
 
 	component Mux_2in is
@@ -59,7 +65,7 @@ Signal Decoder_1_enable: STD_LOGIC;
 
 
 begin
-
+		
 		---------------------Bloco B/-B------------------------------
 			BlocoB: BnB PORT MAP (
           B => B,
@@ -68,19 +74,36 @@ begin
         );
 
 		---------------------multiplexers 16para1------------------------------
+		Mplex16to1_A <= Mplex_RC_CY_A15_out & A(14 downto 0);
 		Mplex16to1: Block_Mplex16to1 PORT MAP (
-          A => A,							--Entradas dos Mplex
+          A => Mplex16to1_A,			--Entradas dos Mplex
           Mp2to1_in => Mp2to1_in,	--Saidas dos Mplex
           B_negativo => B_negativo 	--selector
       );
-
-		--multiplexer de ctl_3bit
-		MpCtl_3bit_2to1_in <= (A(15) & ctl_3bit(0));
-		MpCtl_3bit_2to1: Mux_2in PORT MAP( 
-			Input => MpCtl_3bit_2to1_in,
-			Output => MpCtl_3bit_2to1_out,
-			Sel => ctl_3bit(2)
+		
+		---------------------multiplexers 2para1------------------------------
+		Mplex_RC_CY_A15_sel <= Ctl_3bit(2) and Ctl_3bit(1); --Activa quando é Rotate with Carry
+		Mplex_RC_CY_A15: Mux_2in PORT MAP( 
+			Input(0) => A(15),
+			Input(1) => Cy_interno,
+			Output => Mplex_RC_CY_A15_out,
+			Sel => Mplex_RC_CY_A15_sel
 		);
+		
+		Mplex_IR12_IR10_CY: Mux_2in PORT MAP( 
+			Input(0) => Ctl_3bit(0), -- IR10
+			Input(1) => Cy_interno,
+			Output => Mplex_IR12_IR10_CY_out,
+			Sel => Ctl_3bit(2)  -- IR12
+		);
+		
+		MpCtl_3bit_2to1: Mux_2in PORT MAP( 
+			Input(0) => Mplex_IR12_IR10_CY_out, -- IR10
+			Input(1) => Mplex_RC_CY_A15_out,
+			Output => MpCtl_3bit_2to1_out,
+			Sel => Ctl_3bit(2)  -- IR12
+		);		
+		
 		
 			---------------------Selector para multiplexers 2para1----------------
 			Selector_mplex: Shifter_Sel_mplex2to1 PORT MAP(
@@ -101,19 +124,21 @@ begin
 			
 			---------------------Decoders------------------------------
 			Decoder_1_enable <= (ctl_3bit(1) and not ctl_3bit(2)); --Criei este Signal para evitar o erro gerado pelo compilador. (Enable is not a static signal);
-
+			Decoder_2_enable <= (not ctl_3bit(1));--IR11
+			
 			Decoder_1: Decoder_16out PORT MAP( 
 				Enable => Decoder_1_enable, --ctl_3bit(0),--Decoder_1_enable,--IR11 & NOT IR12 (apenas activo no SHR)   				old--ctl_3bit(0),--IR10
 				Sel => B,
 				Output => Decoder_1_out
 			);
 			Decoder_2: Decoder_16out PORT MAP( 
-				Enable => (not ctl_3bit(1)),--IR11
+				Enable => Decoder_2_enable,
 				Sel => B,
 				Output => Decoder_2_out
 			);			
-	
-Cy <= ((B(0) or B(1)) and Output_Carry);
+
+Cy_interno <= ((B(0) or B(1)) and Output_Carry);
+Cy <= Cy_interno;
 
 end Behavioral;
 

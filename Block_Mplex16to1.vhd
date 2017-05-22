@@ -39,25 +39,26 @@ architecture Behavioral of Block_Mplex16to1 is
 Signal Mplex16to1_input: bit_16_array(15 downto 0); --array de 2D 16x16 - entradas dos multiplexers 16to1
 
 begin
-
+	process(A)
+	begin
 			---------------------Preparar input para os multiplexers------------------------------
-			Mplex16to1_input(15)	<= A(14 downto 0) & A(15);
-			Mplex16to1_input(14)	<= A(13 downto 0) & A(15 downto 14);
-			Mplex16to1_input(13)	<= A(12 downto 0) & A(15 downto 13);
-			Mplex16to1_input(12)	<= A(11 downto 0) & A(15 downto 12);
-			Mplex16to1_input(11)	<= A(10 downto 0) & A(15 downto 11);
-			Mplex16to1_input(10)	<= A(9 downto 0) & A(15 downto 10);
-			Mplex16to1_input(9)	<= A(8 downto 0) & A(15 downto 9);
-			Mplex16to1_input(8)	<= A(7 downto 0) & A(15 downto 8);
-			Mplex16to1_input(7)	<= A(6 downto 0) & A(15 downto 7);
-			Mplex16to1_input(6)	<= A(5 downto 0) & A(15 downto 6);
-			Mplex16to1_input(5)	<= A(4 downto 0) & A(15 downto 5);
-			Mplex16to1_input(4)	<= A(3 downto 0) & A(15 downto 4);
-			Mplex16to1_input(3)	<= A(2 downto 0) & A(15 downto 3);
-			Mplex16to1_input(2)	<= A(1 downto 0) & A(15 downto 2);
-			Mplex16to1_input(1)	<= A(0) & A(15 downto 1);
-			Mplex16to1_input(0)	<= A(15 downto 0);
-			
+			Mplex16to1_input(15)	<= A(0) & A(1) & A(2) & A(3) & A(4) & A(5) & A(6) & A(7) & A(8) & A(9) & A(10) & A(11) & A(12) & A(13) & A(14) & A(15);
+			Mplex16to1_input(14)	<= A(15) & A(0) & A(1) & A(2) & A(3) & A(4) & A(5) & A(6) & A(7) & A(8) & A(9) & A(10) & A(11) & A(12) & A(13) & A(14);
+			Mplex16to1_input(13)	<= A(14) & A(15) & A(0) & A(1) & A(2) & A(3) & A(4) & A(5) & A(6) & A(7) & A(8) & A(9) & A(10) & A(11) & A(12) & A(13);
+			Mplex16to1_input(12)	<= A(13) & A(14) & A(15) & A(0) & A(1) & A(2) & A(3) & A(4) & A(5) & A(6) & A(7) & A(8) & A(9) & A(10) & A(11) & A(12);
+			Mplex16to1_input(11)	<= A(12) & A(13) & A(14) & A(15) & A(0) & A(1) & A(2) & A(3) & A(4) & A(5) & A(6) & A(7) & A(8) & A(9) & A(10) & A(11);
+			Mplex16to1_input(10)	<= A(11) & A(12) & A(13) & A(14) & A(15) & A(0) & A(1) & A(2) & A(3) & A(4) & A(5) & A(6) & A(7) & A(8) & A(9) & A(10);
+			Mplex16to1_input(9)	<= A(10) & A(11) & A(12) & A(13) & A(14) & A(15) & A(0) & A(1) & A(2) & A(3) & A(4) & A(5) & A(6) & A(7) & A(8) & A(9);
+			Mplex16to1_input(8)	<= A(9) & A(10) & A(11) & A(12) & A(13) & A(14) & A(15) & A(0) & A(1) & A(2) & A(3) & A(4) & A(5) & A(6) & A(7) & A(8);
+			Mplex16to1_input(7)	<= A(8) & A(9) & A(10) & A(11) & A(12) & A(13) & A(14) & A(15) & A(0) & A(1) & A(2) & A(3) & A(4) & A(5) & A(6) & A(7);
+			Mplex16to1_input(6)	<= A(7) & A(8) & A(9) & A(10) & A(11) & A(12) & A(13) & A(14) & A(15) & A(0) & A(1) & A(2) & A(3) & A(4) & A(5) & A(6);
+			Mplex16to1_input(5)	<= A(6) & A(7) & A(8) & A(9) & A(10) & A(11) & A(12) & A(13) & A(14) & A(15) & A(0) & A(1) & A(2) & A(3) & A(4) & A(5);
+			Mplex16to1_input(4)	<= A(5) & A(6) & A(7) & A(8) & A(9) & A(10) & A(11) & A(12) & A(13) & A(14) & A(15) & A(0) & A(1) & A(2) & A(3) & A(4);
+			Mplex16to1_input(3)	<= A(4) & A(5) & A(6) & A(7) & A(8) & A(9) & A(10) & A(11) & A(12) & A(13) & A(14) & A(15) & A(0) & A(1) & A(2) & A(3);
+			Mplex16to1_input(2)	<= A(3) & A(4) & A(5) & A(6) & A(7) & A(8) & A(9) & A(10) & A(11) & A(12) & A(13) & A(14) & A(15) & A(0) & A(1) & A(2);
+			Mplex16to1_input(1)	<= A(2) & A(3) & A(4) & A(5) & A(6) & A(7) & A(8) & A(9) & A(10) & A(11) & A(12) & A(13) & A(14) & A(15) & A(0) & A(1);
+			Mplex16to1_input(0)	<= A(1) & A(2) & A(3) & A(4) & A(5) & A(6) & A(7) & A(8) & A(9) & A(10) & A(11) & A(12) & A(13) & A(14) & A(15) & A(0);
+	end process;
 --			Mplex16to1_input(15)	<= A(15 downto 0);
 --			Mplex16to1_input(14)	<= A(14 downto 0) & A(15);
 --			Mplex16to1_input(13)	<= A(13 downto 0) & A(15 downto 14);

@@ -2,15 +2,15 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   18:32:48 07/23/2016
+-- Create Date:   16:58:44 05/10/2017
 -- Design Name:   
--- Module Name:   C:/Documents and Settings/Administrator/My Documents/Dropbox/Documentos Universidade/SV1516/projecto/Trabalho/vhdl1/TB_Decoder3_8.vhd
--- Project Name:  vhdl1
+-- Module Name:   F:/Projecto/github repo/VHDL/TB_Alu_aritmetico.vhd
+-- Project Name:  work
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
 -- 
--- VHDL Test Bench Created by ISE for module: Decoder3_8
+-- VHDL Test Bench Created by ISE for module: Alu_aritmetico
 -- 
 -- Dependencies:
 -- 
@@ -27,8 +27,10 @@
 --------------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
-USE ieee.std_logic_unsigned.all;
-USE ieee.numeric_std.ALL;
+ 
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--USE ieee.numeric_std.ALL;
  
 ENTITY TB_Alu_aritmetico IS
 END TB_Alu_aritmetico;
@@ -37,71 +39,97 @@ ARCHITECTURE behavior OF TB_Alu_aritmetico IS
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT Alu_aritmetico is
-    Port ( A : in  STD_LOGIC_VECTOR(15 downto 0);
-           B : in  STD_LOGIC_VECTOR(15 downto 0);
-           Cin : in  STD_LOGIC;
-           Result : out  STD_LOGIC_VECTOR(15 downto 0);
-           Flags_out : out  STD_LOGIC_VECTOR(1 downto 0);
-			  Op : in STD_LOGIC
-			 );
+    COMPONENT Alu_aritmetico
+    PORT(
+         A : IN  std_logic_vector(15 downto 0);
+         B : IN  std_logic_vector(15 downto 0);
+         Cin : IN  std_logic;
+         Result : OUT  std_logic_vector(15 downto 0);
+         Flags_out : OUT  std_logic_vector(1 downto 0);
+         Op : IN  std_logic
+        );
     END COMPONENT;
     
 
    --Inputs
-   signal A1 : STD_LOGIC_VECTOR(15 downto 0);
-   signal B1 : STD_LOGIC_VECTOR(15 downto 0);
-   signal Cin1 : STD_LOGIC;
-	signal Op1 : STD_LOGIC;
+   signal A : std_logic_vector(15 downto 0) := (others => '0');
+   signal B : std_logic_vector(15 downto 0) := (others => '0');
+   signal Cin : std_logic := '0';
+   signal Op : std_logic := '0';
 
  	--Outputs
-   signal Result1 : STD_LOGIC_VECTOR(15 downto 0);
-   signal Flags_out1 : STD_LOGIC_VECTOR(1 downto 0);
- 
+   signal Result : std_logic_vector(15 downto 0);
+   signal Flags_out : std_logic_vector(1 downto 0);
+   -- No clocks detected in port list. Replace <clock> below with 
+   -- appropriate port name 
+
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: Alu_aritmetico Port map 
-			( A => A1,
-           B => B1,
-           Cin => Cin1,
-           Result => Result1,
-           Flags_out => Flags_out1,
-			  Op => Op1
-			 );
- 
+   uut: Alu_aritmetico PORT MAP (
+          A => A,
+          B => B,
+          Cin => Cin,
+          Result => Result,
+          Flags_out => Flags_out,
+          Op => Op
+        );
+
    -- Stimulus process
    stim_proc: process
-   begin
-		A1 	<= ("0001000000000000");--0
-		B1 	<= ("0000000000001001");--1
-		Cin1 	<= '0';--0
-		Op1	<= '1';--1
-      wait for 2 ns;
-		A1 	<= ("0000000000000000");--0
-		B1 	<= ("0000000000001001");--1
-		Cin1 	<= '0';--0
-		Op1	<= '1';--1
-      wait for 2 ns;
-		A1 	<= ("0001000000000000");--0
-		B1 	<= ("0000000000001001");--1
-		Cin1 	<= '0';--0
-		Op1	<= '0';--1
-      wait for 2 ns;
-		A1 	<= ("0000000000000000");--0
-		B1 	<= ("0000000000001001");--1
-		Cin1 	<= '0';--0
-		Op1	<= '0';--1
-      wait for 2 ns;
-		A1 	<= ("0000000000000000");--0
-		B1 	<= ("0000000000001001");--1
-		Cin1 	<= '1';--0
-		Op1	<= '1';--1
-      wait for 2 ns;
-		A1 	<= ("0000000000000000");--0
-		B1 	<= ("0000000000001001");--1
-		Cin1 	<= '1';--0
-		Op1	<= '0';--1
-		wait;
+   begin		
+      -- hold reset state for 100 ns.
+      wait for 100 ns;
+		-- Soma sem carry in, sem carry out
+		A 		<= "0000000000000001";
+		B 		<= "0000000000000010";
+		Cin 	<= '0';
+		Op 	<= '0';
+		wait for 100 ns;
+		-- Soma com carry in, sem carry out
+		A 		<= "0000000000000001";
+		B 		<= "0000000000000010";
+		Cin 	<= '1';
+		Op 	<= '0';
+		wait for 100 ns;
+		-- Soma sem carry in, com carry out
+		A 		<= "1111111111111111";
+		B 		<= "0000000000000010";
+		Cin 	<= '0';
+		Op 	<= '0';
+		wait for 100 ns;
+		-- Soma com carry in, com carry out
+		A 		<= "1111111111111101";
+		B 		<= "0000000000000010";
+		Cin 	<= '1';
+		Op 	<= '0';
+		wait for 100 ns;
+		-- subtração sem carry in, sem carry out
+		A 		<= "0000000000000010";
+		B 		<= "0000000000000001";
+		Cin 	<= '0';
+		Op 	<= '1';
+		wait for 100 ns;
+		-- subtração com carry in, sem carry out
+		A 		<= "0000000000000011";
+		B 		<= "0000000000000001";
+		Cin 	<= '1';
+		Op 	<= '1';
+		wait for 100 ns;
+		-- subtração sem carry in, com carry out
+		A 		<= "0000000000000000";
+		B 		<= "0000000000000001";
+		Cin 	<= '0';
+		Op 	<= '1';
+		wait for 100 ns;
+		-- subtração com carry in, com carry out
+		A 		<= "0000000000000001";
+		B 		<= "0000000000000001";
+		Cin 	<= '1';
+		Op 	<= '1';
+      -- insert stimulus here 
+
+      wait;
    end process;
+
 END;

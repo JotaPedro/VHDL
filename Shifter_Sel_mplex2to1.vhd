@@ -52,6 +52,8 @@ begin
 			);
 			
 			---------------------Selector multiplexers 2para1------------------------------
+		process(Or_tree_out_A,Or_tree_out_B)
+		begin
 			Mp2to1_sel(15) <= Or_tree_out_A(1);
 			Mp2to1_sel(14) <= Or_tree_out_A(2) or Or_tree_out_B(15);
 			Mp2to1_sel(13) <= Or_tree_out_A(3) or Or_tree_out_B(14);
@@ -68,7 +70,7 @@ begin
 			Mp2to1_sel(2) <= Or_tree_out_A(14) or Or_tree_out_B(3);
 			Mp2to1_sel(1) <= Or_tree_out_A(15) or Or_tree_out_B(2);
 			Mp2to1_sel(0) <= Or_tree_out_B(1);
-
+		end process;
 
 end Behavioral;
 

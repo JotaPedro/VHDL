@@ -22,26 +22,31 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
+use work.pds16_types.ALL;
 
 entity Alu_Logico is
-    Port ( OpA : in  STD_LOGIC_VECTOR(15 downto 0);
-           OpB_Alu : in  STD_LOGIC_VECTOR(15 downto 0);
-           Func : in  STD_LOGIC_VECTOR(1 downto 0); -- Func[3] = IR11, Func[4] = 12
-           Result_logico : out  STD_LOGIC_VECTOR(15 downto 0)
+    Port ( Input_B : in  bit_16;
+           Input_A : in  bit_16;
+           Op : in  STD_LOGIC_VECTOR(1 downto 0);
+           Output : out  bit_16
+--			  OpA : in  STD_LOGIC_VECTOR(15 downto 0);
+--         OpB_Alu : in  STD_LOGIC_VECTOR(15 downto 0);
+--         Func : in  STD_LOGIC_VECTOR(1 downto 0); -- Func[3] = IR11, Func[4] = 12
+--         Result_logico : out  STD_LOGIC_VECTOR(15 downto 0)
 			 );
 end Alu_Logico;
 
 architecture Behavioral of Alu_Logico is
 
 begin
-	process(OpB_Alu,OpA,Func)
+	process(Input_B,Input_A,Op)
 		begin
-				case Func is
-					when "00" => Result_logico <= (OpA AND OpB_Alu); --ANL
-					when "01" => Result_logico <= (OpA OR OpB_Alu);  --ORL
-					when "10" => Result_logico <= (OpA XOR OpB_Alu); --XRL
-					when "11" => Result_logico <= (NOT OpA);			 --NOT
-					when others => Result_logico <= (OpA AND OpB_Alu);
+				case Op is
+					when "00" => Output <= (Input_A AND Input_B); --ANL
+					when "01" => Output <= (Input_A OR Input_B);  --ORL
+					when "10" => Output <= (Input_A XOR Input_B); --XRL
+					when "11" => Output <= (NOT Input_A);			 --NOT
+					when others => Output <= (Input_A AND Input_B);
 				end case;
 	end process;
 

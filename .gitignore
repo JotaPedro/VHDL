@@ -1,0 +1,12 @@
+*.prj
+*.stx
+*.xst
+*.xmsgs
+*.cmd
+*.xreport
+*.projectmgr
+*.dbg
+*.didat
+*.c
+*.vdb
+*.html
