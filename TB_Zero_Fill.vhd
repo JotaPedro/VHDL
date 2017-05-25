@@ -2,10 +2,10 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   23:42:59 07/29/2016
+-- Create Date:   21:20:36 05/24/2017
 -- Design Name:   
--- Module Name:   C:/Documents and Settings/Administrator/My Documents/Dropbox/Documentos Universidade/SV1516/projecto/Trabalho/vhdl1/TB_Zero_Fill.vhd
--- Project Name:  vhdl1
+-- Module Name:   F:/Projecto/github repo/VHDL/TB_Zero_Fill.vhd
+-- Project Name:  work
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
@@ -25,11 +25,12 @@
 -- to guarantee that the testbench will bind correctly to the post-implementation 
 -- simulation model.
 --------------------------------------------------------------------------------
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_ARITH.ALL;
-use IEEE.STD_LOGIC_UNSIGNED.ALL;
-use work.pds16_types.ALL;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+ 
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--USE ieee.numeric_std.ALL;
  
 ENTITY TB_Zero_Fill IS
 END TB_Zero_Fill;
@@ -40,32 +41,36 @@ ARCHITECTURE behavior OF TB_Zero_Fill IS
  
     COMPONENT Zero_Fill
     PORT(
-         Const4bit : in  STD_LOGIC_VECTOR(3 downto 0);
-         Output16bit : out  bit_16
+         Const4bit : IN  std_logic_vector(3 downto 0);
+         Output16bit : OUT  std_logic_vector(15 downto 0)
         );
     END COMPONENT;
     
 
    --Inputs
-   signal Const4 : std_logic_vector(3 downto 0);
+   signal Const4bit : std_logic_vector(3 downto 0) := (others => '0');
 
  	--Outputs
-   signal Output16 : bit_16;
+   signal Output16bit : std_logic_vector(15 downto 0);
+   -- No clocks detected in port list. Replace <clock> below with 
+   -- appropriate port name 
  
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
    uut: Zero_Fill PORT MAP (
-          Const4bit => Const4,
-          Output16bit => Output16
+          Const4bit => Const4bit,
+          Output16bit => Output16bit
         );
 
    -- Stimulus process
    stim_proc: process
    begin		
-      Const4	<=	"1010";
-		wait for 2ns;
-		Const4	<=	"1000";
+      -- hold reset state for 100 ns.
+      wait for 100 ns;	
+		Const4bit <= "0111";
+		wait for 100 ns;	
+		Const4bit <= "1011";
       wait;
    end process;
 

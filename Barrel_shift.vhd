@@ -82,7 +82,7 @@ begin
       );
 		
 		---------------------multiplexers 2para1------------------------------
-		Mplex_RC_CY_A15_sel <= Ctl_3bit(2) and Ctl_3bit(1); --Activa quando é Rotate with Carry
+		Mplex_RC_CY_A15_sel <= (Ctl_3bit(2) and Ctl_3bit(1)); --Activa quando é Rotate with Carry
 		Mplex_RC_CY_A15: Mux_2in PORT MAP( 
 			Input(0) => A(15),
 			Input(1) => Cy_interno,
@@ -137,7 +137,7 @@ begin
 				Output => Decoder_2_out
 			);			
 
-Cy_interno <= ((B(0) or B(1)) and Output_Carry);
+Cy_interno <= ((B(0) or B(1) or B(2) or B(3)) and Output_Carry);
 Cy <= Cy_interno;
 
 end Behavioral;

@@ -33,6 +33,14 @@ USE ieee.std_logic_1164.ALL;
 --USE ieee.numeric_std.ALL;
  
 ENTITY TB_Alu IS
+
+------------------------------------------------------------------------------
+--FALTA CORRIGIR E TESTAR OS ROTATES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+--FALTA CORRIGIR E TESTAR OS ROTATES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+--FALTA CORRIGIR E TESTAR OS ROTATES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+--FALTA CORRIGIR E TESTAR OS ROTATES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+------------------------------------------------------------------------------
+
 END TB_Alu;
  
 ARCHITECTURE behavior OF TB_Alu IS 
@@ -381,62 +389,93 @@ BEGIN
 --		CyBw 	<= '1';
 
 
+--wait for 100 ns;
+---- SHL - Teste sem dar Carry e sem introdução de sinal
+--		Oper 	<= "1000"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
+--		LnA 	<= '1';		--IR14
+--		B 		<= "0000000000000010"; -- 
+--		A 		<= "0000000000001101"; -- 
+--		CyBw 	<= '1';
+--		wait for 100 ns;
+---- SHL - Teste sem dar Carry e com introdução de sinal
+--		Oper 	<= "1001"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
+--		LnA 	<= '1';		--IR14
+--		B 		<= "0000000000000010"; -- 
+--		A 		<= "0000000000001101"; -- 
+--		CyBw 	<= '1';
+--		wait for 100 ns;
+---- SHL - Teste a dar Carry e com introdução de sinal
+--		Oper 	<= "1001"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
+--		LnA 	<= '1';		--IR14
+--		B 		<= "0000000000000010"; -- 
+--		A 		<= "1100000000001101"; -- 
+--		CyBw 	<= '1';
+--		wait for 100 ns;
+---- SHL - Teste a dar Carry e sem introdução de sinal
+--		Oper 	<= "1000"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
+--		LnA 	<= '1';		--IR14
+--		B 		<= "0000000000000010"; -- 
+--		A 		<= "1100000000001101"; -- 
+--		CyBw 	<= '1';
+--wait for 100 ns;
+---- SHR - Teste sem dar Carry e sem introdução de sinal
+--		Oper 	<= "1010"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
+--		LnA 	<= '1';		--IR14
+--		B 		<= "0000000000000010"; -- 
+--		A 		<= "0000000000001101"; -- 
+--		CyBw 	<= '1';
+--		wait for 100 ns;
+---- SHR - Teste sem dar Carry e com introdução de sinal
+--		Oper 	<= "1011"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
+--		LnA 	<= '1';		--IR14
+--		B 		<= "0000000000000010"; -- 
+--		A 		<= "0000000000001101"; -- 
+--		CyBw 	<= '1';
+--		wait for 100 ns;
+---- SHR - Teste a dar Carry e com introdução de sinal
+--		Oper 	<= "1011"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
+--		LnA 	<= '1';		--IR14
+--		B 		<= "0000000000000010"; -- 
+--		A 		<= "1000000000001111"; -- 
+--		CyBw 	<= '1';
+--		wait for 100 ns;
+---- SHR - Teste a dar Carry e sem introdução de sinal
+--		Oper 	<= "1010"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
+--		LnA 	<= '1';		--IR14
+--		B 		<= "0000000000000010"; -- 
+--		A 		<= "1000000000001111"; -- 
+--		CyBw 	<= '1';
+		
 wait for 100 ns;
--- SHL - Teste sem dar Carry e sem introdução de sinal
-		Oper 	<= "1000"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
+-- RRL - Teste sem dar Carry
+		Oper 	<= "1100"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
 		LnA 	<= '1';		--IR14
 		B 		<= "0000000000000010"; -- 
 		A 		<= "0000000000001101"; -- 
 		CyBw 	<= '1';
-		wait for 100 ns;
--- SHL - Teste sem dar Carry e com introdução de sinal
-		Oper 	<= "1001"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
+wait for 100 ns;
+-- RRL - Teste a dar Carry
+		Oper 	<= "1100"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
 		LnA 	<= '1';		--IR14
 		B 		<= "0000000000000010"; -- 
-		A 		<= "0000000000001101"; -- 
-		CyBw 	<= '1';
-		wait for 100 ns;
--- SHL - Teste a dar Carry e com introdução de sinal
-		Oper 	<= "1001"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
-		LnA 	<= '1';		--IR14
-		B 		<= "0000000000000010"; -- 
-		A 		<= "1000000000001101"; -- 
-		CyBw 	<= '1';
-		wait for 100 ns;
--- SHL - Teste sem dar Carry e sem introdução de sinal
-		Oper 	<= "1000"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
+		A 		<= "0000000000001111"; -- 
+		CyBw 	<= '1';		
+wait for 100 ns;
+-- RRM - Teste sem dar Carry
+		Oper 	<= "1101"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
 		LnA 	<= '1';		--IR14
 		B 		<= "0000000000000010"; -- 
 		A 		<= "1000000000001101"; -- 
 		CyBw 	<= '1';
 wait for 100 ns;
--- SHR - Teste sem dar Carry e sem introdução de sinal
-		Oper 	<= "1010"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
+-- RRM - Teste a dar Carry
+		Oper 	<= "1101"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
 		LnA 	<= '1';		--IR14
 		B 		<= "0000000000000010"; -- 
-		A 		<= "0000000000001101"; -- 
-		CyBw 	<= '1';
-		wait for 100 ns;
--- SHR - Teste sem dar Carry e com introdução de sinal
-		Oper 	<= "1011"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
-		LnA 	<= '1';		--IR14
-		B 		<= "0000000000000010"; -- 
-		A 		<= "0000000000001101"; -- 
-		CyBw 	<= '1';
-		wait for 100 ns;
--- SHR - Teste a dar Carry e com introdução de sinal
-		Oper 	<= "1011"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
-		LnA 	<= '1';		--IR14
-		B 		<= "0000000000000010"; -- 
-		A 		<= "1000000000001101"; -- 
-		CyBw 	<= '1';
-		wait for 100 ns;
--- SHR - Teste sem dar Carry e sem introdução de sinal
-		Oper 	<= "1010"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
-		LnA 	<= '1';		--IR14
-		B 		<= "0000000000000010"; -- 
-		A 		<= "1000000000001101"; -- 
-		CyBw 	<= '1';
+		A 		<= "0000000000001111"; -- 
+		CyBw 	<= '1';	
+
+
 		
 		
 		

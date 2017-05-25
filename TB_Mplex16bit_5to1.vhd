@@ -2,10 +2,10 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   23:03:41 07/29/2016
+-- Create Date:   21:30:36 05/24/2017
 -- Design Name:   
--- Module Name:   C:/Documents and Settings/Administrator/My Documents/Dropbox/Documentos Universidade/SV1516/projecto/Trabalho/vhdl1/TB_Mplex16bit_5to1.vhd
--- Project Name:  vhdl1
+-- Module Name:   F:/Projecto/github repo/VHDL/TB_Mplex16bit_5to1.vhd
+-- Project Name:  work
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
@@ -25,11 +25,13 @@
 -- to guarantee that the testbench will bind correctly to the post-implementation 
 -- simulation model.
 --------------------------------------------------------------------------------
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_ARITH.ALL;
-use IEEE.STD_LOGIC_UNSIGNED.ALL;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
 use work.pds16_types.ALL;
+ 
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--USE ieee.numeric_std.ALL;
  
 ENTITY TB_Mplex16bit_5to1 IS
 END TB_Mplex16bit_5to1;
@@ -42,52 +44,51 @@ ARCHITECTURE behavior OF TB_Mplex16bit_5to1 IS
     PORT(
          Input_port : IN  bit_16_array(4 downto 0);
          Selector_MP : IN  std_logic_vector(2 downto 0);
-         Output_port : OUT  bit_16
+         Output_port : OUT  std_logic_vector(15 downto 0)
         );
     END COMPONENT;
     
 
    --Inputs
-   signal Input : bit_16_array(4 downto 0);
-   signal Selector : std_logic_vector(2 downto 0);
+   signal Input_port : bit_16_array(4 downto 0);
+   signal Selector_MP : std_logic_vector(2 downto 0) := (others => '0');
 
  	--Outputs
-   signal Output : bit_16;
+   signal Output_port : std_logic_vector(15 downto 0);
  
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
    uut: Mplex16bit_5to1 PORT MAP (
-          Input_port => Input,
-          Selector_MP => Selector,
-          Output_port => Output
+          Input_port => Input_port,
+          Selector_MP => Selector_MP,
+          Output_port => Output_port
         );
- 
-   Input(0) <= ("0001000000000000");--0
-	Input(1) <= ("0000000000001001");--1
-	Input(2) <= ("0000001000000010");--2
-	Input(3) <= ("0000000010000011");--3
-	Input(4) <= ("0000000000000100");--4
- 
+
    -- Stimulus process
    stim_proc: process
-   begin
-		Selector <= "000";
-		wait for 2 ns;
-		Selector <= "001";
-		wait for 2 ns;
-		Selector <= "010";
-		wait for 2 ns;
-		Selector <= "011";
-		wait for 2 ns;
-		Selector <= "100";
-		wait for 2 ns;
-		Selector <= "101";
-		wait for 2 ns;
-		Selector <= "110";
-		wait for 2 ns;
-		Selector <= "111";
-		wait;
+   begin		
+      -- hold reset state for 100 ns.
+      wait for 100 ns;
+		Input_port(0) <="0000111100001111";
+		Input_port(1) <="1111000011110000";
+		Input_port(2) <="1111111111111111";
+		Input_port(3) <="0000000000000000";
+		Input_port(4) <="1010101010101010";
+      Selector_MP <="000";
+		wait for 100 ns;
+		Selector_MP <="001";
+		wait for 100 ns;
+		Selector_MP <="010";
+		wait for 100 ns;
+		Selector_MP <="011";
+		wait for 100 ns;
+		Selector_MP <="100";
+
+
+      -- insert stimulus here 
+
+      wait;
    end process;
 
 END;
