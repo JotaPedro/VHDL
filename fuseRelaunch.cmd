@@ -1,1 +1,1 @@
--intstyle "ise" -incremental -o "F:/Projecto/github repo/VHDL/Barrel_Shift_TB_isim_beh.exe" -prj "F:/Projecto/github repo/VHDL/Barrel_Shift_TB_beh.prj" "work.Barrel_Shift_TB" 
+-intstyle "ise" -incremental -o "F:/Projecto/github repo/VHDL/Alfa_pds16fpga_isim_beh.exe" -prj "F:/Projecto/github repo/VHDL/Alfa_pds16fpga_beh.prj" "work.Alfa_pds16fpga" 

@@ -62,6 +62,14 @@ ARCHITECTURE behavior OF TB_Data_Processor IS
  	--Outputs
    signal Result1 : std_logic_vector(15 downto 0);
    signal FlagsOut1 : std_logic_vector(3 downto 0);
+	
+	--Auxiliares
+--	signal OpA_cy : std_logic_vector(15 downto 0) := (others => '1');
+--   signal OpB_cy : std_logic_vector(15 downto 0) := (others => '1');
+--	signal Const_cy : std_logic_vector(7 downto 0) := (others => '1');
+--	signal OpA_1 : std_logic_vector(15 downto 0) := (0 => '1', others => '0');
+--   signal OpB_1 : std_logic_vector(15 downto 0) := (0 => '1', others => '0');
+--	signal Const_1 : std_logic_vector(7 downto 0) := (0 => '1', others => '0');
  
 BEGIN
  
@@ -71,60 +79,133 @@ BEGIN
           OpB => OpB1,
           OpA => OpA1,
           CYin => CYin1,
-          Ctr => Ctr1,
-          Func => Func1,--IR10 , 11, 12, 13, 14, 15
+          Ctr => Ctr1,				--Bits de seleção do multiplexer do OpB na entrada da Alu
+											--0-SigExt 1-ZeroFill 2-ZeroFillx2 3-OpB 4-OpBx2
+          Func => Func1,			--IR10 , 11, 12, 13, 14, 15
           Result => Result1,
-          FlagsOut => FlagsOut1-- 0-Zero 1-CyBw 2-GE 3-Parity 
+          FlagsOut => FlagsOut1	--0-Zero 1-CyBw 2-GE 3-Parity 
         );
  
    -- Stimulus process
    stim_proc: process
    begin		
-      OpB1 	<= "0000000000000001";
-		OpA1 	<= "0000000000000001";
+      --Variaveis
+		OpB1 	<= "0000000000000001";
+		OpA1 	<= "0000000000000011";
 		Const1<= "00000001";
 		CYin1 <= '1';
-		Ctr1	<= "011";
-		Func1	<= "100000";-- ADD A/B
-		wait for 1 ns;
-		Ctr1	<= "011";
-		Func1	<= "100100";-- ADD A/B/Cy
-		wait for 1 ns;
-		Ctr1	<= "000";
-		Func1	<= "101000";-- ADD A/const
-		wait for 1 ns;
-		Ctr1	<= "001";
-		Func1	<= "101100";-- ADD A/const/cy
---		wait for 1 ns;
+----Operações Aritméticas sem darem Carry ou Borrow
+--
+--		--ADD A+B
 --		Ctr1	<= "011";
---		Func1	<= "100010";-- SUB A/B
+--		Func1	<= "100000";
 --		wait for 1 ns;
+--		--ADDC A+B+Cy
 --		Ctr1	<= "011";
---		Func1	<= "100110";-- SUB A/B/Cy
+--		Func1	<= "100100";
 --		wait for 1 ns;
+--		--ADD A+Const
+--		Ctr1	<= "000";
+--		Func1	<= "101000";
+--		wait for 1 ns;
+--		--ADDC A+Const+Cy
 --		Ctr1	<= "001";
---		Func1	<= "101010";-- SUB A/const
+--		Func1	<= "101100";
 --		wait for 1 ns;
+--		--SUB A-B
+--		Ctr1	<= "011";
+--		Func1	<= "100010";
+--		wait for 1 ns;
+--		--SBB A-B-Cy
+--		Ctr1	<= "011";
+--		Func1	<= "100110";
+--		wait for 1 ns;
+--		--SUB A-Const
 --		Ctr1	<= "001";
---		Func1	<= "101110";-- SUB A/const/cy
+--		Func1	<= "101010";
 --		wait for 1 ns;
+--		--SBB A-Const-Cy
+--		Ctr1	<= "001";
+--		Func1	<= "101110";
+--		wait for 1 ns;
+--		
+----Operações Aritméticas para darem Carry ou Borrow
+--
+--		OpA1 	<= "1111111111111111";		
+--		--ADD A+B
 --		Ctr1	<= "011";
---		Func1	<= "110000";-- ANL A/B
+--		Func1	<= "100000";
 --		wait for 1 ns;
+--		--ADDC A+B+Cy
 --		Ctr1	<= "011";
---		Func1	<= "110010";-- ORL A/B
+--		Func1	<= "100100";
 --		wait for 1 ns;
+--		--ADD A+Const
+--		Ctr1	<= "000";
+--		Func1	<= "101000";
+--		wait for 1 ns;
+--		--ADDC A+Const+Cy
+--		Ctr1	<= "001";
+--		Func1	<= "101100";
+--		wait for 1 ns;
+--		
+--		OpA1 	<= "0000000000000000";
+--		--SUB A-B
+--		Ctr1	<= "011";
+--		Func1	<= "100010";
+--		wait for 1 ns;
+--		--SBB A-B-Cy
+--		Ctr1	<= "011";
+--		Func1	<= "100110";
+--		wait for 1 ns;
+--		--SUB A-Const
+--		Ctr1	<= "001";
+--		Func1	<= "101010";
+--		wait for 1 ns;
+--		--SBB A-Const-Cy
+--		Ctr1	<= "001";
+--		Func1	<= "101110";
+--		wait for 1 ns;
+--		
+----Operações Lógicas
+--		OpA1 	<= "0000000000000011";
+--		OpB1 	<= "0000000000000110";
+--		--ANL A&B
+--		Ctr1	<= "011";
+--		Func1	<= "110000";
+--		wait for 1 ns;
+--		--ORL A|B
+--		Ctr1	<= "011";
+--		Func1	<= "110010";
+--		wait for 1 ns;
+--		--XRL AxB
 --		Ctr1	<= "011";
 --		Func1	<= "110100";-- XRL A/B
 --		wait for 1 ns;
+--		--NOT A
 --		Ctr1	<= "011";
---		Func1	<= "110110";-- NOT A
+--		Func1	<= "110110";
 --		wait for 1 ns;
---		Ctr1	<= "011";
---		Func1	<= "111000";-- SHL A/const
---		wait for 1 ns;
---		Ctr1	<= "011";
---		Func1	<= "111010";-- SHR A/const
+
+--Operações de deslocamento com SIN=0
+		OpA1 	<= "1000000000000011";
+		Const1<= "00000010";
+
+		Ctr1	<= "001";
+		Func1	<= "111000";-- SHL A/const
+		wait for 1 ns;
+		Ctr1	<= "001";
+		Func1	<= "111010";-- SHR A/const
+
+--Operações de deslocamento com SIN=1
+		wait for 1 ns;
+		Ctr1	<= "001";
+		Func1	<= "111001";-- SHL A/const
+		wait for 1 ns;
+		Ctr1	<= "001";
+		Func1	<= "111011";-- SHR A/const
+
+----------------------------Testado até aqui-----------------------------------------
 --		wait for 1 ns;
 --		Ctr1	<= "011";
 --		Func1	<= "111100";-- RRL A/const
@@ -138,18 +219,9 @@ BEGIN
 --		Ctr1	<= "011";
 --		Func1	<= "111111";-- RCL A
 --		wait for 1 ns;
---		Ctr1	<= "000";
---		Func1	<= "100000";-- teste ao SigExt
---		Const1<= "10000000";
---		wait for 1 ns;
---		Ctr1	<= "001";
---		Func1	<= "100000";-- teste ao ZeroFill
---		wait for 1 ns;
---		Ctr1	<= "010";
---		Func1	<= "100000";-- teste ao ZeroFill x2
---		wait for 1 ns;
---		Ctr1	<= "100";
---		Func1	<= "100000";-- teste ao OpB x2
+
+
+
       wait;
    end process;
 

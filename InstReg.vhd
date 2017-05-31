@@ -28,16 +28,29 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 --use UNISIM.VComponents.all;
 
 entity InstReg is
-    Port ( Input : in  STD_LOGIC;
+    Port ( Input : in  STD_LOGIC_VECTOR(15 downto 0);
            EIR : in  STD_LOGIC;
-           Output : out  STD_LOGIC;
+           Output : out  STD_LOGIC_VECTOR(15 downto 0);
            Clk : in  STD_LOGIC);
 end InstReg;
 
 architecture Behavioral of InstReg is
 
-begin
+	component Register16bits is
+	Port ( D : in  STD_LOGIC_VECTOR (15 downto 0);
+          Q : out  STD_LOGIC_VECTOR (15 downto 0);
+          En : in  STD_LOGIC;
+			 clkReg : in  STD_LOGIC);
+	end component;
 
+begin
+	
+	IR: Register16bits port map(
+		D => Input,
+		En => EIR,
+		Q => Output,
+		clkReg => Clk
+	);
 
 end Behavioral;
 

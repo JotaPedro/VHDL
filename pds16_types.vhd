@@ -215,7 +215,7 @@ package pds16_types is
 	component Mplex8bit_2to1 is
     Port ( Input : in  bit_8_array(1 downto 0);
            Sel : in  STD_LOGIC;
-           Output : out  bit_16);
+           Output : out  std_logic_vector(7 downto 0));
 	end component;
 	
 	component DirZeroFill is

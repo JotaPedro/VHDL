@@ -34,10 +34,11 @@ entity Data_Processor is
            OpB : in  bit_16;
            OpA : in  bit_16;
            CYin : in  STD_LOGIC;
-           Ctr : in  STD_LOGIC_VECTOR(2 downto 0);
-			  Func : in  STD_LOGIC_VECTOR(5 downto 0);--IR10 , 11, 12, 13, 14, 15
+           Ctr : in  STD_LOGIC_VECTOR(2 downto 0);			--Bits de seleção do multiplexer do OpB na entrada da Alu
+																			--0-SigExt 1-ZeroFill 2-ZeroFillx2 3-OpB 4-OpBx2
+			  Func : in  STD_LOGIC_VECTOR(5 downto 0);		--IR10 , 11, 12, 13, 14, 15
            Result : out  bit_16;
-           FlagsOut : out  STD_LOGIC_VECTOR(3 downto 0)-- 0-Zero 1-CyBw 2-GE 3-Parity 
+           FlagsOut : out  STD_LOGIC_VECTOR(3 downto 0)	-- 0-Zero 1-CyBw 2-GE 3-Parity 
 		);
 end Data_Processor;
 
@@ -67,16 +68,16 @@ begin
 				flags  => FlagsOut--: out  STD_LOGIC_VECTOR(3 downto 0) -- 0-Zero 1-CyBw 2-GE 3-Parity 
 			);
 			
-			--VER AS ENTRADAS DAS CONSTANTES PARA CORRIGIR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			
 			SigExt1: SigExt PORT MAP(
-				Const8x2 => Const,--: in  STD_LOGIC_VECTOR(7 downto 0);
+				Const8x2 => Const,--é usado para o offset nos jumps.
 				Output16bit => SigExt_out--: out  bit_16
 			);
 			Zero_Fill1: Zero_Fill PORT MAP(
-				Const4bit => Const(3 downto 0),--: in  STD_LOGIC_VECTOR(3 downto 0);
+				Const4bit => Const(6 downto 3),-- apenas a parte da const4 das instruções.
 				Output16bit => Zero_Fill_out--: out  bit_16
 			);
-			--VER AS ENTRADAS DAS CONSTANTES PARA CORRIGIR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		
 			
 			Mp_Data_in(0) <= SigExt_out;
 			Mp_Data_in(1) <= Zero_Fill_out;
@@ -86,7 +87,7 @@ begin
 			
 			Mp_Data: Mplex16bit_5to1 PORT MAP(
 				Input_port => Mp_Data_in,--: in  bit_16_array(4 downto 0);
-				Selector_MP => Ctr,--: in STD_LOGIC_VECTOR(2 downto 0); QUAIS BITS DO CTR?????????????????????????????? 
+				Selector_MP => Ctr,--: in STD_LOGIC_VECTOR(2 downto 0);
 				Output_port => B--: out  bit_16
 			);
 			

@@ -31,7 +31,7 @@ use work.pds16_types.ALL;
 entity Mplex8bit_2to1 is
     Port ( Input : in  bit_8_array(1 downto 0);
            Sel : in  STD_LOGIC;
-           Output : out  bit_16);
+           Output : out  std_logic_vector(7 downto 0));
 end Mplex8bit_2to1;
 
 architecture Behavioral of Mplex8bit_2to1 is
@@ -40,9 +40,9 @@ begin
 	process(Input,Sel)
 		begin
 			case Sel is
-				when '0' => Output <= Input(0) & Input(1);
-				when '1' => Output <= Input(1) & Input(1);
-				when others => Output <= Input(0) & Input(1);
+				when '0' => Output <= Input(0);
+				when '1' => Output <= Input(1);
+				when others => Output <= Input(0);
 			end case;
 	end process;
 

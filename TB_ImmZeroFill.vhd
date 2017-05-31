@@ -71,6 +71,8 @@ BEGIN
 		SelImm1	<= '0';
 		LSB1		<= "11111111";
 		Input1	<= "00000001";
+		wait for 100 ns;
+		SelImm1	<= '1';
 		wait;
    end process;
 
