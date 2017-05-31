@@ -233,83 +233,190 @@ BEGIN
    -- Stimulus process
    stim_proc: process
    begin		
-      -- hold reset state for 20 ns.
-      wait for 20 ns;
-		--LDI r1,#5
-		DataIn <= "0000000000101001";
+      
+   --para simular o bloco de controlo temos de criar pseudo estados
+	--do processador, i.e., os estados de fetch e execute nesta versão simplista
+	--do pds16fpga.
+	--ordem do estados: Fetch addr, fetch instruction, fetch decode, execute.
+	
+	--NOTA: por enquanto estamos a ignorar o fetch addr pois não existe memória
+	
+	--LDI r1,#5
+		--fetch instruction:
+			DataIn <= "0000000000101001";
+			--control signals
+			EIR 		<= '1';
 			--control signals not used
+			--EIR 		<= '1';
 			RES		<= '0';
 			ALUC		<= "000";
 			A0			<= '0';
-			--control signals
-			EIR 		<= '1';
 			Sel_Imm 	<= '0';
 			SelData  <= "00";
-			wait for 20 ns;
-			RFC		<= "00001"; --decoder enabled
-			
-		wait for 20 ns;
-		
-		--LDIH r1,#5
-		DataIn <= "0000100000101001";
-			--control signals
-			EIR 		<= '1';
-			Sel_Imm 	<= '1';
+			RFC		<= "00000";
+		wait for clk_period*2;
+		--fetch decode/execute:
+			Sel_Imm 	<= '0';
 			SelData  <= "00";
-			wait for 20 ns;
 			RFC		<= "00001"; --decoder enabled
-		
-		wait for 20 ns;
-		
-		--LDI r0,#7
-		DataIn <= "0000000000111000";
 			--control signals not used
+			EIR 		<= '0';
 			RES		<= '0';
 			ALUC		<= "000";
 			A0			<= '0';
+			--Sel_Imm 	<= '0';
+			--SelData  <= "00";
+			--RFC		<= "00000";
+		wait for clk_period*2;
+		
+	--LDIH r1,#5
+		--fetch instruction:
+			DataIn <= "0000100000101001";
 			--control signals
 			EIR 		<= '1';
+			--control signals not used
+			--EIR 		<= '1';
+			RES		<= '0';
+			ALUC		<= "000";
+			A0			<= '0';
 			Sel_Imm 	<= '0';
 			SelData  <= "00";
-			wait for 20 ns;
-			RFC		<= "00001"; --decoder enabled
-			
-		wait for 20 ns;
-		
-		--LDIH r1,#5
-		DataIn <= "0000101100000000";
-			--control signals
-			EIR 		<= '1';
+			RFC		<= "00000";
+		wait for clk_period*2;
+		--fetch decode/execute:
 			Sel_Imm 	<= '1';
 			SelData  <= "00";
-			wait for 20 ns;
 			RFC		<= "00001"; --decoder enabled
-		
-		wait for 20 ns;
-		
-		--ADD r2,r0,r1
-		DataIn <= "1000000001000010";
+			--control signals not used
+			EIR 		<= '0';
+			RES		<= '0';
+			ALUC		<= "000";
+			A0			<= '0';
+			--Sel_Imm 	<= '0';
+			--SelData  <= "00";
+			--RFC		<= "00000";
+		wait for clk_period*2;
+
+	--LDI r0,#7
+		--fetch instruction:
+			DataIn <= "0000000000111000";
 			--control signals
 			EIR 		<= '1';
-			RFC		<= "00000"; --mux opA selector
-			ALUC		<= "011";
-			wait for 20 ns;
-			SelData  <= "11";
+			--control signals not used
+			--EIR 		<= '1';
+			RES		<= '0';
+			ALUC		<= "000";
+			A0			<= '0';
+			Sel_Imm 	<= '0';
+			SelData  <= "00";
+			RFC		<= "00000";
+		wait for clk_period*2;
+		--fetch decode/execute:
+			Sel_Imm 	<= '0';
+			SelData  <= "00";
 			RFC		<= "00001"; --decoder enabled
+			--control signals not used
+			EIR 		<= '0';
+			RES		<= '0';
+			ALUC		<= "000";
+			A0			<= '0';
+			--Sel_Imm 	<= '0';
+			--SelData  <= "00";
+			--RFC		<= "00000";
+		wait for clk_period*2;
 		
-		wait for 20 ns;
-		
-		--ADD r2,r0,r1
-		DataIn <= "1000000001000010";
+	--LDIH r0,#7
+		--fetch instruction:
+			DataIn <= "0000100000111000";
 			--control signals
 			EIR 		<= '1';
-			RFC		<= "00000"; --mux opA selector
+			--control signals not used
+			--EIR 		<= '1';
+			RES		<= '0';
+			ALUC		<= "000";
+			A0			<= '0';
+			Sel_Imm 	<= '0';
+			SelData  <= "00";
+			RFC		<= "00000";
+		wait for clk_period*2;
+		--fetch decode/execute:
+			Sel_Imm 	<= '1';
+			SelData  <= "00";
+			RFC		<= "00001"; --decoder enabled
+			--control signals not used
+			EIR 		<= '0';
+			RES		<= '0';
+			ALUC		<= "000";
+			A0			<= '0';
+			--Sel_Imm 	<= '0';
+			--SelData  <= "00";
+			--RFC		<= "00000";
+		wait for clk_period*2;
+			
+	--ADD r2,r0,r1
+		--fetch instruction:
+			DataIn <= "1000000001000010";
+			--control signals
+			EIR 		<= '1';
+			--control signals not used
+			--EIR 		<= '1';
+			RES		<= '0';
+			ALUC		<= "000";
+			A0			<= '0';
+			Sel_Imm 	<= '0';
+			SelData  <= "00";
+			RFC		<= "00000";
+		wait for clk_period*2;
+		--fetch decode/execute::
 			ALUC		<= "011";
-			wait for 20 ns;
 			SelData  <= "11";
 			RFC		<= "00001"; --decoder enabled
-		
-		wait for 20 ns;
+			--control signals not used
+			EIR 		<= '0';
+			RES		<= '0';
+			--ALUC		<= "000";
+			A0			<= '0';
+			Sel_Imm 	<= '0';
+			--SelData  <= "00";
+			--RFC		<= "00000";
+		wait for clk_period*2;
+	
+	--SHL r2,r2,#1 com introdução de sin
+		--fetch instruction:
+			DataIn <= "1110010001010010";
+			--control signals
+			EIR 		<= '1';
+			--control signals not used
+			--EIR 		<= '1';
+			RES		<= '0';
+			ALUC		<= "000";
+			A0			<= '0';
+			Sel_Imm 	<= '0';
+			SelData  <= "00";
+			RFC		<= "00000";
+		wait for clk_period*2;
+		--fetch decode/execute:
+			ALUC		<= "001";
+			SelData  <= "11";
+			RFC		<= "00001"; --decoder enabled
+			--control signals not used
+			EIR 		<= '0';
+			RES		<= '0';
+			--ALUC		<= "000";
+			A0			<= '0';
+			Sel_Imm 	<= '0';
+			--SelData  <= "00";
+			--RFC		<= "00000";
+		wait for clk_period*2;
+		--STOP
+			--control signals not used
+			EIR 		<= '0';
+			RES		<= '0';
+			ALUC		<= "000";
+			A0			<= '0';
+			Sel_Imm 	<= '0';
+			SelData  <= "00";
+			RFC		<= "00000";
 		
 		
 		
