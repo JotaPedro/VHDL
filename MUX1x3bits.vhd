@@ -30,9 +30,9 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity MUX1x3bits is
-    Port ( In0 : in  STD_LOGIC_VECTOR (2 downto 0);
+    Port ( Sel : in  STD_LOGIC;
+	        In0 : in  STD_LOGIC_VECTOR (2 downto 0);
            In1 : in  STD_LOGIC_VECTOR (2 downto 0);
-           Sel : in  STD_LOGIC;
            outdata : out  STD_LOGIC_VECTOR (2 downto 0));
 end MUX1x3bits;
 

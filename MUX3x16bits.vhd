@@ -30,16 +30,18 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity MUX3x16bits is
-	 Port ( In0 : in  STD_LOGIC_VECTOR (15 downto 0);
-           In1 : in  STD_LOGIC_VECTOR (15 downto 0);
-			  In2 : in  STD_LOGIC_VECTOR (15 downto 0);
-			  In3 : in  STD_LOGIC_VECTOR (15 downto 0);
-			  In4 : in  STD_LOGIC_VECTOR (15 downto 0);
-			  In5 : in  STD_LOGIC_VECTOR (15 downto 0);
-			  In6 : in  STD_LOGIC_VECTOR (15 downto 0);
-			  In7 : in  STD_LOGIC_VECTOR (15 downto 0);
-           Sel : in  STD_LOGIC_VECTOR (2 downto 0);
-           outdata : out  STD_LOGIC_VECTOR (15 downto 0));
+Generic (
+	WIDTH : NATURAL := 16 );
+Port ( Sel : in  STD_LOGIC_VECTOR (2 downto 0);
+	In0 : in  STD_LOGIC_VECTOR (WIDTH-1 downto 0);
+	In1 : in  STD_LOGIC_VECTOR (WIDTH-1 downto 0);
+	In2 : in  STD_LOGIC_VECTOR (WIDTH-1 downto 0);
+	In3 : in  STD_LOGIC_VECTOR (WIDTH-1 downto 0);
+	In4 : in  STD_LOGIC_VECTOR (WIDTH-1 downto 0);
+	In5 : in  STD_LOGIC_VECTOR (WIDTH-1 downto 0);
+	In6 : in  STD_LOGIC_VECTOR (WIDTH-1 downto 0);
+	In7 : in  STD_LOGIC_VECTOR (WIDTH-1 downto 0);
+	outdata : out  STD_LOGIC_VECTOR (WIDTH-1 downto 0));
 end MUX3x16bits;
 
 architecture Behavioral of MUX3x16bits is
@@ -56,7 +58,7 @@ begin
 			when "101" => outdata <= In5;
 			when "110" => outdata <= In6;
 			when "111" => outdata <= In7;
-			when others => outdata <= In0; ----Qual a necessidade????
+			when others => outdata <= In0;
 		end case;
 		
 	end process;

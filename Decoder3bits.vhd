@@ -30,8 +30,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity Decoder3bits is
-    Port ( S : in  STD_LOGIC_VECTOR (2 downto 0);
-           E : in  STD_LOGIC;
+    Port ( E : in  STD_LOGIC;
+	        S : in  STD_LOGIC_VECTOR (2 downto 0);
            O : out STD_LOGIC_VECTOR (7 downto 0));
 end Decoder3bits;
 
@@ -50,10 +50,12 @@ begin
 				when "101" => O <= "00100000";
 				when "110" => O <= "01000000";
 				when "111" => O <= "10000000";
-				when others => O <= "00000001"; ----Qual a necessidade????
+				when others => O <= "00000001";
 			end case;
-		else O <= "00000000";
+		else
+			O <= "00000000";
 		end if;
 	end process;
+
 end Behavioral;
 

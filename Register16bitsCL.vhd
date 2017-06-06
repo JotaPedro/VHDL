@@ -30,12 +30,12 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity Register16bitsCL is
-	Port ( D : in  STD_LOGIC_VECTOR (15 downto 0);
-          Q : out  STD_LOGIC_VECTOR (15 downto 0);
-          En : in  STD_LOGIC;
-			 clkReg : in  STD_LOGIC;
-			 Cl : in STD_LOGIC);
-	end Register16bitsCL;
+	Port ( clkReg : in  STD_LOGIC;
+	       En : in  STD_LOGIC;
+			 Cl : in STD_LOGIC;
+	       D : in  STD_LOGIC_VECTOR (15 downto 0);
+          Q : out  STD_LOGIC_VECTOR (15 downto 0));
+   end Register16bitsCL;
 
 architecture Behavioral of Register16bitsCL is
 	begin
@@ -43,8 +43,10 @@ architecture Behavioral of Register16bitsCL is
 		begin
 			if Cl = '1' then
 				Q <= "0000000000000000";
-				else if rising_edge(clkReg) and En='1' then
+				else if (rising_edge(clkReg)) then
+					if En='1' then
 					Q <= D;
+					end if;
 				end if;
 			end if;
 		end process;

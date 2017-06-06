@@ -36,9 +36,11 @@ end Zero_Fill;
 architecture Behavioral of Zero_Fill is
 
 begin
-	process(Const4bit)
-		begin
-			Output16bit <= (15 downto 4 => '0') & Const4bit;
-	end process;
+
+	Output16bit <= (15 downto 4 => '0') & Const4bit;
+
+--	Output16bit(15 downto 4) <= (others => '0');
+--	Output16bit(3 downto 0)  <= Const4bit;
+
 end Behavioral;
 
