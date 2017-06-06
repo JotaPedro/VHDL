@@ -372,7 +372,56 @@ end component;
            Enable : in  STD_LOGIC;
            Output : out  bit_16);
 	end component;
+
+	component Decoder3bits 
+    Port ( S : in  STD_LOGIC_VECTOR (2 downto 0);
+           E : in  STD_LOGIC;
+           O : out STD_LOGIC_VECTOR (7 downto 0));
+	end component;
+
+	component Register16bits
+	Port ( D : in  STD_LOGIC_VECTOR (15 downto 0);
+          Q : out  STD_LOGIC_VECTOR (15 downto 0);
+          En : in  STD_LOGIC;
+			 clkReg : in  STD_LOGIC);
+	end component;
 	
+	component Register16bitsCL
+	Port ( D : in  STD_LOGIC_VECTOR (15 downto 0);
+          Q : out  STD_LOGIC_VECTOR (15 downto 0);
+          En : in  STD_LOGIC;
+			 clkReg : in  STD_LOGIC;
+			 Cl : in STD_LOGIC);
+	end component;
+
+	component MUX1x16bits is
+    Port ( In0 : in  STD_LOGIC_VECTOR (15 downto 0);
+           In1 : in  STD_LOGIC_VECTOR (15 downto 0);
+           Sel : in  STD_LOGIC;
+           outdata : out  STD_LOGIC_VECTOR (15 downto 0));
+	end component;
+	component MUX1x3bits is
+    Port ( In0 : in  STD_LOGIC_VECTOR (2 downto 0);
+           In1 : in  STD_LOGIC_VECTOR (2 downto 0);
+           Sel : in  STD_LOGIC;
+           outdata : out  STD_LOGIC_VECTOR (2 downto 0));
+	end component;
+	
+	component MUX3x16bits is
+	Generic (
+		WIDTH : NATURAL := 16 );
+	Port ( Sel : in  STD_LOGIC_VECTOR (2 downto 0);
+		In0 : in  STD_LOGIC_VECTOR (WIDTH-1 downto 0);
+		In1 : in  STD_LOGIC_VECTOR (WIDTH-1 downto 0);
+		In2 : in  STD_LOGIC_VECTOR (WIDTH-1 downto 0);
+		In3 : in  STD_LOGIC_VECTOR (WIDTH-1 downto 0);
+		In4 : in  STD_LOGIC_VECTOR (WIDTH-1 downto 0);
+		In5 : in  STD_LOGIC_VECTOR (WIDTH-1 downto 0);
+		In6 : in  STD_LOGIC_VECTOR (WIDTH-1 downto 0);
+		In7 : in  STD_LOGIC_VECTOR (WIDTH-1 downto 0);
+		outdata : out  STD_LOGIC_VECTOR (WIDTH-1 downto 0));
+	end component;
+
 --  type <new_type> is
 --    record
 --        <type_name>        : std_logic_vector( 7 downto 0);

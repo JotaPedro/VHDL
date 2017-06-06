@@ -23,6 +23,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
 --use IEEE.NUMERIC_STD.ALL;
+use work.pds16_types.ALL;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx primitives in this code.
@@ -30,14 +31,14 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity RegisterFile8x16 is
-    Port ( DestData : in  STD_LOGIC_VECTOR (15 downto 0);
+    Port ( clock : in  STD_LOGIC;
+           CL : in  STD_LOGIC;
+           RFC : in  STD_LOGIC_VECTOR (4 downto 0);				
            AddrA : in  STD_LOGIC_VECTOR (2 downto 0);				--RFC(0)-Enable Decoder
            AddrB : in  STD_LOGIC_VECTOR (2 downto 0);				--RFC(1)-OR Reg R5 / SelMuxR5
            AddrSD : in  STD_LOGIC_VECTOR (2 downto 0);			--RFC(2)-OR Reg R6
-           clock : in  STD_LOGIC;										--RFC(3)-OR Reg R7
-           RFC : in  STD_LOGIC_VECTOR (4 downto 0);				--RFC(4)-MUX do MUXaddrA
-           flagsIN : in  STD_LOGIC_VECTOR (3 downto 0);
-           CL : in  STD_LOGIC;
+           DestData : in  STD_LOGIC_VECTOR (15 downto 0);		--RFC(3)-OR Reg R7
+           flagsIN : in  STD_LOGIC_VECTOR (3 downto 0);			--RFC(4)-MUX do MUXaddrA
            OpA : out  STD_LOGIC_VECTOR (15 downto 0);
            OpB : out  STD_LOGIC_VECTOR (15 downto 0);
            SC : out  STD_LOGIC_VECTOR (15 downto 0);
@@ -45,7 +46,7 @@ entity RegisterFile8x16 is
            PCout : out  STD_LOGIC_VECTOR (15 downto 0));
 end RegisterFile8x16;
 
-architecture Behavioral of RegisterFile8x16 is
+architecture Structural of RegisterFile8x16 is
 	
 	signal R0Q: STD_LOGIC_VECTOR (15 downto 0);
 	signal R1Q: STD_LOGIC_VECTOR (15 downto 0);
@@ -60,122 +61,133 @@ architecture Behavioral of RegisterFile8x16 is
 	signal R6Data: STD_LOGIC_VECTOR (15 downto 0);	
 	signal R7Data: STD_LOGIC_VECTOR (15 downto 0);	
 	signal SelOpA: STD_LOGIC_VECTOR (2 downto 0);
-	signal ELink: STD_LOGIC := ER(5) OR RFC(1);
-	signal EPSW: STD_LOGIC := ER(6) OR RFC(2);
-	signal EPC: STD_LOGIC := ER(7) OR RFC(3);
-	signal In1MuxR6: STD_LOGIC_VECTOR (15 downto 0) := "000000000000" & flagsIN;
-	signal In1MuxR7: STD_LOGIC_VECTOR (15 downto 0) := R7Q; -- + 2;	COMO FAZER A SOMA?????
-	
-
-	component Decoder3bits is
-    Port ( S : in  STD_LOGIC_VECTOR (2 downto 0);
-           E : in  STD_LOGIC;
-           O : out STD_LOGIC_VECTOR (7 downto 0));
-	end component;
-	component Register16bits is
-	Port ( D : in  STD_LOGIC_VECTOR (15 downto 0);
-          Q : out  STD_LOGIC_VECTOR (15 downto 0);
-          En : in  STD_LOGIC;
-			 clkReg : in  STD_LOGIC);
-	end component;
-	component Register16bitsCL is
-	Port ( D : in  STD_LOGIC_VECTOR (15 downto 0);
-          Q : out  STD_LOGIC_VECTOR (15 downto 0);
-          En : in  STD_LOGIC;
-			 clkReg : in  STD_LOGIC;
-			 Cl : in STD_LOGIC);
-	end component;
-	component MUX3x16bits is
-	 Port ( In0 : in  STD_LOGIC_VECTOR (15 downto 0);
-           In1 : in  STD_LOGIC_VECTOR (15 downto 0);
-			  In2 : in  STD_LOGIC_VECTOR (15 downto 0);
-			  In3 : in  STD_LOGIC_VECTOR (15 downto 0);
-			  In4 : in  STD_LOGIC_VECTOR (15 downto 0);
-			  In5 : in  STD_LOGIC_VECTOR (15 downto 0);
-			  In6 : in  STD_LOGIC_VECTOR (15 downto 0);
-			  In7 : in  STD_LOGIC_VECTOR (15 downto 0);
-           Sel : in  STD_LOGIC_VECTOR (2 downto 0);
-           outdata : out  STD_LOGIC_VECTOR (15 downto 0));
-	end component;
-	component MUX1x16bits is
-    Port ( In0 : in  STD_LOGIC_VECTOR (15 downto 0);
-           In1 : in  STD_LOGIC_VECTOR (15 downto 0);
-           Sel : in  STD_LOGIC;
-           outdata : out  STD_LOGIC_VECTOR (15 downto 0));
-	end component;
-	component MUX1x3bits is
-    Port ( In0 : in  STD_LOGIC_VECTOR (2 downto 0);
-           In1 : in  STD_LOGIC_VECTOR (2 downto 0);
-           Sel : in  STD_LOGIC;
-           outdata : out  STD_LOGIC_VECTOR (2 downto 0));
-	end component;
-
-
+	signal ELink: STD_LOGIC;
+	signal EPSW: STD_LOGIC;
+	signal EPC: STD_LOGIC;
+	signal IncPC: STD_LOGIC_VECTOR (15 downto 0);
+	signal In1MuxR6: STD_LOGIC_VECTOR (15 downto 0);
 
 begin
------------------------------------------
------------------------------------------
-	flagsOUT <= R6Q(4 downto 0); -- É assim???????
-	PCout <= R7Q;
-----------------DECOD--------------------
+
+	--------------------------
+	-- Decoder
+	--------------------------
 	decod: component Decoder3bits port map(
+		E => RFC(0),
 		S => AddrSD,
-      E => RFC(0),
       O => ER);
----------------Registos------------------
-	R0: component Register16bits port map(
-		D => DestData,
-      Q => R0Q,
-      En => ER(0),
-		clkReg => clock);
 		
-	R1: component Register16bits port map(
+	--------------------------
+	-- Registos	R0->4
+	--------------------------
+	R0: component Register16bits port map(
+		clkReg => clock,
+		En => ER(0),
 		D => DestData,
-      Q => R1Q,
-      En => ER(1),
-		clkReg => clock);
+      Q => R0Q);
+      
+	R1: component Register16bits port map(
+		clkReg => clock,
+		En => ER(1),
+		D => DestData,
+      Q => R1Q);
 		
 	R2: component Register16bits port map(
+		clkReg => clock,
+		En => ER(2),
 		D => DestData,
-      Q => R2Q,
-      En => ER(2),
-		clkReg => clock);
-	
+      Q => R2Q);
+      
 	R3: component Register16bits port map(
+		clkReg => clock,
+		En => ER(3),
 		D => DestData,
-      Q => R3Q,
-      En => ER(3),
-		clkReg => clock);
-		
+      Q => R3Q);
+
 	R4: component Register16bits port map(
+		clkReg => clock,
+		En => ER(4),
 		D => DestData,
-      Q => R4Q,
-      En => ER(4),
-		clkReg => clock);
-		
-	R5: component Register16bits port map(	--LINK
+      Q => R4Q);
+	
+	--------------------------
+	-- Registo R5 => LINK
+	--------------------------
+	muxR5: component MUX1x16bits port map(
+		Sel => RFC(1),
+		In0 => DestData,
+      In1 => R7Q,
+      outdata => R5Data);	
+
+	ELink <= ER(5) OR RFC(1);
+
+	R5: component Register16bits port map(
+		clkReg => clock,
+		En => ELink,
 		D => R5Data,
-      Q => R5Q,
-      En => ELink,	--ELink
-		clkReg => clock);
-		
-	R6: component Register16bitsCL port map( --PSW
+      Q => R5Q);
+      
+	--------------------------
+	-- Registo R6 => PSW
+	--------------------------
+	In1MuxR6(15 downto 0) <= "000000000000" & flagsIN;
+
+	muxR6: component MUX1x16bits port map(
+		Sel => RFC(2),
+		In0 => DestData,
+      In1 => In1MuxR6,
+      outdata => R6Data);
+
+	EPSW <= ER(6) OR RFC(2);
+
+	R6: component Register16bitsCL port map(
+		clkReg => clock,
+		En => EPSW,
+		Cl => CL,
 		D => R6Data,
-      Q => R6Q,
-      En => EPSW,	--EPSW
-		clkReg => clock,
-		Cl => CL);
+      Q => R6Q);
+      
 		
-	R7: component Register16bitsCL port map( --PC
+		
+	--------------------------
+	-- Registo R7 => PC
+	--------------------------
+	-----------------SOMADOR-----------------
+	Somador: component Alu_aritmetico port map(
+		Op => '0', --soma
+		A => R7Q,
+	   B => "0000000000000010", 
+	   Cin => '0',
+	   Result => IncPC,
+	   Flags_out => open);
+
+	muxR7: component MUX1x16bits port map(
+		Sel => RFC(3),
+		In0 => DestData,
+      In1 => IncPC,	
+      outdata => R7Data);
+
+	EPC <= ER(7) OR RFC(3);
+	
+	R7: component Register16bitsCL port map(
+		clkReg => clock,  
+		En => EPC,
+		Cl => CL,
 		D => R7Data,
-      Q => R7Q,
-      En => EPC,	--EPC
-		clkReg => clock,
-		Cl => CL);
+      Q => R7Q);
+ 
+	--------------------------
+	-- Definicao das saidas
+	--------------------------
+	--	Multiplexer do porto de saida A
+	muxMuxA: component MUX1x3bits port map(
+		Sel => RFC(4),
+		In0 => AddrA,
+      In1 => AddrSD,
+      outdata => SelOpA);
 
-
-------------------MUX--------------------
 	muxA: component MUX3x16bits port map(
+		Sel => SelOpA,
 		In0 => R0Q,
       In1 => R1Q,
 		In2 => R2Q,
@@ -184,10 +196,10 @@ begin
 		In5 => R5Q,
 		In6 => R6Q,
 		In7 => R7Q,
-      Sel => SelOpA,
       outdata => OpA);
 
 	muxB: component MUX3x16bits port map(
+      Sel => AddrB,
 		In0 => R0Q,
       In1 => R1Q,
 		In2 => R2Q,
@@ -196,10 +208,10 @@ begin
 		In5 => R5Q,
 		In6 => R6Q,
 		In7 => R7Q,
-      Sel => AddrB,
       outdata => OpB);
 		
 	muxSC: component MUX3x16bits port map(
+      Sel => AddrSD,
 		In0 => R0Q,
       In1 => R1Q,
 		In2 => R2Q,
@@ -208,30 +220,13 @@ begin
 		In5 => R5Q,
 		In6 => R6Q,
 		In7 => R7Q,
-      Sel => AddrSD,
       outdata => SC);
 
-	muxR5: component MUX1x16bits port map(
-		In0 => DestData,
-      In1 => R7Q,
-      Sel => RFC(1),
-      outdata => R5Data);	
-	muxR6: component MUX1x16bits port map(
-		In0 => DestData,
-      In1 => In1MuxR6,			-- Fica assim?????
-      Sel => RFC(2),
-      outdata => R6Data);
-	muxR7: component MUX1x16bits port map(
-		In0 => DestData,
-      In1 => In1MuxR7,	--IncPC					-- Fica assim?????
-      Sel => RFC(3),
-      outdata => R7Data);
-	muxMuxA: component MUX1x3bits port map(
-		In0 => AddrA,
-      In1 => AddrSD,
-      Sel => RFC(4),
-      outdata => SelOpA);
+	-- 
+	flagsOUT <= R6Q(4 downto 0);
+	
+	-- 
+	PCout <= R7Q;
 		
-		
-end Behavioral;
+end Structural;
 
