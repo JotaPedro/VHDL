@@ -94,40 +94,40 @@ BEGIN
 		OpA1 	<= "0000000000000011";
 		Const1<= "00000001";
 		CYin1 <= '1';
-----Operações Aritméticas sem darem Carry ou Borrow
---
---		--ADD A+B
---		Ctr1	<= "011";
---		Func1	<= "100000";
---		wait for 1 ns;
---		--ADDC A+B+Cy
---		Ctr1	<= "011";
---		Func1	<= "100100";
---		wait for 1 ns;
---		--ADD A+Const
---		Ctr1	<= "000";
---		Func1	<= "101000";
---		wait for 1 ns;
---		--ADDC A+Const+Cy
---		Ctr1	<= "001";
---		Func1	<= "101100";
---		wait for 1 ns;
---		--SUB A-B
---		Ctr1	<= "011";
---		Func1	<= "100010";
---		wait for 1 ns;
---		--SBB A-B-Cy
---		Ctr1	<= "011";
---		Func1	<= "100110";
---		wait for 1 ns;
---		--SUB A-Const
---		Ctr1	<= "001";
---		Func1	<= "101010";
---		wait for 1 ns;
---		--SBB A-Const-Cy
---		Ctr1	<= "001";
---		Func1	<= "101110";
---		wait for 1 ns;
+--Operações Aritméticas sem darem Carry ou Borrow
+
+		--ADD A+B
+		Ctr1	<= "011";
+		Func1	<= "100000";
+		wait for 1 ns;
+		--ADDC A+B+Cy
+		Ctr1	<= "011";
+		Func1	<= "100100";
+		wait for 1 ns;
+		--ADD A+Const
+		Ctr1	<= "000";
+		Func1	<= "101000";
+		wait for 1 ns;
+		--ADDC A+Const+Cy
+		Ctr1	<= "001";
+		Func1	<= "101100";
+		wait for 1 ns;
+		--SUB A-B
+		Ctr1	<= "011";
+		Func1	<= "100010";
+		wait for 1 ns;
+		--SBB A-B-Cy
+		Ctr1	<= "011";
+		Func1	<= "100110";
+		wait for 1 ns;
+		--SUB A-Const
+		Ctr1	<= "001";
+		Func1	<= "101010";
+		wait for 1 ns;
+		--SBB A-Const-Cy
+		Ctr1	<= "001";
+		Func1	<= "101110";
+		wait for 1 ns;
 --		
 ----Operações Aritméticas para darem Carry ou Borrow
 --
@@ -188,22 +188,22 @@ BEGIN
 --		wait for 1 ns;
 
 --Operações de deslocamento com SIN=0
-		OpA1 	<= "1000000000000011";
-		Const1<= "00000010";
-
-		Ctr1	<= "001";
-		Func1	<= "111000";-- SHL A/const
-		wait for 1 ns;
-		Ctr1	<= "001";
-		Func1	<= "111010";-- SHR A/const
-
---Operações de deslocamento com SIN=1
-		wait for 1 ns;
-		Ctr1	<= "001";
-		Func1	<= "111001";-- SHL A/const
-		wait for 1 ns;
-		Ctr1	<= "001";
-		Func1	<= "111011";-- SHR A/const
+--		OpA1 	<= "1000000000000011";
+--		Const1<= "00000010";
+--
+--		Ctr1	<= "001";
+--		Func1	<= "111000";-- SHL A/const
+--		wait for 1 ns;
+--		Ctr1	<= "001";
+--		Func1	<= "111010";-- SHR A/const
+--
+----Operações de deslocamento com SIN=1
+--		wait for 1 ns;
+--		Ctr1	<= "001";
+--		Func1	<= "111001";-- SHL A/const
+--		wait for 1 ns;
+--		Ctr1	<= "001";
+--		Func1	<= "111011";-- SHR A/const
 
 ----------------------------Testado até aqui-----------------------------------------
 --		wait for 1 ns;

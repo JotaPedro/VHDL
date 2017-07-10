@@ -36,10 +36,10 @@ entity FullAdder is
 			  );
 end FullAdder;
 
-architecture Behavioral of FullAdder is
+architecture structural of FullAdder is
 
 begin
 	Sx		 <= ((Ax xor Bx) xor Cin);
 	Cout	 <= ((Ax and Bx) or (Cin and Ax) or (Cin and Bx));
-end Behavioral;
+end structural;
 

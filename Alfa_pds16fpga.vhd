@@ -57,21 +57,20 @@ ARCHITECTURE behavior OF Alfa_pds16fpga IS
     END COMPONENT;
 	 
 	 COMPONENT RegisterFile8x16
-    Port ( 
-			 DestData : in  STD_LOGIC_VECTOR (15 downto 0);
-          AddrA : in  STD_LOGIC_VECTOR (2 downto 0);				--RFC(0)-Enable Decoder
-          AddrB : in  STD_LOGIC_VECTOR (2 downto 0);				--RFC(1)-OR Reg R5 / SelMuxR5
-          AddrSD : in  STD_LOGIC_VECTOR (2 downto 0);			--RFC(2)-OR Reg R6
-          clock : in  STD_LOGIC;										--RFC(3)-OR Reg R7
-          RFC : in  STD_LOGIC_VECTOR (4 downto 0);				--RFC(4)-MUX do MUXaddrA
-          flagsIN : in  STD_LOGIC_VECTOR (3 downto 0);
-          CL : in  STD_LOGIC;
-          OpA : out  STD_LOGIC_VECTOR (15 downto 0);
-          OpB : out  STD_LOGIC_VECTOR (15 downto 0);
-          SC : out  STD_LOGIC_VECTOR (15 downto 0);
-          flagsOUT : out  STD_LOGIC_VECTOR (4 downto 0);
-          PCout : out  STD_LOGIC_VECTOR (15 downto 0)
-			);
+    Port ( clock : in  STD_LOGIC;
+           CL : in  STD_LOGIC;
+           RFC : in  STD_LOGIC_VECTOR (4 downto 0);				
+           AddrA : in  STD_LOGIC_VECTOR (2 downto 0);				--RFC(0)-Enable Decoder
+           AddrB : in  STD_LOGIC_VECTOR (2 downto 0);				--RFC(1)-OR Reg R5 / SelMuxR5
+           AddrSD : in  STD_LOGIC_VECTOR (2 downto 0);			--RFC(2)-OR Reg R6
+           DestData : in  STD_LOGIC_VECTOR (15 downto 0);		--RFC(3)-OR Reg R7
+           flagsIN : in  STD_LOGIC_VECTOR (3 downto 0);			--RFC(4)-MUX do MUXaddrA
+           OpA : out  STD_LOGIC_VECTOR (15 downto 0);
+           OpB : out  STD_LOGIC_VECTOR (15 downto 0);
+           SC : out  STD_LOGIC_VECTOR (15 downto 0);
+           flagsOUT : out  STD_LOGIC_VECTOR (4 downto 0);
+           PCout : out  STD_LOGIC_VECTOR (15 downto 0)
+		    );
 	end COMPONENT;
 	
 	COMPONENT Mplex16bit_4to1
@@ -191,6 +190,22 @@ BEGIN
 	 
 	 RegisterFile: RegisterFile8x16
     Port map( 
+	 
+--	 clock : in  STD_LOGIC;
+--           CL : in  STD_LOGIC;
+--           RFC : in  STD_LOGIC_VECTOR (4 downto 0);				
+--           AddrA : in  STD_LOGIC_VECTOR (2 downto 0);				--RFC(0)-Enable Decoder
+--           AddrB : in  STD_LOGIC_VECTOR (2 downto 0);				--RFC(1)-OR Reg R5 / SelMuxR5
+--           AddrSD : in  STD_LOGIC_VECTOR (2 downto 0);			--RFC(2)-OR Reg R6
+--           DestData : in  STD_LOGIC_VECTOR (15 downto 0);		--RFC(3)-OR Reg R7
+--           flagsIN : in  STD_LOGIC_VECTOR (3 downto 0);			--RFC(4)-MUX do MUXaddrA
+--           OpA : out  STD_LOGIC_VECTOR (15 downto 0);
+--           OpB : out  STD_LOGIC_VECTOR (15 downto 0);
+--           SC : out  STD_LOGIC_VECTOR (15 downto 0);
+--           flagsOUT : out  STD_LOGIC_VECTOR (4 downto 0);
+--           PCout : out  STD_LOGIC_VECTOR (15 downto 0)
+	 
+	 
 			 DestData 	=> mplex_sel_Output,
           AddrA 		=> IR_Data(5 downto 3),	--RFC(0)-Enable Decoder
           AddrB 		=> IR_Data(8 downto 6),	--RFC(1)-OR Reg R5 / SelMuxR5
@@ -383,7 +398,7 @@ BEGIN
 	
 	--SHL r2,r2,#1 com introdução de sin
 		--fetch instruction:
-			DataIn <= "1110010001010010";
+			DataIn <= "1110010001010011";
 			--control signals
 			EIR 		<= '1';
 			--control signals not used
@@ -408,15 +423,7 @@ BEGIN
 			--SelData  <= "00";
 			--RFC		<= "00000";
 		wait for clk_period*2;
-		--STOP
-			--control signals not used
-			EIR 		<= '0';
-			RES		<= '0';
-			ALUC		<= "000";
-			A0			<= '0';
-			Sel_Imm 	<= '0';
-			SelData  <= "00";
-			RFC		<= "00000";
+		
 		
 		
 		

@@ -37,7 +37,7 @@ entity Alu_aritmetico is
 			  Op : in STD_LOGIC);
 end Alu_aritmetico;
 
-architecture Behavioral of Alu_aritmetico is
+architecture structural of Alu_aritmetico is
 Signal Carry: STD_LOGIC_VECTOR(16 downto 0);
 Signal B_input: STD_LOGIC_VECTOR(15 downto 0);
 begin
@@ -86,4 +86,4 @@ begin
 		
 		Flags_out(1) <= Carry(16);
 
-end Behavioral;
+end structural;

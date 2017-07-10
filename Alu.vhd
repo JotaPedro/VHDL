@@ -45,7 +45,7 @@ entity Alu is
 		);
 end Alu;
 
-architecture Behavioral of Alu is
+architecture structural of Alu is
 
 Signal Output_shifter: bit_16;
 Signal Output_shifter_Cy: STD_LOGIC;
@@ -119,5 +119,5 @@ begin
 		R <= Mp_IR14_output;
 
 
-end Behavioral;
+end structural;
 
