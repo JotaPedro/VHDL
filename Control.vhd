@@ -133,7 +133,7 @@ begin
 													end if;
 												end if;
 
-					when SExecution => NewState <= SFetch_Addr;
+				--	when SExecution => NewState <= SFetch_Addr;
 					
 					when SExecution => if (Sync(0)= '1') then --BRQ activo
 													 NewState <= SHold_Fetch;

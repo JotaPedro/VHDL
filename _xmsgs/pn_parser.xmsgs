@@ -8,13 +8,76 @@
 <!-- Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.    -->
 
 <messages>
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;F:/Projecto/github repo/VHDL/Alfa_pds16fpga.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/Projecto/github repo/VHDL/Alfa_pds16fpga.vhd</arg>&quot; Line <arg fmt="%d" index="2">145</arg>. <arg fmt="%s" index="3">Syntax error near &quot;in&quot;.</arg>
+</msg>
+
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/Projecto/github repo/VHDL/Alfa_pds16fpga.vhd</arg>&quot; Line <arg fmt="%d" index="2">289</arg>. <arg fmt="%s" index="3">Syntax error near &quot;:&quot;.</arg>
+</msg>
+
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/Projecto/github repo/VHDL/Alfa_pds16fpga.vhd</arg>&quot; Line <arg fmt="%d" index="2">291</arg>. <arg fmt="%s" index="3">Syntax error near &quot;in&quot;.</arg>
+</msg>
+
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/Projecto/github repo/VHDL/Alfa_pds16fpga.vhd</arg>&quot; Line <arg fmt="%d" index="2">292</arg>. <arg fmt="%s" index="3">Syntax error near &quot;in&quot;.</arg>
+</msg>
+
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/Projecto/github repo/VHDL/Alfa_pds16fpga.vhd</arg>&quot; Line <arg fmt="%d" index="2">293</arg>. <arg fmt="%s" index="3">Syntax error near &quot;in&quot;.</arg>
+</msg>
+
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/Projecto/github repo/VHDL/Alfa_pds16fpga.vhd</arg>&quot; Line <arg fmt="%d" index="2">294</arg>. <arg fmt="%s" index="3">Syntax error near &quot;in&quot;.</arg>
+</msg>
+
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/Projecto/github repo/VHDL/Alfa_pds16fpga.vhd</arg>&quot; Line <arg fmt="%d" index="2">295</arg>. <arg fmt="%s" index="3">Syntax error near &quot;in&quot;.</arg>
+</msg>
+
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/Projecto/github repo/VHDL/Alfa_pds16fpga.vhd</arg>&quot; Line <arg fmt="%d" index="2">296</arg>. <arg fmt="%s" index="3">Syntax error near &quot;out&quot;.</arg>
+</msg>
+
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/Projecto/github repo/VHDL/Alfa_pds16fpga.vhd</arg>&quot; Line <arg fmt="%d" index="2">297</arg>. <arg fmt="%s" index="3">Syntax error near &quot;out&quot;.</arg>
+</msg>
+
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/Projecto/github repo/VHDL/Alfa_pds16fpga.vhd</arg>&quot; Line <arg fmt="%d" index="2">298</arg>. <arg fmt="%s" index="3">Syntax error near &quot;out&quot;.</arg>
+</msg>
+
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/Projecto/github repo/VHDL/Alfa_pds16fpga.vhd</arg>&quot; Line <arg fmt="%d" index="2">299</arg>. <arg fmt="%s" index="3">Syntax error near &quot;out&quot;.</arg>
+</msg>
+
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/Projecto/github repo/VHDL/Alfa_pds16fpga.vhd</arg>&quot; Line <arg fmt="%d" index="2">300</arg>. <arg fmt="%s" index="3">Syntax error near &quot;out&quot;.</arg>
+</msg>
+
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/Projecto/github repo/VHDL/Alfa_pds16fpga.vhd</arg>&quot; Line <arg fmt="%d" index="2">301</arg>. <arg fmt="%s" index="3">Syntax error near &quot;out&quot;.</arg>
+</msg>
+
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/Projecto/github repo/VHDL/Alfa_pds16fpga.vhd</arg>&quot; Line <arg fmt="%d" index="2">302</arg>. <arg fmt="%s" index="3">Syntax error near &quot;out&quot;.</arg>
+</msg>
+
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/Projecto/github repo/VHDL/Alfa_pds16fpga.vhd</arg>&quot; Line <arg fmt="%d" index="2">303</arg>. <arg fmt="%s" index="3">Syntax error near &quot;out&quot;.</arg>
+</msg>
+
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/Projecto/github repo/VHDL/Alfa_pds16fpga.vhd</arg>&quot; Line <arg fmt="%d" index="2">304</arg>. <arg fmt="%s" index="3">Syntax error near &quot;out&quot;.</arg>
+</msg>
+
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/Projecto/github repo/VHDL/Alfa_pds16fpga.vhd</arg>&quot; Line <arg fmt="%d" index="2">305</arg>. <arg fmt="%s" index="3">Syntax error near &quot;out&quot;.</arg>
+</msg>
+
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/Projecto/github repo/VHDL/Alfa_pds16fpga.vhd</arg>&quot; Line <arg fmt="%d" index="2">306</arg>. <arg fmt="%s" index="3">Syntax error near &quot;out&quot;.</arg>
+</msg>
+
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/Projecto/github repo/VHDL/Alfa_pds16fpga.vhd</arg>&quot; Line <arg fmt="%d" index="2">308</arg>. <arg fmt="%s" index="3">Syntax error near &quot;out&quot;.</arg>
+</msg>
+
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/Projecto/github repo/VHDL/Alfa_pds16fpga.vhd</arg>&quot; Line <arg fmt="%d" index="2">309</arg>. <arg fmt="%s" index="3">Syntax error near &quot;out&quot;.</arg>
+</msg>
+
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/Projecto/github repo/VHDL/Alfa_pds16fpga.vhd</arg>&quot; Line <arg fmt="%d" index="2">314</arg>. <arg fmt="%s" index="3">Syntax error near &quot;clk_process&quot;.</arg>
+</msg>
+
 <msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;F:/Projecto/github repo/VHDL/BIU.vhd&quot; into library work</arg>
 </msg>
 
 <msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/Projecto/github repo/VHDL/BIU.vhd</arg>&quot; Line <arg fmt="%d" index="2">57</arg>. <arg fmt="%s" index="3">Syntax error near &quot;Sync&quot;.</arg>
-</msg>
-
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;F:/Projecto/github repo/VHDL/Control.vhd&quot; into library work</arg>
 </msg>
 
 <msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;F:/Projecto/github repo/VHDL/Decoder2to4.vhd&quot; into library work</arg>
