@@ -16,6 +16,9 @@ package pds16_types is
 	type bit_3_array is array (integer range <>) of bit_3;
 	subtype bit_8 is STD_LOGIC_VECTOR( 7 downto 0 );
 	type bit_8_array is array (integer range <>) of bit_8;
+	type INST_TYPE is (LDI, LDIH, LD_Direct, LD_IndConst, LD_Indexed, ST_Direct, ST_IndConst, ST_Indexed, ADD, ADDC, ADD_const, ADDC_const, SUB, SBB, SUB_const, SBB_const, ANL, ORL, XRL, NT, SHL,SHR,RRL,RRM,RCR,RCL,JZ,JNZ,JC,JNC,JMP,JMPL,IRET,NOP);
+	type STATE_TYPE is (SReset, SFetch_Addr, SFetch_Inst, SFetch_Decod, SExecution, SExec_Addr, SExec_RW, SInterrupt, SBreak, SHold_Fetch, SHold_Exec, SWait_Fetch, SWait_Exec);
+
 
 	
 	Component DFlipFlop is
@@ -265,8 +268,7 @@ package pds16_types is
 				RD 			: out	 STD_LOGIC; -- ACTIVE LOW
 				WR			: out  STD_LOGIC_VECTOR(1 downto 0); -- 0-WRL, 1-WRH
 				BGT			: out	 STD_LOGIC;
-				S0 			: out	 STD_LOGIC;
-				S1 			: out	 STD_LOGIC;
+				S1S0 		: out	 STD_LOGIC_VECTOR(1 downto 0);
 				EIR			: out	 STD_LOGIC);
 	end component;
 	
@@ -421,6 +423,15 @@ end component;
 		In7 : in  STD_LOGIC_VECTOR (WIDTH-1 downto 0);
 		outdata : out  STD_LOGIC_VECTOR (WIDTH-1 downto 0));
 	end component;
+	
+	component InstDecode is
+    Port (  OpCode 	: in  STD_LOGIC_VECTOR(6 downto 0);
+				Inst		: out INST_TYPE;
+				FlagUpdate: out STD_LOGIC
+			);
+	end component;
+	
+	
 
 --  type <new_type> is
 --    record

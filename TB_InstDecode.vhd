@@ -2,15 +2,15 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   17:35:57 05/28/2017
+-- Create Date:   23:26:31 07/27/2017
 -- Design Name:   
--- Module Name:   F:/Projecto/github repo/VHDL/TB_HiZeroFill.vhd
+-- Module Name:   F:/Projecto/github repo/VHDL/TB_InstDecode.vhd
 -- Project Name:  work
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
 -- 
--- VHDL Test Bench Created by ISE for module: HiZeroFill
+-- VHDL Test Bench Created by ISE for module: InstDecode
 -- 
 -- Dependencies:
 -- 
@@ -27,54 +27,57 @@
 --------------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
+use work.pds16_types.ALL;
  
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
 --USE ieee.numeric_std.ALL;
  
-ENTITY TB_HiZeroFill IS
-END TB_HiZeroFill;
+ENTITY TB_InstDecode IS
+END TB_InstDecode;
  
-ARCHITECTURE behavior OF TB_HiZeroFill IS 
+ARCHITECTURE behavior OF TB_InstDecode IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT HiZeroFill
+    COMPONENT InstDecode
     PORT(
-         Input : IN  std_logic_vector(7 downto 0);
-         A0 : IN  std_logic;
-         Output : OUT  std_logic_vector(15 downto 0)
+         OpCode : IN  std_logic_vector(6 downto 0);
+         Inst : OUT  INST_TYPE;
+         FlagUpdate : OUT  std_logic
         );
     END COMPONENT;
     
 
    --Inputs
-   signal Input : std_logic_vector(7 downto 0) := (others => '0');
-   signal A0 : std_logic := '0';
+   signal OpCode : std_logic_vector(6 downto 0) := (others => '0');
 
  	--Outputs
-   signal Output : std_logic_vector(15 downto 0);
+   signal Inst : INST_TYPE;
+   signal FlagUpdate : std_logic;
 
- 
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: HiZeroFill PORT MAP (
-          Input => Input,
-          A0 => A0,
-          Output => Output
+   uut: InstDecode PORT MAP (
+          OpCode => OpCode,
+          Inst => Inst,
+          FlagUpdate => FlagUpdate
         );
 
    -- Stimulus process
    stim_proc: process
    begin		
-		Input <= "01010101";
-		A0 <= '0';
+      
+		OpCode <= "0000000";
 		wait for 100 ns;
-		A0 <= '1';
-
-      -- insert stimulus here 
-
+		--OpCode <= "0000100";
+		OpCode <= "0000101";
+		wait for 100 ns;
+		OpCode <= "1000000";
+		wait for 100 ns;
+		OpCode <= "1100000";
+		
       wait;
    end process;
 

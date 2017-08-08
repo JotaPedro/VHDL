@@ -29,16 +29,17 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity Register16bits is
+entity Latch16bits is
 
 Port ( clkReg : in  STD_LOGIC;
        En : in  STD_LOGIC;
        D : in  STD_LOGIC_VECTOR (15 downto 0);
-       Q : out  STD_LOGIC_VECTOR (15 downto 0));
+       Q : out  STD_LOGIC_VECTOR (14 downto 0);
+		 A0: out STD_LOGIC);
        
-end Register16bits;
+end Latch16bits;
 
-architecture Behavioural of Register16bits is
+architecture Behavioural of Latch16bits is
 begin
 
 	process(clkReg)
@@ -46,7 +47,8 @@ begin
 		if(rising_edge(clkReg)) then
 			if(En='1') then
 				
-				Q <= D;
+				Q <= D(15 downto 1);
+				A0<= D(0);
 
 			end if;
 		end if;

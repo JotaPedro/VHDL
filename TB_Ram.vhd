@@ -2,15 +2,15 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   21:18:10 05/24/2017
+-- Create Date:   23:11:35 07/27/2017
 -- Design Name:   
--- Module Name:   F:/Projecto/github repo/VHDL/TB_SigExt.vhd
+-- Module Name:   F:/Projecto/github repo/VHDL/TB_Ram.vhd
 -- Project Name:  work
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
 -- 
--- VHDL Test Bench Created by ISE for module: SigExt
+-- VHDL Test Bench Created by ISE for module: Ram
 -- 
 -- Dependencies:
 -- 
@@ -32,46 +32,71 @@ USE ieee.std_logic_1164.ALL;
 -- arithmetic functions with Signed or Unsigned values
 --USE ieee.numeric_std.ALL;
  
-ENTITY TB_SigExt IS
-END TB_SigExt;
+ENTITY TB_Ram IS
+END TB_Ram;
  
-ARCHITECTURE behavior OF TB_SigExt IS 
+ARCHITECTURE behavior OF TB_Ram IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT SigExt
+    COMPONENT Ram
     PORT(
-         Const8x2 : IN  std_logic_vector(7 downto 0);
-         Output16bit : OUT  std_logic_vector(15 downto 0)
+         Clk : IN  std_logic;
+         AD : IN  std_logic_vector(15 downto 0);
+         nRD : IN  std_logic;
+         nWRL : IN  std_logic;
+         nWRH : IN  std_logic;
+         DATA : INOUT  std_logic_vector(15 downto 0)
         );
     END COMPONENT;
     
 
    --Inputs
-   signal Const8x2 : std_logic_vector(7 downto 0) := (others => '0');
+   signal Clk : std_logic := '0';
+   signal AD : std_logic_vector(15 downto 0) := (others => '0');
+   signal nRD : std_logic := '0';
+   signal nWRL : std_logic := '0';
+   signal nWRH : std_logic := '0';
 
- 	--Outputs
-   signal Output16bit : std_logic_vector(15 downto 0);
-   -- No clocks detected in port list. Replace <clock> below with 
-   -- appropriate port name 
-	
+	--BiDirs
+   signal DATA : std_logic_vector(15 downto 0);
+
+   -- Clock period definitions
+   constant Clk_period : time := 10 ns;
+ 
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: SigExt PORT MAP (
-          Const8x2 => Const8x2,
-          Output16bit => Output16bit
+   uut: Ram PORT MAP (
+          Clk => Clk,
+          AD => AD,
+          nRD => nRD,
+          nWRL => nWRL,
+          nWRH => nWRH,
+          DATA => DATA
         );
+
+   -- Clock process definitions
+   Clk_process :process
+   begin
+		Clk <= '0';
+		wait for Clk_period/2;
+		Clk <= '1';
+		wait for Clk_period/2;
+   end process;
+ 
 
    -- Stimulus process
    stim_proc: process
    begin		
       -- hold reset state for 100 ns.
       wait for 100 ns;	
-		Const8x2 <="00111001";
-		wait for 100 ns;	
-		Const8x2 <="10111001";
-
+		AD 	<= "0000000000000000";
+		nRD 	<= '0';
+      wait for Clk_period*10;
+		nRD 	<= '1';
+		wait for Clk_period*10;
+		AD 	<= "0000000000000001";
       -- insert stimulus here 
 
       wait;

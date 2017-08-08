@@ -106,6 +106,32 @@ ARCHITECTURE behavior OF Alfa_pds16fpga IS
 			 clkReg : in  STD_LOGIC);
 	end COMPONENT;
 	
+	COMPONENT Control
+	Port (  WL 			: in  STD_LOGIC;
+           Flags 		: in  STD_LOGIC_VECTOR(2 downto 0);-- 0-Zero 1-Carry 2-GE
+           OpCode 	: in  STD_LOGIC_VECTOR(6 downto 0);-- bits de 15 a 9
+           INTP 		: in  STD_LOGIC;
+           Clock 		: in  STD_LOGIC;
+           CL 			: in  STD_LOGIC;
+           Sync 		: in  STD_LOGIC_VECTOR(1 downto 0); -- 0- BRQ, 1-RDY
+           BusCtr 	: out  STD_LOGIC_VECTOR(3 downto 0); -- 0-WrByte, 1-DataOut, 2-Addr, 3-ALE
+           RFC 		: out  STD_LOGIC_VECTOR(4 downto 0);
+           ALUC 		: out  STD_LOGIC_VECTOR(2 downto 0);
+           SelAddr 	: out  STD_LOGIC_VECTOR(1 downto 0);
+           SelData	: out  STD_LOGIC_VECTOR(1 downto 0);
+           Sellmm 	: out  STD_LOGIC;
+			  RD 			: out	 STD_LOGIC; -- ACTIVE LOW
+			  WR			: out  STD_LOGIC_VECTOR(1 downto 0); -- 0-WRL, 1-WRH
+			  BGT			: out	 STD_LOGIC;
+			  S1S0 		: out	 STD_LOGIC_VECTOR(1 downto 0);
+			  EIR			: out	 STD_LOGIC;
+			  --Apartir daqui os signais são apenas para ver no testbench (apagar depois)
+			  CState		:out STATE_TYPE;
+			  inst		: out INST_TYPE
+	);
+	end COMPONENT;
+	
+	
 	------------------------------------------------------------------------
 	--Clocks in here
 	constant clk_period : time := 10 ns;
@@ -114,13 +140,36 @@ ARCHITECTURE behavior OF Alfa_pds16fpga IS
 	------------------------------------------------------------------------
 	--Variables here:
 	--Control
-	Signal SelData : std_logic_vector(1 downto 0)  := (others => '0');
-	Signal RFC 	   : std_logic_vector(4 downto 0)  := (others => '0');
-	Signal RES	   : std_logic							  := '0';
-	Signal ALUC    : std_logic_vector(2 downto 0)  := (others => '0');
-	Signal Sel_Imm : std_logic							  := '0';
-	Signal EIR	   : std_logic							  := '0';
-	Signal A0	   : std_logic							  := '0';
+	Signal WL_Input 			: in  STD_LOGIC; --WL = A0 - sinal que sai do bit menos significante do Addr0-15
+	Signal Flags_Input 		: in  STD_LOGIC_VECTOR(2 downto 0);-- 0-Zero 1-Carry 2-GE
+	Signal OpCode_Input 		: in  STD_LOGIC_VECTOR(6 downto 0);-- bits de 15 a 9
+	Signal INTP_Input 		: in  STD_LOGIC;
+	Signal Clock_Input 		: in  STD_LOGIC;
+	Signal CL_Input 			: in  STD_LOGIC;
+	Signal Sync_Input 		: in  STD_LOGIC_VECTOR(1 downto 0); -- 0- BRQ, 1-RDY
+	Signal BusCtr_Output 	: out  STD_LOGIC_VECTOR(3 downto 0); -- 0-WrByte, 1-DataOut, 2-Addr, 3-ALE
+	Signal RFC_Output 		: out  STD_LOGIC_VECTOR(4 downto 0);
+	Signal ALUC_Output 		: out  STD_LOGIC_VECTOR(2 downto 0);
+	Signal SelAddr_Output 	: out  STD_LOGIC_VECTOR(1 downto 0);
+	Signal SelData_Output	: out  STD_LOGIC_VECTOR(1 downto 0);
+	Signal Sellmm_Output 	: out  STD_LOGIC;
+	Signal RD_Output 			: out	 STD_LOGIC; -- ACTIVE LOW
+	Signal WR_Output			: out  STD_LOGIC_VECTOR(1 downto 0); -- 0-WRL, 1-WRH
+	Signal BGT_Output			: out	 STD_LOGIC;
+	Signal S1S0_Output 		: out	 STD_LOGIC_VECTOR(1 downto 0);
+	Signal EIR_Output			: out	 STD_LOGIC;
+	--Apartir daqui os signais são apenas para ver no testbench (apagar depois)
+	Signal CState_Output		:out STATE_TYPE;
+	Signal inst_Output		: out INST_TYPE
+
+	
+	Signal SelData_Output 	: std_logic_vector(1 downto 0)  := (others => '0');
+	Signal RFC_Output 	   : std_logic_vector(4 downto 0)  := (others => '0');
+	Signal RES_Output	   	: std_logic							  := '0';
+	Signal ALUC_Output    	: std_logic_vector(2 downto 0)  := (others => '0');
+	Signal Sel_Imm_Output 	: std_logic							  := '0';
+	Signal EIR_Output	   	: std_logic							  := '0';
+	Signal A0	   			: std_logic							  := '0';
 	
 	--Inputs
 	Signal DataIn  : std_logic_vector(15 downto 0) := (others => '0');
@@ -232,6 +281,32 @@ BEGIN
          Result 	=> Result_DP,
          FlagsOut => flagsOut_DP
         );
+		  
+	 Controler: Control
+    PORT MAP( 
+			WL 			: in  STD_LOGIC;
+			Flags 		: in  STD_LOGIC_VECTOR(2 downto 0);-- 0-Zero 1-Carry 2-GE
+			OpCode 	: in  STD_LOGIC_VECTOR(6 downto 0);-- bits de 15 a 9
+			INTP 		: in  STD_LOGIC;
+			Clock 		: in  STD_LOGIC;
+			CL 			: in  STD_LOGIC;
+			Sync 		: in  STD_LOGIC_VECTOR(1 downto 0); -- 0- BRQ, 1-RDY
+			BusCtr 	: out  STD_LOGIC_VECTOR(3 downto 0); -- 0-WrByte, 1-DataOut, 2-Addr, 3-ALE
+			RFC 		: out  STD_LOGIC_VECTOR(4 downto 0);
+			ALUC 		: out  STD_LOGIC_VECTOR(2 downto 0);
+			SelAddr 	: out  STD_LOGIC_VECTOR(1 downto 0);
+			SelData	: out  STD_LOGIC_VECTOR(1 downto 0);
+			Sellmm 	: out  STD_LOGIC;
+			RD 			: out	 STD_LOGIC; -- ACTIVE LOW
+			WR			: out  STD_LOGIC_VECTOR(1 downto 0); -- 0-WRL, 1-WRH
+			BGT			: out	 STD_LOGIC;
+			S1S0 		: out	 STD_LOGIC_VECTOR(1 downto 0);
+			EIR			: out	 STD_LOGIC;
+			--Apartir daqui os signais são apenas para ver no testbench (apagar depois)
+			CState		:out STATE_TYPE;
+			inst		: out INST_TYPE
+		  );
+end Control;
 			 
    -- Clock process definitions
    clk_process :process
