@@ -29,44 +29,55 @@ use work.pds16_types.ALL;
 --use UNISIM.VComponents.all;
 
 entity BIU is
-    Port ( Clock : in  STD_LOGIC;
-           CL : in  STD_LOGIC;
-           Addr : in  STD_LOGIC_VECTOR(14 downto 0);--Addr 15 downto 1
-           DataOut : in  STD_LOGIC_VECTOR(15 downto 0);
-           BusCtr : in  STD_LOGIC_VECTOR(3 downto 0);-- 0-WrByte, 1-DataOut, 2-Addr, 3-Ale
-           Sync : out  STD_LOGIC_VECTOR(1 downto 0);-- 0- BRQ, 1-RDY
-           AD : inout  STD_LOGIC_VECTOR(15 downto 0);
-           ALE : out  STD_LOGIC;
-           S0_in : in  STD_LOGIC;
-           S1_in : in  STD_LOGIC;
-			  S0_out : out  STD_LOGIC;
-           S1_out : out  STD_LOGIC;
-           RD : in  STD_LOGIC;
-           WRL : in  STD_LOGIC;
-           WRH : in  STD_LOGIC;
-			  nRD : out  STD_LOGIC;
-			  nWRL : out  STD_LOGIC;
-           nWRH : out  STD_LOGIC;
-           RDY : in  STD_LOGIC;
-           BRQ : in  STD_LOGIC;
-           BGT_in : in  STD_LOGIC;
-			  BGT_out : out  STD_LOGIC;
-           RESOUT : out  STD_LOGIC;
-           DataIn : out  STD_LOGIC_VECTOR (15 downto 0));
+    Port ( Clock 		: in  STD_LOGIC;
+           CL 			: in  STD_LOGIC;
+			  RESOUT 	: out  STD_LOGIC;
+           DataOut 	: in  STD_LOGIC_VECTOR(15 downto 0);
+           BusCtr 	: in  STD_LOGIC_VECTOR(3 downto 0);-- 0-WrByte, 1-DataOut, 2-Addr, 3-Ale
+           
+			  AD 			: inout  STD_LOGIC_VECTOR(15 downto 0);
+           
+			  S0_in 		: in  STD_LOGIC;
+           S1_in 		: in  STD_LOGIC;
+			  S0_out 	: out  STD_LOGIC;
+           S1_out 	: out  STD_LOGIC;
+		
+			  RD 			: in  STD_LOGIC;
+			  nRD 		: out  STD_LOGIC;
+           WRL 		: in  STD_LOGIC;
+           nWRL 		: out  STD_LOGIC;
+			  WRH 		: in  STD_LOGIC;
+			  nWRH 		: out  STD_LOGIC;
+			  
+           RDY 		: in  STD_LOGIC; -- do lado da memoria
+           BRQ 		: in  STD_LOGIC; -- do lado da memoria
+           BGT_in 	: in  STD_LOGIC;
+			  BGT_out 	: out  STD_LOGIC;
+           DataIn 	: out  STD_LOGIC_VECTOR (15 downto 0));
+			  Sync 		: out  STD_LOGIC_VECTOR(1 downto 0);-- 0- BRQ, 1-RDY
+			  Addr 		: out  STD_LOGIC_VECTOR(14 downto 0);--Addr 15 downto 1
+			  A0			: out STD_LOGIC;
 end BIU;
 
 architecture Behavioral of BIU is
 
-	Signal ALE_flipflop_output: STD_LOGIC;
-	Signal Data_to_mem: bit_16;
-	Signal Mplex_DataOut_input: bit_8_array(1 downto 0);
-	Signal TS_DataOut_Enable: STD_LOGIC;
-	Signal TS_Addr_Enable: STD_LOGIC;
-	Signal TS_Addr_Input: bit_16;
+	Signal ALE_flipflop_output	: STD_LOGIC;
+	Signal Data_to_mem			: bit_16;
+	Signal Mplex_DataOut_input	: bit_8_array(1 downto 0);
+	Signal TS_DataOut_Enable	: STD_LOGIC;
+	Signal TS_Addr_Enable		: STD_LOGIC;
+	Signal TS_Addr_Input			: bit_16;
+	Signal ALE 						: STD_LOGIC;
 	
 begin
+	--Sinais que apenas são passados da entrada para uma saída.
+	nRD <= (not RD);
+	nWRL<= (not WRL);
+	nWRH<= (not WRH);
 	
-	-- init var & sig
+	
+----------------------------------VER o que é isto???	
+	-- init var & sig / Tristate
 	TS_Addr_Enable 	<= (BusCtr(2) and (not BGT_in));
 	TS_DataOut_Enable	<= (BusCtr(1) and (not BGT_in));
 	TS_Addr_Input		<= Addr & '0';
@@ -76,6 +87,17 @@ begin
 	S0_out <= S0_in;
 	S1_out <= S1_in;
 	BGT_out <= BGT_in;
+------------------------------------------------------
+
+	
+	-- Latch for the address storing when acessing ram
+	Latch: Latch16bits
+	Port map( D 		=> AD,
+				 Q 		=> Addr,
+				 En 		=> ALE,
+				 clkReg 	=> Clock,
+				 A0		=> A0
+				);
 	
 	-- Tri-State Buffer control
 	-- Data_to_mem input :

@@ -23,7 +23,6 @@
 
   <files xmlns="http://www.xilinx.com/XMLSchema">
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_LSO" xil_pn:name=".lso"/>
-    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="Alfa_pds16fpga_beh.prj"/>
     <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="Alfa_pds16fpga_isim_beh.exe"/>
     <file xil_pn:fileType="FILE_ISIM_MISC" xil_pn:name="Alfa_pds16fpga_isim_beh.wdb"/>
     <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="Alfa_pds16fpga_stx_beh.prj"/>
@@ -50,10 +49,19 @@
     <file xil_pn:fileType="FILE_ISIM_MISC" xil_pn:name="BnB_TB_isim_beh.wdb"/>
     <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="BnB_TB_stx_beh.prj"/>
     <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="BnB_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="Control.prj"/>
+    <file xil_pn:fileType="FILE_XST_STX" xil_pn:name="Control.stx"/>
+    <file xil_pn:fileType="FILE_XST" xil_pn:name="Control.xst"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="Control_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="Control_stx_beh.prj"/>
     <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="Decoder_16out_TB_isim_beh.exe"/>
     <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="HiZeroFill_stx_beh.prj"/>
     <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="ImmZeroFill_isim_beh.exe"/>
     <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="ImmZeroFill_stx_beh.prj"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="InstDecode.prj"/>
+    <file xil_pn:fileType="FILE_XST_STX" xil_pn:name="InstDecode.stx"/>
+    <file xil_pn:fileType="FILE_XST" xil_pn:name="InstDecode.xst"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="InstDecode_stx_beh.prj"/>
     <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="InstReg_stx_beh.prj"/>
     <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="Mplex8bit_2to1_isim_beh.exe"/>
     <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="Mplex8bit_2to1_stx_beh.prj"/>
@@ -72,9 +80,11 @@
     <file xil_pn:fileType="FILE_XST_STX" xil_pn:name="PDS16fpga.stx"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_REPORT" xil_pn:name="PDS16fpga.syr"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST" xil_pn:name="PDS16fpga.xst"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="PDS16fpga_stx_beh.prj"/>
     <file xil_pn:fileType="FILE_HTML" xil_pn:name="PDS16fpga_summary.html"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="PDS16fpga_vhdl.prj"/>
     <file xil_pn:fileType="FILE_XRPT" xil_pn:name="PDS16fpga_xst.xrpt"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="Ram_stx_beh.prj"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGDBUILD_LOG" xil_pn:name="RegisterFile8x16.bld"/>
     <file xil_pn:fileType="FILE_CMD_LOG" xil_pn:name="RegisterFile8x16.cmd_log"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_LSO" xil_pn:name="RegisterFile8x16.lso"/>
@@ -112,13 +122,21 @@
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="RegisterFile8x16_vhdl.prj"/>
     <file xil_pn:fileType="FILE_XRPT" xil_pn:name="RegisterFile8x16_xst.xrpt"/>
     <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="Shifter_Sel_TB_isim_beh.exe"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="TB_Control_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_ISIM_MISC" xil_pn:name="TB_Control_isim_beh.wdb"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="TB_Control_stx_beh.prj"/>
     <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="TB_Data_Processor_isim_beh.exe"/>
     <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="TB_HiZeroFill_isim_beh.exe"/>
     <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="TB_HiZeroFill_stx_beh.prj"/>
     <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="TB_ImmZeroFill_isim_beh.exe"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="TB_InstDecode_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_ISIM_MISC" xil_pn:name="TB_InstDecode_isim_beh.wdb"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="TB_InstDecode_stx_beh.prj"/>
     <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="TB_InstReg_isim_beh.exe"/>
     <file xil_pn:fileType="FILE_ISIM_MISC" xil_pn:name="TB_InstReg_isim_beh.wdb"/>
     <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="TB_InstReg_stx_beh.prj"/>
+    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="TB_Ram_isim_beh.exe"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="TB_Ram_stx_beh.prj"/>
     <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="_ngo"/>
     <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/bitgen.xmsgs"/>
     <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/map.xmsgs"/>
@@ -126,10 +144,7 @@
     <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/par.xmsgs"/>
     <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/trce.xmsgs"/>
     <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/xst.xmsgs"/>
-    <file xil_pn:fileType="FILE_LOG" xil_pn:name="fuse.log"/>
-    <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="isim"/>
     <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_CMD" xil_pn:name="isim.cmd"/>
-    <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_LOG" xil_pn:name="isim.log"/>
     <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="nbit_register_beh.prj"/>
     <file xil_pn:branch="BehavioralSim" xil_pn:fileType="FILE_ISIM_EXE" xil_pn:name="nbit_register_isim_beh.exe"/>
     <file xil_pn:fileType="FILE_ISIM_MISC" xil_pn:name="nbit_register_isim_beh.wdb"/>
@@ -149,12 +164,9 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1497023215" xil_pn:in_ck="-6251577153706982168" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1497023215">
+    <transform xil_pn:end_ts="1502211933" xil_pn:in_ck="5135155058218678204" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1502211933">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
-      <status xil_pn:value="OutOfDateForInputs"/>
-      <status xil_pn:value="InputAdded"/>
-      <status xil_pn:value="InputChanged"/>
       <outfile xil_pn:name="Alfa_pds16fpga.vhd"/>
       <outfile xil_pn:name="Alu.vhd"/>
       <outfile xil_pn:name="Alu_Logico_TB.vhd"/>
@@ -183,6 +195,7 @@
       <outfile xil_pn:name="FullAdderV2.vhd"/>
       <outfile xil_pn:name="HiZeroFill.vhd"/>
       <outfile xil_pn:name="ImmZeroFill.vhd"/>
+      <outfile xil_pn:name="InstDecode.vhd"/>
       <outfile xil_pn:name="InstReg.vhd"/>
       <outfile xil_pn:name="MBR.vhd"/>
       <outfile xil_pn:name="MUX1x16bits.vhd"/>
@@ -211,6 +224,7 @@
       <outfile xil_pn:name="Or_tree.vhd"/>
       <outfile xil_pn:name="PC_Adder.vhd"/>
       <outfile xil_pn:name="PDS16fpga.vhd"/>
+      <outfile xil_pn:name="Ram.vhd"/>
       <outfile xil_pn:name="Register16bits.vhd"/>
       <outfile xil_pn:name="Register16bitsCL.vhd"/>
       <outfile xil_pn:name="Register16bitsCL_TB.vhd"/>
@@ -231,11 +245,13 @@
       <outfile xil_pn:name="TB_Block_Mplex16to1.vhd"/>
       <outfile xil_pn:name="TB_Block_Mplex2to1.vhd"/>
       <outfile xil_pn:name="TB_BnB.vhd"/>
+      <outfile xil_pn:name="TB_Control.vhd"/>
       <outfile xil_pn:name="TB_Data_Processor.vhd"/>
       <outfile xil_pn:name="TB_Decoder3_8.vhd"/>
       <outfile xil_pn:name="TB_FullAdder.vhd"/>
       <outfile xil_pn:name="TB_HiZeroFill.vhd"/>
       <outfile xil_pn:name="TB_ImmZeroFill.vhd"/>
+      <outfile xil_pn:name="TB_InstDecode.vhd"/>
       <outfile xil_pn:name="TB_InstReg.vhd"/>
       <outfile xil_pn:name="TB_Mplex16bit_2to1.vhd"/>
       <outfile xil_pn:name="TB_Mplex16bit_5to1.vhd"/>
@@ -245,6 +261,7 @@
       <outfile xil_pn:name="TB_Mplex4to1.vhd"/>
       <outfile xil_pn:name="TB_Or_tree.vhd"/>
       <outfile xil_pn:name="TB_PC_Adder.vhd"/>
+      <outfile xil_pn:name="TB_Ram.vhd"/>
       <outfile xil_pn:name="TB_RegisterFile.vhd"/>
       <outfile xil_pn:name="TB_Sel_andgatesTree.vhd"/>
       <outfile xil_pn:name="TB_Shifter_Sel_mplex2to1.vhd"/>
@@ -256,11 +273,11 @@
       <outfile xil_pn:name="nbit_register_synthesis.vhd"/>
       <outfile xil_pn:name="pds16_types.vhd"/>
     </transform>
-    <transform xil_pn:end_ts="1496253122" xil_pn:name="TRAN_xawsToSimhdl" xil_pn:prop_ck="-1944737025173345355" xil_pn:start_ts="1496253122">
+    <transform xil_pn:end_ts="1501538417" xil_pn:name="TRAN_xawsToSimhdl" xil_pn:prop_ck="-9116268257326686644" xil_pn:start_ts="1501538417">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1496253122" xil_pn:name="TRAN_schematicsToHdlSim" xil_pn:prop_ck="1299945531482596599" xil_pn:start_ts="1496253122">
+    <transform xil_pn:end_ts="1501538417" xil_pn:name="TRAN_schematicsToHdlSim" xil_pn:prop_ck="6611601823866070862" xil_pn:start_ts="1501538417">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
@@ -268,10 +285,9 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1497023225" xil_pn:in_ck="-6251577153706982168" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1497023224">
+    <transform xil_pn:end_ts="1502211933" xil_pn:in_ck="5135155058218678204" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1502211933">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
-      <status xil_pn:value="OutOfDateForPredecessor"/>
       <outfile xil_pn:name="Alfa_pds16fpga.vhd"/>
       <outfile xil_pn:name="Alu.vhd"/>
       <outfile xil_pn:name="Alu_Logico_TB.vhd"/>
@@ -300,6 +316,7 @@
       <outfile xil_pn:name="FullAdderV2.vhd"/>
       <outfile xil_pn:name="HiZeroFill.vhd"/>
       <outfile xil_pn:name="ImmZeroFill.vhd"/>
+      <outfile xil_pn:name="InstDecode.vhd"/>
       <outfile xil_pn:name="InstReg.vhd"/>
       <outfile xil_pn:name="MBR.vhd"/>
       <outfile xil_pn:name="MUX1x16bits.vhd"/>
@@ -328,6 +345,7 @@
       <outfile xil_pn:name="Or_tree.vhd"/>
       <outfile xil_pn:name="PC_Adder.vhd"/>
       <outfile xil_pn:name="PDS16fpga.vhd"/>
+      <outfile xil_pn:name="Ram.vhd"/>
       <outfile xil_pn:name="Register16bits.vhd"/>
       <outfile xil_pn:name="Register16bitsCL.vhd"/>
       <outfile xil_pn:name="Register16bitsCL_TB.vhd"/>
@@ -348,11 +366,13 @@
       <outfile xil_pn:name="TB_Block_Mplex16to1.vhd"/>
       <outfile xil_pn:name="TB_Block_Mplex2to1.vhd"/>
       <outfile xil_pn:name="TB_BnB.vhd"/>
+      <outfile xil_pn:name="TB_Control.vhd"/>
       <outfile xil_pn:name="TB_Data_Processor.vhd"/>
       <outfile xil_pn:name="TB_Decoder3_8.vhd"/>
       <outfile xil_pn:name="TB_FullAdder.vhd"/>
       <outfile xil_pn:name="TB_HiZeroFill.vhd"/>
       <outfile xil_pn:name="TB_ImmZeroFill.vhd"/>
+      <outfile xil_pn:name="TB_InstDecode.vhd"/>
       <outfile xil_pn:name="TB_InstReg.vhd"/>
       <outfile xil_pn:name="TB_Mplex16bit_2to1.vhd"/>
       <outfile xil_pn:name="TB_Mplex16bit_5to1.vhd"/>
@@ -362,6 +382,7 @@
       <outfile xil_pn:name="TB_Mplex4to1.vhd"/>
       <outfile xil_pn:name="TB_Or_tree.vhd"/>
       <outfile xil_pn:name="TB_PC_Adder.vhd"/>
+      <outfile xil_pn:name="TB_Ram.vhd"/>
       <outfile xil_pn:name="TB_RegisterFile.vhd"/>
       <outfile xil_pn:name="TB_Sel_andgatesTree.vhd"/>
       <outfile xil_pn:name="TB_Shifter_Sel_mplex2to1.vhd"/>
@@ -373,29 +394,18 @@
       <outfile xil_pn:name="nbit_register_synthesis.vhd"/>
       <outfile xil_pn:name="pds16_types.vhd"/>
     </transform>
-    <transform xil_pn:end_ts="1497023233" xil_pn:in_ck="-6251577153706982168" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="5618119899225288108" xil_pn:start_ts="1497023225">
-      <status xil_pn:value="SuccessfullyRun"/>
+    <transform xil_pn:end_ts="1502211937" xil_pn:in_ck="5135155058218678204" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="-8249964453114836486" xil_pn:start_ts="1502211933">
+      <status xil_pn:value="FailedRun"/>
       <status xil_pn:value="ReadyToRun"/>
-      <status xil_pn:value="OutOfDateForProperties"/>
-      <status xil_pn:value="OutOfDateForPredecessor"/>
-      <status xil_pn:value="OutOfDateForOutputs"/>
-      <status xil_pn:value="OutputChanged"/>
-      <outfile xil_pn:name="Alfa_pds16fpga_beh.prj"/>
-      <outfile xil_pn:name="Alfa_pds16fpga_isim_beh.exe"/>
-      <outfile xil_pn:name="fuse.log"/>
-      <outfile xil_pn:name="isim"/>
-      <outfile xil_pn:name="isim.log"/>
-      <outfile xil_pn:name="xilinxsim.ini"/>
     </transform>
-    <transform xil_pn:end_ts="1497030045" xil_pn:in_ck="-6385822170305164339" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="1155659918581261785" xil_pn:start_ts="1497030044">
-      <status xil_pn:value="SuccessfullyRun"/>
+    <transform xil_pn:end_ts="1501696215" xil_pn:in_ck="-416995107597683892" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="9164473590818946631" xil_pn:start_ts="1501696215">
+      <status xil_pn:value="AbortedRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForProperties"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
-      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="OutOfDateForced"/>
       <status xil_pn:value="InputRemoved"/>
-      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1492093629" xil_pn:name="TRAN_copyInitialToXSTAbstractSynthesis" xil_pn:start_ts="1492093629">
       <status xil_pn:value="SuccessfullyRun"/>

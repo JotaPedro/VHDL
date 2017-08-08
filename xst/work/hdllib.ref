@@ -8,7 +8,8 @@ AR block_mplex16to1 behavioral "F:/Projecto/github repo/VHDL/Block_Mplex16to1.vh
 AR alu_aritmetico behavioral "F:/Projecto/github repo/VHDL/Alu_aritmetico.vhd" sub00/vhpl39 1493149501
 EN mplex4to1 NULL "F:/Projecto/github repo/VHDL/Mplex4to1.vhd" sub00/vhpl40 1493149502
 EN nbit_register NULL "F:/Projecto/github repo/VHDL/nbit_register.vhd" sub00/vhpl08 1492103066
-PB pds16_types pds16_types "F:/Projecto/github repo/VHDL/pds16_types.vhd" sub00/vhpl01 1494171347
+PB pds16_types pds16_types "F:/Projecto/github repo/VHDL/pds16_types.vhd" sub00/vhpl01 1501106249
+EN instdecode NULL "F:/Projecto/github repo/VHDL/InstDecode.vhd" sub00/vhpl48 1501106250
 AR decoder3_8 behavioral "F:/Projecto/github repo/VHDL/Decoder3_8.vhd" sub00/vhpl07 1493149509
 AR mplex16bit_8to1 behavioral "F:/Projecto/github repo/VHDL/Mplex16bit_8to1.vhd" sub00/vhpl11 1492103069
 EN mplex16bit_8to1 NULL "F:/Projecto/github repo/VHDL/Mplex16bit_8to1.vhd" sub00/vhpl10 1492103068
@@ -31,12 +32,15 @@ EN block_mplex16to1 NULL "F:/Projecto/github repo/VHDL/Block_Mplex16to1.vhd" sub
 AR mplex4to1 behavioral "F:/Projecto/github repo/VHDL/Mplex4to1.vhd" sub00/vhpl41 1493149503
 EN alu_aritmetico NULL "F:/Projecto/github repo/VHDL/Alu_aritmetico.vhd" sub00/vhpl38 1493149500
 AR block_mplex2to1 behavioral "F:/Projecto/github repo/VHDL/Block_Mplex2to1.vhd" sub00/vhpl31 1494184850
-PH pds16_types NULL "F:/Projecto/github repo/VHDL/pds16_types.vhd" sub00/vhpl00 1494171346
+PH pds16_types NULL "F:/Projecto/github repo/VHDL/pds16_types.vhd" sub00/vhpl00 1501106248
 AR registerfile8x16 behavioral "F:/Projecto/github repo/VHDL/RegisterFile8x16.vhd" sub00/vhpl17 1492103075
+EN control NULL "F:/Projecto/github repo/VHDL/Control.vhd" sub00/vhpl50 1501106252
 EN mplex3bit_2to1 NULL "F:/Projecto/github repo/VHDL/Mplex3bit_2to1.vhd" sub00/vhpl12 1492103070
 EN mux_2in NULL "F:/Projecto/github repo/VHDL/Mux_2in.vhd" sub00/vhpl44 1494184837
 EN mplex2to1 NULL "F:/Projecto/github repo/VHDL/Mplex2to1.vhd" sub00/vhpl18 1493149478
+AR control behavioral "F:/Projecto/github repo/VHDL/Control.vhd" sub00/vhpl51 1501106253
 AR mplex16to1 behavioral "F:/Projecto/github repo/VHDL/Mplex16to1.vhd" sub00/vhpl23 1493149483
+AR instdecode behavioral "F:/Projecto/github repo/VHDL/InstDecode.vhd" sub00/vhpl49 1501106251
 EN alu_logico NULL "F:/Projecto/github repo/VHDL/Alu_logico.vhd" sub00/vhpl34 1493149496
 AR mplex3bit_2to1 behavioral "F:/Projecto/github repo/VHDL/Mplex3bit_2to1.vhd" sub00/vhpl13 1492103071
 EN registerfile8x16 NULL "F:/Projecto/github repo/VHDL/RegisterFile8x16.vhd" sub00/vhpl16 1492103074
