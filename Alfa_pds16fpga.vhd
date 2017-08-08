@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 --------------------------------------------------------------------------------
 -- Company: 
 -- Engineer:
@@ -153,6 +154,84 @@ ARCHITECTURE behavior OF Alfa_pds16fpga IS
 	end COMPONENT;
 	
 >>>>>>> 7d8b9c264f5cc7938c9a5734879ecf27c7cf802d
+=======
+--------------------------------------------------------------------------------
+-- Company: 
+-- Engineer:
+--
+-- Create Date:   23:42:10 05/29/2017
+-- Design Name:   
+-- Module Name:   F:/Projecto/github repo/VHDL/Alfa_pds16fpga.vhd
+-- Project Name:  work
+-- Target Device:  
+-- Tool versions:  
+-- Description:   
+-- 
+-- VHDL Test Bench Created by ISE for module: TB_Data_Processor
+-- 
+-- Dependencies:
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+--
+-- Notes: 
+-- This testbench has been automatically generated using types std_logic and
+-- std_logic_vector for the ports of the unit under test.  Xilinx recommends
+-- that these types always be used for the top-level I/O of a design in order
+-- to guarantee that the testbench will bind correctly to the post-implementation 
+-- simulation model.
+--------------------------------------------------------------------------------
+---12321654987654321
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+use ieee.numeric_std.ALL;
+use work.pds16_types.ALL;
+ 
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--USE ieee.numeric_std.ALL;
+ 
+ENTITY Alfa_pds16fpga IS
+END Alfa_pds16fpga;
+ 
+ARCHITECTURE behavior OF Alfa_pds16fpga IS 
+ 
+    -- Component Declaration for the Unit Under Test (UUT)
+ 
+    COMPONENT Data_Processor
+    PORT(
+         Const : IN  std_logic_vector(7 downto 0);
+         OpB : IN  std_logic_vector(15 downto 0);
+         OpA : IN  std_logic_vector(15 downto 0);
+         CYin : IN  std_logic;
+         Ctr : IN  std_logic_vector(2 downto 0);
+         Func : IN  std_logic_vector(5 downto 0);
+         Result : OUT  std_logic_vector(15 downto 0);
+         FlagsOut : OUT  std_logic_vector(3 downto 0)
+        );
+    END COMPONENT;
+	 
+	 COMPONENT RegisterFile8x16
+    Port ( clock : in  STD_LOGIC;
+           CL : in  STD_LOGIC;
+           RFC : in  STD_LOGIC_VECTOR (4 downto 0);				
+           AddrA : in  STD_LOGIC_VECTOR (2 downto 0);				--RFC(0)-Enable Decoder
+           AddrB : in  STD_LOGIC_VECTOR (2 downto 0);				--RFC(1)-OR Reg R5 / SelMuxR5
+           AddrSD : in  STD_LOGIC_VECTOR (2 downto 0);			--RFC(2)-OR Reg R6
+           DestData : in  STD_LOGIC_VECTOR (15 downto 0);		--RFC(3)-OR Reg R7
+           flagsIN : in  STD_LOGIC_VECTOR (3 downto 0);			--RFC(4)-MUX do MUXaddrA
+           OpA : out  STD_LOGIC_VECTOR (15 downto 0);
+           OpB : out  STD_LOGIC_VECTOR (15 downto 0);
+           SC : out  STD_LOGIC_VECTOR (15 downto 0);
+           flagsOUT : out  STD_LOGIC_VECTOR (4 downto 0);
+           PCout : out  STD_LOGIC_VECTOR (15 downto 0)
+		    );
+	end COMPONENT;
+	
+>>>>>>> origin/PDS16fpga
 	COMPONENT Mplex16bit_4to1
     Port ( Input : in  bit_16_array(3 downto 0);
            Sel : in  STD_LOGIC_VECTOR(1 downto 0);
