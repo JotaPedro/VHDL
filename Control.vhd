@@ -221,18 +221,12 @@ begin
 							'0';
 -- 2-Addr							
 		BusCtr(2)	<= '1' when (CurrentState = SFetch_Addr) else -- Quando estamos no estado T1 Fetch Address
-							--'1' when (instruction = LDI) and (CurrentState = SFetch_Addr) else
-							--'1' when (instruction = LDIH) and (CurrentState = SFetch_Addr) else
-							--'1' when (instruction = ADD) and (CurrentState = SFetch_Addr) else
 							'0';
 -- 3-ALE							
-		BusCtr(3)	<= '1' when (CurrentState = SFetch_Addr) else -- Quando estamos no estado T1 Fetch Address
---							'1' when (instruction = LDI) and (CurrentState = SFetch_Addr) else
---							'1' when (instruction = LDIH) and (CurrentState = SFetch_Addr) else
---							'1' when (instruction = ADD) and (CurrentState = SFetch_Addr) else
+		BusCtr(3)	<= '1' when (CurrentState = SFetch_Addr) or (CurrentState = SExec_Addr) else -- Quando estamos no estado T1 Fetch Address ou no T5 Execute Address
 							'0';
 --Decoder							
-		RFC(0)		<= '1' when ((instruction = LDI) or (instruction = LDIH) or (instruction = ADD)) and (CurrentState = SFetch_Decod)	else
+		RFC(0)		<= '1' when ((instruction = LDI) or (instruction = LDIH)) and (CurrentState = SExecution)	else
 							'0';
 --mplexr5 -Link						
 		RFC(1)		<= '0' when (instruction = LDI) or (instruction = LDIH) or (instruction = ADD) else
@@ -244,7 +238,6 @@ begin
 							'0';
 --mplexr7 -PC							
 		RFC(3)		<= '1' when (CurrentState = SFetch_Inst) else -- Quando estamos no estado T2 Fetch Instruction, para incrementar o PC
-							--'1' when ((instruction = LDI) or (instruction = LDIH) or (instruction = ADD)) and (CurrentState = SFetch_Inst)	else
 							'0';
 --mplexAddrA	
 		RFC(4)		<= '0' when (instruction = LDI) or (instruction = LDIH) or (instruction = ADD)	else
@@ -259,28 +252,26 @@ begin
 							
 		ALUC(2)		<= '0' when ((instruction = ADD)) and (CurrentState = SFetch_Decod)	else
 							'1';
-							
+-- LDI, LDIH, LD_Direct, LD_IndConst, LD_Indexed, ST_Direct, ST_IndConst, ST_Indexed, ADD, ADDC, ADD_const, ADDC_const, SUB, 
+-- SBB, SUB_const, SBB_const, ANL, ORL, XRL, NT, SHL,SHR,RRL,RRM,RCR,RCL,JZ,JNZ,JC,JNC,JMP,JMPL,IRET,NOP		
+					
 		SelAddr		<= "00" when (CurrentState = SFetch_Addr) else -- Quando estamos no estado T1 Fetch Address
-						--	"00" when ((instruction = LDI) or (instruction = LDIH) or (instruction = ADD)) and (CurrentState = SFetch_Addr)	else
+							"01" when (instruction = (NOP))	else
+							"10" when ((instruction = NOP)) and (CurrentState = SFetch_Decod)	else
+							"11" when (instruction = (NOP))	else
+							"00";
+							
+		SelData		<= "00" when ((instruction = LDI) or (instruction = LDIH)) and (CurrentState = SFetch_Decod) else
 							"01" when (instruction = (NOP))	else
 							"10" when (instruction = (NOP))	else
 							"11" when (instruction = (NOP))	else
 							"00";
-							
-		SelData(0)	<= '0' when ((instruction = LDI) or (instruction = LDIH)) and (CurrentState = SFetch_Decod)	else
-							'1' when ((instruction = ADD)) and (CurrentState = SFetch_Decod)	else
-							'0';
-							
-		SelData(1)	<= '0' when ((instruction = LDI) or (instruction = LDIH)) and (CurrentState = SFetch_Decod)	else
-							'1' when ((instruction = ADD)) and (CurrentState = SFetch_Decod)	else
-							'0';
 							
 		Sellmm		<= '1' when ((instruction = LDIH) ) and (CurrentState = SFetch_Decod)	else
 							'0' when ((instruction = LDI) ) and (CurrentState = SFetch_Decod)	else
 							'0';
 							
 		RD 			<= '1' when (CurrentState = SFetch_Inst) else -- Quando estamos no estado T2 Fetch Instruction
-							--'1' when ((instruction = LDI) or (instruction = LDIH) or (instruction = ADD)) and (CurrentState = SFetch_Inst)	else
 							'0';
 --LOW														
 		WR(0)			<= '0' when (instruction = LDI) or (instruction = LDIH) or (instruction = ADD)	else -- Word
@@ -306,7 +297,6 @@ begin
 							"00";
 							
 		EIR			<= '1' when (CurrentState = SFetch_Inst) else -- Quando estamos no estado T2 Fetch Instruction
-							--'1' when ((instruction = LDI) or (instruction = LDIH) or (instruction = ADD)) and (CurrentState = SFetch_Inst)	else
 							'0';
 
 end Behavioral;

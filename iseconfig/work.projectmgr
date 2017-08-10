@@ -17,7 +17,6 @@
          <ClosedNode>/Mux_16in_TB - behavior F:|Projecto|github repo|VHDL|Mux_16in_TB.vhd</ClosedNode>
          <ClosedNode>/Mux_4in_TB - behavior F:|Projecto|github repo|VHDL|Mux_4in_TB.vhd</ClosedNode>
          <ClosedNode>/PC_Adder - Behavioral F:|Projecto|github repo|VHDL|PC_Adder.vhd</ClosedNode>
-         <ClosedNode>/PDS16fpga - Behavioral F:|Projecto|github repo|VHDL|PDS16fpga.vhd/BIU - BIU - Behavioral</ClosedNode>
          <ClosedNode>/PDS16fpga - Behavioral F:|Projecto|github repo|VHDL|PDS16fpga.vhd/Data_Processor - Data_Processor - Behavioral</ClosedNode>
          <ClosedNode>/PDS16fpga - Behavioral F:|Projecto|github repo|VHDL|PDS16fpga.vhd/Data_Processor - Data_Processor - Behavioral/Alu1 - Alu - Behavioral</ClosedNode>
          <ClosedNode>/PDS16fpga - Behavioral F:|Projecto|github repo|VHDL|PDS16fpga.vhd/InstReg - InstReg - Behavioral</ClosedNode>
@@ -59,13 +58,13 @@
          <ClosedNode>/TB_tester - behavior F:|Projecto|github repo|VHDL|TB_tester.vhd</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>PDS16fpga - Behavioral (F:/Projecto/github repo/VHDL/PDS16fpga.vhd)</SelectedItem>
+         <SelectedItem>TB_Alu_aritmetico - behavior (F:/Projecto/github repo/VHDL/TB_Alu_aritmetico.vhd)</SelectedItem>
       </SelectedItems>
-      <ScrollbarPosition orientation="vertical" >13</ScrollbarPosition>
+      <ScrollbarPosition orientation="vertical" >21</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000001c0000000020000000000000000000000000200000064ffffffff000000810000000300000002000001c00000000100000003000000000000000100000003</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000001cc000000020000000000000000000000000200000064ffffffff000000810000000300000002000001cc0000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
-      <CurrentItem>PDS16fpga - Behavioral (F:/Projecto/github repo/VHDL/PDS16fpga.vhd)</CurrentItem>
+      <CurrentItem>TB_Alu_aritmetico - behavior (F:/Projecto/github repo/VHDL/TB_Alu_aritmetico.vhd)</CurrentItem>
    </ItemView>
    <ItemView engineview="SynthesisOnly" sourcetype="" guiview="Process" >
       <ClosedNodes>
@@ -77,7 +76,7 @@
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000000000000000000073000000010000000100000000000000000000000064ffffffff000000810000000000000001000000730000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000010000000000000000000000000000000000000000000000018d000000010000000100000000000000000000000064ffffffff0000008100000000000000010000018d0000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem/>
    </ItemView>
@@ -103,7 +102,7 @@
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >21</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000000000000010000000000000000000000000000000000000064000000010001000100000000000000000000000064ffffffff000000810000000000000001000000640000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000000000000001000000000000000000000000000000000000017c000000010001000100000000000000000000000064ffffffff0000008100000000000000010000017c0000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem>pds16_types.vhd</CurrentItem>
    </ItemView>
@@ -122,7 +121,7 @@
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000000000000000000064000000010000000100000000000000000000000064ffffffff000000810000000000000001000000640000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000010000000000000000000000000000000000000000000000018d000000010000000100000000000000000000000064ffffffff0000008100000000000000010000018d0000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem></CurrentItem>
    </ItemView>
@@ -130,6 +129,7 @@
       <ClosedNodes>
          <ClosedNodesVersion>2</ClosedNodesVersion>
          <ClosedNode>/Alfa_pds16fpga - behavior F:|Projecto|github repo|VHDL|Alfa_pds16fpga.vhd</ClosedNode>
+         <ClosedNode>/Alfa_pds16fpga - behavior F:|Projecto|github repo|VHDL|Alfa_pds16fpga.vhd/Controler - Control - Behavioral</ClosedNode>
          <ClosedNode>/Alfa_pds16fpga - behavior F:|Projecto|github repo|VHDL|Alfa_pds16fpga.vhd/Data_processor - Data_Processor - Behavioral</ClosedNode>
          <ClosedNode>/Alfa_pds16fpga - behavior F:|Projecto|github repo|VHDL|Alfa_pds16fpga.vhd/Dataprocessor - Data_Processor - Behavioral</ClosedNode>
          <ClosedNode>/Alfa_pds16fpga - behavior F:|Projecto|github repo|VHDL|Alfa_pds16fpga.vhd/Dataprocessor - Data_Processor - Behavioral/Alu1 - Alu - Behavioral/Shifter - Barrel_shift - Behavioral</ClosedNode>
@@ -160,6 +160,7 @@
          <ClosedNode>/PDS16fpga - Behavioral F:|Projecto|github repo|VHDL|PDS16fpga.vhd/RegisterFile - RegisterFile8x16 - Structural</ClosedNode>
          <ClosedNode>/Register16bitsCL_TB - behavior F:|Projecto|github repo|VHDL|Register16bitsCL_TB.vhd</ClosedNode>
          <ClosedNode>/Register16bits_TB - behavior F:|Projecto|github repo|VHDL|Register16bits_TB.vhd</ClosedNode>
+         <ClosedNode>/RegisterFile8x16_TB - behavior F:|Projecto|github repo|VHDL|RegisterFile8x16_TB.vhd</ClosedNode>
          <ClosedNode>/RegisterFile8x16_TB - behavior F:|Projecto|github repo|VHDL|RegisterFile8x16_TB.vhd/uut - RegisterFile8x16 - Structural/Somador - Alu_aritmetico - structural</ClosedNode>
          <ClosedNode>/Shifter_Sel_TB - behavior F:|Projecto|github repo|VHDL|Shifter_Sel_TB.vhd</ClosedNode>
          <ClosedNode>/TB_Alu - behavior F:|Projecto|github repo|VHDL|TB_Alu.vhd</ClosedNode>
@@ -202,7 +203,7 @@
       <SelectedItems>
          <SelectedItem>id - InstDecode - Behavioral (F:/Projecto/github repo/VHDL/InstDecode.vhd)</SelectedItem>
       </SelectedItems>
-      <ScrollbarPosition orientation="vertical" >21</ScrollbarPosition>
+      <ScrollbarPosition orientation="vertical" >22</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000001c0000000020000000000000000000000000200000064ffffffff000000810000000300000002000001c00000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
@@ -218,7 +219,7 @@
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000000000000000000073000000010000000100000000000000000000000064ffffffff000000810000000000000001000000730000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000010000000000000000000000000000000000000000000000018d000000010000000100000000000000000000000064ffffffff0000008100000000000000010000018d0000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem/>
    </ItemView>
@@ -231,7 +232,7 @@
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000010000000000000000000000000000000000000000000000018d000000010000000100000000000000000000000064ffffffff0000008100000000000000010000018d0000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000000000000000000073000000010000000100000000000000000000000064ffffffff000000810000000000000001000000730000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem></CurrentItem>
    </ItemView>

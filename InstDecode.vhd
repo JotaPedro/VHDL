@@ -10,31 +10,9 @@ use work.pds16_types.ALL;
 --use UNISIM.VComponents.all;
 
 entity InstDecode is
-<<<<<<< HEAD
     Port (  OpCode 	: in  STD_LOGIC_VECTOR(6 downto 0);-- bits de 15 a 9
 				Inst		: out INST_TYPE; --Que instrução é a descodificada.
-				--RegUpdate: out STD_LOGIC; --Se é para atualizar o registo destino. true/false
 				FlagUpdate: out STD_LOGIC --Se é para atualizar o registo de flags. true/false
-=======
-    Port (  OpCode 	: in  STD_LOGIC_VECTOR(6 downto 0);-- bits de 15 a 9
-				Inst		: out INST_TYPE; --Que instrução é a descodificada.
-				--RegUpdate: out STD_LOGIC; --Se é para atualizar o registo destino. true/false
-				FlagUpdate: out STD_LOGIC --Se é para atualizar o registo de flags. true/false
->>>>>>> 7d8b9c264f5cc7938c9a5734879ecf27c7cf802d
-				
---           BusCtr 	: out  STD_LOGIC_VECTOR(3 downto 0); -- 0-WrByte, 1-DataOut, 2-Addr, 3-ALE
---           RFC 		: out  STD_LOGIC_VECTOR(4 downto 0);
---           ALUC 		: out  STD_LOGIC_VECTOR(2 downto 0);
---           SelAddr 	: out  STD_LOGIC_VECTOR(1 downto 0);
---           SelData	: out  STD_LOGIC_VECTOR(1 downto 0);
---           Sellmm 	: out  STD_LOGIC;
---			  RD 			: out	 STD_LOGIC; -- ACTIVE LOW
-<<<<<<< HEAD
---			  WR			: out  STD_LOGIC_VECTOR(1 downto 0); -- 0-WRL, 1-WRH
-=======
---			  WR			: out  STD_LOGIC_VECTOR(1 downto 0); -- 0-WRL, 1-WRH
->>>>>>> 7d8b9c264f5cc7938c9a5734879ecf27c7cf802d
---			  LDST		: out	 STD_LOGIC 
 	);
 end InstDecode;
 
@@ -44,7 +22,6 @@ architecture Behavioral of InstDecode is
 	signal instruction : INST_TYPE;
 	
 begin
-<<<<<<< HEAD
 	
 	FlagUpdate <= OpCode(1); -- Apenas faz sentido quando a instrução é logica/aritmética com 3 registos e aritmética com constante, mas não lógica com constante.
 	Inst <= instruction;
@@ -98,7 +75,6 @@ begin
 			
 			when others => instruction	<=	NOP;
 		end case;
-=======
 	
 	FlagUpdate <= OpCode(1); -- Apenas faz sentido quando a instrução é logica/aritmética com 3 registos e aritmética com constante, mas não lógica com constante.
 	Inst <= instruction;
@@ -152,7 +128,6 @@ begin
 			
 			when others => instruction	<=	NOP;
 		end case;
->>>>>>> 7d8b9c264f5cc7938c9a5734879ecf27c7cf802d
 	end process;
 
 end Behavioral;

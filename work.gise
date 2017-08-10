@@ -167,6 +167,10 @@
     <transform xil_pn:end_ts="1502211933" xil_pn:in_ck="5135155058218678204" xil_pn:name="TRAN_copyAbstractToPostAbstractSimulation" xil_pn:start_ts="1502211933">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="Alfa_pds16fpga.vhd"/>
       <outfile xil_pn:name="Alu.vhd"/>
       <outfile xil_pn:name="Alu_Logico_TB.vhd"/>
@@ -288,6 +292,11 @@
     <transform xil_pn:end_ts="1502211933" xil_pn:in_ck="5135155058218678204" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1502211933">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="Alfa_pds16fpga.vhd"/>
       <outfile xil_pn:name="Alu.vhd"/>
       <outfile xil_pn:name="Alu_Logico_TB.vhd"/>
@@ -397,6 +406,10 @@
     <transform xil_pn:end_ts="1502211937" xil_pn:in_ck="5135155058218678204" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="-8249964453114836486" xil_pn:start_ts="1502211933">
       <status xil_pn:value="FailedRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForProperties"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
+      <status xil_pn:value="InputChanged"/>
     </transform>
     <transform xil_pn:end_ts="1501696215" xil_pn:in_ck="-416995107597683892" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="9164473590818946631" xil_pn:start_ts="1501696215">
       <status xil_pn:value="AbortedRun"/>
