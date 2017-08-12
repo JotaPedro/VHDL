@@ -33,7 +33,7 @@ entity Multiplexer8-1 is
            Output_port : out  STD_LOGIC);
 end Multiplexer8-1;
 
-architecture Behavioral of Mplex16bit-8to1 is
+architecture Behavioral of Multiplexer8-1 is
 begin
 	process(Input_port,Ctl_sig_port)
 		begin

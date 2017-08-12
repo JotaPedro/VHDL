@@ -169,113 +169,11 @@
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputAdded"/>
       <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="InputRemoved"/>
       <status xil_pn:value="OutputChanged"/>
-      <outfile xil_pn:name="Alfa_pds16fpga.vhd"/>
-      <outfile xil_pn:name="Alu.vhd"/>
-      <outfile xil_pn:name="Alu_Logico_TB.vhd"/>
-      <outfile xil_pn:name="Alu_aritmetico.vhd"/>
-      <outfile xil_pn:name="Alu_logico.vhd"/>
-      <outfile xil_pn:name="BIU.vhd"/>
-      <outfile xil_pn:name="Barrel_Shift_TB.vhd"/>
-      <outfile xil_pn:name="Barrel_shift.vhd"/>
-      <outfile xil_pn:name="Block_Mplex16to1.vhd"/>
-      <outfile xil_pn:name="Block_Mplex16to1_TB.vhd"/>
-      <outfile xil_pn:name="Block_Mplex2to1.vhd"/>
-      <outfile xil_pn:name="BnB.vhd"/>
-      <outfile xil_pn:name="BnB_TB.vhd"/>
-      <outfile xil_pn:name="Control.vhd"/>
-      <outfile xil_pn:name="DFlipFlop.vhd"/>
-      <outfile xil_pn:name="Data_Processor.vhd"/>
-      <outfile xil_pn:name="Decoder2to4.vhd"/>
-      <outfile xil_pn:name="Decoder3_8.vhd"/>
-      <outfile xil_pn:name="Decoder3bits.vhd"/>
-      <outfile xil_pn:name="Decoder3bits_TB.vhd"/>
-      <outfile xil_pn:name="Decoder4to16.vhd"/>
-      <outfile xil_pn:name="Decoder_16out.vhd"/>
-      <outfile xil_pn:name="Decoder_16out_TB.vhd"/>
-      <outfile xil_pn:name="DirZeroFill.vhd"/>
-      <outfile xil_pn:name="FullAdder.vhd"/>
-      <outfile xil_pn:name="FullAdderV2.vhd"/>
-      <outfile xil_pn:name="HiZeroFill.vhd"/>
-      <outfile xil_pn:name="ImmZeroFill.vhd"/>
-      <outfile xil_pn:name="InstDecode.vhd"/>
-      <outfile xil_pn:name="InstReg.vhd"/>
-      <outfile xil_pn:name="MBR.vhd"/>
-      <outfile xil_pn:name="MUX1x16bits.vhd"/>
-      <outfile xil_pn:name="MUX1x16bits_TB.vhd"/>
-      <outfile xil_pn:name="MUX1x3_TB.vhd"/>
-      <outfile xil_pn:name="MUX1x3bits.vhd"/>
-      <outfile xil_pn:name="MUX3x16bits.vhd"/>
-      <outfile xil_pn:name="MUX3x16bits_TB.vhd"/>
-      <outfile xil_pn:name="Mplex16bit_2to1.vhd"/>
-      <outfile xil_pn:name="Mplex16bit_4to1.vhd"/>
-      <outfile xil_pn:name="Mplex16bit_5to1.vhd"/>
-      <outfile xil_pn:name="Mplex16bit_8to1.vhd"/>
-      <outfile xil_pn:name="Mplex16to1.vhd"/>
-      <outfile xil_pn:name="Mplex2to1.vhd"/>
-      <outfile xil_pn:name="Mplex3bit_2to1.vhd"/>
-      <outfile xil_pn:name="Mplex4to1.vhd"/>
-      <outfile xil_pn:name="Mplex8bit_2to1.vhd"/>
-      <outfile xil_pn:name="Multiplexer8-1.vhd"/>
-      <outfile xil_pn:name="Mux_16In.vhd"/>
-      <outfile xil_pn:name="Mux_16in_TB.vhd"/>
-      <outfile xil_pn:name="Mux_2in.vhd"/>
-      <outfile xil_pn:name="Mux_2in_TB.vhd"/>
-      <outfile xil_pn:name="Mux_3in.vhd"/>
-      <outfile xil_pn:name="Mux_4in.vhd"/>
-      <outfile xil_pn:name="Mux_4in_TB.vhd"/>
-      <outfile xil_pn:name="Or_tree.vhd"/>
-      <outfile xil_pn:name="PC_Adder.vhd"/>
-      <outfile xil_pn:name="PDS16fpga.vhd"/>
-      <outfile xil_pn:name="Ram.vhd"/>
-      <outfile xil_pn:name="Register16bits.vhd"/>
-      <outfile xil_pn:name="Register16bitsCL.vhd"/>
-      <outfile xil_pn:name="Register16bitsCL_TB.vhd"/>
-      <outfile xil_pn:name="Register16bits_TB.vhd"/>
-      <outfile xil_pn:name="RegisterFile8x16.vhd"/>
-      <outfile xil_pn:name="RegisterFile8x16_TB.vhd"/>
-      <outfile xil_pn:name="Sel_andgatesTree.vhd"/>
-      <outfile xil_pn:name="Shifter_Sel_TB.vhd"/>
-      <outfile xil_pn:name="Shifter_Sel_mplex2to1.vhd"/>
-      <outfile xil_pn:name="SigExt.vhd"/>
-      <outfile xil_pn:name="TB_ Decoder4to16.vhd"/>
-      <outfile xil_pn:name="TB_ Mplex2to1.vhd"/>
-      <outfile xil_pn:name="TB_Alu.vhd"/>
-      <outfile xil_pn:name="TB_Alu_aritmetico.vhd"/>
-      <outfile xil_pn:name="TB_Alu_logico.vhd"/>
-      <outfile xil_pn:name="TB_BIU.vhd"/>
-      <outfile xil_pn:name="TB_Barrel_shift.vhd"/>
-      <outfile xil_pn:name="TB_Block_Mplex16to1.vhd"/>
-      <outfile xil_pn:name="TB_Block_Mplex2to1.vhd"/>
-      <outfile xil_pn:name="TB_BnB.vhd"/>
-      <outfile xil_pn:name="TB_Control.vhd"/>
-      <outfile xil_pn:name="TB_Data_Processor.vhd"/>
-      <outfile xil_pn:name="TB_Decoder3_8.vhd"/>
-      <outfile xil_pn:name="TB_FullAdder.vhd"/>
-      <outfile xil_pn:name="TB_HiZeroFill.vhd"/>
-      <outfile xil_pn:name="TB_ImmZeroFill.vhd"/>
-      <outfile xil_pn:name="TB_InstDecode.vhd"/>
-      <outfile xil_pn:name="TB_InstReg.vhd"/>
-      <outfile xil_pn:name="TB_Mplex16bit_2to1.vhd"/>
-      <outfile xil_pn:name="TB_Mplex16bit_5to1.vhd"/>
-      <outfile xil_pn:name="TB_Mplex16bit_8to1.vhd"/>
-      <outfile xil_pn:name="TB_Mplex16to1.vhd"/>
-      <outfile xil_pn:name="TB_Mplex3bit_2to1.vhd"/>
-      <outfile xil_pn:name="TB_Mplex4to1.vhd"/>
-      <outfile xil_pn:name="TB_Or_tree.vhd"/>
-      <outfile xil_pn:name="TB_PC_Adder.vhd"/>
-      <outfile xil_pn:name="TB_Ram.vhd"/>
-      <outfile xil_pn:name="TB_RegisterFile.vhd"/>
-      <outfile xil_pn:name="TB_Sel_andgatesTree.vhd"/>
-      <outfile xil_pn:name="TB_Shifter_Sel_mplex2to1.vhd"/>
-      <outfile xil_pn:name="TB_SigExt.vhd"/>
-      <outfile xil_pn:name="TB_Zero_Fill.vhd"/>
-      <outfile xil_pn:name="TB_nbit_register.vhd"/>
-      <outfile xil_pn:name="Tristate.vhd"/>
-      <outfile xil_pn:name="Zero_Fill.vhd"/>
-      <outfile xil_pn:name="nbit_register_synthesis.vhd"/>
-      <outfile xil_pn:name="pds16_types.vhd"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1501538417" xil_pn:name="TRAN_xawsToSimhdl" xil_pn:prop_ck="-9116268257326686644" xil_pn:start_ts="1501538417">
       <status xil_pn:value="SuccessfullyRun"/>
@@ -288,6 +186,7 @@
     <transform xil_pn:end_ts="1494169579" xil_pn:name="TRAN_regenerateCoresSim" xil_pn:prop_ck="-8836907756191838057" xil_pn:start_ts="1494169579">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForProperties"/>
     </transform>
     <transform xil_pn:end_ts="1502211933" xil_pn:in_ck="5135155058218678204" xil_pn:name="TRAN_copyPostAbstractToPreSimulation" xil_pn:start_ts="1502211933">
       <status xil_pn:value="SuccessfullyRun"/>
@@ -296,120 +195,18 @@
       <status xil_pn:value="OutOfDateForPredecessor"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
       <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="InputRemoved"/>
       <status xil_pn:value="OutputChanged"/>
-      <outfile xil_pn:name="Alfa_pds16fpga.vhd"/>
-      <outfile xil_pn:name="Alu.vhd"/>
-      <outfile xil_pn:name="Alu_Logico_TB.vhd"/>
-      <outfile xil_pn:name="Alu_aritmetico.vhd"/>
-      <outfile xil_pn:name="Alu_logico.vhd"/>
-      <outfile xil_pn:name="BIU.vhd"/>
-      <outfile xil_pn:name="Barrel_Shift_TB.vhd"/>
-      <outfile xil_pn:name="Barrel_shift.vhd"/>
-      <outfile xil_pn:name="Block_Mplex16to1.vhd"/>
-      <outfile xil_pn:name="Block_Mplex16to1_TB.vhd"/>
-      <outfile xil_pn:name="Block_Mplex2to1.vhd"/>
-      <outfile xil_pn:name="BnB.vhd"/>
-      <outfile xil_pn:name="BnB_TB.vhd"/>
-      <outfile xil_pn:name="Control.vhd"/>
-      <outfile xil_pn:name="DFlipFlop.vhd"/>
-      <outfile xil_pn:name="Data_Processor.vhd"/>
-      <outfile xil_pn:name="Decoder2to4.vhd"/>
-      <outfile xil_pn:name="Decoder3_8.vhd"/>
-      <outfile xil_pn:name="Decoder3bits.vhd"/>
-      <outfile xil_pn:name="Decoder3bits_TB.vhd"/>
-      <outfile xil_pn:name="Decoder4to16.vhd"/>
-      <outfile xil_pn:name="Decoder_16out.vhd"/>
-      <outfile xil_pn:name="Decoder_16out_TB.vhd"/>
-      <outfile xil_pn:name="DirZeroFill.vhd"/>
-      <outfile xil_pn:name="FullAdder.vhd"/>
-      <outfile xil_pn:name="FullAdderV2.vhd"/>
-      <outfile xil_pn:name="HiZeroFill.vhd"/>
-      <outfile xil_pn:name="ImmZeroFill.vhd"/>
-      <outfile xil_pn:name="InstDecode.vhd"/>
-      <outfile xil_pn:name="InstReg.vhd"/>
-      <outfile xil_pn:name="MBR.vhd"/>
-      <outfile xil_pn:name="MUX1x16bits.vhd"/>
-      <outfile xil_pn:name="MUX1x16bits_TB.vhd"/>
-      <outfile xil_pn:name="MUX1x3_TB.vhd"/>
-      <outfile xil_pn:name="MUX1x3bits.vhd"/>
-      <outfile xil_pn:name="MUX3x16bits.vhd"/>
-      <outfile xil_pn:name="MUX3x16bits_TB.vhd"/>
-      <outfile xil_pn:name="Mplex16bit_2to1.vhd"/>
-      <outfile xil_pn:name="Mplex16bit_4to1.vhd"/>
-      <outfile xil_pn:name="Mplex16bit_5to1.vhd"/>
-      <outfile xil_pn:name="Mplex16bit_8to1.vhd"/>
-      <outfile xil_pn:name="Mplex16to1.vhd"/>
-      <outfile xil_pn:name="Mplex2to1.vhd"/>
-      <outfile xil_pn:name="Mplex3bit_2to1.vhd"/>
-      <outfile xil_pn:name="Mplex4to1.vhd"/>
-      <outfile xil_pn:name="Mplex8bit_2to1.vhd"/>
-      <outfile xil_pn:name="Multiplexer8-1.vhd"/>
-      <outfile xil_pn:name="Mux_16In.vhd"/>
-      <outfile xil_pn:name="Mux_16in_TB.vhd"/>
-      <outfile xil_pn:name="Mux_2in.vhd"/>
-      <outfile xil_pn:name="Mux_2in_TB.vhd"/>
-      <outfile xil_pn:name="Mux_3in.vhd"/>
-      <outfile xil_pn:name="Mux_4in.vhd"/>
-      <outfile xil_pn:name="Mux_4in_TB.vhd"/>
-      <outfile xil_pn:name="Or_tree.vhd"/>
-      <outfile xil_pn:name="PC_Adder.vhd"/>
-      <outfile xil_pn:name="PDS16fpga.vhd"/>
-      <outfile xil_pn:name="Ram.vhd"/>
-      <outfile xil_pn:name="Register16bits.vhd"/>
-      <outfile xil_pn:name="Register16bitsCL.vhd"/>
-      <outfile xil_pn:name="Register16bitsCL_TB.vhd"/>
-      <outfile xil_pn:name="Register16bits_TB.vhd"/>
-      <outfile xil_pn:name="RegisterFile8x16.vhd"/>
-      <outfile xil_pn:name="RegisterFile8x16_TB.vhd"/>
-      <outfile xil_pn:name="Sel_andgatesTree.vhd"/>
-      <outfile xil_pn:name="Shifter_Sel_TB.vhd"/>
-      <outfile xil_pn:name="Shifter_Sel_mplex2to1.vhd"/>
-      <outfile xil_pn:name="SigExt.vhd"/>
-      <outfile xil_pn:name="TB_ Decoder4to16.vhd"/>
-      <outfile xil_pn:name="TB_ Mplex2to1.vhd"/>
-      <outfile xil_pn:name="TB_Alu.vhd"/>
-      <outfile xil_pn:name="TB_Alu_aritmetico.vhd"/>
-      <outfile xil_pn:name="TB_Alu_logico.vhd"/>
-      <outfile xil_pn:name="TB_BIU.vhd"/>
-      <outfile xil_pn:name="TB_Barrel_shift.vhd"/>
-      <outfile xil_pn:name="TB_Block_Mplex16to1.vhd"/>
-      <outfile xil_pn:name="TB_Block_Mplex2to1.vhd"/>
-      <outfile xil_pn:name="TB_BnB.vhd"/>
-      <outfile xil_pn:name="TB_Control.vhd"/>
-      <outfile xil_pn:name="TB_Data_Processor.vhd"/>
-      <outfile xil_pn:name="TB_Decoder3_8.vhd"/>
-      <outfile xil_pn:name="TB_FullAdder.vhd"/>
-      <outfile xil_pn:name="TB_HiZeroFill.vhd"/>
-      <outfile xil_pn:name="TB_ImmZeroFill.vhd"/>
-      <outfile xil_pn:name="TB_InstDecode.vhd"/>
-      <outfile xil_pn:name="TB_InstReg.vhd"/>
-      <outfile xil_pn:name="TB_Mplex16bit_2to1.vhd"/>
-      <outfile xil_pn:name="TB_Mplex16bit_5to1.vhd"/>
-      <outfile xil_pn:name="TB_Mplex16bit_8to1.vhd"/>
-      <outfile xil_pn:name="TB_Mplex16to1.vhd"/>
-      <outfile xil_pn:name="TB_Mplex3bit_2to1.vhd"/>
-      <outfile xil_pn:name="TB_Mplex4to1.vhd"/>
-      <outfile xil_pn:name="TB_Or_tree.vhd"/>
-      <outfile xil_pn:name="TB_PC_Adder.vhd"/>
-      <outfile xil_pn:name="TB_Ram.vhd"/>
-      <outfile xil_pn:name="TB_RegisterFile.vhd"/>
-      <outfile xil_pn:name="TB_Sel_andgatesTree.vhd"/>
-      <outfile xil_pn:name="TB_Shifter_Sel_mplex2to1.vhd"/>
-      <outfile xil_pn:name="TB_SigExt.vhd"/>
-      <outfile xil_pn:name="TB_Zero_Fill.vhd"/>
-      <outfile xil_pn:name="TB_nbit_register.vhd"/>
-      <outfile xil_pn:name="Tristate.vhd"/>
-      <outfile xil_pn:name="Zero_Fill.vhd"/>
-      <outfile xil_pn:name="nbit_register_synthesis.vhd"/>
-      <outfile xil_pn:name="pds16_types.vhd"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1502211937" xil_pn:in_ck="5135155058218678204" xil_pn:name="TRAN_ISimulateBehavioralModelRunFuse" xil_pn:prop_ck="-8249964453114836486" xil_pn:start_ts="1502211933">
       <status xil_pn:value="FailedRun"/>
-      <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="NotReadyToRun"/>
       <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForProperties"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
       <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="InputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1501696215" xil_pn:in_ck="-416995107597683892" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="9164473590818946631" xil_pn:start_ts="1501696215">
       <status xil_pn:value="AbortedRun"/>
@@ -424,45 +221,11 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1493149465" xil_pn:name="TRAN_schematicsToHdl" xil_pn:prop_ck="2532462102414697361" xil_pn:start_ts="1493149464">
-      <status xil_pn:value="SuccessfullyRun"/>
-      <status xil_pn:value="ReadyToRun"/>
-    </transform>
-    <transform xil_pn:end_ts="1493149465" xil_pn:name="TRAN_regenerateCores" xil_pn:prop_ck="-8836907756191838057" xil_pn:start_ts="1493149465">
-      <status xil_pn:value="SuccessfullyRun"/>
-      <status xil_pn:value="ReadyToRun"/>
-    </transform>
-    <transform xil_pn:end_ts="1493149465" xil_pn:name="TRAN_SubProjectAbstractToPreProxy" xil_pn:start_ts="1493149465">
-      <status xil_pn:value="SuccessfullyRun"/>
-      <status xil_pn:value="ReadyToRun"/>
-    </transform>
-    <transform xil_pn:end_ts="1493149465" xil_pn:name="TRAN_xawsTohdl" xil_pn:prop_ck="7960723604729325711" xil_pn:start_ts="1493149465">
-      <status xil_pn:value="SuccessfullyRun"/>
-      <status xil_pn:value="ReadyToRun"/>
-    </transform>
-    <transform xil_pn:end_ts="1493149465" xil_pn:name="TRAN_SubProjectPreToStructuralProxy" xil_pn:prop_ck="-3893270297158069842" xil_pn:start_ts="1493149465">
-      <status xil_pn:value="SuccessfullyRun"/>
-      <status xil_pn:value="ReadyToRun"/>
-    </transform>
-    <transform xil_pn:end_ts="1493149465" xil_pn:name="TRAN_platgen" xil_pn:prop_ck="-5149170439785117599" xil_pn:start_ts="1493149465">
-      <status xil_pn:value="SuccessfullyRun"/>
-      <status xil_pn:value="ReadyToRun"/>
-    </transform>
-    <transform xil_pn:end_ts="1493149472" xil_pn:in_ck="4148957113104544038" xil_pn:name="TRANEXT_xstsynthesize_spartan3e" xil_pn:prop_ck="-6182626374192738860" xil_pn:start_ts="1493149465">
-      <status xil_pn:value="FailedRun"/>
-      <status xil_pn:value="WarningsGenerated"/>
-      <status xil_pn:value="ReadyToRun"/>
-      <status xil_pn:value="OutOfDateForInputs"/>
-      <status xil_pn:value="OutOfDateForOutputs"/>
-      <status xil_pn:value="InputAdded"/>
-      <status xil_pn:value="InputChanged"/>
-      <status xil_pn:value="InputRemoved"/>
-      <status xil_pn:value="OutputChanged"/>
-      <status xil_pn:value="OutputRemoved"/>
-    </transform>
     <transform xil_pn:end_ts="1493149472" xil_pn:name="TRAN_compileBCD2" xil_pn:prop_ck="6163265666641593828" xil_pn:start_ts="1493149472">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForProperties"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
     </transform>
   </transforms>
 

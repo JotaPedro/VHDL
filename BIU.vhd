@@ -53,10 +53,10 @@ entity BIU is
            BRQ 		: in  STD_LOGIC; -- do lado da memoria
            BGT_in 	: in  STD_LOGIC;
 			  BGT_out 	: out  STD_LOGIC;
-           DataIn 	: out  STD_LOGIC_VECTOR (15 downto 0));
+           DataIn 	: out  STD_LOGIC_VECTOR (15 downto 0);
 			  Sync 		: out  STD_LOGIC_VECTOR(1 downto 0);-- 0- BRQ, 1-RDY
 			  Addr 		: out  STD_LOGIC_VECTOR(14 downto 0);--Addr 15 downto 1
-			  A0			: out STD_LOGIC;
+			  A0			: out STD_LOGIC);
 end BIU;
 
 architecture Behavioral of BIU is

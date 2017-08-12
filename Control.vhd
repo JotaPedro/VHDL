@@ -141,11 +141,11 @@ begin
 													if (INTP = '1') then
 													 NewState <= SInterrupt;
 													else --VER O QUE É A BREAK CONDITION -------------------------------------
-														if (breakCondition) then
-															NewState <= SBreak;
-														else
+--														if (breakCondition) then
+--															NewState <= SBreak;
+--														else
 															NewState <= SFetch_Addr;
-														end if;
+--														end if;
 													end if;
 												end if;
 												
@@ -160,28 +160,27 @@ begin
 					when SInterrupt => if (Sync(0)= '1') then -- BRQ activo
 												NewState <= SHold_Fetch;
 											else
-												if(breakCondition) then
-													NewState <= SBreak;
-												else
+--												if(breakCondition) then
+--													NewState <= SBreak;
+--												else
 													NewState <= SFetch_Addr;
-												end if;
+--												end if;
 											end if;
 					
-				--	when SBreak => NewState <= SFetch_Addr;
-					when SBreak => if (GO = '0') then -- Se não existir sinal para continuar, mantemos o Break.
-												NewState <= SBreak;
-										else
-												NewState <= SFetch_Addr;
-										end if;
+--					when SBreak => if (GO = '0') then -- Se não existir sinal para continuar, mantemos o Break.
+--												NewState <= SBreak;
+--										else
+--												NewState <= SFetch_Addr;
+--										end if;
 										
 					when SHold_Fetch => if (Sync(0)= '1') then -- BRQ activo
 												NewState <= SHold_Fetch;
 											else
-												if(breakCondition) then
-													NewState <= SBreak;
-												else
+--												if(breakCondition) then
+--													NewState <= SBreak;
+--												else
 													NewState <= SFetch_Addr;
-												end if;
+--												end if;
 											end if;		
 
 					when SHold_Exec =>if (Sync(0)= '1') then -- BRQ activo
@@ -241,7 +240,7 @@ begin
 							'0';
 --Enable R7 PC		
 		RFC(5)		<= '1' when (((Flags(0) = '1') and (instruction = JZ)) or ((Flags(0) = '0') and (instruction = JNZ)) or ((Flags(1) = '1') and (instruction = JC)) or ((Flags(1) = '0') and (instruction = JNC)) or (instruction = JMP) or (instruction = JMPL)) and (CurrentState = SExecution) else
-							'0'
+							'0';
 		
 		ALUC			<= "000" when (((Flags(0) = '1') and (instruction = JZ)) or ((Flags(0) = '0') and (instruction = JNZ)) or ((Flags(1) = '1') and (instruction = JC)) or ((Flags(1) = '0') and (instruction = JNC)) or (instruction = JMP) or (instruction = JMPL)) and (CurrentState = SFetch_Decod)	else
 							"001" when (((OpCode(1) = '0') and ((instruction = LD_IndConst) or (instruction = ST_IndConst))) or or ((instruction = ADD_const) or (instruction = ADDC_const) or (instruction = SUB_const) or (instruction = SBB_const) or (instruction = SHL) or (instruction = SHR) or (instruction = RRL) or (instruction = RRM))) and (CurrentState = SFetch_Decod)	else
@@ -282,7 +281,7 @@ begin
 		LDST			<= '1' when (instruction = LD_Direct) or (instruction = LD_IndConst) or (instruction = LD_Indexed) or (instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed)	else --LDI
 							'0';
 							
-		BGT			<=	'1' when () else
+		BGT			<=	'1' when ((instruction = LD_Direct)) else --está por fazer
 							'0';
 							
 		S1S0 			<= "00" when ((CurrentState = SFetch_Addr) or (CurrentState = SFetch_Inst) or (CurrentState = SFetch_Decod))	else

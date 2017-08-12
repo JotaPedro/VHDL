@@ -30,7 +30,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 entity Decoder2to4 is
     Port ( Sel : in  STD_LOGIC_VECTOR(1 downto 0);
            Enable : in  STD_LOGIC;
-           Output : out  STD_LOGIC_VECTOR(3 downto 0);
+           Output : out  STD_LOGIC_VECTOR(3 downto 0));
 end Decoder2to4;
 
 architecture Behavioral of Decoder2to4 is
