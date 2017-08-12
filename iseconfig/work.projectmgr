@@ -200,13 +200,13 @@
          <ClosedNode>/TB_tester - behavior F:|Projecto|github repo|VHDL|TB_tester.vhd/uut - PDS16fpga - Behavioral/RegisterFile - RegisterFile8x16 - Behavioral</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>Control - Control - Behavioral (F:/Projecto/github repo/VHDL/Control.vhd)</SelectedItem>
+         <SelectedItem>RegisterFile - RegisterFile8x16 - Structural (F:/Projecto/github repo/VHDL/RegisterFile8x16.vhd)</SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >22</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000001c0000000020000000000000000000000000200000064ffffffff000000810000000300000002000001c00000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
-      <CurrentItem>Control - Control - Behavioral (F:/Projecto/github repo/VHDL/Control.vhd)</CurrentItem>
+      <CurrentItem>RegisterFile - RegisterFile8x16 - Structural (F:/Projecto/github repo/VHDL/RegisterFile8x16.vhd)</CurrentItem>
    </ItemView>
    <ItemView engineview="BehavioralSim" sourcetype="" guiview="Process" >
       <ClosedNodes>
