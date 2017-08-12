@@ -413,7 +413,7 @@
     </transform>
     <transform xil_pn:end_ts="1501696215" xil_pn:in_ck="-416995107597683892" xil_pn:name="TRAN_ISimulateBehavioralModel" xil_pn:prop_ck="9164473590818946631" xil_pn:start_ts="1501696215">
       <status xil_pn:value="AbortedRun"/>
-      <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="NotReadyToRun"/>
       <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForProperties"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>

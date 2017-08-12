@@ -29,7 +29,7 @@ use work.pds16_types.ALL;
 --use UNISIM.VComponents.all;
 
 entity Control is
-    Port ( WL 			: in  STD_LOGIC;
+    Port ( A0 			: in  STD_LOGIC;
            Flags 		: in  STD_LOGIC_VECTOR(2 downto 0);-- 0-Zero 1-Carry 2-GE
            OpCode 	: in  STD_LOGIC_VECTOR(6 downto 0);-- bits de 15 a 9
            INTP 		: in  STD_LOGIC;
@@ -37,7 +37,7 @@ entity Control is
            CL 			: in  STD_LOGIC;
            Sync 		: in  STD_LOGIC_VECTOR(1 downto 0); -- 0- BRQ, 1-RDY
            BusCtr 	: out  STD_LOGIC_VECTOR(3 downto 0); -- 0-WrByte, 1-DataOut, 2-Addr, 3-ALE
-           RFC 		: out  STD_LOGIC_VECTOR(4 downto 0);
+           RFC 		: out  STD_LOGIC_VECTOR(5 downto 0); -- 0-Decoder, 1-OR Reg R5/SelMuxR5, 2-OR Reg R6/SelMuxR6, 3-OR Reg R7/SelMuxR7, 4-MUXaddrA, 5-enable Reg R7(para os jumps)
            ALUC 		: out  STD_LOGIC_VECTOR(2 downto 0);
            SelAddr 	: out  STD_LOGIC_VECTOR(1 downto 0);
            SelData	: out  STD_LOGIC_VECTOR(1 downto 0);
@@ -212,21 +212,21 @@ begin
     ---------------------------------------------------------------------------
 
 -- 0-WrByte	 
-		BusCtr(0)	<= '0' when (instruction = LDI) or (instruction = LDIH) or (instruction = ADD)	else -- Word
-							'1' when (instruction = (NOP)) else 
+		BusCtr(0)	<= '0' when (OpCode(1) = '1') and ((instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed)) and (CurrentState = SExec_RW)	else -- Word
+							'1' when (OpCode(1) = '0') and ((instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed)) and (CurrentState = SExec_RW)	else 
 							'0';
 -- 1-DataOut							
-		BusCtr(1)	<= '0' when (instruction = LDI) or (instruction = LDIH) or (instruction = ADD)	else 
-							'1' when (instruction = (NOP))	else
+		BusCtr(1)	<= '0' when (instruction = (NOP))	else 
+							'1' when ((instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed)) and (CurrentState = SExec_RW)	else
 							'0';
 -- 2-Addr							
-		BusCtr(2)	<= '1' when (CurrentState = SFetch_Addr) else -- Quando estamos no estado T1 Fetch Address
+		BusCtr(2)	<= '1' when (CurrentState = SFetch_Addr) or (CurrentState = SExec_Addr)  else -- Quando estamos no estado T1 Fetch Address
 							'0';
 -- 3-ALE							
 		BusCtr(3)	<= '1' when (CurrentState = SFetch_Addr) or (CurrentState = SExec_Addr) else -- Quando estamos no estado T1 Fetch Address ou no T5 Execute Address
 							'0';
 --Decoder							
-		RFC(0)		<= '1' when ((instruction = LDI) or (instruction = LDIH)) and (CurrentState = SExecution)	else
+		RFC(0)		<= '1' when ((instruction = LDI) or (instruction = LDIH) or (instruction = LD_Direct) or (instruction = LD_IndConst) or (instruction = LD_Indexed) or (instruction = ADD) or (instruction = ADDC) or (instruction = ADD_const) or (instruction = ADDC_const) or (instruction = SUB) or (instruction = SBB) or (instruction = SUB_const) or (instruction = SBB_const) or (instruction = ANL) or (instruction = ORL) or (instruction = XRL) or (instruction = NT) or (instruction = SHL) or (instruction = SHR) or (instruction = RRL) or (instruction = RRM) or (instruction = RCR) or (instruction = RCL)) and (CurrentState = SExecution)	else
 							'0';
 --mplexr5 -Link						
 		RFC(1)		<= '0' when (instruction = LDI) or (instruction = LDIH) or (instruction = ADD) else
@@ -243,43 +243,42 @@ begin
 		RFC(4)		<= '0' when (instruction = LDI) or (instruction = LDIH) or (instruction = ADD)	else
 							'1' when (instruction = (NOP))	else
 							'0';
-							
-		ALUC(0)		<= '1' when ((instruction = ADD)) and (CurrentState = SFetch_Decod)	else
-							'0';
-							
-		ALUC(1)		<= '1' when ((instruction = ADD)) and (CurrentState = SFetch_Decod)	else
-							'0';
-							
-		ALUC(2)		<= '0' when ((instruction = ADD)) and (CurrentState = SFetch_Decod)	else
-							'1';
+		
+		ALUC			<= "000" when (instruction = (NOP))	else
+							"001" when (((OpCode(1) = '0') and ((instruction = LD_IndConst) or (instruction = ST_IndConst))) or or ((instruction = ADD_const) or (instruction = ADDC_const) or (instruction = SUB_const) or (instruction = SBB_const) or (instruction = SHL) or (instruction = SHR) or (instruction = RRL) or (instruction = RRM))) and (CurrentState = SFetch_Decod)	else
+							"010" when ((OpCode(1) = '1') and ((instruction = LD_IndConst) or (instruction = ST_IndConst))) and (CurrentState = SFetch_Decod)	else
+							"011" when (((OpCode(1) = '0') and ((instruction = LD_Indexed) or (instruction = ST_Indexed))) or ((instruction = ADD) or (instruction = ADDC) or (instruction = SUB) or (instruction = SBB) or (instruction = ANL) or (instruction = ORL) or (instruction = XRL) or (instruction = NT))) and (CurrentState = SFetch_Decod)	else
+							"100" when ((OpCode(1) = '1') and ((instruction = LD_Indexed) or (instruction = ST_Indexed))) and (CurrentState = SFetch_Decod)	else
+							"000";
+
 -- LDI, LDIH, LD_Direct, LD_IndConst, LD_Indexed, ST_Direct, ST_IndConst, ST_Indexed, ADD, ADDC, ADD_const, ADDC_const, SUB, 
 -- SBB, SUB_const, SBB_const, ANL, ORL, XRL, NT, SHL,SHR,RRL,RRM,RCR,RCL,JZ,JNZ,JC,JNC,JMP,JMPL,IRET,NOP		
 					
 		SelAddr		<= "00" when (CurrentState = SFetch_Addr) else -- Quando estamos no estado T1 Fetch Address
-							"01" when (instruction = (NOP))	else
-							"10" when ((instruction = NOP)) and (CurrentState = SFetch_Decod)	else
+							"01" when ((instruction = LD_IndConst) or (instruction = LD_Indexed) or (instruction = ST_IndConst) or (instruction = ST_Indexed)) and (CurrentState = SFetch_Decod)	else
+							"10" when ((instruction = LD_Direct) or (instruction = ST_Direct)) and (CurrentState = SFetch_Decod)	else
 							"11" when (instruction = (NOP))	else
 							"00";
 							
 		SelData		<= "00" when ((instruction = LDI) or (instruction = LDIH)) and (CurrentState = SFetch_Decod) else
-							"01" when (instruction = (NOP))	else
-							"10" when (instruction = (NOP))	else
-							"11" when (instruction = (NOP))	else
+							"01" when (OpCode(1) = '1') and ((instruction = LD_Direct) or (instruction = LD_IndConst) or (instruction = LD_Indexed)) and (CurrentState = SExec_RW)	else
+							"10" when (OpCode(1) = '0') and ((instruction = LD_Direct) or (instruction = LD_IndConst) or (instruction = LD_Indexed)) and (CurrentState = SExec_RW)	else
+							"11" when ((instruction = ADD) or (instruction = ADDC) or (instruction = ADD_const) or (instruction = ADDC_const) or (instruction = SUB) or (instruction = SBB) or (instruction = SUB_const) or (instruction = SBB_const) or (instruction = ANL) or (instruction = ORL) or (instruction = XRL) or (instruction = NT) or (instruction = SHL) or (instruction = SHR) or (instruction = RRL) or (instruction = RRM) or (instruction = RCR) or (instruction = RCL) ) and (CurrentState = SFetch_Decod)	else
 							"00";
 							
 		Sellmm		<= '1' when ((instruction = LDIH) ) and (CurrentState = SFetch_Decod)	else
 							'0' when ((instruction = LDI) ) and (CurrentState = SFetch_Decod)	else
 							'0';
 							
-		RD 			<= '1' when (CurrentState = SFetch_Inst) else -- Quando estamos no estado T2 Fetch Instruction
+		RD 			<= '1' when (CurrentState = SFetch_Inst) or ((CurrentState = SExec_Addr) and ((instruction = LD_Direct) or (instruction = LD_IndConst) or (instruction = LD_Indexed))) else
 							'0';
 --LOW														
-		WR(0)			<= '0' when (instruction = LDI) or (instruction = LDIH) or (instruction = ADD)	else -- Word
-							'1' when (instruction = (NOP))	else
+		WR(0)			<= '0' when ((OpCode(1) = '0') and (A0 = 0) and ((instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed))) and (CurrentState = SExec_RW)	else -- Word
+							'1' when (((OpCode(1) = '1') or ((OpCode(1) = '0') and (A0 = 1) )) and ((instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed))) and (CurrentState = SExec_RW)	else
 							'0';
 --HIGH
-		WR(1)			<= '0' when (instruction = LDI) or (instruction = LDIH) or (instruction = ADD)	else -- Word
-							'1' when (instruction = (NOP))	else
+		WR(1)			<= '0' when ((OpCode(1) = '0') and (A0 = 1) and ((instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed))) and (CurrentState = SExec_RW)	else
+							'1' when (((OpCode(1) = '1') or ((OpCode(1) = '0') and (A0 = 0) )) and ((instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed))) and (CurrentState = SExec_RW)	else
 							'0';
 			
 		LDST			<= '0' when (instruction = LDI) or (instruction = LDIH) or (instruction = ADD)	else
@@ -300,4 +299,3 @@ begin
 							'0';
 
 end Behavioral;
-

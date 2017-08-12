@@ -33,13 +33,13 @@ use work.pds16_types.ALL;
 entity RegisterFile8x16 is
     Port ( clock : in  STD_LOGIC;
            CL : in  STD_LOGIC;
-           RFC : in  STD_LOGIC_VECTOR (4 downto 0);				
+           RFC : in  STD_LOGIC_VECTOR (5 downto 0);				
            AddrA : in  STD_LOGIC_VECTOR (2 downto 0);				--RFC(0)-Enable Decoder
            AddrB : in  STD_LOGIC_VECTOR (2 downto 0);				--RFC(1)-OR Reg R5 / SelMuxR5
            AddrSD : in  STD_LOGIC_VECTOR (2 downto 0);			--RFC(2)-OR Reg R6
            DestData : in  STD_LOGIC_VECTOR (15 downto 0);		--RFC(3)-OR Reg R7
            flagsIN : in  STD_LOGIC_VECTOR (3 downto 0);			--RFC(4)-MUX do MUXaddrA
-           OpA : out  STD_LOGIC_VECTOR (15 downto 0);
+           OpA : out  STD_LOGIC_VECTOR (15 downto 0);				--RFC(5)-enable Reg R7(para os jumps)
            OpB : out  STD_LOGIC_VECTOR (15 downto 0);
            SC : out  STD_LOGIC_VECTOR (15 downto 0);
            flagsOUT : out  STD_LOGIC_VECTOR (4 downto 0);
@@ -167,7 +167,7 @@ begin
       In1 => IncPC,	
       outdata => R7Data);
 
-	EPC <= ER(7) OR RFC(3);
+	EPC <= ER(7) OR RFC(3) OR RFC(5);--adicionei o RFC(5) para conseguir fazer as instruções de jumps (fazer a introdução no R7 quando a instrução não usa o R7 como registo de soma com o offset)
 	
 	R7: component Register16bitsCL port map(
 		clkReg => clock,  
