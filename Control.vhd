@@ -56,7 +56,8 @@ end Control;
 architecture Behavioral of Control is
 
 	--type STATE_TYPE is (SReset, SFetch_Addr, SFetch_Inst, SFetch_Decod, SExecution, SExec_Addr, SExec_RW, SInterrupt, SBreak, SHold_Fetch, SHold_Exec, SWait_Fetch, SWait_Exec);
-	signal CurrentState 	: STATE_TYPE := SFetch_Addr; -- Estado inicial
+	signal CurrentState 	: STATE_TYPE := SReset;
+	--signal CurrentState 	: STATE_TYPE := SFetch_Addr;	-- Estado inicial
 	signal NewState 		: STATE_TYPE;
 	
 	--sinais só para testes
@@ -114,6 +115,12 @@ begin
             NewState <= SReset; --se Clear for activo, o estado seguinte é o Reset.
         else
             case (CurrentState) is
+					
+					 when SReset =>if (Sync(0)= '1') then -- BRQ activo
+													NewState <= SHold_Exec;
+											else
+													NewState <= SFetch_Addr;										
+											end if;
 			
                 when SFetch_Addr => NewState <= SFetch_Inst;
 
@@ -184,7 +191,7 @@ begin
 											end if;		
 
 					when SHold_Exec =>if (Sync(0)= '1') then -- BRQ activo
-													NewState <= SHold_Fetch;
+													NewState <= SHold_Exec;
 											else
 													NewState <= SExec_Addr;										
 											end if;
@@ -243,7 +250,7 @@ begin
 							'0';
 		
 		ALUC			<= "000" when (((Flags(0) = '1') and (instruction = JZ)) or ((Flags(0) = '0') and (instruction = JNZ)) or ((Flags(1) = '1') and (instruction = JC)) or ((Flags(1) = '0') and (instruction = JNC)) or (instruction = JMP) or (instruction = JMPL)) and (CurrentState = SFetch_Decod)	else
-							"001" when (((OpCode(1) = '0') and ((instruction = LD_IndConst) or (instruction = ST_IndConst))) or or ((instruction = ADD_const) or (instruction = ADDC_const) or (instruction = SUB_const) or (instruction = SBB_const) or (instruction = SHL) or (instruction = SHR) or (instruction = RRL) or (instruction = RRM))) and (CurrentState = SFetch_Decod)	else
+							"001" when (((OpCode(1) = '0') and ((instruction = LD_IndConst) or (instruction = ST_IndConst))) or ((instruction = ADD_const) or (instruction = ADDC_const) or (instruction = SUB_const) or (instruction = SBB_const) or (instruction = SHL) or (instruction = SHR) or (instruction = RRL) or (instruction = RRM))) and (CurrentState = SFetch_Decod)	else
 							"010" when ((OpCode(1) = '1') and ((instruction = LD_IndConst) or (instruction = ST_IndConst))) and (CurrentState = SFetch_Decod)	else
 							"011" when (((OpCode(1) = '0') and ((instruction = LD_Indexed) or (instruction = ST_Indexed))) or ((instruction = ADD) or (instruction = ADDC) or (instruction = SUB) or (instruction = SBB) or (instruction = ANL) or (instruction = ORL) or (instruction = XRL) or (instruction = NT))) and (CurrentState = SFetch_Decod)	else
 							"100" when ((OpCode(1) = '1') and ((instruction = LD_Indexed) or (instruction = ST_Indexed))) and (CurrentState = SFetch_Decod)	else
@@ -269,13 +276,15 @@ begin
 							
 		RD 			<= '1' when (CurrentState = SFetch_Inst) or ((CurrentState = SExec_Addr) and ((instruction = LD_Direct) or (instruction = LD_IndConst) or (instruction = LD_Indexed))) else
 							'0';
---LOW														
-		WR(0)			<= '0' when ((OpCode(1) = '0') and (A0 = 0) and ((instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed))) and (CurrentState = SExec_RW)	else -- Word
-							'1' when (((OpCode(1) = '1') or ((OpCode(1) = '0') and (A0 = 1) )) and ((instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed))) and (CurrentState = SExec_RW)	else
+--LOW
+		
+														
+		WR(0)			<= '0' when ((OpCode(1) = '0') and (A0 = '0') and ((instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed))) and (CurrentState = SExec_RW)	else -- Word
+							'1' when (((OpCode(1) = '1') or ((OpCode(1) = '0') and (A0 = '1') )) and ((instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed))) and (CurrentState = SExec_RW)	else
 							'0';
 --HIGH
-		WR(1)			<= '0' when ((OpCode(1) = '0') and (A0 = 1) and ((instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed))) and (CurrentState = SExec_RW)	else
-							'1' when (((OpCode(1) = '1') or ((OpCode(1) = '0') and (A0 = 0) )) and ((instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed))) and (CurrentState = SExec_RW)	else
+		WR(1)			<= '0' when ((OpCode(1) = '0') and (A0 = '1') and ((instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed))) and (CurrentState = SExec_RW)	else
+							'1' when (((OpCode(1) = '1') or ((OpCode(1) = '0') and (A0 = '0') )) and ((instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed))) and (CurrentState = SExec_RW)	else
 							'0';
 -- Indica se a instrução é de acesso há memória.		
 		LDST			<= '1' when (instruction = LD_Direct) or (instruction = LD_IndConst) or (instruction = LD_Indexed) or (instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed)	else --LDI

@@ -23,9 +23,6 @@ architecture Behavioral of InstDecode is
 	
 begin
 	
-	FlagUpdate <= OpCode(1); -- Apenas faz sentido quando a instrução é logica/aritmética com 3 registos e aritmética com constante, mas não lógica com constante.
-	Inst <= instruction;
-	
 	 Inst_Decode:
 	 process (OpCode)
     begin
@@ -76,8 +73,11 @@ begin
 			when others => instruction	<=	NOP;
 		end case;
 	
+--	FlagUpdate <= OpCode(1); -- Apenas faz sentido quando a instrução é logica/aritmética com 3 registos e aritmética com constante, mas não lógica com constante.
+--	Inst <= instruction;
+	end process;
+	
 	FlagUpdate <= OpCode(1); -- Apenas faz sentido quando a instrução é logica/aritmética com 3 registos e aritmética com constante, mas não lógica com constante.
 	Inst <= instruction;
-	end process;
 	
 end Behavioral;
