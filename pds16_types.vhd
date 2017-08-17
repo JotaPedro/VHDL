@@ -66,7 +66,7 @@ package pds16_types is
 			 );
 	end Component;
 	
-	Component SigExt is
+	Component Sig_Ext is
     Port ( Const8x2 : in  STD_LOGIC_VECTOR(7 downto 0);
            Output16bit : out  bit_16);
 	end Component;
@@ -424,6 +424,33 @@ end component;
 		outdata : out  STD_LOGIC_VECTOR (WIDTH-1 downto 0));
 	end component;
 	
+	component MUX2x16bits is
+	Generic (
+		WIDTH : NATURAL := 16 );
+	Port ( Sel : in  STD_LOGIC_VECTOR (1 downto 0);
+		In0 : in  STD_LOGIC_VECTOR (WIDTH-1 downto 0);
+		In1 : in  STD_LOGIC_VECTOR (WIDTH-1 downto 0);
+		In2 : in  STD_LOGIC_VECTOR (WIDTH-1 downto 0);
+		In3 : in  STD_LOGIC_VECTOR (WIDTH-1 downto 0);
+		outdata : out  STD_LOGIC_VECTOR (WIDTH-1 downto 0));
+	end component;
+	
+	component MUX1x8bits is
+	 Port ( Sel : in  STD_LOGIC;
+	        In0 : in  STD_LOGIC_VECTOR (7 downto 0);
+           In1 : in  STD_LOGIC_VECTOR (7 downto 0);
+           outdata : out  STD_LOGIC_VECTOR (7 downto 0));
+	end component;
+	
+	component MUX2x1bit is
+    Port ( Sel : in  STD_LOGIC_VECTOR (1 downto 0);
+           In0 : in  STD_LOGIC;
+           In1 : in  STD_LOGIC;
+           In2 : in  STD_LOGIC;
+           In3 : in  STD_LOGIC;
+           outdata : out  STD_LOGIC);
+	end component;
+	
 	component InstDecode is
     Port (  OpCode 	: in  STD_LOGIC_VECTOR(6 downto 0);
 				Inst		: out INST_TYPE;
@@ -431,6 +458,26 @@ end component;
 			);
 	end component;
 	
+	component MUX4x1bit is
+	Port ( Sel : in  STD_LOGIC_VECTOR (3 downto 0);
+			 In0 : in  STD_LOGIC;
+		    In1 : in  STD_LOGIC;
+			 In2 : in  STD_LOGIC;
+			 In3 : in  STD_LOGIC;
+			 In4 : in  STD_LOGIC;
+			 In5 : in  STD_LOGIC;
+			 In6 : in  STD_LOGIC;
+			 In7 : in  STD_LOGIC;
+			 In8 : in  STD_LOGIC;
+			 In9 : in  STD_LOGIC;
+			 In10 : in  STD_LOGIC;
+			 In11 : in  STD_LOGIC;
+			 In12 : in  STD_LOGIC;
+			 In13 : in  STD_LOGIC;
+			 In14 : in  STD_LOGIC;
+			 In15 : in  STD_LOGIC;
+			 outdata : out  STD_LOGIC);
+end component;
 	
 
 --  type <new_type> is

@@ -1,11 +1,11 @@
 ----------------------------------------------------------------------------------
--- Company: 
+-- Company: ISEL
 -- Engineer: 
 -- 
 -- Create Date:    16:38:48 04/28/2016 
 -- Design Name: 
 -- Module Name:    DirZeroFill - Behavioral 
--- Project Name: 
+-- Project Name: PDS16fpga
 -- Target Devices: 
 -- Tool versions: 
 -- Description: 
@@ -23,14 +23,10 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 use work.pds16_types.ALL;
 
----- Uncomment the following library declaration if instantiating
----- any Xilinx primitives in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity DirZeroFill is
     Port ( Input : in  STD_LOGIC_VECTOR(6 downto 0);
-           Output : out  bit_16);
+           Output : out  STD_LOGIC_VECTOR(15 downto 0));
 end DirZeroFill;
 
 architecture Behavioral of DirZeroFill is

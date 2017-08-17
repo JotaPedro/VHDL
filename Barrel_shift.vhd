@@ -1,11 +1,11 @@
 ----------------------------------------------------------------------------------
--- Company: 
+-- Company: ISEL
 -- Engineer: 
 -- 
 -- Create Date:    15:01:41 04/19/2016 
 -- Design Name: 
 -- Module Name:    Barrel_shift - Behavioral 
--- Project Name: 
+-- Project Name: PDS16fpga
 -- Target Devices: 
 -- Tool versions: 
 -- Description: 
@@ -23,37 +23,33 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 use work.pds16_types.ALL;
 
----- Uncomment the following library declaration if instantiating
----- any Xilinx primitives in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity Barrel_shift is
-    Port ( A : in  bit_16;
-           B : in  STD_LOGIC_VECTOR(3 downto 0);
-           Output : out  bit_16;
-           Ctl_3bit : in  STD_LOGIC_VECTOR(2 downto 0); --IR10 , 11, 12
-           Cy : out  STD_LOGIC);
+    Port ( A : in STD_LOGIC_VECTOR(15 downto 0);
+           B : in STD_LOGIC_VECTOR(3 downto 0);
+           Ctl_3bit : in STD_LOGIC_VECTOR(2 downto 0); --IR12 IR11 IR10
+			  Output : out STD_LOGIC_VECTOR(15 downto 0);
+           Cy : out STD_LOGIC);
 end Barrel_shift;
 
 architecture Behavioral of Barrel_shift is
 
-Signal Mp2to1_j : integer := 0;
-Signal Mp2to1_in: STD_LOGIC_VECTOR(15 downto 0):= (others => '0'); --todas as entradas dos multiplexers 2para1.
-Signal Mp2to1_sel: STD_LOGIC_VECTOR(15 downto 0):= (others => '0'); --selectores dos multiplexers 2para1
-Signal Output_Carry: STD_LOGIC := '0';
-Signal MpCtl_3bit_2to1_in: STD_LOGIC_VECTOR(1 downto 0):= (others => '0'); -- IR10 e A15
-Signal MpCtl_3bit_2to1_out: STD_LOGIC := '0';
-Signal B_negativo: STD_LOGIC_VECTOR(3 downto 0):=(others => '0');
-Signal Decoder_1_out: STD_LOGIC_VECTOR(15 downto 0):= (others => '0');
-Signal Decoder_2_out: STD_LOGIC_VECTOR(15 downto 0):= (others => '0');
-Signal Decoder_1_enable: STD_LOGIC;
-Signal Decoder_2_enable: STD_LOGIC;
-Signal Cy_interno: STD_LOGIC;
-Signal Mplex_RC_CY_A15_sel: STD_LOGIC;
-Signal Mplex_RC_CY_A15_out: STD_LOGIC;
-Signal Mplex16to1_A: STD_LOGIC_VECTOR(15 downto 0);
-Signal Mplex_IR12_IR10_CY_out: STD_LOGIC;
+--	Signal Mp2to1_j : integer := 0;
+--	Signal Mp2to1_in: STD_LOGIC_VECTOR(15 downto 0):= (others => '0'); --todas as entradas dos multiplexers 2para1.
+--	Signal Mp2to1_sel: STD_LOGIC_VECTOR(15 downto 0):= (others => '0'); --selectores dos multiplexers 2para1
+--	Signal Output_Carry: STD_LOGIC := '0';
+--	Signal MpCtl_3bit_2to1_in: STD_LOGIC_VECTOR(1 downto 0):= (others => '0'); -- IR10 e A15
+--	Signal MpCtl_3bit_2to1_out: STD_LOGIC := '0';
+--	Signal B_negativo: STD_LOGIC_VECTOR(3 downto 0):=(others => '0');
+--	Signal Decoder_1_out: STD_LOGIC_VECTOR(15 downto 0):= (others => '0');
+--	Signal Decoder_2_out: STD_LOGIC_VECTOR(15 downto 0):= (others => '0');
+--	Signal Decoder_1_enable: STD_LOGIC;
+--	Signal Decoder_2_enable: STD_LOGIC;
+--	Signal Cy_interno: STD_LOGIC;
+--	Signal Mplex_RC_CY_A15_sel: STD_LOGIC;
+--	Signal Mplex_RC_CY_A15_out: STD_LOGIC;
+--	Signal Mplex16to1_A: STD_LOGIC_VECTOR(15 downto 0);
+--	Signal Mplex_IR12_IR10_CY_out: STD_LOGIC;
 
 
 	component Mux_2in is
@@ -66,14 +62,18 @@ Signal Mplex_IR12_IR10_CY_out: STD_LOGIC;
 
 begin
 		
-		---------------------Bloco B/-B------------------------------
+		
+	-----------------
+	-- Shift MUXs
+	-----------------
+		--Bloco B/-B--
 			BlocoB: BnB PORT MAP (
           B => B,
           IR11 => ctl_3bit(1),
           B_negativo => B_negativo
         );
 
-		---------------------multiplexers 16para1------------------------------
+		-- MUX 4x1 para1el --
 		Mplex16to1_A <= Mplex_RC_CY_A15_out & A(14 downto 0);
 		Mplex16to1: Block_Mplex16to1 PORT MAP (
           A => Mplex16to1_A,			--Entradas dos Mplex
