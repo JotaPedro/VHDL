@@ -274,7 +274,7 @@ begin
 							'0' when ((instruction = LDI) ) and (CurrentState = SFetch_Decod)	else
 							'0';
 							
-		RD 			<= '1' when (CurrentState = SFetch_Inst) or ((CurrentState = SExec_Addr) and ((instruction = LD_Direct) or (instruction = LD_IndConst) or (instruction = LD_Indexed))) else
+		RD 			<= '1' when (CurrentState = SFetch_Inst) or ((CurrentState = SExec_RW) and ((instruction = LD_Direct) or (instruction = LD_IndConst) or (instruction = LD_Indexed))) else
 							'0';
 --LOW
 		
@@ -290,7 +290,7 @@ begin
 		LDST			<= '1' when (instruction = LD_Direct) or (instruction = LD_IndConst) or (instruction = LD_Indexed) or (instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed)	else --LDI
 							'0';
 							
-		BGT			<=	'1' when ((instruction = LD_Direct)) else --está por fazer
+		BGT			<=	'1' when ((CurrentState = SBreak)) else --está por fazer
 							'0';
 							
 		S1S0 			<= "00" when ((CurrentState = SFetch_Addr) or (CurrentState = SFetch_Inst) or (CurrentState = SFetch_Decod))	else

@@ -133,17 +133,17 @@ BEGIN
    stim_proc: process
    begin		
       
--- Instruções já testadas. ------------------------------------------
-		OpCode <= "0000000"; --LDI
+-- Sinais necessários para as instruções serem executadas.
 		Sync(1) <= '1';
-		wait for 10 ns;
-		wait until (CState = SFetch_Addr);
-		OpCode <= "0000101"; --LDIH
-		wait for 10 ns;
-		wait until (CState = SFetch_Addr);
-
--- Instruções para testar. ------------------------------------------
 		
+-- Instruções já testadas. ------------------------------------------
+--		OpCode <= "0000000"; --LDI
+--		wait for 10 ns;
+--		wait until (CState = SFetch_Addr);
+--		OpCode <= "0000101"; --LDIH
+--		wait for 10 ns;
+--		wait until (CState = SFetch_Addr);
+
 --		OpCode <= "0001000"; --LD_Direct
 --		wait for 10 ns;
 --		wait until (CState = SFetch_Addr);
@@ -213,7 +213,7 @@ BEGIN
 --		OpCode <= "1110100"; --SHR
 --		wait for 10 ns;
 --		wait until (CState = SFetch_Addr);
-
+--
 --		OpCode <= "1111000"; --RRL
 --		wait for 10 ns;
 --		wait until (CState = SFetch_Addr);
@@ -227,27 +227,30 @@ BEGIN
 --		OpCode <= "1111110"; --RCL
 --		wait for 10 ns;
 --		wait until (CState = SFetch_Addr);
-
+--
 --		OpCode <= "0100000"; --JZ
 --		wait for 10 ns;
 --		wait until (CState = SFetch_Addr);
 --		OpCode <= "0100100"; --JNZ
 --		wait for 10 ns;
 --		wait until (CState = SFetch_Addr);
-
+--
 --		OpCode <= "0101000"; --JC
 --		wait for 10 ns;
 --		wait until (CState = SFetch_Addr);
 --		OpCode <= "0101100"; --JNC
 --		wait for 10 ns;
 --		wait until (CState = SFetch_Addr);
-
+--
 --		OpCode <= "0110000"; --JMP
 --		wait for 10 ns;
 --		wait until (CState = SFetch_Addr);
 --		OpCode <= "0110100"; --JMPL
 --		wait for 10 ns;
 --		wait until (CState = SFetch_Addr);
+
+
+-- Instruções para testar. ------------------------------------------
 
 --		OpCode <= "0111000"; --IRET
 --		wait for 10 ns;

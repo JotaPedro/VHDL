@@ -77,6 +77,7 @@ begin
 --	Inst <= instruction;
 	end process;
 	
+	-- Corrigir a flag update para considerar as instruções que realmente pedem para fazer o update das flags.
 	FlagUpdate <= OpCode(1); -- Apenas faz sentido quando a instrução é logica/aritmética com 3 registos e aritmética com constante, mas não lógica com constante.
 	Inst <= instruction;
 	
