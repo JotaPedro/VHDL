@@ -299,6 +299,14 @@ package pds16_types is
            DataIn : out  STD_LOGIC_VECTOR (15 downto 0));
 	end component;
 	
+	component Latch16bits is
+		Port ( --clkReg : in  STD_LOGIC;
+				En : in  STD_LOGIC;
+				D : in  STD_LOGIC_VECTOR (15 downto 0);
+				Q : out  STD_LOGIC_VECTOR (14 downto 0);
+				A0: out STD_LOGIC);		 
+	end component;
+	
 	component Data_Processor is
 	 Port ( Const : in  STD_LOGIC_VECTOR(7 downto 0);
            OpB : in  bit_16;

@@ -96,7 +96,7 @@
       <SelectedItems>
          <SelectedItem>pds16_types.vhd</SelectedItem>
       </SelectedItems>
-      <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
+      <ScrollbarPosition orientation="vertical" >23</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000000000000000100000000000000000000000000000000000002d2000000040101000100000000000000000000000064ffffffff0000008100000000000000040000007900000001000000000000005a00000001000000000000005d0000000100000000000001a20000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
@@ -107,13 +107,13 @@
          <ClosedNodesVersion>1</ClosedNodesVersion>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>MUX1x3bits.vhd</SelectedItem>
+         <SelectedItem>PDS16fpga.vhd</SelectedItem>
       </SelectedItems>
-      <ScrollbarPosition orientation="vertical" >4</ScrollbarPosition>
+      <ScrollbarPosition orientation="vertical" >40</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000000000000010000000000000000000000000000000000000064000000010001000100000000000000000000000064ffffffff000000810000000000000001000000640000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem>MUX1x3bits.vhd</CurrentItem>
+      <CurrentItem>PDS16fpga.vhd</CurrentItem>
    </ItemView>
    <ItemView engineview="SynthesisOnly" sourcetype="DESUT_VHDL_ARCHITECTURE" guiview="Process" >
       <ClosedNodes>
@@ -168,7 +168,10 @@
          <ClosedNode>/PDS16fpga - Behavioral F:|Projecto|github repo|VHDL|PDS16fpga.vhd/InstReg - InstReg - Behavioral</ClosedNode>
          <ClosedNode>/PDS16fpga - Behavioral F:|Projecto|github repo|VHDL|PDS16fpga.vhd/RegisterFile - RegisterFile8x16 - Behavioral</ClosedNode>
          <ClosedNode>/PDS16fpga - Behavioral F:|Projecto|github repo|VHDL|PDS16fpga.vhd/RegisterFile - RegisterFile8x16 - Structural</ClosedNode>
-         <ClosedNode>/PDS16fpga - Structural F:|Projecto|github repo|VHDL|PDS16fpga.vhd</ClosedNode>
+         <ClosedNode>/PDS16fpga - Structural F:|Projecto|github repo|VHDL|PDS16fpga.vhd/BIU - BIU - Behavioral</ClosedNode>
+         <ClosedNode>/PDS16fpga - Structural F:|Projecto|github repo|VHDL|PDS16fpga.vhd/Control - Control - Behavioral</ClosedNode>
+         <ClosedNode>/PDS16fpga - Structural F:|Projecto|github repo|VHDL|PDS16fpga.vhd/DataProcessor - Data_Processor - Structural</ClosedNode>
+         <ClosedNode>/PDS16fpga - Structural F:|Projecto|github repo|VHDL|PDS16fpga.vhd/RegisterFile - RegisterFile8x16 - Structural</ClosedNode>
          <ClosedNode>/Register16bitsCL_TB - behavior F:|Projecto|github repo|VHDL|Register16bitsCL_TB.vhd</ClosedNode>
          <ClosedNode>/Register16bits_TB - behavior F:|Projecto|github repo|VHDL|Register16bits_TB.vhd</ClosedNode>
          <ClosedNode>/RegisterFile8x16_TB - behavior F:|Projecto|github repo|VHDL|RegisterFile8x16_TB.vhd</ClosedNode>
@@ -182,6 +185,7 @@
          <ClosedNode>/TB_Block_Mplex16to1 - behavior F:|Projecto|github repo|VHDL|TB_Block_Mplex16to1.vhd</ClosedNode>
          <ClosedNode>/TB_Block_Mplex2to1 - behavior F:|Projecto|github repo|VHDL|TB_Block_Mplex2to1.vhd</ClosedNode>
          <ClosedNode>/TB_BnB - behavior F:|Projecto|github repo|VHDL|TB_BnB.vhd</ClosedNode>
+         <ClosedNode>/TB_Control - behavior F:|Projecto|github repo|VHDL|TB_Control.vhd</ClosedNode>
          <ClosedNode>/TB_Data_Processor - behavior F:|Projecto|github repo|VHDL|TB_Data_Processor.vhd</ClosedNode>
          <ClosedNode>/TB_Data_Processor - behavior F:|Projecto|github repo|VHDL|TB_Data_Processor.vhd/uut - Data_Processor - Behavioral/Alu1 - Alu - Behavioral</ClosedNode>
          <ClosedNode>/TB_Decoder3_8 - behavior F:|Projecto|github repo|VHDL|TB_Decoder3_8.vhd</ClosedNode>
@@ -212,13 +216,13 @@
          <ClosedNode>/TB_tester - behavior F:|Projecto|github repo|VHDL|TB_tester.vhd/uut - PDS16fpga - Behavioral/RegisterFile - RegisterFile8x16 - Behavioral</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>TB_Control - behavior (F:/Projecto/github repo/VHDL/TB_Control.vhd)</SelectedItem>
+         <SelectedItem>TB_BIU - behavior (F:/Projecto/github repo/VHDL/TB_BIU.vhd)</SelectedItem>
       </SelectedItems>
-      <ScrollbarPosition orientation="vertical" >27</ScrollbarPosition>
+      <ScrollbarPosition orientation="vertical" >38</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000001a9000000020000000000000000000000000200000064ffffffff000000810000000300000002000001a90000000100000003000000000000000100000003</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000001ae000000020000000000000000000000000200000064ffffffff000000810000000300000002000001ae0000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
-      <CurrentItem>TB_Control - behavior (F:/Projecto/github repo/VHDL/TB_Control.vhd)</CurrentItem>
+      <CurrentItem>TB_BIU - behavior (F:/Projecto/github repo/VHDL/TB_BIU.vhd)</CurrentItem>
    </ItemView>
    <ItemView engineview="BehavioralSim" sourcetype="" guiview="Process" >
       <ClosedNodes>
@@ -239,13 +243,13 @@
          <ClosedNodesVersion>1</ClosedNodesVersion>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem></SelectedItem>
+         <SelectedItem>Behavioral Check Syntax</SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000010000000000000000000000000000000000000000000000018d000000010000000100000000000000000000000064ffffffff0000008100000000000000010000018d0000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000000000000000000073000000010000000100000000000000000000000064ffffffff000000810000000000000001000000730000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem></CurrentItem>
+      <CurrentItem>Behavioral Check Syntax</CurrentItem>
    </ItemView>
    <ItemView engineview="PostTransSim" guiview="Source" compilemode="AutoCompile" >
       <ClosedNodes>

@@ -85,32 +85,6 @@ architecture Structural of PDS16fpga is
 	--Mplex_selAddr_input(1) <= 
 
 begin
-
-	-----------------
-	-- CONTROL
-	-----------------
-		Control: component Control PORT MAP(
-		WL 		: in  STD_LOGIC;
-		Flags 	: in  STD_LOGIC_VECTOR(2 downto 0);-- 0-Zero 1-Carry 2-GE
-		OpCode 	: in  STD_LOGIC_VECTOR(6 downto 0);-- bits de 15 a 9
-		INTP 		: in  STD_LOGIC;
-		Clock 	: in  STD_LOGIC;
-		CL 		: in  STD_LOGIC;
-		Sync 		: in  STD_LOGIC_VECTOR(1 downto 0); -- 0- BRQ, 1-RDY
-		BusCtr 	: out  STD_LOGIC_VECTOR(3 downto 0); -- 0-WrByte, 1-DataOut, 2-Addr, 3-ALE
-		RFC 		: out  STD_LOGIC_VECTOR(4 downto 0);
-		ALUC 		: out  STD_LOGIC_VECTOR(2 downto 0);
-		SelAddr 	: out  STD_LOGIC_VECTOR(1 downto 0);
-		SelData	: out  STD_LOGIC_VECTOR(1 downto 0);
-		Sellmm 	: out  STD_LOGIC;
-		
-		RD 		: out	 STD_LOGIC; -- ACTIVE LOW
-		WR			: out  STD_LOGIC_VECTOR(1 downto 0); -- 0-WRL, 1-WRH
-		BGT		: out	 STD_LOGIC;
-		S0 		: out	 STD_LOGIC;
-		S1 		: out	 STD_LOGIC;
-		EIR		: out	 STD_LOGIC
-	);
 	
 	-----------------------
 	-- External Interrupt
@@ -219,32 +193,63 @@ begin
 	------------------------
 	-- BUS INTERFACE UNIT
 	------------------------
-	BIU: BIU PORT MAP(
-		Clock : in  STD_LOGIC;
-		CL : in  STD_LOGIC;
-		Addr : in  STD_LOGIC_VECTOR(14 downto 0);--Addr 15 downto 1
-		DataOut : in  STD_LOGIC_VECTOR(15 downto 0);
-		BusCtr : in  STD_LOGIC_VECTOR(3 downto 0);-- 0-WrByte, 1-DataOut, 2-Addr, 3-Ale
-		Sync : out  STD_LOGIC_VECTOR(1 downto 0);-- 0- BRQ, 1-RDY
-		AD : inout  STD_LOGIC_VECTOR(15 downto 0);
-		ALE : out  STD_LOGIC;
-		S0_in : in  STD_LOGIC;
-		S1_in : in  STD_LOGIC;
-		S0_out : out  STD_LOGIC;
-		S1_out : out  STD_LOGIC;
-		RD : in  STD_LOGIC;
-		WRL : in  STD_LOGIC;
-		WRH : in  STD_LOGIC;
-		nRD : out  STD_LOGIC;
-		nWRL : out  STD_LOGIC;
-		nWRH : out  STD_LOGIC;
-		RDY : in  STD_LOGIC;
-		BRQ : in  STD_LOGIC;
-		BGT_in : in  STD_LOGIC;
-		BGT_out : out  STD_LOGIC;
-		RESOUT : out  STD_LOGIC;
-		DataIn : out  STD_LOGIC_VECTOR (15 downto 0)
-	);
+	
+--	NOTA: É preciso corrigir este componente
+
+
+--	BIU: BIU PORT MAP(
+--		Clock : in  STD_LOGIC;
+--		CL : in  STD_LOGIC;
+--		Addr : in  STD_LOGIC_VECTOR(14 downto 0);--Addr 15 downto 1
+--		DataOut : in  STD_LOGIC_VECTOR(15 downto 0);
+--		BusCtr : in  STD_LOGIC_VECTOR(3 downto 0);-- 0-WrByte, 1-DataOut, 2-Addr, 3-Ale
+--		Sync : out  STD_LOGIC_VECTOR(1 downto 0);-- 0- BRQ, 1-RDY
+--		AD : inout  STD_LOGIC_VECTOR(15 downto 0);
+--		ALE : out  STD_LOGIC;
+--		S0_in : in  STD_LOGIC;
+--		S1_in : in  STD_LOGIC;
+--		S0_out : out  STD_LOGIC;
+--		S1_out : out  STD_LOGIC;
+--		RD : in  STD_LOGIC;
+--		WRL : in  STD_LOGIC;
+--		WRH : in  STD_LOGIC;
+--		nRD : out  STD_LOGIC;
+--		nWRL : out  STD_LOGIC;
+--		nWRH : out  STD_LOGIC;
+--		RDY : in  STD_LOGIC;
+--		BRQ : in  STD_LOGIC;
+--		BGT_in : in  STD_LOGIC;
+--		BGT_out : out  STD_LOGIC;
+--		RESOUT : out  STD_LOGIC;
+--		DataIn : out  STD_LOGIC_VECTOR (15 downto 0)
+--	);
+	
+		-----------------
+	-- CONTROL
+	-----------------
+--		Control: component Control PORT MAP(
+--		WL 		: in  STD_LOGIC;
+--		Flags 	: in  STD_LOGIC_VECTOR(2 downto 0);-- 0-Zero 1-Carry 2-GE
+--		OpCode 	: in  STD_LOGIC_VECTOR(6 downto 0);-- bits de 15 a 9
+--		INTP 		: in  STD_LOGIC;
+--		Clock 	: in  STD_LOGIC;
+--		CL 		: in  STD_LOGIC;
+--		Sync 		: in  STD_LOGIC_VECTOR(1 downto 0); -- 0- BRQ, 1-RDY
+--		BusCtr 	: out  STD_LOGIC_VECTOR(3 downto 0); -- 0-WrByte, 1-DataOut, 2-Addr, 3-ALE
+--		RFC 		: out  STD_LOGIC_VECTOR(4 downto 0);
+--		ALUC 		: out  STD_LOGIC_VECTOR(2 downto 0);
+--		SelAddr 	: out  STD_LOGIC_VECTOR(1 downto 0);
+--		SelData	: out  STD_LOGIC_VECTOR(1 downto 0);
+--		Sellmm 	: out  STD_LOGIC;
+--		
+--		RD 		: out	 STD_LOGIC; -- ACTIVE LOW
+--		WR			: out  STD_LOGIC_VECTOR(1 downto 0); -- 0-WRL, 1-WRH
+--		BGT		: out	 STD_LOGIC;
+--		S0 		: out	 STD_LOGIC;
+--		S1 		: out	 STD_LOGIC;
+--		EIR		: out	 STD_LOGIC
+--	);
+	
 	
 end Behavioral;
 
