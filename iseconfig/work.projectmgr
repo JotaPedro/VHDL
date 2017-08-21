@@ -67,13 +67,13 @@
          <ClosedNode>/TB_tester - behavior F:|Projecto|github repo|VHDL|TB_tester.vhd</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>Control - Control - Behavioral (F:/Projecto/github repo/VHDL/Control.vhd)</SelectedItem>
+         <SelectedItem>InstReg - Behavioral (F:/Projecto/github repo/VHDL/InstReg.vhd)</SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >7</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000001ae000000020000000000000000000000000200000064ffffffff000000810000000300000002000001ae0000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
-      <CurrentItem>Control - Control - Behavioral (F:/Projecto/github repo/VHDL/Control.vhd)</CurrentItem>
+      <CurrentItem>InstReg - Behavioral (F:/Projecto/github repo/VHDL/InstReg.vhd)</CurrentItem>
    </ItemView>
    <ItemView engineview="SynthesisOnly" sourcetype="" guiview="Process" >
       <ClosedNodes>
@@ -96,7 +96,7 @@
       <SelectedItems>
          <SelectedItem>pds16_types.vhd</SelectedItem>
       </SelectedItems>
-      <ScrollbarPosition orientation="vertical" >23</ScrollbarPosition>
+      <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000000000000000100000000000000000000000000000000000002d2000000040101000100000000000000000000000064ffffffff0000008100000000000000040000007900000001000000000000005a00000001000000000000005d0000000100000000000001a20000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
@@ -107,13 +107,13 @@
          <ClosedNodesVersion>1</ClosedNodesVersion>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>PDS16fpga.vhd</SelectedItem>
+         <SelectedItem>pds16_types.vhd</SelectedItem>
       </SelectedItems>
-      <ScrollbarPosition orientation="vertical" >40</ScrollbarPosition>
+      <ScrollbarPosition orientation="vertical" >25</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000000000000010000000000000000000000000000000000000064000000010001000100000000000000000000000064ffffffff000000810000000000000001000000640000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem>PDS16fpga.vhd</CurrentItem>
+      <CurrentItem>pds16_types.vhd</CurrentItem>
    </ItemView>
    <ItemView engineview="SynthesisOnly" sourcetype="DESUT_VHDL_ARCHITECTURE" guiview="Process" >
       <ClosedNodes>
@@ -130,7 +130,7 @@
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000010000000000000000000000000000000000000000000000018d000000010000000100000000000000000000000064ffffffff0000008100000000000000010000018d0000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000000000000000000064000000010000000100000000000000000000000064ffffffff000000810000000000000001000000640000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem>Design Utilities</CurrentItem>
    </ItemView>
@@ -202,6 +202,7 @@
          <ClosedNode>/TB_Mplex2to1 - behavior F:|Projecto|github repo|VHDL|TB_ Mplex2to1.vhd</ClosedNode>
          <ClosedNode>/TB_Mplex3bit_2to1 - behavior F:|Projecto|github repo|VHDL|TB_Mplex3bit_2to1.vhd</ClosedNode>
          <ClosedNode>/TB_Mplex4to1 - behavior F:|Projecto|github repo|VHDL|TB_Mplex4to1.vhd</ClosedNode>
+         <ClosedNode>/TB_MplexWrByte - behavior F:|Projecto|github repo|VHDL|TB_MplexWrByte.vhd</ClosedNode>
          <ClosedNode>/TB_Or_tree - behavior F:|Projecto|github repo|VHDL|TB_Or_tree.vhd</ClosedNode>
          <ClosedNode>/TB_PC_Adder - behavior F:|Projecto|github repo|VHDL|TB_PC_Adder.vhd</ClosedNode>
          <ClosedNode>/TB_Ram - behavior F:|Projecto|github repo|VHDL|TB_Ram.vhd</ClosedNode>
@@ -216,13 +217,13 @@
          <ClosedNode>/TB_tester - behavior F:|Projecto|github repo|VHDL|TB_tester.vhd/uut - PDS16fpga - Behavioral/RegisterFile - RegisterFile8x16 - Behavioral</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>TB_BIU - behavior (F:/Projecto/github repo/VHDL/TB_BIU.vhd)</SelectedItem>
+         <SelectedItem>TB_Ram - behavior (F:/Projecto/github repo/VHDL/TB_Ram.vhd)</SelectedItem>
       </SelectedItems>
-      <ScrollbarPosition orientation="vertical" >38</ScrollbarPosition>
+      <ScrollbarPosition orientation="vertical" >52</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000001ae000000020000000000000000000000000200000064ffffffff000000810000000300000002000001ae0000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
-      <CurrentItem>TB_BIU - behavior (F:/Projecto/github repo/VHDL/TB_BIU.vhd)</CurrentItem>
+      <CurrentItem>TB_Ram - behavior (F:/Projecto/github repo/VHDL/TB_Ram.vhd)</CurrentItem>
    </ItemView>
    <ItemView engineview="BehavioralSim" sourcetype="" guiview="Process" >
       <ClosedNodes>
@@ -230,26 +231,26 @@
          <ClosedNode>Design Utilities</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem/>
+         <SelectedItem></SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000010000000000000000000000000000000000000000000000018d000000010000000100000000000000000000000064ffffffff0000008100000000000000010000018d0000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000000000000000000073000000010000000100000000000000000000000064ffffffff000000810000000000000001000000730000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem/>
+      <CurrentItem></CurrentItem>
    </ItemView>
    <ItemView engineview="BehavioralSim" sourcetype="DESUT_VHDL_ARCHITECTURE" guiview="Process" >
       <ClosedNodes>
          <ClosedNodesVersion>1</ClosedNodesVersion>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>Behavioral Check Syntax</SelectedItem>
+         <SelectedItem></SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000000000000000000073000000010000000100000000000000000000000064ffffffff000000810000000000000001000000730000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem>Behavioral Check Syntax</CurrentItem>
+      <CurrentItem></CurrentItem>
    </ItemView>
    <ItemView engineview="PostTransSim" guiview="Source" compilemode="AutoCompile" >
       <ClosedNodes>

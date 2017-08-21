@@ -62,6 +62,11 @@ ARCHITECTURE behavior OF TB_BIU IS
          DataIn : OUT  std_logic_vector(15 downto 0);
          Sync : OUT  std_logic_vector(1 downto 0);
          A0 : OUT  std_logic;
+			
+			--para teste
+			  ALE_flipflop_out : out STD_LOGIC;
+			
+			Addr_out 	: out  STD_LOGIC_VECTOR(14 downto 0);--Addr 15 downto 1
          RESOUT : OUT  std_logic
         );
     END COMPONENT;
@@ -94,9 +99,12 @@ ARCHITECTURE behavior OF TB_BIU IS
    signal Sync : std_logic_vector(1 downto 0);
    signal A0 : std_logic;
    signal RESOUT : std_logic;
+	signal Addr_out : STD_LOGIC_VECTOR(14 downto 0);--Addr 15 downto 1
+	--para teste
+	signal ALE_flipflop_out : STD_LOGIC;
 
    -- Clock period definitions
-   constant Clock_period : time := 10 ns;
+   constant Clock_period : time := 50 ns;
  
 BEGIN
  
@@ -123,15 +131,19 @@ BEGIN
           DataIn => DataIn,
           Sync => Sync,
           A0 => A0,
+			 --para teste
+			 ALE_flipflop_out => ALE_flipflop_out,
+			 
+			 Addr_out => Addr_out,
           RESOUT => RESOUT
         );
 
    -- Clock process definitions
    Clock_process :process
    begin
-		Clock <= '0';
-		wait for Clock_period/2;
 		Clock <= '1';
+		wait for Clock_period/2;
+		Clock <= '0';
 		wait for Clock_period/2;
    end process;
  
@@ -139,9 +151,45 @@ BEGIN
    -- Stimulus process
    stim_proc: process
    begin		
-      
-		
-		
+
+--------------------------------------------------      
+-- Testar a entrada de dados no Bus AD
+-- Testar o funcionamento do multiplexer do DataOut
+-- Testar a entrada de endereço no Bus AD
+--------------------------------------------------
+
+---- introduzir dados nas entradas de data e endereço
+--	DataOut 	<= x"F00F";
+--	Addr		<= "000" & x"0_0F"; 	--15 bits
+---- ativar o tristate para disponibilizar o endereço no bus AD
+--	BusCtr(1)<= '1'; --DataOut
+---- passar uma word do bus DataOut
+--	BusCtr(0)<= '0'; --WrByte
+--	wait for 50 ns;
+---- passar um Byte do bus DataOut
+--	BusCtr(0)<= '1'; --WrByte
+--	wait for 50 ns;
+---- retirar o acesso ao Bus AD
+--	BusCtr(1)<= '0'; --DataOut
+--	BusCtr(2)<= '1';
+
+
+--------------------------------------------------      
+-- Testar a entrada de endereço na Latch address.	
+--------------------------------------------------
+
+---- introduzir dados nas entradas de data e endereço
+--	DataOut 	<= x"F0_0F";
+--	Addr		<= "000" & x"0_0F"; 	--15 bits
+---- ativar o tristate para disponibilizar o endereço no bus AD
+--	BusCtr(2)<= '1'; --addr	
+--	wait for 50 ns;
+--	BusCtr(3)<= '1'; --ALE
+--	wait for 50 ns;
+--	BusCtr(3)<= '0';	
+--	BGT_in	<= '0';
+
+			
       wait;
    end process;
 

@@ -19,7 +19,15 @@ package pds16_types is
 	type INST_TYPE is (LDI, LDIH, LD_Direct, LD_IndConst, LD_Indexed, ST_Direct, ST_IndConst, ST_Indexed, ADD, ADDC, ADD_const, ADDC_const, SUB, SBB, SUB_const, SBB_const, ANL, ORL, XRL, NT, SHL,SHR,RRL,RRM,RCR,RCL,JZ,JNZ,JC,JNC,JMP,JMPL,IRET,NOP);
 	type STATE_TYPE is (SReset, SFetch_Addr, SFetch_Inst, SFetch_Decod, SExecution, SExec_Addr, SExec_RW, SInterrupt, SBreak, SHold_Fetch, SHold_Exec, SWait_Fetch, SWait_Exec);
 
-
+	
+	Component MplexWrByte is
+    Port ( 	Input0 : in  std_logic_vector(7 downto 0); -- Parte Alta
+				Input1 : in  std_logic_vector(7 downto 0); -- Parte Baixa
+				Sel : in  STD_LOGIC;
+				Output : out  std_logic_vector(15 downto 0));
+	end Component;
+	
+	
 	
 	Component DFlipFlop is
     Port ( D : in  STD_LOGIC;
@@ -296,7 +304,12 @@ package pds16_types is
            BGT_in : in  STD_LOGIC;
 			  BGT_out : out  STD_LOGIC;
            RESOUT : out  STD_LOGIC;
-           DataIn : out  STD_LOGIC_VECTOR (15 downto 0));
+           DataIn : out  STD_LOGIC_VECTOR (15 downto 0);
+			  
+			  --para teste
+			  ALE_flipflop_out : out STD_LOGIC;
+			  
+			  Addr_out 	: out  STD_LOGIC_VECTOR(14 downto 0));
 	end component;
 	
 	component Latch16bits is

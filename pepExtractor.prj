@@ -1,7 +1,1 @@
-work	"BIU.vhd"
-work	"DFlipFlop.vhd"
-work	"Latch16bits.vhd"
-work	"MBR.vhd"
-work	"Mplex8bit_2to1.vhd"
-work	"Tristate.vhd"
-work	"pds16_types.vhd"
+work	"Ram.vhd"

@@ -61,6 +61,9 @@ entity BIU is
 			  A0			: out STD_LOGIC;
 			  
 			  Addr_out 	: out  STD_LOGIC_VECTOR(14 downto 0);--Addr 15 downto 1
+			  --para teste
+			  ALE_flipflop_out : out STD_LOGIC;
+			  
 			  RESOUT 	: out  STD_LOGIC
 			  );
 end BIU;
@@ -125,12 +128,14 @@ begin
 --	Mplex_DataOut_input(1) <= DataOut(7 downto 0);
 --Data_to_mem <= x"00" & DataOut(7 downto 0); Isto era o quê?
 	
-	Mplex_DataOut: Mplex8bit_2to1 PORT MAP(
-		Input(0) => DataOut(15 downto 8),
-		Input(1) => DataOut(7 downto 0),
+	Mplex_DataOut: MplexWrByte PORT MAP(
+		Input0 => DataOut(15 downto 8),
+		Input1 => DataOut(7 downto 0),
       Sel => BusCtr(0), -- BusCtr(WrByte)
       Output => Data_to_mem -- dados a entrar no tristate DataOut.
 	);
+	
+	--Data_to_mem <= Data_to_mem(15 downto 8) & DataOut(7 downto 0);
 	
 	-----------------------
 	-- Tristate DataOut
@@ -181,15 +186,17 @@ begin
 	);
 	
 	
-	ALE <= (BusCtr(3) AND (NOT ALE_flipflop));
-	
 	ALE_ff: DFlipFlop PORT MAP(
 		D => BusCtr(3),--BusCtr(ALE)
       Q => ALE_flipflop,
       Clk => Clock,
       CL => '0'
 	);
-
+	
+	--para teste apenas
+	ALE_flipflop_out <= ALE_flipflop;
+	
+	ALE <= (BusCtr(3) AND (NOT ALE_flipflop));
 	
 	-----------------------
 	-- LATCH ADDRESS
@@ -198,7 +205,7 @@ begin
 	-- Latch for the address storing when acessing ram
 	-- não deve ter clock.
 	Latch: Latch16bits
-	Port map( D 		=> Addr,
+	Port map( D 		=> AD,
 				 --Q 		=> AD,
 				 Q 		=> Addr_out,
 				 En 		=> ALE,
