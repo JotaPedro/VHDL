@@ -6,8 +6,8 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity Ram is
 	Port ( 
-		Clk 		: in std_logic; -- processing clock
-		AD			: in std_logic_vector(15 downto 0); -- Endereço
+		clk		: in std_logic;
+		AD			: in std_logic_vector(14 downto 0); -- Endereço
 		nRD		: in std_logic; -- 
 		nWRL		: in std_logic; -- 
 		nWRH		: in std_logic; -- 
@@ -17,34 +17,57 @@ end Ram;
 
 architecture Behavioral of Ram is
 ------------------------------------- RAM declaration
-type ram is array(127 downto 0) of std_logic_vector(15 downto 0);
-signal ram1 	: ram;
--------------------------------------- Signal declaration
-signal r_add : std_logic_vector(15 downto 0);
+type ram is array(10 downto 0) of std_logic_vector(7 downto 0);
+signal ramHigh	: ram;
+signal ramLow	: ram;
+signal data_out : std_logic_vector(15 downto 0);
 
 	begin
+		data_out 	<= (others => 'Z');
 		
-		ram1(0) <= "1110000000000000";
-		ram1(1) <= "1111111000000000";
-		ram1(1) <= "1111111000000000";
+		ramHigh(0)	<= "11100000";
+		ramLow(0)	<= "00000000";
 		
-		ram1(0) <= "1110000000000000";
-		ram1(1) <= "1111111000000000";
-		ram1(1) <= "1111111000000000";
+		ramHigh(1)	<= "11111110";
+		ramLow(1)	<= "00000000";
 		
-		process(Clk)
-			begin
-				if Clk'event and Clk = '1' then
-					if nRD = '1' then -- Se é para ler da ram
-						DATA <= ram1(conv_integer(AD));
-					else
-						DATA <= (others => '0');
-					end if;
-					--if nWRL = '1' and nWRH = '0' then -- Escrever parte baixa da ram
-					--r_add <= radd;
+		ramHigh(2)	<= "11111000";
+		ramLow(2)	<= "00000000";
+
+-- Tri-State Buffer control
+  DATA <= data_out when (nRD = '0' and nWRL = '1' and nWRH = '1') else (others=>'Z');
+	
+-- Memory Write Block
+-- Write Operation : When we = 1, cs = 1
+  MEM_WRITE: process (clk) 
+	begin
+	if (rising_edge(clk)) then
+    --se for para escrever uma word
+		if (nWRL = '0' and nWRH = '0') then
+			ramHigh(conv_integer(AD))  <= DATA(15 downto 8);
+			ramLow(conv_integer(AD))	<= DATA(7 downto 0);
+		else
+		--se for para escrever um byte na parte baixa ( endereço impar )
+			if (nWRL = '0' and nWRH = '1') then
+				ramLow(conv_integer(AD))	<= DATA(7 downto 0);
+			else
+				--se for para escrever um byte na parte alta ( endereço par )
+				if (nWRL = '1' and nWRH = '0') then
+					ramHigh(conv_integer(AD))  <= DATA(15 downto 8);
 				end if;
-		end process;
+			end if;
+		end if;
+	end if;
+  end process;
 
-		--data_out <= ram1_1(conv_integer(r_add)); -- Reading the data from RAM
-
+-- Memory Read Block
+  MEM_READ: process (clk) 
+	begin
+	if (rising_edge(clk)) then
+		 if (nRD = '0') then
+			data_out <= ramHigh(conv_integer(AD)) & ramLow(conv_integer(AD));
+		 end if;
+	end if;
+  end process;
+	
 end Behavioral; 
