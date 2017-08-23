@@ -481,22 +481,14 @@ end component;
 	
 	component MUX4x1bit is
 	Port ( Sel : in  STD_LOGIC_VECTOR (3 downto 0);
+			 Mux_In : in  STD_LOGIC_VECTOR (15 downto 0);
+			 outdata : out  STD_LOGIC);
+end component;
+
+	component MUX1x1bit is
+	Port ( Sel : in  STD_LOGIC;
 			 In0 : in  STD_LOGIC;
 		    In1 : in  STD_LOGIC;
-			 In2 : in  STD_LOGIC;
-			 In3 : in  STD_LOGIC;
-			 In4 : in  STD_LOGIC;
-			 In5 : in  STD_LOGIC;
-			 In6 : in  STD_LOGIC;
-			 In7 : in  STD_LOGIC;
-			 In8 : in  STD_LOGIC;
-			 In9 : in  STD_LOGIC;
-			 In10 : in  STD_LOGIC;
-			 In11 : in  STD_LOGIC;
-			 In12 : in  STD_LOGIC;
-			 In13 : in  STD_LOGIC;
-			 In14 : in  STD_LOGIC;
-			 In15 : in  STD_LOGIC;
 			 outdata : out  STD_LOGIC);
 end component;
 	

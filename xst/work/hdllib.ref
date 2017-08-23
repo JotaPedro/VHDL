@@ -1,52 +1,57 @@
-EN shifter_sel_mplex2to1 NULL "F:/Projecto/github repo/VHDL/Shifter_Sel_mplex2to1.vhd" sub00/vhpl28 1494184847
+EN shifter_sel_mplex2to1 NULL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Shifter_Sel_mplex2to1.vhd" sub00/vhpl28 1503447496
 AR nbit_register behavioral "F:/Projecto/github repo/VHDL/nbit_register.vhd" sub00/vhpl09 1492103067
-EN bnb NULL "F:/Projecto/github repo/VHDL/BnB.vhd" sub00/vhpl24 1494184843
-EN block_mplex2to1 NULL "F:/Projecto/github repo/VHDL/Block_Mplex2to1.vhd" sub00/vhpl30 1494184849
-AR mux_16in behavioral "F:/Projecto/github repo/VHDL/Mux_16In.vhd" sub00/vhpl43 1494184842
-AR alu_logico behavioral "F:/Projecto/github repo/VHDL/Alu_logico.vhd" sub00/vhpl35 1493149497
+EN bnb NULL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/BnB.vhd" sub00/vhpl24 1503448251
+EN block_mplex2to1 NULL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Block_Mplex2to1.vhd" sub00/vhpl30 1503447498
+AR mux_16in behavioral "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Mux_16In.vhd" sub00/vhpl43 1503447489
+AR alu_logico behavioral "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Alu_logico.vhd" sub00/vhpl35 1503447503
 AR block_mplex16to1 behavioral "F:/Projecto/github repo/VHDL/Block_Mplex16to1.vhd" sub00/vhpl27 1494184846
 AR alu_aritmetico behavioral "F:/Projecto/github repo/VHDL/Alu_aritmetico.vhd" sub00/vhpl39 1493149501
+EN mux4x1bit NULL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/MUX4x1bit.vhd" sub00/vhpl55 1503450718
 EN mplex4to1 NULL "F:/Projecto/github repo/VHDL/Mplex4to1.vhd" sub00/vhpl40 1493149502
 EN nbit_register NULL "F:/Projecto/github repo/VHDL/nbit_register.vhd" sub00/vhpl08 1492103066
 PB pds16_types pds16_types "F:/Projecto/github repo/VHDL/pds16_types.vhd" sub00/vhpl01 1501106249
 EN instdecode NULL "F:/Projecto/github repo/VHDL/InstDecode.vhd" sub00/vhpl48 1501106250
+AR block_mux4x16bits behavioral "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Block_MUX4x16bits.vhd" sub00/vhpl54 1503447495
 AR decoder3_8 behavioral "F:/Projecto/github repo/VHDL/Decoder3_8.vhd" sub00/vhpl07 1493149509
 AR mplex16bit_8to1 behavioral "F:/Projecto/github repo/VHDL/Mplex16bit_8to1.vhd" sub00/vhpl11 1492103069
 EN mplex16bit_8to1 NULL "F:/Projecto/github repo/VHDL/Mplex16bit_8to1.vhd" sub00/vhpl10 1492103068
-EN mux_16in NULL "F:/Projecto/github repo/VHDL/Mux_16In.vhd" sub00/vhpl42 1494184841
-AR bnb behavioral "F:/Projecto/github repo/VHDL/BnB.vhd" sub00/vhpl25 1494184844
+EN mux_16in NULL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Mux_16In.vhd" sub00/vhpl42 1503447488
+AR bnb behavioral "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/BnB.vhd" sub00/vhpl25 1503448252
 AR barrel_shift behavioral "F:/Projecto/github repo/VHDL/Barrel_shift.vhd" sub00/vhpl37 1494184854
-AR mux_2in behavioral "F:/Projecto/github repo/VHDL/Mux_2in.vhd" sub00/vhpl45 1494184838
-EN fulladder NULL "F:/Projecto/github repo/VHDL/FullAdder.vhd" sub00/vhpl02 1493149484
+AR fulladder structural "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/FullAdder.vhd" sub00/vhpl52 1503447491
+AR mux_2in behavioral "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Mux_2in.vhd" sub00/vhpl45 1503447485
+EN fulladder NULL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/FullAdder.vhd" sub00/vhpl02 1503447490
 EN mplex16bit_2to1 NULL "F:/Projecto/github repo/VHDL/Mplex16bit_2to1.vhd" sub00/vhpl14 1493149504
-EN barrel_shift NULL "F:/Projecto/github repo/VHDL/Barrel_shift.vhd" sub00/vhpl36 1494184853
-AR decoder_16out behavioral "F:/Projecto/github repo/VHDL/Decoder_16out.vhd" sub00/vhpl47 1494184852
+EN barrel_shift NULL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" sub00/vhpl36 1503447504
+AR decoder_16out behavioral "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Decoder_16out.vhd" sub00/vhpl47 1503447501
 EN mplex16to1 NULL "F:/Projecto/github repo/VHDL/Mplex16to1.vhd" sub00/vhpl22 1493149482
 AR pc_adder behavioral "F:/Projecto/github repo/VHDL/PC_Adder.vhd" sub00/vhpl05 1493149507
 EN decoder4to16 NULL "F:/Projecto/github repo/VHDL/Decoder4to16.vhd" sub00/vhpl32 1493149494
 AR mplex16bit_2to1 behavioral "F:/Projecto/github repo/VHDL/Mplex16bit_2to1.vhd" sub00/vhpl15 1493149505
-AR or_tree behavioral "F:/Projecto/github repo/VHDL/Or_tree.vhd" sub00/vhpl21 1494184840
+EN block_mux4x16bits NULL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Block_MUX4x16bits.vhd" sub00/vhpl53 1503450720
+AR or_tree behavioral "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Or_tree.vhd" sub00/vhpl21 1503447487
 EN decoder3_8 NULL "F:/Projecto/github repo/VHDL/Decoder3_8.vhd" sub00/vhpl06 1493149508
 AR decoder4to16 behavioral "F:/Projecto/github repo/VHDL/Decoder4to16.vhd" sub00/vhpl33 1493149495
 EN block_mplex16to1 NULL "F:/Projecto/github repo/VHDL/Block_Mplex16to1.vhd" sub00/vhpl26 1494184845
 AR mplex4to1 behavioral "F:/Projecto/github repo/VHDL/Mplex4to1.vhd" sub00/vhpl41 1493149503
 EN alu_aritmetico NULL "F:/Projecto/github repo/VHDL/Alu_aritmetico.vhd" sub00/vhpl38 1493149500
-AR block_mplex2to1 behavioral "F:/Projecto/github repo/VHDL/Block_Mplex2to1.vhd" sub00/vhpl31 1494184850
+AR block_mplex2to1 behavioral "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Block_Mplex2to1.vhd" sub00/vhpl31 1503447499
+AR mux4x1bit behavioral "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/MUX4x1bit.vhd" sub00/vhpl56 1503450719
 PH pds16_types NULL "F:/Projecto/github repo/VHDL/pds16_types.vhd" sub00/vhpl00 1501106248
 AR registerfile8x16 behavioral "F:/Projecto/github repo/VHDL/RegisterFile8x16.vhd" sub00/vhpl17 1492103075
 EN control NULL "F:/Projecto/github repo/VHDL/Control.vhd" sub00/vhpl50 1501106252
 EN mplex3bit_2to1 NULL "F:/Projecto/github repo/VHDL/Mplex3bit_2to1.vhd" sub00/vhpl12 1492103070
-EN mux_2in NULL "F:/Projecto/github repo/VHDL/Mux_2in.vhd" sub00/vhpl44 1494184837
+EN mux_2in NULL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Mux_2in.vhd" sub00/vhpl44 1503447484
 EN mplex2to1 NULL "F:/Projecto/github repo/VHDL/Mplex2to1.vhd" sub00/vhpl18 1493149478
 AR control behavioral "F:/Projecto/github repo/VHDL/Control.vhd" sub00/vhpl51 1501106253
 AR mplex16to1 behavioral "F:/Projecto/github repo/VHDL/Mplex16to1.vhd" sub00/vhpl23 1493149483
 AR instdecode behavioral "F:/Projecto/github repo/VHDL/InstDecode.vhd" sub00/vhpl49 1501106251
-EN alu_logico NULL "F:/Projecto/github repo/VHDL/Alu_logico.vhd" sub00/vhpl34 1493149496
+EN alu_logico NULL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Alu_logico.vhd" sub00/vhpl34 1503447502
 AR mplex3bit_2to1 behavioral "F:/Projecto/github repo/VHDL/Mplex3bit_2to1.vhd" sub00/vhpl13 1492103071
 EN registerfile8x16 NULL "F:/Projecto/github repo/VHDL/RegisterFile8x16.vhd" sub00/vhpl16 1492103074
-AR shifter_sel_mplex2to1 behavioral "F:/Projecto/github repo/VHDL/Shifter_Sel_mplex2to1.vhd" sub00/vhpl29 1494184848
-EN or_tree NULL "F:/Projecto/github repo/VHDL/Or_tree.vhd" sub00/vhpl20 1494184839
+EN or_tree NULL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Or_tree.vhd" sub00/vhpl20 1503447486
+AR shifter_sel_mplex2to1 behavioral "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Shifter_Sel_mplex2to1.vhd" sub00/vhpl29 1503447497
 EN pc_adder NULL "F:/Projecto/github repo/VHDL/PC_Adder.vhd" sub00/vhpl04 1493149506
 AR fulladder behavioral "F:/Projecto/github repo/VHDL/FullAdder.vhd" sub00/vhpl03 1493149485
-EN decoder_16out NULL "F:/Projecto/github repo/VHDL/Decoder_16out.vhd" sub00/vhpl46 1494184851
+EN decoder_16out NULL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Decoder_16out.vhd" sub00/vhpl46 1503447500
 AR mplex2to1 behavioral "F:/Projecto/github repo/VHDL/Mplex2to1.vhd" sub00/vhpl19 1493149479

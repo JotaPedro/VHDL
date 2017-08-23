@@ -1,19 +1,13 @@
 ----------------------------------------------------------------------------------
--- Company: ISEL
--- Engineer: 
--- 
--- Create Date:    21:13:18 04/07/2016 
--- Design Name: 
--- Module Name:    Data_Processor - Behavioral 
 -- Project Name: PDS16fpga
--- Target Devices: 
--- Tool versions: 
+
+-- Autors:	  João Botelho nº31169
+--				  Tiago Ramos  nº32125
+
+-- Module Name:  Data_Processor - Descrição Hardware
+
 -- Description: 
 --
--- Dependencies: 
---
--- Revision: 
--- Revision 0.01 - File Created
 -- Additional Comments: 
 --
 ----------------------------------------------------------------------------------
@@ -46,16 +40,18 @@ architecture Structural of Data_Processor is
 begin
 
 	-----------------
-	-- ALU
+	-- Const
 	-----------------
-	ALU: component Alu PORT MAP(
-		aluFunc => Func,
-		CyBw => CYin,
-		A => OpA,
-		B => B_sig,
-		R => Result,
-		flags => FlagsOut);
-	
+	ZeroFill: component Zero_Fill PORT MAP(
+		Const4bit => Const (6 downto 3), --const4
+		Output16bit => Zero_Fill_out);
+		
+	SigExt: component  Sig_Ext PORT MAP(
+		Const8x2 => Const(14 downto 0) & '0',		--offset8
+		Output16bit => SigExtOut);						--: out  bit_16
+			--onde se faz a multiplicaçao por 2?????
+				--no interior do sigExt ou antes??????
+				
 	-----------------
 	-- OpB Selector
 	-----------------	
@@ -69,22 +65,18 @@ begin
 		In5 => "0000000000000000",	--entrada não utilizada
 		In6 => "0000000000000000", --entrada não utilizada
 		In7 => "0000000000000000", --entrada não utilizada
-      outdata => B_sig);
-
+      outdata => B_sig);			
+				
 	-----------------
-	-- Const
+	-- ALU
 	-----------------
-	ZeroFill: component Zero_Fill PORT MAP(
-		Const4bit => Const (6 downto 3), --const4
-		Output16bit => Zero_Fill_out);
-		
-	SigExt: component  Sig_Ext PORT MAP(
-		Const8x2 => Const,		--offset8
-		Output16bit => SigExtOut);--: out  bit_16
-			--onde se faz a multiplicaçao por 2?????
-				--no interior do sigExt ou antes??????
-		
+	ALU: component Alu PORT MAP(
+		aluFunc => Func,
+		CyBw => CYin,
+		A => OpA,
+		B => B_sig,
+		R => Result,
+		flags => FlagsOut);
 	
-
+	
 end Behavioral;
-

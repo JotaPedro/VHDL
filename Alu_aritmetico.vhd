@@ -1,19 +1,13 @@
 ----------------------------------------------------------------------------------
--- Company: ISEL
--- Engineer: 
--- 
--- Create Date:    17:42:17 04/09/2016 
--- Design Name: 
--- Module Name:    Alu_aritmetico - Behavioral 
 -- Project Name: PDS16fpga
--- Target Devices: 
--- Tool versions: 
+
+-- Autors:	  João Botelho nº31169
+--				  Tiago Ramos  nº32125
+
+-- Module Name:  Alu_aritmetico - Descrição Hardware
+
 -- Description: 
 --
--- Dependencies: 
---
--- Revision: 
--- Revision 0.01 - File Created
 -- Additional Comments: 
 --
 ----------------------------------------------------------------------------------

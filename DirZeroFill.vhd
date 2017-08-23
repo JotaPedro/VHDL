@@ -1,19 +1,13 @@
 ----------------------------------------------------------------------------------
--- Company: ISEL
--- Engineer: 
--- 
--- Create Date:    16:38:48 04/28/2016 
--- Design Name: 
--- Module Name:    DirZeroFill - Behavioral 
 -- Project Name: PDS16fpga
--- Target Devices: 
--- Tool versions: 
+
+-- Autors:	  João Botelho nº31169
+--				  Tiago Ramos  nº32125
+
+-- Module Name:  DirZeroFill - Descrição Comportamental
+
 -- Description: 
 --
--- Dependencies: 
---
--- Revision: 
--- Revision 0.01 - File Created
 -- Additional Comments: 
 --
 ----------------------------------------------------------------------------------

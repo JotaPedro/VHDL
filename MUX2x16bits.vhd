@@ -1,19 +1,13 @@
 ----------------------------------------------------------------------------------
--- Company: ISEL
--- Engineer: 
--- 
--- Create Date:    00:07:27 08/10/2017 
--- Design Name: 
--- Module Name:    MUX2x16bits - Behavioral 
 -- Project Name: PDS16fpga
--- Target Devices: 
--- Tool versions: 
+
+-- Autors:	  João Botelho nº31169
+--				  Tiago Ramos  nº32125
+
+-- Module Name:  MUX2x16bits - Descrição Comportamental
+
 -- Description: 
 --
--- Dependencies: 
---
--- Revision: 
--- Revision 0.01 - File Created
 -- Additional Comments: 
 --
 ----------------------------------------------------------------------------------

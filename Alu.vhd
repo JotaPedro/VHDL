@@ -1,19 +1,13 @@
 ----------------------------------------------------------------------------------
--- Company: ISEL
--- Engineer: 
--- 
--- Create Date:    16:55:43 04/25/2016 
--- Design Name: 
--- Module Name:    Alu - Behavioral 
 -- Project Name: PDS16fpga
--- Target Devices: 
--- Tool versions: 
+
+-- Autors:	  João Botelho nº31169
+--				  Tiago Ramos  nº32125
+
+-- Module Name:  ALU - Descrição Hardware
+
 -- Description: 
 --
--- Dependencies: 
---
--- Revision: 
--- Revision 0.01 - File Created
 -- Additional Comments: 
 --
 ----------------------------------------------------------------------------------
@@ -67,7 +61,7 @@ begin
 	Shifter: component Barrel_shift PORT MAP( 
 		A => A,
 		B => B(3 downto 0),
-		Ctl_3bit => (aluFunc(5) AND aluFunc(2)) & (aluFunc(5) AND aluFunc(1)) & (aluFunc(5) AND aluFunc(0)), -- IR12 IR11 IR10
+		Shifter_Ctrl => (aluFunc(5) AND aluFunc(2)) & (aluFunc(5) AND aluFunc(1)) & (aluFunc(5) AND aluFunc(0)), -- IR12 IR11 IR10
 		Output => Output_shifter,
 		Cy => Output_shifter_Cy);
 

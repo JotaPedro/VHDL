@@ -1,19 +1,13 @@
 ----------------------------------------------------------------------------------
--- Company: ISEL
--- Engineer: 
--- 
--- Create Date:    15:01:41 04/19/2016 
--- Design Name: 
--- Module Name:    Barrel_shift - Behavioral 
 -- Project Name: PDS16fpga
--- Target Devices: 
--- Tool versions: 
+
+-- Autors:	  João Botelho nº31169
+--				  Tiago Ramos  nº32125
+
+-- Module Name:  Barrel_shift - Descrição Hardware
+
 -- Description: 
 --
--- Dependencies: 
---
--- Revision: 
--- Revision 0.01 - File Created
 -- Additional Comments: 
 --
 ----------------------------------------------------------------------------------
@@ -27,37 +21,38 @@ use work.pds16_types.ALL;
 entity Barrel_shift is
     Port ( A : in STD_LOGIC_VECTOR(15 downto 0);
            B : in STD_LOGIC_VECTOR(3 downto 0);
-           Ctl_3bit : in STD_LOGIC_VECTOR(2 downto 0); --IR12 IR11 IR10
+           Shifter_Ctrl : in STD_LOGIC_VECTOR(2 downto 0); --IR12 IR11 IR10
 			  Output : out STD_LOGIC_VECTOR(15 downto 0);
            Cy : out STD_LOGIC);
 end Barrel_shift;
 
 architecture Behavioral of Barrel_shift is
 
+	Signal BnB_sig: STD_LOGIC_VECTOR(3 downto 0);
+	Signal MUX_RC_CY_A15_out: STD_LOGIC;
+	Signal shiftMuxs_in: STD_LOGIC_VECTOR(15 downto 0);
+	Signal shiftMuxs_out: STD_LOGIC_VECTOR(15 downto 0); --todas as entradas dos multiplexers 2para1.
+	Signal MUX_RC_CY_A15_sel: STD_LOGIC;
+	Signal Cy_interno: STD_LOGIC;
+	Signal MUX_sin_CY_IR12_out: STD_LOGIC;
+	
+
 --	Signal Mp2to1_j : integer := 0;
---	Signal Mp2to1_in: STD_LOGIC_VECTOR(15 downto 0):= (others => '0'); --todas as entradas dos multiplexers 2para1.
+	
 --	Signal Mp2to1_sel: STD_LOGIC_VECTOR(15 downto 0):= (others => '0'); --selectores dos multiplexers 2para1
 --	Signal Output_Carry: STD_LOGIC := '0';
 --	Signal MpCtl_3bit_2to1_in: STD_LOGIC_VECTOR(1 downto 0):= (others => '0'); -- IR10 e A15
 --	Signal MpCtl_3bit_2to1_out: STD_LOGIC := '0';
---	Signal B_negativo: STD_LOGIC_VECTOR(3 downto 0):=(others => '0');
+	
 --	Signal Decoder_1_out: STD_LOGIC_VECTOR(15 downto 0):= (others => '0');
 --	Signal Decoder_2_out: STD_LOGIC_VECTOR(15 downto 0):= (others => '0');
 --	Signal Decoder_1_enable: STD_LOGIC;
 --	Signal Decoder_2_enable: STD_LOGIC;
---	Signal Cy_interno: STD_LOGIC;
---	Signal Mplex_RC_CY_A15_sel: STD_LOGIC;
---	Signal Mplex_RC_CY_A15_out: STD_LOGIC;
---	Signal Mplex16to1_A: STD_LOGIC_VECTOR(15 downto 0);
+	
+	
+--	
+	
 --	Signal Mplex_IR12_IR10_CY_out: STD_LOGIC;
-
-
-	component Mux_2in is
-		 Port ( Input: in STD_LOGIC_VECTOR(1 downto 0);
-				  Output: out STD_LOGIC;
-				  Sel: in STD_LOGIC
-				 );
-	end component;
 
 
 begin
@@ -67,42 +62,39 @@ begin
 	-- Shift MUXs
 	-----------------
 		--Bloco B/-B--
-			BlocoB: BnB PORT MAP (
-          B => B,
-          IR11 => ctl_3bit(1),
-          B_negativo => B_negativo
-        );
+		BlocoB: BnB PORT MAP (
+			IR11 => Shifter_Ctrl(1),
+			B => B,
+			B_negativo => BnB_sig);
 
-		-- MUX 4x1 para1el --
-		Mplex16to1_A <= Mplex_RC_CY_A15_out & A(14 downto 0);
-		Mplex16to1: Block_Mplex16to1 PORT MAP (
-          A => Mplex16to1_A,			--Entradas dos Mplex
-          Mp2to1_in => Mp2to1_in,	--Saidas dos Mplex
-          B_negativo => B_negativo 	--selector
+		-- MUX 4x16bits para1el --
+		shiftMuxs_in <= MUX_RC_CY_A15_out & A(14 downto 0);
+		
+		Block_shiftMUXs: Block_MUX4x16bits PORT MAP (
+          Sel => BnB_sig, 					--selector
+			 A => shiftMuxs_in,				--Entradas dos Mplex
+			 out_Block => shiftMuxs_out	--Saidas dos Mplex
       );
 		
-		---------------------multiplexers 2para1------------------------------
-		Mplex_RC_CY_A15_sel <= (Ctl_3bit(2) and Ctl_3bit(1)); --Activa quando é Rotate with Carry
-		Mplex_RC_CY_A15: Mux_2in PORT MAP( 
-			Input(0) => A(15),
-			Input(1) => Cy_interno,
-			Output => Mplex_RC_CY_A15_out,
-			Sel => Mplex_RC_CY_A15_sel
-		);
+				
+	--------------------------------
+	-- Rotate w/ Carry and Sin MUXs
+	--------------------------------
+		--multiplexers 2para1--
+		MUX_RC_CY_A15_sel <= (Shifter_Ctrl(2) and Shifter_Ctrl(1)); --Activa quando é Rotate with Carry=IR12 adn IR11
 		
-		Mplex_IR12_IR10_CY: Mux_2in PORT MAP( 
-			Input(0) => Ctl_3bit(0), -- IR10
-			Input(1) => Cy_interno,
-			Output => Mplex_IR12_IR10_CY_out,
-			Sel => Ctl_3bit(2)  -- IR12
-		);
+		MUX_RC_CY_A15: MUX1x1bit PORT MAP( 
+			Sel : MUX_RC_CY_A15_sel;
+			In0 : A(15);
+		   In1 : Cy_interno;
+			outdata : MUX_RC_CY_A15_out);
 		
-		MpCtl_3bit_2to1: Mux_2in PORT MAP( 
-			Input(0) => Mplex_IR12_IR10_CY_out, -- IR10
-			Input(1) => Mplex_RC_CY_A15_out,
-			Output => MpCtl_3bit_2to1_out,
-			Sel => Ctl_3bit(2)  -- IR12
-		);		
+		MUX_sin_CY_IR12: MUX1x1bit PORT MAP( 
+			Sel : Shifter_Ctrl(2);
+			In0 : Shifter_Ctrl(0);
+		   In1 : MUX_RC_CY_A15_out;
+			outdata : MUX_sin_CY_IR12_out);
+		
 		
 		
 			---------------------Selector para multiplexers 2para1----------------

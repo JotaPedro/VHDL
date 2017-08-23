@@ -1,34 +1,101 @@
 Release 14.7 - xst P.20131013 (nt64)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
---> Parameter TMPDIR set to F:/Projecto/github repo/VHDL/xst/projnav.tmp
+--> Parameter TMPDIR set to D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/xst/projnav.tmp
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.11 secs
+Total CPU time to Xst completion: 0.10 secs
  
---> Parameter xsthdpdir set to F:/Projecto/github repo/VHDL/xst
+--> Parameter xsthdpdir set to D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.11 secs
+Total CPU time to Xst completion: 0.10 secs
  
 --> WARNING:Xst:3164 - Option "-debug" found multiple times in the command line. Only the first occurence is considered.
 
 =========================================================================
 *                          HDL Compilation                              *
 =========================================================================
-Compiling vhdl file "F:/Projecto/github repo/VHDL/pds16_types.vhd" in Library work.
-ERROR:HDLParsers:164 - "F:/Projecto/github repo/VHDL/pds16_types.vhd" Line 116. parse error, unexpected COMPONENT, expecting END
+Compiling vhdl file "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Mux_2in.vhd" in Library work.
+Architecture behavioral of Entity mux_2in is up to date.
+Compiling vhdl file "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Or_tree.vhd" in Library work.
+Architecture behavioral of Entity or_tree is up to date.
+Compiling vhdl file "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Mux_16In.vhd" in Library work.
+Architecture behavioral of Entity mux_16in is up to date.
+Compiling vhdl file "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/FullAdder.vhd" in Library work.
+Architecture structural of Entity fulladder is up to date.
+Compiling vhdl file "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/BnB.vhd" in Library work.
+Architecture behavioral of Entity bnb is up to date.
+Compiling vhdl file "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Block_MUX4x16bits.vhd" in Library work.
+Entity <block_mux4x16bits> compiled.
+Entity <Block_MUX4x16bits> (Architecture <Behavioral>) compiled.
+Compiling vhdl file "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Shifter_Sel_mplex2to1.vhd" in Library work.
+Architecture behavioral of Entity shifter_sel_mplex2to1 is up to date.
+Compiling vhdl file "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Block_Mplex2to1.vhd" in Library work.
+Architecture behavioral of Entity block_mplex2to1 is up to date.
+Compiling vhdl file "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Decoder_16out.vhd" in Library work.
+Architecture behavioral of Entity decoder_16out is up to date.
+Compiling vhdl file "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Alu_logico.vhd" in Library work.
+Entity <alu_logico> compiled.
+Entity <alu_logico> (Architecture <behavioral>) compiled.
+Compiling vhdl file "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" in Library work.
+Entity <barrel_shift> compiled.
+ERROR:HDLParsers:3312 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 66. Undefined symbol 'ctl_3bit'.
+ERROR:HDLParsers:1209 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 66. ctl_3bit: Undefined symbol (last report in this block)
+ERROR:HDLParsers:3312 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 68. Undefined symbol 'B_negativo'.
+ERROR:HDLParsers:1209 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 68. B_negativo: Undefined symbol (last report in this block)
+ERROR:HDLParsers:851 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 64. Formal IR11 of BnB with no default value must be associated with an actual value.
+ERROR:HDLParsers:3312 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 71. Undefined symbol 'Mplex16to1_A'.
+ERROR:HDLParsers:3312 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 71. Undefined symbol 'Mplex_RC_CY_A15_out'.
+ERROR:HDLParsers:1209 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 71. Mplex_RC_CY_A15_out: Undefined symbol (last report in this block)
+ERROR:HDLParsers:3312 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 73. Undefined symbol 'Block_MUX4x16bits'.
+ERROR:HDLParsers:1209 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 74. Mplex16to1_A: Undefined symbol (last report in this block)
+ERROR:HDLParsers:3312 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 75. Undefined symbol 'Mp2to1_in'.
+ERROR:HDLParsers:1209 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 75. Mp2to1_in: Undefined symbol (last report in this block)
+ERROR:HDLParsers:3312 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 85. Undefined symbol 'Mux_RC_CY_A15_sel'.
+ERROR:HDLParsers:808 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 85. and can not have such operands in this context.
+ERROR:HDLParsers:3312 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 89. Undefined symbol 'Cy_interno'.
+ERROR:HDLParsers:1209 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 89. Cy_interno: Undefined symbol (last report in this block)
+ERROR:HDLParsers:3312 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 92. Undefined symbol 'Mplex_RC_CY_A15_sel'.
+ERROR:HDLParsers:1209 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 92. Mplex_RC_CY_A15_sel: Undefined symbol (last report in this block)
+ERROR:HDLParsers:3452 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 87. An index or element of the formal port Input of Mux_2in is missing in instantiation.
+ERROR:HDLParsers:3312 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 95. Undefined symbol 'Ctl_3bit'.
+ERROR:HDLParsers:1209 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 95. Ctl_3bit: Undefined symbol (last report in this block)
+ERROR:HDLParsers:3312 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 97. Undefined symbol 'Mplex_IR12_IR10_CY_out'.
+ERROR:HDLParsers:1209 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 97. Mplex_IR12_IR10_CY_out: Undefined symbol (last report in this block)
+ERROR:HDLParsers:3324 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 94. IN mode Formal Input of Mux_2in with no default value must be associated with an actual value.
+ERROR:HDLParsers:3312 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 104. Undefined symbol 'MpCtl_3bit_2to1_out'.
+ERROR:HDLParsers:1209 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 104. MpCtl_3bit_2to1_out: Undefined symbol (last report in this block)
+ERROR:HDLParsers:3324 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 101. IN mode Formal Input of Mux_2in with no default value must be associated with an actual value.
+ERROR:HDLParsers:3313 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 111. Undefined symbol 'Decoder_1_out'.  Should it be: Decoder_16out?
+ERROR:HDLParsers:1209 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 111. Decoder_1_out: Undefined symbol (last report in this block)
+ERROR:HDLParsers:3312 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 112. Undefined symbol 'Decoder_2_out'.
+ERROR:HDLParsers:1209 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 112. Decoder_2_out: Undefined symbol (last report in this block)
+ERROR:HDLParsers:3312 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 114. Undefined symbol 'Mp2to1_sel'.
+ERROR:HDLParsers:1209 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 114. Mp2to1_sel: Undefined symbol (last report in this block)
+ERROR:HDLParsers:3324 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 110. IN mode Formal Decoder_1 of Shifter_Sel_mplex2to1 with no default value must be associated with an actual value.
+ERROR:HDLParsers:3312 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 121. Undefined symbol 'Output_Carry'.
+ERROR:HDLParsers:1209 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 121. Output_Carry: Undefined symbol (last report in this block)
+ERROR:HDLParsers:851 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 117. Formal Input1 of Block_Mplex2to1 with no default value must be associated with an actual value.
+ERROR:HDLParsers:3312 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 127. Undefined symbol 'Decoder_1_enable'.
+ERROR:HDLParsers:808 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 127. not can not have such operands in this context.
+ERROR:HDLParsers:3312 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 128. Undefined symbol 'Decoder_2_enable'.
+ERROR:HDLParsers:808 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 128. not can not have such operands in this context.
+ERROR:HDLParsers:1209 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 131. Decoder_1_enable: Undefined symbol (last report in this block)
+ERROR:HDLParsers:851 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 130. Formal Enable of Decoder_16out with no default value must be associated with an actual value.
+ERROR:HDLParsers:1209 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 136. Decoder_2_enable: Undefined symbol (last report in this block)
+ERROR:HDLParsers:851 - "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" Line 135. Formal Enable of Decoder_16out with no default value must be associated with an actual value.
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.23 secs
+Total CPU time to Xst completion: 0.51 secs
  
 --> 
 
-Total memory usage is 222772 kilobytes
+Total memory usage is 269740 kilobytes
 
-Number of errors   :    1 (   0 filtered)
+Number of errors   :   45 (   0 filtered)
 Number of warnings :    1 (   0 filtered)
 Number of infos    :    0 (   0 filtered)
 

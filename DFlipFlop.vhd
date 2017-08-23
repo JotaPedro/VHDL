@@ -1,19 +1,13 @@
 ----------------------------------------------------------------------------------
--- Company: ISEL
--- Engineer: 
--- 
--- Create Date:    13:03:23 04/28/2016 
--- Design Name: 
--- Module Name:    DFlipFlop - Behavioral 
 -- Project Name: PDS16fpga
--- Target Devices: 
--- Tool versions: 
+
+-- Autors:	  João Botelho nº31169
+--				  Tiago Ramos  nº32125
+
+-- Module Name:  DFlipFlop - Descrição Comportamental
+
 -- Description: 
 --
--- Dependencies: 
---
--- Revision: 
--- Revision 0.01 - File Created
 -- Additional Comments: 
 --
 ----------------------------------------------------------------------------------
@@ -25,7 +19,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity DFlipFlop is
     Port ( Clk : in  STD_LOGIC;
-			  CL : in  STD_LOGIC;
+			  En : in  STD_LOGIC;
 			  D : in  STD_LOGIC;
            Q : out  STD_LOGIC );
 end DFlipFlop;
@@ -36,7 +30,7 @@ begin
 	process (Clk)
 	begin
 		if (rising_edge(Clk)) then
-			if CL='0' then 			-- En????
+			if En='1' then 
 				
 				Q <= D;
 				

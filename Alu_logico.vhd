@@ -4,7 +4,7 @@
 -- Autors:	  João Botelho nº31169
 --				  Tiago Ramos  nº32125
 
--- Module Name:  Alu_Logico - Descrição Hardware
+-- Module Name:  Alu_Logico - Descrição Comportamental
 
 -- Description: 
 -- Este modulo é referente ao bloco existente na ALU do PDS16 com o nome "Lógico".

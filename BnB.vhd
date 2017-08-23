@@ -1,19 +1,13 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date:    20:02:40 08/10/2016 
--- Design Name: 
--- Module Name:    BnB - Behavioral 
--- Project Name: 
--- Target Devices: 
--- Tool versions: 
+-- Project Name: PDS16fpga
+
+-- Autors:	  João Botelho nº31169
+--				  Tiago Ramos  nº32125
+
+-- Module Name:  BnB - Descrição Hardware
+
 -- Description: 
 --
--- Dependencies: 
---
--- Revision: 
--- Revision 0.01 - File Created
 -- Additional Comments: 
 --
 ----------------------------------------------------------------------------------
@@ -23,14 +17,10 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 use work.pds16_types.ALL;
 
----- Uncomment the following library declaration if instantiating
----- any Xilinx primitives in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity BnB is
-    Port ( B : in  STD_LOGIC_VECTOR(3 downto 0);
-           IR11 : in  STD_LOGIC;
+    Port ( IR11 : in  STD_LOGIC;
+			  B : in  STD_LOGIC_VECTOR(3 downto 0);
            B_negativo : out  STD_LOGIC_VECTOR(3 downto 0));
 end BnB;
 
@@ -41,12 +31,9 @@ begin
 	process(B,IR11)	
 		begin
 			if (IR11 = '1') then
-				--B <= not B_negativo;
 				B_negativo <= unsigned(not(B)) + 1;
-			else if (IR11 = '0') then
-				--B <= not B_negativo;
+			else 
 				B_negativo <= B;
-				end if;
 			end if;
 	end process;
 

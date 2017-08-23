@@ -23,10 +23,6 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 use work.pds16_types.ALL;
 
----- Uncomment the following library declaration if instantiating
----- any Xilinx primitives in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity Block_Mplex2to1 is
     Port ( Input1 : in  STD_LOGIC_VECTOR(15 downto 0);

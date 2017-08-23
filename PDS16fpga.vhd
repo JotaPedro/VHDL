@@ -1,19 +1,13 @@
 ----------------------------------------------------------------------------------
--- Company: ISEL
--- Engineer: 
--- 
--- Create Date:    12:51:49 04/28/2016 
--- Design Name: 
--- Module Name:    PDS16fpga - Behavioral 
 -- Project Name: PDS16fpga
--- Target Devices: 
--- Tool versions: 
+
+-- Autors:	  João Botelho nº31169
+--				  Tiago Ramos  nº32125
+
+-- Module Name:  PDS16 - Descrição Hardware
+
 -- Description: 
 --
--- Dependencies: 
---
--- Revision: 
--- Revision 0.01 - File Created
 -- Additional Comments: 
 --
 ----------------------------------------------------------------------------------
@@ -91,7 +85,7 @@ begin
 	-----------------------
 	EXINT_FF: component DFlipFlop PORT MAP(
 		Clk => N_MCLK,
-		CL => IE,
+		En => IE,
 		D => NOT EXINT,
       Q => INTP_sig); 		--sinal INTP do Control
 
@@ -100,8 +94,8 @@ begin
 	-----------------
 	Reset_FF: component DFlipFlop PORT MAP(
 		Clk => N_MCLK,
-		CL => '0',		--CL?? ou En??
-		D => RESET,
+		En => '1',
+		D => NOT RESET,
       Q => reset);
 	
 	clear <= RESET OR reset;
@@ -224,7 +218,7 @@ begin
 --		DataIn : out  STD_LOGIC_VECTOR (15 downto 0)
 --	);
 	
-		-----------------
+	-----------------
 	-- CONTROL
 	-----------------
 --		Control: component Control PORT MAP(

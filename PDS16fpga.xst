@@ -1,5 +1,5 @@
-set -tmpdir "F:/Projecto/github repo/VHDL/xst/projnav.tmp"
-set -xsthdpdir "F:/Projecto/github repo/VHDL/xst"
+set -tmpdir "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/xst/projnav.tmp"
+set -xsthdpdir "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/xst"
 elaborate
 -ifn PDS16fpga.prj
 -ifmt mixed
