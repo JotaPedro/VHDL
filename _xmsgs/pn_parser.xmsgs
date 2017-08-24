@@ -8,22 +8,193 @@
 <!-- Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.    -->
 
 <messages>
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Alu.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Alu_aritmetico.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Alu_logico.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/BIU.vhd&quot; into library work</arg>
+</msg>
+
 <msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd&quot; into library work</arg>
 </msg>
 
-<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd</arg>&quot; Line <arg fmt="%d" index="2">87</arg>. <arg fmt="%s" index="3">Syntax error near &quot;:&quot;.</arg>
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Block_MUX1x1bit.vhd&quot; into library work</arg>
 </msg>
 
-<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd</arg>&quot; Line <arg fmt="%d" index="2">90</arg>. <arg fmt="%s" index="3">Syntax error near &quot;)&quot;.</arg>
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Block_MUX4x16bits.vhd&quot; into library work</arg>
 </msg>
 
-<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd</arg>&quot; Line <arg fmt="%d" index="2">93</arg>. <arg fmt="%s" index="3">Syntax error near &quot;:&quot;.</arg>
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/BnB.vhd&quot; into library work</arg>
 </msg>
 
-<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd</arg>&quot; Line <arg fmt="%d" index="2">96</arg>. <arg fmt="%s" index="3">Syntax error near &quot;)&quot;.</arg>
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Control.vhd&quot; into library work</arg>
 </msg>
 
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Block_Mplex2to1.vhd&quot; into library work</arg>
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/DFlipFlop.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Data_Processor.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Decoder2to4.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Decoder3_8.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Decoder3bits.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Decoder4bits.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Decoder4to16.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Decoder_16out.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/DirZeroFill.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/FullAdder.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/FullAdderV2.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/HiZeroFill.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/ImmZeroFill.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/InstDecode.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/InstReg.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Latch16bits.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/MBR.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/MUX1x16bits.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/MUX1x1bit.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/MUX1x3bits.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/MUX1x8bits.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/MUX2x16bits.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/MUX2x1bit.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/MUX3x16bits.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/MUX4x1bit.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Mplex16bit_2to1.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Mplex16bit_4to1.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Mplex16bit_5to1.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Mplex16bit_8to1.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Mplex16to1.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Mplex2to1.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Mplex3bit_2to1.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Mplex4to1.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Mplex8bit_2to1.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/MplexWrByte.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Mux_16In.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Mux_2in.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Mux_3in.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Mux_4in.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Or_tree.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/PC_Adder.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/PDS16fpga.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Ram.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Register16bits.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Register16bitsCL.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/RegisterFile8x16.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Sel_andgatesTree.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/SigExt.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Sig_Ext.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Tristate.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Zero_Fill.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/nbit_register_synthesis.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/out_MUXs_Sel.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/pds16_types.vhd&quot; into library work</arg>
 </msg>
 
 </messages>

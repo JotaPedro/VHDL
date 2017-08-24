@@ -1,19 +1,13 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date:    21:44:57 04/20/2016 
--- Design Name: 
--- Module Name:    Or_tree - Behavioral 
--- Project Name: 
--- Target Devices: 
--- Tool versions: 
+-- Project Name: PDS16fpga
+
+-- Autors:	  João Botelho nº31169
+--				  Tiago Ramos  nº32125
+
+-- Module Name:  Or_tree - Descrição Hardware
+
 -- Description: 
 --
--- Dependencies: 
---
--- Revision: 
--- Revision 0.01 - File Created
 -- Additional Comments: 
 --
 ----------------------------------------------------------------------------------
@@ -23,18 +17,14 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
----- Uncomment the following library declaration if instantiating
----- any Xilinx primitives in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity Or_tree is
     Port ( Input : in  STD_LOGIC_VECTOR(15 downto 0);
-           Output : buffer  STD_LOGIC_VECTOR(15 downto 0)
-		);
+           Output : buffer  STD_LOGIC_VECTOR(15 downto 0));
+			  
 end Or_tree;
 
-architecture Behavioral of Or_tree is
+architecture Structural of Or_tree is
 begin
 	process(Input)
 		begin
@@ -55,5 +45,5 @@ begin
 				Output(1) <= or_reduce(Input(15 downto 1));--Input(1) or Output(2);
 				Output(0) <= '0';
 	end process;
-end Behavioral;
+end Structural;
 

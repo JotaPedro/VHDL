@@ -1,19 +1,13 @@
 ----------------------------------------------------------------------------------
--- Company: ISEL
--- Engineer: 
--- 
--- Create Date:    23:34:16 08/16/2017 
--- Design Name: 
--- Module Name:    MUX4x1bit - Behavioral 
 -- Project Name: PDS16fpga
--- Target Devices: 
--- Tool versions: 
+
+-- Autors:	  João Botelho nº31169
+--				  Tiago Ramos  nº32125
+
+-- Module Name:  MUX1x1bit - Descrição Comportametal
+
 -- Description: 
 --
--- Dependencies: 
---
--- Revision: 
--- Revision 0.01 - File Created
 -- Additional Comments: 
 --
 ----------------------------------------------------------------------------------
@@ -38,8 +32,8 @@ begin
 		begin
 		
 		case Sel is
-			when "0" => outdata <= In0;
-			when "1" => outdata <= In1;
+			when '0' => outdata <= In0;
+			when '1' => outdata <= In1;
 			when others => outdata <= In0;
 		end case;
 		

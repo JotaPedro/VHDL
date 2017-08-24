@@ -1,8 +1,8 @@
-V3 296
+V3 322
 FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Alu.vhd" 2017/08/23.01:10:44 P.20131013
 EN work/Alu 0 FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Alu.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
-      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1501106249
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
 AR work/Alu/Structural 0 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Alu.vhd" EN work/Alu 0 \
       CP Alu_logico CP Barrel_shift CP Alu_aritmetico CP MUX1x16bits CP MUX2x1bit
@@ -10,56 +10,64 @@ FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Alu_aritmetico.vhd" 2017/08/
 EN work/Alu_aritmetico 1493149500 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Alu_aritmetico.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
-      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1501106249
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
 AR work/Alu_aritmetico/structural 0 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Alu_aritmetico.vhd" \
       EN work/Alu_aritmetico 1493149500 CP FullAdder
 FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Alu_logico.vhd" 2017/08/22.23:57:52 P.20131013
-EN work/Alu_logico 1503447502 \
+EN work/Alu_logico 1503536945 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Alu_logico.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
-      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1501106249
-AR work/Alu_logico/Behavioral 1503447503 \
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
+AR work/Alu_logico/Behavioral 1503536946 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Alu_logico.vhd" \
-      EN work/Alu_logico 1503447502
+      EN work/Alu_logico 1503536945
 FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" 2017/08/23.01:10:13 P.20131013
 EN work/Barrel_shift 1494184853 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
-      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1501106249
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
 AR work/Barrel_shift/Behavioral 1494184854 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd" \
-      EN work/Barrel_shift 1494184853 CP BnB CP Block_MUX4x16bits CP Mux_2in \
-      CP Shifter_Sel_mplex2to1 CP Block_Mplex2to1 CP Decoder_16out
+      EN work/Barrel_shift 1494184853 CP BnB CP Block_MUX4x16bits CP MUX1x1bit \
+      CP Block_MUX1x1bit CP Decoder4bits CP out_MUXs_Sel
 FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Block_Mplex2to1.vhd" 2017/05/22.18:45:23 P.20131013
 EN work/Block_Mplex2to1 1503447498 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Block_Mplex2to1.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
-      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1501106249
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
 AR work/Block_Mplex2to1/Behavioral 1503447499 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Block_Mplex2to1.vhd" \
       EN work/Block_Mplex2to1 1503447498 CP Mux_2in
-FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Block_MUX4x16bits.vhd" 2017/08/23.01:17:59 P.20131013
-EN work/Block_MUX4x16bits 1503447494 \
+FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Block_MUX1x1bit.vhd" 2017/08/24.01:53:44 P.20131013
+EN work/Block_MUX1x1bit 1503536939 \
+      FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Block_MUX1x1bit.vhd" \
+      PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
+AR work/Block_MUX1x1bit/Structural 1503536940 \
+      FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Block_MUX1x1bit.vhd" \
+      EN work/Block_MUX1x1bit 1503536939 CP MUX1x1bit
+FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Block_MUX4x16bits.vhd" 2017/08/23.23:51:17 P.20131013
+EN work/Block_MUX4x16bits 1503536937 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Block_MUX4x16bits.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
-      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1501106249
-AR work/Block_MUX4x16bits/Behavioral 1503447495 \
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
+AR work/Block_MUX4x16bits/Structural 1503536938 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Block_MUX4x16bits.vhd" \
-      EN work/Block_MUX4x16bits 1503447494 CP MUX4x1bit
+      EN work/Block_MUX4x16bits 1503536937 CP MUX4x1bit
 FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/BnB.vhd" 2017/08/23.01:30:48 P.20131013
-EN work/BnB 1503448251 \
+EN work/BnB 1503536935 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/BnB.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
-      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1501106249
-AR work/BnB/Behavioral 1503448252 \
-      FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/BnB.vhd" EN work/BnB 1503448251
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
+AR work/BnB/Behavioral 1503536936 \
+      FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/BnB.vhd" EN work/BnB 1503536935
 FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Data_Processor.vhd" 2017/08/22.23:39:23 P.20131013
 EN work/Data_Processor 0 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Data_Processor.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
       PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB ieee/NUMERIC_STD 1381692181 \
-      PB work/pds16_types 1501106249
+      PB work/pds16_types 1503536926
 AR work/Data_Processor/Structural 0 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Data_Processor.vhd" \
       EN work/Data_Processor 0 CP Zero_Fill CP Sig_Ext CP MUX3x16bits CP Alu
@@ -70,6 +78,13 @@ EN work/Decoder3bits 0 \
 AR work/Decoder3bits/Behavioral 0 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Decoder3bits.vhd" \
       EN work/Decoder3bits 0
+FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Decoder4bits.vhd" 2017/08/24.00:40:38 P.20131013
+EN work/Decoder4bits 1503536941 \
+      FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Decoder4bits.vhd" \
+      PB ieee/std_logic_1164 1381692176
+AR work/Decoder4bits/Behavioral 1503536942 \
+      FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Decoder4bits.vhd" \
+      EN work/Decoder4bits 1503536941
 FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Decoder_16out.vhd" 2017/08/08.18:53:25 P.20131013
 EN work/Decoder_16out 1503447500 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Decoder_16out.vhd" \
@@ -89,18 +104,18 @@ FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/DirZeroFill.vhd" 2017/08/22.
 EN work/DirZeroFill 0 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/DirZeroFill.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
-      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1501106249
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
 AR work/DirZeroFill/Behavioral 0 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/DirZeroFill.vhd" \
       EN work/DirZeroFill 0
 FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/FullAdder.vhd" 2017/08/23.00:08:04 P.20131013
-EN work/FullAdder 1503447490 \
+EN work/FullAdder 1503536933 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/FullAdder.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
       PB ieee/STD_LOGIC_UNSIGNED 1381692179
-AR work/FullAdder/structural 1503447491 \
+AR work/FullAdder/structural 1503536934 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/FullAdder.vhd" \
-      EN work/FullAdder 1503447490
+      EN work/FullAdder 1503536933
 FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/HiZeroFill.vhd" 2017/08/22.23:24:42 P.20131013
 EN work/HiZeroFill 0 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/HiZeroFill.vhd" \
@@ -113,10 +128,18 @@ FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/ImmZeroFill.vhd" 2017/08/22.
 EN work/ImmZeroFill 0 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/ImmZeroFill.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
-      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1501106249
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
 AR work/ImmZeroFill/Behavioral 0 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/ImmZeroFill.vhd" \
       EN work/ImmZeroFill 0
+FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/InstReg.vhd" 2017/06/04.22:05:37 P.20131013
+EN work/InstReg 1503529159 \
+      FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/InstReg.vhd" \
+      PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179
+AR work/InstReg/Behavioral 1503529160 \
+      FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/InstReg.vhd" \
+      EN work/InstReg 1503529159 CP Register16bits
 FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/MUX1x16bits.vhd" 2017/08/22.23:59:43 P.20131013
 EN work/MUX1x16bits 0 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/MUX1x16bits.vhd" \
@@ -124,6 +147,14 @@ EN work/MUX1x16bits 0 \
 AR work/MUX1x16bits/Behavioral 0 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/MUX1x16bits.vhd" \
       EN work/MUX1x16bits 0
+FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/MUX1x1bit.vhd" 2017/08/23.23:52:51 P.20131013
+EN work/MUX1x1bit 1503536929 \
+      FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/MUX1x1bit.vhd" \
+      PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
+AR work/MUX1x1bit/Behavioral 1503536930 \
+      FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/MUX1x1bit.vhd" \
+      EN work/MUX1x1bit 1503536929
 FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/MUX1x3bits.vhd" 2017/08/10.18:08:51 P.20131013
 EN work/MUX1x3bits 0 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/MUX1x3bits.vhd" \
@@ -160,13 +191,13 @@ AR work/MUX3x16bits/Behavioral 0 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/MUX3x16bits.vhd" \
       EN work/MUX3x16bits 0
 FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/MUX4x1bit.vhd" 2017/08/23.02:10:14 P.20131013
-EN work/MUX4x1bit 1503450718 \
+EN work/MUX4x1bit 1503536931 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/MUX4x1bit.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
-      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1501106249
-AR work/MUX4x1bit/Behavioral 1503450719 \
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
+AR work/MUX4x1bit/Behavioral 1503536932 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/MUX4x1bit.vhd" \
-      EN work/MUX4x1bit 1503450718
+      EN work/MUX4x1bit 1503536931
 FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Mux_16In.vhd" 2017/08/17.19:17:18 P.20131013
 EN work/Mux_16in 1503447488 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Mux_16In.vhd" \
@@ -183,31 +214,58 @@ EN work/Mux_2in 1503447484 \
 AR work/Mux_2in/Behavioral 1503447485 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Mux_2in.vhd" \
       EN work/Mux_2in 1503447484
-FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Or_tree.vhd" 2017/05/22.18:44:14 P.20131013
-EN work/Or_tree 1503447486 \
+FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Or_tree.vhd" 2017/08/24.01:17:08 P.20131013
+EN work/Or_tree 1503536927 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Or_tree.vhd" \
       PB ieee/std_logic_misc 1381692178 PB ieee/std_logic_1164 1381692176 \
       PB ieee/std_logic_arith 1381692177 PB ieee/STD_LOGIC_UNSIGNED 1381692179
-AR work/Or_tree/Behavioral 1503447487 \
+AR work/Or_tree/Structural 1503536928 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Or_tree.vhd" \
-      EN work/Or_tree 1503447486
+      EN work/Or_tree 1503536927
+FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/out_MUXs_Sel.vhd" 2017/08/24.01:46:53 P.20131013
+EN work/out_MUXs_Sel 1503536943 \
+      FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/out_MUXs_Sel.vhd" \
+      PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
+AR work/out_MUXs_Sel/Structural 1503536944 \
+      FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/out_MUXs_Sel.vhd" \
+      EN work/out_MUXs_Sel 1503536943 CP Or_tree
 FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/PDS16fpga.vhd" 2017/08/22.23:20:19 P.20131013
 EN work/PDS16fpga 0 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/PDS16fpga.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
-      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1501106249
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
 AR work/PDS16fpga/Structural 0 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/PDS16fpga.vhd" \
       EN work/PDS16fpga 0 CP DFlipFlop CP Register16bits CP ImmZeroFill \
       CP MUX1x8bits CP HiZeroFill CP MUX2x16bits CP RegisterFile8x16 \
       CP Data_Processor CP DirZeroFill
+FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/pds16_types.vhd" 2017/08/24.02:08:20 P.20131013
+PH work/pds16_types 1503536925 \
+      FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/pds16_types.vhd" \
+      PB ieee/std_logic_1164 1381692176 CD MplexWrByte CD DFlipFlop CD FullAdder \
+      CD PC_Adder CD Adder16bit CD Alu_aritmetico CD Mplex16bit_5to1 CD Sig_Ext \
+      CD Zero_Fill CD Alu CD Alu_logico CD Mux_2in CD Mux_4in CD Mux_16in \
+      CD Shifter_Sel_mplex2to1 CD Or_tree CD Barrel_shift CD Mplex4to1 \
+      CD Mplex16bit_2to1 CD Decoder3_8 CD nbit_register CD Mplex16bit_8to1 \
+      CD Mplex3bit_2to1 CD Sel_andgatesTree CD Mplex16bit_4to1 CD Mplex8bit_2to1 \
+      CD DirZeroFill CD MBR CD InstReg CD ImmZeroFill CD HiZeroFill CD Control CD BIU \
+      CD Latch16bits CD Data_Processor CD RegisterFile8x16 CD BnB \
+      CD Block_Mplex16to1 CD Block_Mplex2to1 CD Decoder_16out CD Tristate \
+      CD Decoder3bits CD Register16bits CD Register16bitsCL CD MUX1x16bits \
+      CD MUX1x3bits CD MUX3x16bits CD MUX2x16bits CD MUX1x8bits CD MUX2x1bit \
+      CD InstDecode CD MUX4x1bit CD MUX1x1bit CD out_MUXs_Sel CD Decoder4bits \
+      CD Block_MUX1x1bit CD Block_MUX4x16bits
+PB work/pds16_types 1503536926 \
+      FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/pds16_types.vhd" \
+      PH work/pds16_types 1503536925
 FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Register16bits.vhd" 2017/08/22.23:21:52 P.20131013
-EN work/Register16bits 0 \
+EN work/Register16bits 1503529157 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Register16bits.vhd" \
       PB ieee/std_logic_1164 1381692176
-AR work/Register16bits/Behavioural 0 \
+AR work/Register16bits/Behavioural 1503529158 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Register16bits.vhd" \
-      EN work/Register16bits 0
+      EN work/Register16bits 1503529157
 FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Register16bitsCL.vhd" 2017/08/10.18:08:51 P.20131013
 EN work/Register16bitsCL 0 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Register16bitsCL.vhd" \
@@ -218,7 +276,7 @@ AR work/Register16bitsCL/Behavioral 0 \
 FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/RegisterFile8x16.vhd" 2017/08/17.19:17:18 P.20131013
 EN work/RegisterFile8x16 1492103074 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/RegisterFile8x16.vhd" \
-      PB ieee/std_logic_1164 1381692176 PB work/pds16_types 1501106249
+      PB ieee/std_logic_1164 1381692176 PB work/pds16_types 1503536926
 AR work/RegisterFile8x16/Structural 0 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/RegisterFile8x16.vhd" \
       EN work/RegisterFile8x16 1492103074 CP Decoder3bits CP Register16bits \
@@ -228,14 +286,14 @@ FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Shifter_Sel_mplex2to1.vhd" 2
 EN work/Shifter_Sel_mplex2to1 1503447496 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Shifter_Sel_mplex2to1.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
-      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1501106249
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
 AR work/Shifter_Sel_mplex2to1/Behavioral 1503447497 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Shifter_Sel_mplex2to1.vhd" \
       EN work/Shifter_Sel_mplex2to1 1503447496 CP Or_tree
 FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Sig_Ext.vhd" 2017/08/22.23:40:36 P.20131013
 EN work/Sig_Ext 0 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Sig_Ext.vhd" \
-      PB ieee/std_logic_1164 1381692176 PB work/pds16_types 1501106249
+      PB ieee/std_logic_1164 1381692176 PB work/pds16_types 1503536926
 AR work/Sig_Ext/Behavioral 0 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Sig_Ext.vhd" \
       EN work/Sig_Ext 0
@@ -243,7 +301,7 @@ FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Zero_Fill.vhd" 2017/08/22.23
 EN work/Zero_Fill 0 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Zero_Fill.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
-      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1501106249
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
 AR work/Zero_Fill/Behavioral 0 \
       FL "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Zero_Fill.vhd" \
       EN work/Zero_Fill 0
@@ -260,7 +318,7 @@ FL "F:/Projecto/github repo/VHDL/Barrel_shift.vhd" 2017/05/07.20:20:32 P.2013101
 FL "F:/Projecto/github repo/VHDL/BIU.vhd" 2017/04/07.21:01:52 P.20131013
 EN work/BIU 0 FL "F:/Projecto/github repo/VHDL/BIU.vhd" PB ieee/std_logic_1164 1381692176 \
       PB ieee/std_logic_arith 1381692177 PB ieee/STD_LOGIC_UNSIGNED 1381692179 \
-      PB work/pds16_types 1501106249
+      PB work/pds16_types 1503536926
 AR work/BIU/Behavioral 0 \
       FL "F:/Projecto/github repo/VHDL/BIU.vhd" EN work/BIU 0 CP Tristate CP MBR \
       CP Mplex8bit_2to1 CP DFlipFlop
@@ -268,7 +326,7 @@ FL "F:/Projecto/github repo/VHDL/Block_Mplex16to1.vhd" 2017/05/07.18:11:21 P.201
 EN work/Block_Mplex16to1 1494184845 \
       FL "F:/Projecto/github repo/VHDL/Block_Mplex16to1.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
-      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1501106249
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
 AR work/Block_Mplex16to1/Behavioral 1494184846 \
       FL "F:/Projecto/github repo/VHDL/Block_Mplex16to1.vhd" \
       EN work/Block_Mplex16to1 1494184845 CP Mux_16in
@@ -277,7 +335,7 @@ FL "F:/Projecto/github repo/VHDL/BnB.vhd" 2017/04/25.20:30:05 P.20131013
 FL "F:/Projecto/github repo/VHDL/Control.vhd" 2017/07/26.22:57:17 P.20131013
 EN work/Control 1501106252 FL "F:/Projecto/github repo/VHDL/Control.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
-      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1501106249
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
 AR work/Control/Behavioral 1501106253 \
       FL "F:/Projecto/github repo/VHDL/Control.vhd" EN work/Control 1501106252 \
       CP InstDecode
@@ -288,7 +346,7 @@ AR work/Data_Processor/Behavioral 0 \
 FL "F:/Projecto/github repo/VHDL/Decoder3_8.vhd" 2017/04/07.21:01:52 P.20131013
 EN work/Decoder3_8 1493149508 FL "F:/Projecto/github repo/VHDL/Decoder3_8.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
-      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1501106249
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
 AR work/Decoder3_8/Behavioral 1493149509 \
       FL "F:/Projecto/github repo/VHDL/Decoder3_8.vhd" EN work/Decoder3_8 1493149508
 FL "F:/Projecto/github repo/VHDL/Decoder4to16.vhd" 2017/04/07.21:01:52 P.20131013
@@ -302,21 +360,16 @@ FL "F:/Projecto/github repo/VHDL/DFlipFlop.vhd" 2017/04/07.21:01:52 P.20131013
 FL "F:/Projecto/github repo/VHDL/DirZeroFill.vhd" 2017/04/07.21:01:52 P.20131013
 FL "F:/Projecto/github repo/VHDL/FullAdder.vhd" 2017/04/07.21:01:52 P.20131013
 AR work/FullAdder/Behavioral -1 FL "F:/Projecto/github repo/VHDL/FullAdder.vhd" \
-      EN work/FullAdder 1503447490
+      EN work/FullAdder 1503536933
 FL "F:/Projecto/github repo/VHDL/HiZeroFill.vhd" 2017/04/07.21:01:52 P.20131013
 FL "F:/Projecto/github repo/VHDL/ImmZeroFill.vhd" 2017/04/07.21:01:52 P.20131013
 FL "F:/Projecto/github repo/VHDL/InstDecode.vhd" 2017/07/26.21:54:03 P.20131013
 EN work/InstDecode 1501106250 FL "F:/Projecto/github repo/VHDL/InstDecode.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
-      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1501106249
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
 AR work/InstDecode/Behavioral 1501106251 \
       FL "F:/Projecto/github repo/VHDL/InstDecode.vhd" EN work/InstDecode 1501106250
 FL "F:/Projecto/github repo/VHDL/InstReg.vhd" 2017/04/07.21:01:52 P.20131013
-EN work/InstReg 0 FL "F:/Projecto/github repo/VHDL/InstReg.vhd" \
-      PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
-      PB ieee/STD_LOGIC_UNSIGNED 1381692179
-AR work/InstReg/Behavioral 0 \
-      FL "F:/Projecto/github repo/VHDL/InstReg.vhd" EN work/InstReg 0
 FL "F:/Projecto/github repo/VHDL/MBR.vhd" 2017/04/07.21:01:52 P.20131013
 EN work/MBR 0 FL "F:/Projecto/github repo/VHDL/MBR.vhd" PB ieee/std_logic_1164 1381692176 \
       PB ieee/std_logic_arith 1381692177 PB ieee/STD_LOGIC_UNSIGNED 1381692179
@@ -326,21 +379,21 @@ FL "F:/Projecto/github repo/VHDL/Mplex16bit_2to1.vhd" 2017/04/07.21:01:52 P.2013
 EN work/Mplex16bit_2to1 1493149504 \
       FL "F:/Projecto/github repo/VHDL/Mplex16bit_2to1.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
-      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1501106249
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
 AR work/Mplex16bit_2to1/Behavioral 1493149505 \
       FL "F:/Projecto/github repo/VHDL/Mplex16bit_2to1.vhd" \
       EN work/Mplex16bit_2to1 1493149504
 FL "F:/Projecto/github repo/VHDL/Mplex16bit_4to1.vhd" 2017/04/07.21:01:52 P.20131013
 EN work/Mplex16bit_4to1 0 FL "F:/Projecto/github repo/VHDL/Mplex16bit_4to1.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
-      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1501106249
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
 AR work/Mplex16bit_4to1/Behavioral 0 \
       FL "F:/Projecto/github repo/VHDL/Mplex16bit_4to1.vhd" \
       EN work/Mplex16bit_4to1 0
 FL "F:/Projecto/github repo/VHDL/Mplex16bit_5to1.vhd" 2017/04/07.21:01:52 P.20131013
 EN work/Mplex16bit_5to1 0 FL "F:/Projecto/github repo/VHDL/Mplex16bit_5to1.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
-      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1501106249
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
 AR work/Mplex16bit_5to1/Behavioral 0 \
       FL "F:/Projecto/github repo/VHDL/Mplex16bit_5to1.vhd" \
       EN work/Mplex16bit_5to1 0
@@ -348,14 +401,14 @@ FL "F:/Projecto/github repo/VHDL/Mplex16bit_8to1.vhd" 2017/04/07.21:01:52 P.2013
 EN work/Mplex16bit_8to1 1492103068 \
       FL "F:/Projecto/github repo/VHDL/Mplex16bit_8to1.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
-      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1501106249
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
 AR work/Mplex16bit_8to1/Behavioral 1492103069 \
       FL "F:/Projecto/github repo/VHDL/Mplex16bit_8to1.vhd" \
       EN work/Mplex16bit_8to1 1492103068
 FL "F:/Projecto/github repo/VHDL/Mplex16to1.vhd" 2017/04/07.21:01:52 P.20131013
 EN work/Mplex16to1 1493149482 FL "F:/Projecto/github repo/VHDL/Mplex16to1.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
-      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1501106249
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
 AR work/Mplex16to1/Behavioral 1493149483 \
       FL "F:/Projecto/github repo/VHDL/Mplex16to1.vhd" EN work/Mplex16to1 1493149482
 FL "F:/Projecto/github repo/VHDL/Mplex2to1.vhd" 2017/04/07.21:01:52 P.20131013
@@ -368,7 +421,7 @@ FL "F:/Projecto/github repo/VHDL/Mplex3bit_2to1.vhd" 2017/04/07.21:01:52 P.20131
 EN work/Mplex3bit_2to1 1492103070 \
       FL "F:/Projecto/github repo/VHDL/Mplex3bit_2to1.vhd" PB ieee/std_logic_1164 1381692176 \
       PB ieee/std_logic_arith 1381692177 PB ieee/STD_LOGIC_UNSIGNED 1381692179 \
-      PB work/pds16_types 1501106249
+      PB work/pds16_types 1503536926
 AR work/Mplex3bit_2to1/Behavioral 1492103071 \
       FL "F:/Projecto/github repo/VHDL/Mplex3bit_2to1.vhd" EN work/Mplex3bit_2to1 1492103070
 FL "F:/Projecto/github repo/VHDL/Mplex4to1.vhd" 2017/04/07.21:01:52 P.20131013
@@ -380,7 +433,7 @@ AR work/Mplex4to1/Behavioral 1493149503 \
 FL "F:/Projecto/github repo/VHDL/Mplex8bit_2to1.vhd" 2017/04/07.21:01:52 P.20131013
 EN work/Mplex8bit_2to1 0 FL "F:/Projecto/github repo/VHDL/Mplex8bit_2to1.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
-      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1501106249
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
 AR work/Mplex8bit_2to1/Behavioral 0 \
       FL "F:/Projecto/github repo/VHDL/Mplex8bit_2to1.vhd" EN work/Mplex8bit_2to1 0
 FL "F:/Projecto/github repo/VHDL/Mux_16In.vhd" 2017/04/30.17:51:13 P.20131013
@@ -400,7 +453,7 @@ FL "F:/Projecto/github repo/VHDL/Or_tree.vhd" 2017/04/25.20:30:05 P.20131013
 FL "F:/Projecto/github repo/VHDL/PC_Adder.vhd" 2017/04/07.21:01:52 P.20131013
 EN work/PC_Adder 1493149506 FL "F:/Projecto/github repo/VHDL/PC_Adder.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
-      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1501106249
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
 AR work/PC_Adder/Behavioral 1493149507 \
       FL "F:/Projecto/github repo/VHDL/PC_Adder.vhd" EN work/PC_Adder 1493149506 \
       CP FullAdder
@@ -410,19 +463,6 @@ AR work/PDS16fpga/Behavioral 0 FL "F:/Projecto/github repo/VHDL/PDS16fpga.vhd" \
       CP DirZeroFill CP InstReg CP ImmZeroFill CP in CP out CP HiZeroFill CP Control \
       CP BIU CP inout CP Data_Processor CP RegisterFile8x16
 FL "F:/Projecto/github repo/VHDL/pds16_types.vhd" 2017/07/26.22:53:14 P.20131013
-PH work/pds16_types 1501106248 FL "F:/Projecto/github repo/VHDL/pds16_types.vhd" \
-      PB ieee/std_logic_1164 1381692176 CD DFlipFlop CD FullAdder CD PC_Adder \
-      CD Adder16bit CD Alu_aritmetico CD Mplex16bit_5to1 CD SigExt CD Zero_Fill \
-      CD Alu CD Alu_logico CD Mux_2in CD Mux_4in CD Mux_16in CD Shifter_Sel_mplex2to1 \
-      CD Or_tree CD Barrel_shift CD Mplex4to1 CD Mplex16bit_2to1 CD Decoder3_8 \
-      CD nbit_register CD Mplex16bit_8to1 CD Mplex3bit_2to1 CD Sel_andgatesTree \
-      CD Mplex16bit_4to1 CD Mplex8bit_2to1 CD DirZeroFill CD MBR CD InstReg \
-      CD ImmZeroFill CD HiZeroFill CD Control CD BIU CD Data_Processor \
-      CD RegisterFile8x16 CD BnB CD Block_Mplex16to1 CD Block_Mplex2to1 \
-      CD Decoder_16out CD Tristate CD Decoder3bits CD Register16bits \
-      CD Register16bitsCL CD MUX1x16bits CD MUX1x3bits CD MUX3x16bits CD InstDecode
-PB work/pds16_types 1501106249 \
-      FL "F:/Projecto/github repo/VHDL/pds16_types.vhd" PH work/pds16_types 1501106248
 FL "F:/Projecto/github repo/VHDL/RegisterFile8x16.vhd" 2017/04/07.21:01:53 P.20131013
 AR work/RegisterFile8x16/Behavioral 1492103075 \
       FL "F:/Projecto/github repo/VHDL/RegisterFile8x16.vhd" \
@@ -439,13 +479,13 @@ FL "F:/Projecto/github repo/VHDL/Shifter_Sel_mplex2to1.vhd" 2017/04/25.20:30:05 
 FL "F:/Projecto/github repo/VHDL/SigExt.vhd" 2017/04/07.21:01:53 P.20131013
 EN work/SigExt 0 FL "F:/Projecto/github repo/VHDL/SigExt.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
-      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1501106249
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
 AR work/SigExt/Behavioral 0 \
       FL "F:/Projecto/github repo/VHDL/SigExt.vhd" EN work/SigExt 0
 FL "F:/Projecto/github repo/VHDL/Tristate.vhd" 2017/04/07.21:01:53 P.20131013
 EN work/Tristate 0 FL "F:/Projecto/github repo/VHDL/Tristate.vhd" \
       PB ieee/std_logic_1164 1381692176 PB ieee/std_logic_arith 1381692177 \
-      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1501106249
+      PB ieee/STD_LOGIC_UNSIGNED 1381692179 PB work/pds16_types 1503536926
 AR work/Tristate/Behavioral 0 \
       FL "F:/Projecto/github repo/VHDL/Tristate.vhd" EN work/Tristate 0
 FL "F:/Projecto/github repo/VHDL/Zero_Fill.vhd" 2017/04/07.21:01:53 P.20131013

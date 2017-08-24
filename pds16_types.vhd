@@ -491,7 +491,31 @@ end component;
 		    In1 : in  STD_LOGIC;
 			 outdata : out  STD_LOGIC);
 end component;
+
+	component out_MUXs_Sel is
+	 Port ( Decoder_1 : in  STD_LOGIC_VECTOR(15 downto 0);
+			  Decoder_2 : in  STD_LOGIC_VECTOR(15 downto 0);
+			  selector : out  STD_LOGIC_VECTOR(15 downto 0));
+end component;
+
+	component Decoder4bits is
+    Port ( E : in  STD_LOGIC;
+	        S : in  STD_LOGIC_VECTOR (3 downto 0);
+           O : out STD_LOGIC_VECTOR (15 downto 0));
+end component;
+
+	component Block_MUX1x1bit is
+    Port ( Sel : in  STD_LOGIC_VECTOR(15 downto 0);
+			  in_block_0 : in  STD_LOGIC_VECTOR(15 downto 0);
+			  in_block_1 : in STD_LOGIC;
+           out_block : out  STD_LOGIC_VECTOR(15 downto 0));
+end component;
 	
+	component Block_MUX4x16bits is
+	 Port ( Sel : in  STD_LOGIC_VECTOR(3 downto 0);
+			  A : in  STD_LOGIC_VECTOR(15 downto 0);
+           out_Block: out  STD_LOGIC_VECTOR(15 downto 0)); 
+end component;
 
 --  type <new_type> is
 --    record

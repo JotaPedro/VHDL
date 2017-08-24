@@ -25,7 +25,7 @@ entity Block_MUX4x16bits is
            
 end Block_MUX4x16bits;
 
-architecture Behavioral of Block_MUX4x16bits is
+architecture Structural of Block_MUX4x16bits is
 
 	Signal Block_input: bit_16_array(15 downto 0); --array de 2D 16x16 - entradas dos multiplexers 16to1
 
@@ -135,5 +135,5 @@ begin
 			);
 
 
-end Behavioral;
+end Structural;
 

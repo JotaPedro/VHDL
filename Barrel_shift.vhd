@@ -35,28 +35,12 @@ architecture Behavioral of Barrel_shift is
 	Signal MUX_RC_CY_A15_sel: STD_LOGIC;
 	Signal Cy_interno: STD_LOGIC;
 	Signal MUX_sin_CY_IR12_out: STD_LOGIC;
+	Signal Output_Carry: STD_LOGIC;
+	Signal Decoder_1_out: STD_LOGIC_VECTOR(15 downto 0);
+	Signal Decoder_2_out: STD_LOGIC_VECTOR(15 downto 0);
+	Signal sel_MUXs_outdata: STD_LOGIC_VECTOR(15 downto 0); --selectores dos multiplexers de saida de dados
 	
-
---	Signal Mp2to1_j : integer := 0;
-	
---	Signal Mp2to1_sel: STD_LOGIC_VECTOR(15 downto 0):= (others => '0'); --selectores dos multiplexers 2para1
---	Signal Output_Carry: STD_LOGIC := '0';
---	Signal MpCtl_3bit_2to1_in: STD_LOGIC_VECTOR(1 downto 0):= (others => '0'); -- IR10 e A15
---	Signal MpCtl_3bit_2to1_out: STD_LOGIC := '0';
-	
---	Signal Decoder_1_out: STD_LOGIC_VECTOR(15 downto 0):= (others => '0');
---	Signal Decoder_2_out: STD_LOGIC_VECTOR(15 downto 0):= (others => '0');
---	Signal Decoder_1_enable: STD_LOGIC;
---	Signal Decoder_2_enable: STD_LOGIC;
-	
-	
---	
-	
---	Signal Mplex_IR12_IR10_CY_out: STD_LOGIC;
-
-
 begin
-		
 		
 	-----------------
 	-- Shift MUXs
@@ -75,62 +59,65 @@ begin
 			 A => shiftMuxs_in,				--Entradas dos Mplex
 			 out_Block => shiftMuxs_out	--Saidas dos Mplex
       );
-		
-				
+			
 	--------------------------------
 	-- Rotate w/ Carry and Sin MUXs
 	--------------------------------
-		--multiplexers 2para1--
+		--multiplexers 16 entradas a 1 bit--
 		MUX_RC_CY_A15_sel <= (Shifter_Ctrl(2) and Shifter_Ctrl(1)); --Activa quando é Rotate with Carry=IR12 adn IR11
 		
 		MUX_RC_CY_A15: MUX1x1bit PORT MAP( 
-			Sel : MUX_RC_CY_A15_sel;
-			In0 : A(15);
-		   In1 : Cy_interno;
-			outdata : MUX_RC_CY_A15_out);
+			Sel => MUX_RC_CY_A15_sel,
+			In0 => A(15),
+		   In1 => Cy_interno,
+			outdata => MUX_RC_CY_A15_out);
 		
 		MUX_sin_CY_IR12: MUX1x1bit PORT MAP( 
-			Sel : Shifter_Ctrl(2);
-			In0 : Shifter_Ctrl(0);
-		   In1 : MUX_RC_CY_A15_out;
-			outdata : MUX_sin_CY_IR12_out);
+			Sel => Shifter_Ctrl(2),
+			In0 => Shifter_Ctrl(0),
+		   In1 => MUX_RC_CY_A15_out,
+			outdata => MUX_sin_CY_IR12_out);
 		
+	----------------------------------------
+	-- MUXs de saida do bloco Barrel Shift
+	----------------------------------------
+		--multiplexers 2 entradas a 1 bit--	
+		Block_outdataMuxs: Block_MUX1x1bit PORT MAP (
+			Sel => sel_MUXs_outdata,
+			in_block_0 => shiftMuxs_out,
+			in_block_1 => MUX_sin_CY_IR12_out,
+         out_block => Output);
+			
+		--mux de saida CY--
+		Mux_Carry: MUX1x1bit PORT MAP( 
+			Sel => Shifter_Ctrl(1), --IR11
+			In0 => shiftMuxs_out(15),
+			In1 => shiftMuxs_out(0),
+			outdata => Output_Carry);
 		
+		Cy_interno <= ((B(0) or B(1) or B(2) or B(3)) and Output_Carry);
+		Cy <= Cy_interno;
 		
-			---------------------Selector para multiplexers 2para1----------------
-			Selector_mplex: Shifter_Sel_mplex2to1 PORT MAP(
+	----------------------------------------
+	-- Select dos MUXs de saida
+	----------------------------------------	
+		--Decoders--
+		Decoder_1: Decoder4bits PORT MAP( 
+			E => (Shifter_Ctrl(1) and not Shifter_Ctrl(2)), --IR11 AND nIR12 (apenas activo no SHR)   				old--ctl_3bit(0),--IR10
+			S => B,
+			O => Decoder_1_out);
+			
+		Decoder_2: Decoder4bits PORT MAP( 
+			E => (not Shifter_Ctrl(1)),	--nIR11
+			S => B,
+			O => Decoder_2_out);			
+		
+		--Selector para multiplexers 2para1----------------
+			Selector_mplex: out_MUXs_Sel PORT MAP(
 				Decoder_1 => Decoder_1_out,
 				Decoder_2 => Decoder_2_out,
-				Mp2to1_sel => Mp2to1_sel
-			);
+				selector => sel_MUXs_outdata);
 		
-			---------------------multiplexers 2para1 + Mplex Carry - Output(16)------------------------------
-			Mplex2to1: Block_Mplex2to1 PORT MAP (
-          Input1 => Mp2to1_in,
-          Input2 => MpCtl_3bit_2to1_out,
-          Output => Output,
-			 Output_Carry => Output_Carry,
-          Sel => Mp2to1_sel,
-			 IR11 => ctl_3bit(1)
-        );
-			
-			---------------------Decoders------------------------------
-			Decoder_1_enable <= (ctl_3bit(1) and not ctl_3bit(2)); --Criei este Signal para evitar o erro gerado pelo compilador. (Enable is not a static signal);
-			Decoder_2_enable <= (not ctl_3bit(1));--IR11
-			
-			Decoder_1: Decoder_16out PORT MAP( 
-				Enable => Decoder_1_enable, --ctl_3bit(0),--Decoder_1_enable,--IR11 & NOT IR12 (apenas activo no SHR)   				old--ctl_3bit(0),--IR10
-				Sel => B,
-				Output => Decoder_1_out
-			);
-			Decoder_2: Decoder_16out PORT MAP( 
-				Enable => Decoder_2_enable,
-				Sel => B,
-				Output => Decoder_2_out
-			);			
-
-Cy_interno <= ((B(0) or B(1) or B(2) or B(3)) and Output_Carry);
-Cy <= Cy_interno;
 
 end Behavioral;
 

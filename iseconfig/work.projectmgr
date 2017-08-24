@@ -34,8 +34,12 @@
          <ClosedNode>/PDS16fpga - Behavioral F:|Projecto|github repo|VHDL|PDS16fpga.vhd/RegisterFile - RegisterFile8x16 - Structural</ClosedNode>
          <ClosedNode>/PDS16fpga - Structural D:|ISEL|3o Ano|6o Semestre|PFC|VHDL|Github|VHDL|PDS16fpga.vhd/DataProcessor - Data_Processor - Structural/ALU - Alu - Structural/Aritmetico - Alu_aritmetico - structural</ClosedNode>
          <ClosedNode>/PDS16fpga - Structural D:|ISEL|3o Ano|6o Semestre|PFC|VHDL|Github|VHDL|PDS16fpga.vhd/DataProcessor - Data_Processor - Structural/ALU - Alu - Structural/Shifter - Barrel_shift - Behavioral/Block_shiftMUXs - Block_MUX4x16bits - Behavioral</ClosedNode>
+         <ClosedNode>/PDS16fpga - Structural D:|ISEL|3o Ano|6o Semestre|PFC|VHDL|Github|VHDL|PDS16fpga.vhd/DataProcessor - Data_Processor - Structural/ALU - Alu - Structural/Shifter - Barrel_shift - Behavioral/Block_shiftMUXs - Block_MUX4x16bits - Structural</ClosedNode>
          <ClosedNode>/PDS16fpga - Structural D:|ISEL|3o Ano|6o Semestre|PFC|VHDL|Github|VHDL|PDS16fpga.vhd/DataProcessor - Data_Processor - Structural/ALU - Alu - Structural/Shifter - Barrel_shift - Behavioral/Block_shiftMux - Block_MUX4x16bits - Behavioral</ClosedNode>
+         <ClosedNode>/PDS16fpga - Structural D:|ISEL|3o Ano|6o Semestre|PFC|VHDL|Github|VHDL|PDS16fpga.vhd/DataProcessor - Data_Processor - Structural/ALU - Alu - Structural/Shifter - Barrel_shift - Behavioral/Mplex2to1 - Block_Mplex2to1 - Behavioral</ClosedNode>
+         <ClosedNode>/PDS16fpga - Structural D:|ISEL|3o Ano|6o Semestre|PFC|VHDL|Github|VHDL|PDS16fpga.vhd/DataProcessor - Data_Processor - Structural/ALU - Alu - Structural/Shifter - Barrel_shift - Behavioral/Selector_mplex - out_MUXs_Sel - Structural</ClosedNode>
          <ClosedNode>/PDS16fpga - Structural D:|ISEL|3o Ano|6o Semestre|PFC|VHDL|Github|VHDL|PDS16fpga.vhd/RegisterFile - RegisterFile8x16 - Structural</ClosedNode>
+         <ClosedNode>/PDS16fpga - Structural D:|ISEL|3o Ano|6o Semestre|PFC|VHDL|Github|VHDL|PDS16fpga.vhd/RegisterFile - RegisterFile8x16 - Structural/Somador - Alu_aritmetico - structural</ClosedNode>
          <ClosedNode>/PDS16fpga - Structural F:|Projecto|github repo|VHDL|PDS16fpga.vhd/BIU - BIU - Behavioral</ClosedNode>
          <ClosedNode>/PDS16fpga - Structural F:|Projecto|github repo|VHDL|PDS16fpga.vhd/Control - Control - Behavioral</ClosedNode>
          <ClosedNode>/PDS16fpga - Structural F:|Projecto|github repo|VHDL|PDS16fpga.vhd/DataProcessor - Data_Processor - Structural</ClosedNode>
@@ -76,13 +80,13 @@
          <ClosedNode>/TB_tester - behavior F:|Projecto|github repo|VHDL|TB_tester.vhd</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>MUX_RC_CY_A15 - MUX1x1bit - Behavioral (D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/MUX1x1bit.vhd)</SelectedItem>
+         <SelectedItem>Shifter - Barrel_shift - Behavioral (D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd)</SelectedItem>
       </SelectedItems>
-      <ScrollbarPosition orientation="vertical" >43</ScrollbarPosition>
+      <ScrollbarPosition orientation="vertical" >35</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000020200000001000000010000006400000236000000020000000000000000000000000200000064ffffffff000000810000000300000002000002360000000100000003000000000000000100000003</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000020200000001000000010000006400000223000000020000000000000000000000000200000064ffffffff000000810000000300000002000002230000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
-      <CurrentItem>MUX_RC_CY_A15 - MUX1x1bit - Behavioral (D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/MUX1x1bit.vhd)</CurrentItem>
+      <CurrentItem>Shifter - Barrel_shift - Behavioral (D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Barrel_shift.vhd)</CurrentItem>
    </ItemView>
    <ItemView engineview="SynthesisOnly" sourcetype="" guiview="Process" >
       <ClosedNodes>
@@ -94,7 +98,7 @@
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000010000000000000000000000000000000000000000000000014a000000010000000100000000000000000000000064ffffffff0000008100000000000000010000014a0000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000000000000000000180000000010000000100000000000000000000000064ffffffff000000810000000000000001000001800000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem/>
    </ItemView>
@@ -103,44 +107,45 @@
          <ClosedNodesVersion>1</ClosedNodesVersion>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>MUX1x1bit.vhd</SelectedItem>
+         <SelectedItem>pds16_types.vhd</SelectedItem>
       </SelectedItems>
-      <ScrollbarPosition orientation="vertical" >52</ScrollbarPosition>
+      <ScrollbarPosition orientation="vertical" >47</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000010000000001000000000000000000000000000000000000027d000000040101000100000000000000000000000064ffffffff000000810000000000000004000000a500000001000000000000005a00000001000000000000005d0000000100000000000001210000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000000000000001000000000000000000000000000000000000027d000000040101000100000000000000000000000064ffffffff000000810000000000000004000000a500000001000000000000005a00000001000000000000005d0000000100000000000001210000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem>MUX1x1bit.vhd</CurrentItem>
+      <CurrentItem>pds16_types.vhd</CurrentItem>
    </ItemView>
    <ItemView guiview="Library" >
       <ClosedNodes>
          <ClosedNodesVersion>1</ClosedNodesVersion>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>pds16_types.vhd</SelectedItem>
+         <SelectedItem>Mux_3in.vhd</SelectedItem>
       </SelectedItems>
-      <ScrollbarPosition orientation="vertical" >53</ScrollbarPosition>
+      <ScrollbarPosition orientation="vertical" >45</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000000000000000100000000000000000000000000000000000000f8000000010001000100000000000000000000000064ffffffff000000810000000000000001000000f80000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem>pds16_types.vhd</CurrentItem>
+      <CurrentItem>Mux_3in.vhd</CurrentItem>
    </ItemView>
    <ItemView engineview="SynthesisOnly" sourcetype="DESUT_VHDL_ARCHITECTURE" guiview="Process" >
       <ClosedNodes>
          <ClosedNodesVersion>1</ClosedNodesVersion>
          <ClosedNode>Configure Target Device</ClosedNode>
+         <ClosedNode>Implement Design</ClosedNode>
          <ClosedNode>Implement Design/Map</ClosedNode>
          <ClosedNode>Implement Design/Place &amp; Route</ClosedNode>
          <ClosedNode>Implement Design/Translate</ClosedNode>
          <ClosedNode>User Constraints</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem></SelectedItem>
+         <SelectedItem>Check Syntax</SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000010000000000000000000000000000000000000000000000019e000000010000000100000000000000000000000064ffffffff0000008100000000000000010000019e0000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000001e8000000010000000100000000000000000000000064ffffffff000000810000000000000001000001e80000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem></CurrentItem>
+      <CurrentItem>Check Syntax</CurrentItem>
    </ItemView>
    <ItemView engineview="BehavioralSim" guiview="Source" compilemode="AutoCompile" >
       <ClosedNodes>
@@ -341,7 +346,7 @@
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem/>
    </ItemView>
-   <SourceProcessView>000000ff0000000000000002000000eb0000005a01000000050100000002</SourceProcessView>
+   <SourceProcessView>000000ff0000000000000002000001340000009001000000050100000002</SourceProcessView>
    <CurrentView>Implementation</CurrentView>
    <ItemView engineview="SynthesisOnly" sourcetype="DESUT_VHDL_PACKAGE_BODY" guiview="Process" >
       <ClosedNodes>
@@ -368,5 +373,18 @@
       <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000000000000000000165000000020000000000000000000000000000000064ffffffff000000810000000000000002000000f50000000100000000000000700000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem>Control.vhd (F:/Projecto/github repo/VHDL/Control.vhd)</CurrentItem>
+   </ItemView>
+   <ItemView engineview="SynthesisOnly" guiview="Source" compilemode="ManualCompile" >
+      <ClosedNodes>
+         <ClosedNodesVersion>2</ClosedNodesVersion>
+      </ClosedNodes>
+      <SelectedItems>
+         <SelectedItem>Alu.vhd (D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Alu.vhd)</SelectedItem>
+      </SelectedItems>
+      <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
+      <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
+      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000000000000000000156000000020000000000000000000000000000000064ffffffff000000810000000000000002000000e60000000100000000000000700000000100000000</ViewHeaderState>
+      <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
+      <CurrentItem>Alu.vhd (D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Alu.vhd)</CurrentItem>
    </ItemView>
 </Project>
