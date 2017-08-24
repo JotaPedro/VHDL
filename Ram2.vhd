@@ -10,14 +10,10 @@ library ieee;
     use ieee.std_logic_unsigned.all;
 
 entity Ram2 is
-    generic (
-        DATA_WIDTH :integer := 16;
-        ADDR_WIDTH :integer := 16
-    );
     port (
 
-        AD 		:in    std_logic_vector (ADDR_WIDTH-1 downto 0);  		-- address Input
-        DATA   :inout std_logic_vector (DATA_WIDTH-1 downto 0);  -- data bi-directional
+        AD 		:in    std_logic_vector (14 downto 0);  		-- address Input
+        DATA   :inout std_logic_vector (15 downto 0);  -- data bi-directional
         nWR    :in    std_logic_vector(1 downto 0);             -- Write Enable (High/Low)
         nRD    :in    std_logic                                 	-- Read Enable
 --		nWRL		: in std_logic; -- 
@@ -26,11 +22,11 @@ entity Ram2 is
 end entity;
 architecture rtl of Ram2 is
     ----------------Internal variables----------------
-    constant RAM_DEPTH :integer := 2**ADDR_WIDTH;
+    constant RAM_DEPTH :integer := 2**14;
 
-    signal data_out :std_logic_vector (DATA_WIDTH-1 downto 0);
+    signal data_out :std_logic_vector (15 downto 0);
 
-    type RAM is array (integer range <>)of std_logic_vector (DATA_WIDTH-1 downto 0);
+    type RAM is array (integer range <>)of std_logic_vector (15 downto 0);
     signal mem : RAM (0 to RAM_DEPTH-1);
 begin
 

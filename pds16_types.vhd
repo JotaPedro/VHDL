@@ -27,13 +27,25 @@ package pds16_types is
 				Output : out  std_logic_vector(15 downto 0));
 	end Component;
 	
+	Component Ram2 is
+    port (
+
+        AD 		:in    std_logic_vector (14 downto 0);  		-- address Input
+        DATA   :inout std_logic_vector (15 downto 0);  -- data bi-directional
+        nWR    :in    std_logic_vector(1 downto 0);             -- Write Enable (High/Low)
+        nRD    :in    std_logic                                 	-- Read Enable
+    );
+	end Component;
+	
+	
 	
 	
 	Component DFlipFlop is
     Port ( D : in  STD_LOGIC;
            Q : out  STD_LOGIC;
            Clk : in  STD_LOGIC;
-           CL : in  STD_LOGIC);
+          En : in  STD_LOGIC
+			 );
 	end Component;
 	
 	Component FullAdder is
@@ -307,7 +319,7 @@ package pds16_types is
            DataIn : out  STD_LOGIC_VECTOR (15 downto 0);
 			  
 			  --para teste
-			  ALE_flipflop_out : out STD_LOGIC;
+--			  ALE_flipflop_out : out STD_LOGIC;
 			  
 			  Addr_out 	: out  STD_LOGIC_VECTOR(14 downto 0));
 	end component;

@@ -62,7 +62,7 @@ entity BIU is
 			  
 			  Addr_out 	: out  STD_LOGIC_VECTOR(14 downto 0);--Addr 15 downto 1
 			  --para teste
-			  ALE_flipflop_out : out STD_LOGIC;
+--			  ALE_flipflop_out : out STD_LOGIC;
 			  
 			  RESOUT 	: out  STD_LOGIC
 			  );
@@ -174,7 +174,8 @@ begin
 		D => RDY,
       Q => Sync(1),--Sync(RDY)
       Clk => Clock,
-      CL => '0'
+		En => Clock
+     -- CL => '0'
 	);
 	
 	
@@ -182,7 +183,8 @@ begin
 		D => BRQ,
       Q => Sync(0),--Sync(BRQ)
       Clk => Clock,
-      CL => '0'
+      En => Clock
+		--CL => '0'
 	);
 	
 	
@@ -190,11 +192,12 @@ begin
 		D => BusCtr(3),--BusCtr(ALE)
       Q => ALE_flipflop,
       Clk => Clock,
-      CL => '0'
+      En => Clock
+		--CL => '0'
 	);
 	
 	--para teste apenas
-	ALE_flipflop_out <= ALE_flipflop;
+--	ALE_flipflop_out <= ALE_flipflop;
 	
 	ALE <= (BusCtr(3) AND (NOT ALE_flipflop));
 	
