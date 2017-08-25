@@ -1,0 +1,29 @@
+Command line:
+   TB_ImmZeroFill_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  53993
+
+Thu Aug 24 23:34:39 2017
+
+
+ Elaboration Time: 0.109375 sec
+
+ Current Memory Usage: 1493.41 Meg
+
+ Total Signals          : 8
+ Total Nets             : 33
+ Total Signal Drivers   : 4
+ Total Blocks           : 6
+ Total Primitive Blocks : 5
+ Total Processes        : 2
+ Total Traceable Variables  : 11
+ Total Scalar Nets and Variables : 412
+Total Line Count : 11
+
+ Total Simulation Time: 0.109375 sec
+
+ Current Memory Usage: 1493.41 Meg
+
+Thu Aug 24 23:34:50 2017
+

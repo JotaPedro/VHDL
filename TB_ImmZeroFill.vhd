@@ -2,10 +2,10 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   22:00:49 08/27/2016
+-- Create Date:   23:13:39 08/24/2017
 -- Design Name:   
--- Module Name:   C:/Documents and Settings/Administrator/My Documents/Dropbox/Documentos Universidade/SV1516/projecto/Trabalho/vhdl1/TB_ImmZeroFill.vhd
--- Project Name:  vhdl1
+-- Module Name:   D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/TB_ImmZeroFill.vhd
+-- Project Name:  work
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
@@ -27,8 +27,10 @@
 --------------------------------------------------------------------------------
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
-USE ieee.std_logic_unsigned.all;
-USE ieee.numeric_std.ALL;
+ 
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--USE ieee.numeric_std.ALL;
  
 ENTITY TB_ImmZeroFill IS
 END TB_ImmZeroFill;
@@ -39,41 +41,49 @@ ARCHITECTURE behavior OF TB_ImmZeroFill IS
  
     COMPONENT ImmZeroFill
     PORT(
-         LSB : IN  std_logic_vector(7 downto 0);
          SelImm : IN  std_logic;
-         Output : OUT  std_logic_vector(15 downto 0);
-         Input : IN  std_logic_vector(7 downto 0)
+         LSB : IN  std_logic_vector(7 downto 0);
+         Input : IN  std_logic_vector(7 downto 0);
+         Output : OUT  std_logic_vector(15 downto 0)
         );
     END COMPONENT;
     
 
    --Inputs
-   signal LSB1 : std_logic_vector(7 downto 0) := (others => '0');
-   signal SelImm1 : std_logic;-- := '0';
-   signal Input1 : std_logic_vector(7 downto 0) := (others => '0');
+   signal SelImm : std_logic := '0';
+   signal LSB : std_logic_vector(7 downto 0) := (others => '0');
+   signal Input : std_logic_vector(7 downto 0) := (others => '0');
 
  	--Outputs
-   signal Output1 : std_logic_vector(15 downto 0);
+   signal Output : std_logic_vector(15 downto 0);
+
  
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
    uut: ImmZeroFill PORT MAP (
-          LSB => LSB1,
-          SelImm => SelImm1,
-          Output => Output1,
-          Input => Input1
+          SelImm => SelImm,
+          LSB => LSB,
+          Input => Input,
+          Output => Output
         );
+
 
    -- Stimulus process
    stim_proc: process
    begin		
-		SelImm1	<= '0';
-		LSB1		<= "11111111";
-		Input1	<= "00000001";
+      -- hold reset state for 100 ns.
+      wait for 100 ns;	
+
+      -- insert stimulus here 
+
+		SelImm	<= '0';		--LDI
+		LSB		<= "11111111";
+		Input	<= "00000110";
 		wait for 100 ns;
-		SelImm1	<= '1';
-		wait;
+		SelImm	<= '1';		--LDIH
+
+      wait;
    end process;
 
 END;

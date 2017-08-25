@@ -1,0 +1,29 @@
+Command line:
+   TB_DirZeroFill_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  54022
+
+Thu Aug 24 23:48:46 2017
+
+
+ Elaboration Time: 0.078125 sec
+
+ Current Memory Usage: 1493.89 Meg
+
+ Total Signals          : 4
+ Total Nets             : 23
+ Total Signal Drivers   : 2
+ Total Blocks           : 6
+ Total Primitive Blocks : 5
+ Total Processes        : 2
+ Total Traceable Variables  : 11
+ Total Scalar Nets and Variables : 402
+Total Line Count : 6
+
+ Total Simulation Time: 0.078125 sec
+
+ Current Memory Usage: 864.711 Meg
+
+Thu Aug 24 23:50:49 2017
+
