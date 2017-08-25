@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   23:39:14 08/24/2017
+-- Create Date:   17:35:57 05/28/2017
 -- Design Name:   
--- Module Name:   D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/TB_HiZeroFill.vhd
+-- Module Name:   F:/Projecto/github repo/VHDL/TB_HiZeroFill.vhd
 -- Project Name:  work
 -- Target Device:  
 -- Tool versions:  
@@ -42,6 +42,7 @@ ARCHITECTURE behavior OF TB_HiZeroFill IS
     COMPONENT HiZeroFill
     PORT(
          Input : IN  std_logic_vector(7 downto 0);
+         A0 : IN  std_logic;
          Output : OUT  std_logic_vector(15 downto 0)
         );
     END COMPONENT;
@@ -49,6 +50,7 @@ ARCHITECTURE behavior OF TB_HiZeroFill IS
 
    --Inputs
    signal Input : std_logic_vector(7 downto 0) := (others => '0');
+   signal A0 : std_logic := '0';
 
  	--Outputs
    signal Output : std_logic_vector(15 downto 0);
@@ -59,21 +61,20 @@ BEGIN
 	-- Instantiate the Unit Under Test (UUT)
    uut: HiZeroFill PORT MAP (
           Input => Input,
+          A0 => A0,
           Output => Output
         );
-
 
    -- Stimulus process
    stim_proc: process
    begin		
-      -- hold reset state for 100 ns.
-      wait for 100 ns;	
+		Input <= "01010101";
+		A0 <= '0';
+		wait for 100 ns;
+		A0 <= '1';
 
       -- insert stimulus here 
-		Input <= "01010101";
-		wait for 10 ns;
-		Input <= "11001100";
-		
+
       wait;
    end process;
 

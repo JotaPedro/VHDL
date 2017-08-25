@@ -2,15 +2,15 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   00:30:06 08/25/2017
+-- Create Date:   17:53:25 05/28/2017
 -- Design Name:   
--- Module Name:   D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/TB_InstReg.vhd
+-- Module Name:   F:/Projecto/github repo/VHDL/TB_InstReg.vhd
 -- Project Name:  work
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
 -- 
--- VHDL Test Bench Created by ISE for module: Register16bits
+-- VHDL Test Bench Created by ISE for module: InstReg
 -- 
 -- Dependencies:
 -- 
@@ -39,64 +39,60 @@ ARCHITECTURE behavior OF TB_InstReg IS
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT Register16bits
+    COMPONENT InstReg
     PORT(
-         clkReg : IN  std_logic;
-         En : IN  std_logic;
-         D : IN  std_logic_vector(15 downto 0);
-         Q : OUT  std_logic_vector(15 downto 0)
+         Input : IN  std_logic_vector(15 downto 0);
+         EIR : IN  std_logic;
+         Output : OUT  std_logic_vector(15 downto 0);
+         Clk : IN  std_logic
         );
     END COMPONENT;
     
 
    --Inputs
-   signal clkReg : std_logic := '0';
-   signal En : std_logic := '0';
-   signal D : std_logic_vector(15 downto 0) := (others => '0');
+   signal Input : std_logic_vector(15 downto 0) := (others => '0');
+   signal EIR : std_logic := '0';
+   signal Clk : std_logic := '0';
 
  	--Outputs
-   signal Q : std_logic_vector(15 downto 0);
+   signal Output : std_logic_vector(15 downto 0);
 
    -- Clock period definitions
-   constant clkReg_period : time := 10 ns;
+   constant Clk_period : time := 10 ns;
  
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: Register16bits PORT MAP (
-          clkReg => clkReg,
-          En => En,
-          D => D,
-          Q => Q
+   uut: InstReg PORT MAP (
+          Input => Input,
+          EIR => EIR,
+          Output => Output,
+          Clk => Clk
         );
 
    -- Clock process definitions
-   clkReg_process :process
+   Clk_process :process
    begin
-		clkReg <= '0';
-		wait for clkReg_period/2;
-		clkReg <= '1';
-		wait for clkReg_period/2;
+		Clk <= '0';
+		wait for Clk_period/2;
+		Clk <= '1';
+		wait for Clk_period/2;
    end process;
  
 
    -- Stimulus process
    stim_proc: process
    begin		
-      -- hold reset state for 100 ns.
-      wait for 100 ns;	
-
-      wait for clkReg_period*10;
-
-      -- insert stimulus here 
-      D <= "0000000000011111";
-		En <= '0';
-		wait for 13 ns;
-		En <= '1';
-      wait for 13 ns;
-		D <= "1111100000011111";
-		wait for 13 ns;
-		En <= '0';
+      Input <= "0000000000011111";
+		EIR <= '0';
+		wait for 15 ns;
+		EIR <= '1';
+      wait for 15 ns;
+		Input <= "1111100000011111";
+		wait for 15 ns;
+		EIR <= '0';
+		Input <= "0000000000011111";
+		-- insert stimulus here 
 
       wait;
    end process;
