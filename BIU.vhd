@@ -87,9 +87,12 @@ begin
 --	S1S0_out <= S1S0_in;
 --	BGT_out <= BGT_in;
 	
-	nRD 		<= (not RD) when BGT_in='0' else 'Z';
-	nWRL		<= (not WRL) when BGT_in='0' else 'Z';
-	nWRH		<= (not WRH) when BGT_in='0' else 'Z';
+	nRD 		<= (RD) when BGT_in='0' else 'Z';
+	nWRL		<= (WRL) when BGT_in='0' else 'Z';
+	nWRH		<= (WRH) when BGT_in='0' else 'Z';
+--	nRD 		<= (not RD) when BGT_in='0' else 'Z';
+--	nWRL		<= (not WRL) when BGT_in='0' else 'Z';
+--	nWRH		<= (not WRH) when BGT_in='0' else 'Z';
 	RESOUT 	<= CL;
 	S1S0_out <= S1S0_in;
 	BGT_out <= BGT_in;

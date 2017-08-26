@@ -2,15 +2,15 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   21:37:40 08/24/2017
+-- Create Date:   19:46:12 08/26/2017
 -- Design Name:   
--- Module Name:   F:/Projecto/github repo/VHDL/TB_Biu_Ram2.vhd
+-- Module Name:   F:/Projecto/github repo/VHDL/TB_Control_Biu_Ram.vhd
 -- Project Name:  work
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
 -- 
--- VHDL Test Bench Created by ISE for module: BIU
+-- VHDL Test Bench Created by ISE for module: Control
 -- 
 -- Dependencies:
 -- 
@@ -32,12 +32,64 @@ USE ieee.std_logic_1164.ALL;
 -- arithmetic functions with Signed or Unsigned values
 --USE ieee.numeric_std.ALL;
  
-ENTITY TB_Biu_Ram2 IS
-END TB_Biu_Ram2;
+ENTITY TB_Control_Biu_Ram IS
+END TB_Control_Biu_Ram;
  
-ARCHITECTURE behavior OF TB_Biu_Ram2 IS 
+ARCHITECTURE behavior OF TB_Control_Biu_Ram IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
+ 
+    COMPONENT Control
+    PORT(
+         A0 : IN  std_logic;
+         Flags : IN  std_logic_vector(2 downto 0);
+         OpCode : IN  std_logic_vector(6 downto 0);
+         INTP : IN  std_logic;
+         Clock : IN  std_logic;
+         CL : IN  std_logic;
+         Sync : IN  std_logic_vector(1 downto 0);
+         BusCtr : OUT  std_logic_vector(3 downto 0);
+         RFC : OUT  std_logic_vector(5 downto 0);
+         ALUC : OUT  std_logic_vector(2 downto 0);
+         SelAddr : OUT  std_logic_vector(1 downto 0);
+         SelData : OUT  std_logic_vector(1 downto 0);
+         Sellmm : OUT  std_logic;
+         RD : OUT  std_logic;
+         WR : OUT  std_logic_vector(1 downto 0);
+         BGT : OUT  std_logic;
+         S1S0 : OUT  std_logic_vector(1 downto 0);
+         EIR : OUT  std_logic;
+         CState : OUT  std_logic;
+         inst : OUT  std_logic
+        );
+    END COMPONENT;
+    
+	
+   --Inputs
+   signal A0 : std_logic := '0';
+   signal Flags : std_logic_vector(2 downto 0) := (others => '0');
+   signal OpCode : std_logic_vector(6 downto 0) := (others => '0');
+   signal INTP : std_logic := '0';
+   signal Clock : std_logic := '0';
+   signal CL : std_logic := '0';
+   signal Sync : std_logic_vector(1 downto 0) := (others => '0');
+
+ 	--Outputs
+   signal BusCtr : std_logic_vector(3 downto 0);
+   signal RFC : std_logic_vector(5 downto 0);
+   signal ALUC : std_logic_vector(2 downto 0);
+   signal SelAddr : std_logic_vector(1 downto 0);
+   signal SelData : std_logic_vector(1 downto 0);
+   signal Sellmm : std_logic;
+   signal RD : std_logic;
+   signal WR : std_logic_vector(1 downto 0);
+   signal BGT : std_logic;
+   signal S1S0 : std_logic_vector(1 downto 0);
+   signal EIR : std_logic;
+   signal CState : std_logic;
+   signal inst : std_logic;
+
+	 -- Component Declaration for the Unit Under Test (UUT)
  
     COMPONENT BIU
     PORT(
@@ -119,11 +171,34 @@ ARCHITECTURE behavior OF TB_Biu_Ram2 IS
 	
 	-- Clock period definitions
    constant Clock_period : time := 50 ns;
-	
+ 
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: BIU PORT MAP (
+   uut: Control PORT MAP (
+          A0 => A0,
+          Flags => Flags,
+          OpCode => OpCode,
+          INTP => INTP,
+          Clock => Clock,
+          CL => CL,
+          Sync => Sync,
+          BusCtr => BusCtr,
+          RFC => RFC,
+          ALUC => ALUC,
+          SelAddr => SelAddr,
+          SelData => SelData,
+          Sellmm => Sellmm,
+          RD => RD,
+          WR => WR,
+          BGT => BGT,
+          S1S0 => S1S0,
+          EIR => EIR,
+          CState => CState,
+          inst => inst
+        );
+		  
+	uut2: BIU PORT MAP (
           Clock => Clock,
           CL => CL,
           DataOut => DataOut,
@@ -152,7 +227,7 @@ BEGIN
 	nWR(0) <= nWRL;
 	nWR(1) <= nWRH;
 	-- Instantiate the Unit Under Test (UUT)
-   uut2: Ram2 PORT MAP (
+   uut3: Ram2 PORT MAP (
 
           AD => Addr_out,
           DATA => AD,
@@ -173,122 +248,13 @@ BEGIN
    -- Stimulus process
    stim_proc: process
    begin		
-      
---------------------------------------------------      
--- Testar a escrita de word
--- Testar a leitura da word
+      -- hold reset state for 100 ns.
+      wait for 100 ns;	
 
--- Testar a escrita de byte high
--- Testar a leitura de byte high
+      wait for Clock_period*10;
 
--- Testar a escrita de byte low
--- Testar a leitura de byte low
---------------------------------------------------
+      -- insert stimulus here 
 
-
---------------------------------------------------      
-				-- escrita de word
---------------------------------------------------      
-
--- introduzir dados nas entradas de data e endereço
-	DataOut 	<= x"F00F";
-	Addr		<= "000" & x"0_00"; 	--15 bits
-	wait for 50 ns;
--- ativar o tristate para disponibilizar o endereço no bus AD
-	BusCtr(2)<= '1'; --Addr
-	BGT_in	<= '0'; --Bus Grant
-	wait for 50 ns;
--- guardar no registo de Latch address o endereço no bus AD
-	BusCtr(3)<= '1'; --ALE
-	wait for 50 ns;
--- passar uma word para bus AD
-	BusCtr(3)<= '0'; --ALE
-	BusCtr(0)<= '0'; -- WrByte
-	BusCtr(2)<= '0'; -- desativar o tristate de Addr
-	BusCtr(1)<= '1'; -- ativar o tristate de DataOut
-	wait for 50 ns;
--- escrever uma word
-	WRL		<= '1';
-	WRH		<= '1';
-	wait for 50 ns;
-	WRL		<= '0'; -- desativar a escrita
-	WRH		<= '0'; -- desativar a escrita
-	BusCtr(1)<= '0'; -- desativar o tristate de DataOut
-	wait for 50 ns;
---300ns
---------------------------------------------------      
-				-- escrita de word
---------------------------------------------------      
-	
--- introduzir dados nas entradas de data e endereço
-	DataOut 	<= x"0FF0";
-	Addr		<= "000" & x"0_01"; 	--15 bits
-	wait for 50 ns;
--- ativar o tristate para disponibilizar o endereço no bus AD
-	BusCtr(2)<= '1'; --Addr
-	BGT_in	<= '0'; --Bus Grant
-	wait for 50 ns;
--- guardar no registo de Latch address o endereço no bus AD
-	BusCtr(3)<= '1'; --ALE
-	wait for 50 ns;
--- passar uma word para bus AD
-	BusCtr(3)<= '0'; --ALE
-	BusCtr(0)<= '0'; -- WrByte
-	BusCtr(2)<= '0'; -- desativar o tristate de Addr
-	BusCtr(1)<= '1'; -- ativar o tristate de DataOut
-	wait for 50 ns;
--- escrever uma word
-	WRL		<= '1';
-	WRH		<= '1';
-	wait for 50 ns;
-	WRL		<= '0'; -- desativar a escrita
-	WRH		<= '0'; -- desativar a escrita
-	BusCtr(1)<= '0'; -- desativar o tristate de DataOut
-	wait for 50 ns;
---600ns
---------------------------------------------------      
-				-- leitura de word
---------------------------------------------------      
-
--- introduzir dados nas entradas de data e endereço
-	Addr		<= "000" & x"0_00"; 	--15 bits
-	wait for 50 ns;
--- ativar o tristate para disponibilizar o endereço no bus AD
-	BusCtr(2)<= '1'; --Addr
-	BGT_in	<= '0'; --Bus Grant
-	wait for 50 ns;
--- guardar no registo de Latch address o endereço no bus AD
-	BusCtr(3)<= '1'; --ALE
-	wait for 50 ns;
--- ler uma word	
-	BusCtr(3)<= '0'; -- desativar o ALE
-	BusCtr(2)<= '0'; -- desativar o tristate de Addr
-	RD		<= '1';
-	wait for 50 ns;
-	RD		<= '0'; -- desativar a leitura
---------------------------------------------------      
-				-- leitura de word
---------------------------------------------------      
-
-
--- introduzir dados nas entradas de data e endereço
-	DataOut 	<= x"0FF0";
-	Addr		<= "000" & x"0_01"; 	--15 bits
-	wait for 50 ns;
--- ativar o tristate para disponibilizar o endereço no bus AD
-	BusCtr(2)<= '1'; --Addr
-	BGT_in	<= '0'; --Bus Grant
-	wait for 50 ns;
--- guardar no registo de Latch address o endereço no bus AD
-	BusCtr(3)<= '1'; --ALE
-	wait for 50 ns;
--- ler uma word
-	BusCtr(3)<= '0'; -- desativar o ALE
-	BusCtr(2)<= '0'; -- desativar o tristate de Addr
-	RD		<= '1';
-	wait for 50 ns;
-	RD		<= '0'; -- desativar a leitura
-	
       wait;
    end process;
 

@@ -64,7 +64,7 @@ ARCHITECTURE behavior OF TB_BIU IS
          A0 : OUT  std_logic;
 			
 			--para teste
-			  ALE_flipflop_out : out STD_LOGIC;
+		--	  ALE_flipflop_out : out STD_LOGIC;
 			
 			Addr_out 	: out  STD_LOGIC_VECTOR(14 downto 0);--Addr 15 downto 1
          RESOUT : OUT  std_logic
@@ -101,7 +101,7 @@ ARCHITECTURE behavior OF TB_BIU IS
    signal RESOUT : std_logic;
 	signal Addr_out : STD_LOGIC_VECTOR(14 downto 0);--Addr 15 downto 1
 	--para teste
-	signal ALE_flipflop_out : STD_LOGIC;
+--	signal ALE_flipflop_out : STD_LOGIC;
 
    -- Clock period definitions
    constant Clock_period : time := 50 ns;
@@ -132,7 +132,7 @@ BEGIN
           Sync => Sync,
           A0 => A0,
 			 --para teste
-			 ALE_flipflop_out => ALE_flipflop_out,
+--			 ALE_flipflop_out => ALE_flipflop_out,
 			 
 			 Addr_out => Addr_out,
           RESOUT => RESOUT
