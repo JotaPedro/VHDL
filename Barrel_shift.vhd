@@ -39,7 +39,7 @@ architecture Behavioral of Barrel_shift is
 	Signal Decoder_1_out: STD_LOGIC_VECTOR(15 downto 0);
 	Signal Decoder_2_out: STD_LOGIC_VECTOR(15 downto 0);
 	Signal sel_MUXs_outdata: STD_LOGIC_VECTOR(15 downto 0); --selectores dos multiplexers de saida de dados
-	
+	Signal enable_decod1: STD_LOGIC;
 begin
 		
 	-----------------
@@ -102,8 +102,10 @@ begin
 	-- Select dos MUXs de saida
 	----------------------------------------	
 		--Decoders--
+		enable_decod1 <= (Shifter_Ctrl(1) and (not Shifter_Ctrl(2)));
+		
 		Decoder_1: Decoder4bits PORT MAP( 
-			E => (Shifter_Ctrl(1) and not Shifter_Ctrl(2)), --IR11 AND nIR12 (apenas activo no SHR)   				old--ctl_3bit(0),--IR10
+			E => enable_decod1, --IR11 AND nIR12 (apenas activo no SHR) 
 			S => B,
 			O => Decoder_1_out);
 			

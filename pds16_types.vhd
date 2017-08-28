@@ -71,12 +71,14 @@ package pds16_types is
 	end Component;
 	
 	Component Alu_aritmetico is
-    Port ( A : in  STD_LOGIC_VECTOR(15 downto 0);
+    Port ( Op : in STD_LOGIC_VECTOR(1 downto 0) ; -- IR12 IR11
+			  A : in  STD_LOGIC_VECTOR(15 downto 0);
            B : in  STD_LOGIC_VECTOR(15 downto 0);
            Cin : in  STD_LOGIC;
            Result : out  STD_LOGIC_VECTOR(15 downto 0);
-           Flags_out : out  STD_LOGIC_VECTOR(1 downto 0);
-			  Op : in STD_LOGIC);
+           Flags_out : out  STD_LOGIC_VECTOR(1 downto 0));
+  
+  
 	end Component;
 	
 	Component Mplex16bit_5to1 is
@@ -515,6 +517,7 @@ end component;
 	        S : in  STD_LOGIC_VECTOR (3 downto 0);
            O : out STD_LOGIC_VECTOR (15 downto 0));
 end component;
+
 
 	component Block_MUX1x1bit is
     Port ( Sel : in  STD_LOGIC_VECTOR(15 downto 0);

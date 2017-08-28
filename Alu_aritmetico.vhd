@@ -41,6 +41,8 @@ begin
 	-------------
 	process(B,Op(0))
 		begin
+		
+		
 		-- Xor gate para decidir se vamos fazer uma soma ou uma subtração.
 		B_input(0) <= B(0) xor Op(0);
 		B_input(1) <= B(1) xor Op(0);
@@ -58,8 +60,12 @@ begin
 		B_input(13) <= B(13) xor Op(0);
 		B_input(14) <= B(14) xor Op(0);
 		B_input(15) <= B(15) xor Op(0);
+		
+		
 	end process;
-		Carry(0)<= (Cin AND Op(1));
+
+		
+		Carry(0)<= ((Cin AND OP(1)) XOR Op(0));
 		
 		Adder:
 		for i in 0 to 15 generate

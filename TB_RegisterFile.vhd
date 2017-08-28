@@ -2,10 +2,10 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   22:38:13 07/25/2016
+-- Create Date:   11:52:50 08/28/2017
 -- Design Name:   
--- Module Name:   C:/Documents and Settings/Administrator/My Documents/Dropbox/Documentos Universidade/SV1516/projecto/Trabalho/vhdl1/TB_RegisterFile.vhd
--- Project Name:  vhdl1
+-- Module Name:   D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/TB_RegisterFile.vhd
+-- Project Name:  work
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
@@ -25,11 +25,12 @@
 -- to guarantee that the testbench will bind correctly to the post-implementation 
 -- simulation model.
 --------------------------------------------------------------------------------
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_ARITH.ALL;
-use IEEE.STD_LOGIC_UNSIGNED.ALL;
-use work.pds16_types.ALL;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+ 
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--USE ieee.numeric_std.ALL;
  
 ENTITY TB_RegisterFile IS
 END TB_RegisterFile;
@@ -40,100 +41,128 @@ ARCHITECTURE behavior OF TB_RegisterFile IS
  
     COMPONENT RegisterFile8x16
     PORT(
-         clock : in  STD_LOGIC;
-			addressSD : in  STD_LOGIC_VECTOR(2 downto 0);
-			flags : in  STD_LOGIC_VECTOR(3 downto 0); -- 0-Zero 1-Carry 2-GE 3-Parity
-			RFC : in  STD_LOGIC_VECTOR (4 downto 0); -- como é que os bits estão distribuidos? 1-enablers 2-mplexr5 3-mplexr6 4-mplexr7 5-mplexAddrA
-			CL : in  STD_LOGIC;
-			addrA : in  STD_LOGIC_VECTOR(2 downto 0);
-			addrB : in  STD_LOGIC_VECTOR(2 downto 0);
-			DestData : in  bit_16;
-			flags_output : out  STD_LOGIC_VECTOR(2 downto 0); -- 0-Zero 1-Carry 2-GE
-			PC : out  bit_16;
-			Output_A : out  bit_16;
-			Output_B : out  bit_16;
-			Output_Sc : out  bit_16
+         clock : IN  std_logic;
+         CL : IN  std_logic;
+         RFC : IN  std_logic_vector(5 downto 0);
+         AddrA : IN  std_logic_vector(2 downto 0);
+         AddrB : IN  std_logic_vector(2 downto 0);
+         AddrSD : IN  std_logic_vector(2 downto 0);
+         DestData : IN  std_logic_vector(15 downto 0);
+         flagsIN : IN  std_logic_vector(3 downto 0);
+         OpA : OUT  std_logic_vector(15 downto 0);
+         OpB : OUT  std_logic_vector(15 downto 0);
+         SC : OUT  std_logic_vector(15 downto 0);
+         flagsOUT : OUT  std_logic_vector(4 downto 0);
+         PCout : OUT  std_logic_vector(15 downto 0)
         );
     END COMPONENT;
     
 
    --Inputs
-   signal clock1 : std_logic := '0';
-   signal addressSD1 : std_logic_vector(2 downto 0) := (others => '0');
-   signal flags1 : std_logic_vector(3 downto 0) := (others => '0');
-   signal RFC1 : std_logic_vector(4 downto 0) := (others => '0');
-   signal CL1 : std_logic := '0';
-   signal addrA1 : std_logic_vector(2 downto 0) := (others => '0');
-   signal addrB1 : std_logic_vector(2 downto 0) := (others => '0');
-   signal DestData1 : bit_16 := (others => '0');
+   signal clock : std_logic := '0';
+   signal CL : std_logic := '0';
+   signal RFC : std_logic_vector(5 downto 0) := (others => '0');
+   signal AddrA : std_logic_vector(2 downto 0) := (others => '0');
+   signal AddrB : std_logic_vector(2 downto 0) := (others => '0');
+   signal AddrSD : std_logic_vector(2 downto 0) := (others => '0');
+   signal DestData : std_logic_vector(15 downto 0) := (others => '0');
+   signal flagsIN : std_logic_vector(3 downto 0) := (others => '0');
 
  	--Outputs
-   signal flags_output1 : std_logic_vector(2 downto 0);
-	signal PC1 : bit_16;
-   signal Output_A1 : bit_16;
-   signal Output_B1 : bit_16;
-   signal Output_Sc1 : bit_16;
+   signal OpA : std_logic_vector(15 downto 0);
+   signal OpB : std_logic_vector(15 downto 0);
+   signal SC : std_logic_vector(15 downto 0);
+   signal flagsOUT : std_logic_vector(4 downto 0);
+   signal PCout : std_logic_vector(15 downto 0);
 
    -- Clock period definitions
-   constant clock_period : time := 1ns;
+   constant clock_period : time := 10 ns;
  
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
    uut: RegisterFile8x16 PORT MAP (
-          clock => clock1,
-          addressSD => addressSD1,
-          flags => flags1,
-          RFC => RFC1,
-          CL => CL1,
-          addrA => addrA1,
-          addrB => addrB1,
-          DestData => DestData1,
-          flags_output => flags_output1,
-          PC => PC1,
-          Output_A => Output_A1,
-          Output_B => Output_B1,
-          Output_Sc => Output_Sc1
+          clock => clock,
+          CL => CL,
+          RFC => RFC,
+          AddrA => AddrA,
+          AddrB => AddrB,
+          AddrSD => AddrSD,
+          DestData => DestData,
+          flagsIN => flagsIN,
+          OpA => OpA,
+          OpB => OpB,
+          SC => SC,
+          flagsOUT => flagsOUT,
+          PCout => PCout
         );
 
    -- Clock process definitions
    clock_process :process
    begin
-		clock1 <= '0';
+		clock <= '0';
 		wait for clock_period/2;
-		clock1 <= '1';
+		clock <= '1';
 		wait for clock_period/2;
    end process;
  
 
    -- Stimulus process
    stim_proc: process
-   begin
---		clock1 : in  STD_LOGIC;
---		addressSD1 : in  STD_LOGIC_VECTOR(2 downto 0);
---		flags1 : in  STD_LOGIC_VECTOR(3 downto 0); -- 0-Zero 1-Carry 2-GE 3-Parity
---		RFC1 : in  STD_LOGIC_VECTOR (4 downto 0); 
--- 	1-enablers 2-mplexr5 3-mplexr6 4-mplexr7 5-mplexAddrA
---		CL1 : in  STD_LOGIC;
---		addrA1 : in  STD_LOGIC_VECTOR(2 downto 0);
---		addrB1 : in  STD_LOGIC_VECTOR(2 downto 0);
---		DestData1 : in  bit_16;
---		PC1 : inout  bit_16;
-		--PC1			<= "0000000000000000";
+   begin		
+      -- hold reset state for 100 ns.
+      wait for 100 ns;	
+      wait for clock_period*10;
+
+      -- insert stimulus here 
+--         CL : IN  std_logic;											--RFC(0)-Enable Decoder
+--         RFC : IN  std_logic_vector(5 downto 0);					--RFC(1)-OR Reg R5 / SelMuxR5
+--         AddrA : IN  std_logic_vector(2 downto 0);				--RFC(2)-OR Reg R6
+--         AddrB : IN  std_logic_vector(2 downto 0);				--RFC(3)-OR Reg R7
+--         AddrSD : IN  std_logic_vector(2 downto 0);				--RFC(4)-MUX do MUXaddrA
+--         DestData : IN  std_logic_vector(15 downto 0);			--RFC(5)-enable Reg R7(para os jumps)
+--         flagsIN : IN  std_logic_vector(3 downto 0);			
+
+--Teste aos registos
+		-- R0 --> OpA
+		CL			<= '0';
+		RFC		<= "000001";
+		AddrA		<= "000";
+		AddrB		<= "000";
+		AddrSD	<= "000";
+		DestData	<= "0001000100010001";
+		flagsIN	<= "0000";
 		
-		--Teste aos registos
---		addressSD1	<= "000";
---		flags1		<= "0000";
---		RFC1			<= "00001";
---		CL1			<= '0';
---		addrA1		<= "000";
---		addrB1		<= "000";
---		DestData1	<= "0001000000000000";
---		wait for 2ns;
+		wait for 13ns;
+		-- R2 --> OpB
+		--CL			<= '0';
+		--RFC		<= "000001";
+		--AddrA		<= "000";
+		AddrB		<= "010";
+		AddrSD	<= "010";
+		DestData	<= "0000000011111111";
+		--flagsIN	<= "0000";
+		
+		wait for 13ns;
+		-- R5 --> nEnable
+		--CL			<= '0';
+		--RFC		<= "000001";
+		--AddrA		<= "000";
+		AddrB		<= "101";
+		AddrSD	<= "101";
+		DestData	<= "0011001100110011";
+		
+		wait for 113ns;
+		AddrSD	<= "111";
+		DestData	<= "0011000000000011";
+		wait for 13ns;
+		RFC		<= "000010";
+		
+		--flagsIN	<= "0000";
 --		addressSD1	<= "001";
 --		DestData1	<= "0001000010000000";
 --		addrA1		<= "001";
---		wait for 2ns;
+--		wait for 2ns; 
 --		addressSD1	<= "010";
 --		DestData1	<= "0001100010000000";		
 --		addrA1		<= "010";
@@ -160,17 +189,20 @@ BEGIN
 --      wait;
 
 		--Teste ao registo R7 PC
-		addressSD1	<= "111";
-		flags1		<= "0000";
-		RFC1			<= "00001";
-		CL1			<= '0';
-		addrA1		<= "111";
-		addrB1		<= "000";
-		DestData1	<= "0000000000000000";
-		wait for 2ns;
-		RFC1			<= "01001";
-		wait;		
+--		addressSD1	<= "111";
+--		flags1		<= "0000";
+--		RFC1			<= "00001";
+--		CL1			<= '0';
+--		addrA1		<= "111";
+--		addrB1		<= "000";
+--		DestData1	<= "0000000000000000";
+--		wait for 2ns;
+--		RFC1			<= "01001";
 
+
+
+
+      wait;
    end process;
 
 END;

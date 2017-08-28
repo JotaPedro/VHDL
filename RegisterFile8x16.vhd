@@ -154,7 +154,7 @@ begin
 	--------------------------
 	-----------------SOMADOR-----------------
 	Somador: component Alu_aritmetico port map(
-		Op => '0', --soma
+		Op => "00", --soma
 		A => R7Q,
 	   B => "0000000000000010", 
 	   Cin => '0',
