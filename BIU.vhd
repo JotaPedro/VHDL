@@ -64,6 +64,7 @@ entity BIU is
 			  --para teste
 --			  ALE_flipflop_out : out STD_LOGIC;
 			  
+			  ALE			: out STD_LOGIC;
 			  RESOUT 	: out  STD_LOGIC
 			  );
 end BIU;
@@ -75,7 +76,7 @@ architecture Behavioral of BIU is
 	Signal TS_DataOut_Enable	: STD_LOGIC;
 	Signal TS_Addr_Enable		: STD_LOGIC;
 	Signal TS_Addr_Input			: STD_LOGIC_VECTOR(15 downto 0);
-	Signal ALE 						: STD_LOGIC;
+	Signal ALE_out					: STD_LOGIC;
 	Signal ALE_flipflop			: STD_LOGIC;
 	
 begin
@@ -202,7 +203,8 @@ begin
 	--para teste apenas
 --	ALE_flipflop_out <= ALE_flipflop;
 	
-	ALE <= (BusCtr(3) AND (NOT ALE_flipflop));
+	ALE_out <= (BusCtr(3) AND (NOT ALE_flipflop));
+	ALE	  <= ALE_out;
 	
 	-----------------------
 	-- LATCH ADDRESS
@@ -214,7 +216,7 @@ begin
 	Port map( D 		=> AD,
 				 --Q 		=> AD,
 				 Q 		=> Addr_out,
-				 En 		=> ALE,
+				 En 		=> ALE_out,
 				 --clkReg 	=> Clock,
 				 A0		=> A0
 				);
