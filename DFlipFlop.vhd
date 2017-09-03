@@ -33,10 +33,7 @@ begin
 			if En='1' then 
 				
 				Q <= D;
-				
-			else
-				Q <= '0';
-				
+
 			end if;
 		end if; 
 	end process;			

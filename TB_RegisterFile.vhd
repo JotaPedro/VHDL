@@ -112,7 +112,7 @@ BEGIN
    begin		
       -- hold reset state for 100 ns.
       wait for 100 ns;	
-      wait for clock_period*10;
+      --wait for clock_period*10;
 
       -- insert stimulus here 
 --         CL : IN  std_logic;											--RFC(0)-Enable Decoder
@@ -126,38 +126,31 @@ BEGIN
 --Teste aos registos
 		-- R0 --> OpA
 		CL			<= '0';
-		RFC		<= "000001";
+		RFC		<= "000001";	--escreve apenas num registo
 		AddrA		<= "000";
 		AddrB		<= "000";
 		AddrSD	<= "000";
 		DestData	<= "0001000100010001";
 		flagsIN	<= "0000";
 		
-		wait for 13ns;
-		-- R2 --> OpB
-		--CL			<= '0';
-		--RFC		<= "000001";
-		--AddrA		<= "000";
-		AddrB		<= "010";
-		AddrSD	<= "010";
-		DestData	<= "0000000011111111";
-		--flagsIN	<= "0000";
-		
-		wait for 13ns;
-		-- R5 --> nEnable
-		--CL			<= '0';
-		--RFC		<= "000001";
-		--AddrA		<= "000";
-		AddrB		<= "101";
-		AddrSD	<= "101";
-		DestData	<= "0011001100110011";
-		
-		wait for 113ns;
+		wait for 13ns;				--escrever R7 e sair em OpB
+		AddrB		<= "111";
 		AddrSD	<= "111";
-		DestData	<= "0011000000000011";
-		wait for 13ns;
-		RFC		<= "000010";
+		DestData	<= "0000000011111111";
+
 		
+		wait for 13ns;
+		RFC		<= "000010";	-- R5(Link) grava o PC	
+		AddrA		<= "101";
+		
+		wait for 13ns;
+		RFC		<= "000100";	-- R6(PSW) grava flags_in
+		AddrA		<= "110";
+		flagsIN	<= "0110";
+
+		wait for 13ns;
+		RFC		<= "001000";	-- inc PC
+--		
 		--flagsIN	<= "0000";
 --		addressSD1	<= "001";
 --		DestData1	<= "0001000010000000";

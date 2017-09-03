@@ -21,6 +21,7 @@ use work.pds16_types.ALL;
 entity Barrel_shift is
     Port ( A : in STD_LOGIC_VECTOR(15 downto 0);
            B : in STD_LOGIC_VECTOR(3 downto 0);
+			  Cyin : in STD_LOGIC;
            Shifter_Ctrl : in STD_LOGIC_VECTOR(2 downto 0); --IR12 IR11 IR10
 			  Output : out STD_LOGIC_VECTOR(15 downto 0);
            Cy : out STD_LOGIC);
@@ -33,21 +34,27 @@ architecture Behavioral of Barrel_shift is
 	Signal shiftMuxs_in: STD_LOGIC_VECTOR(15 downto 0);
 	Signal shiftMuxs_out: STD_LOGIC_VECTOR(15 downto 0); --todas as entradas dos multiplexers 2para1.
 	Signal MUX_RC_CY_A15_sel: STD_LOGIC;
-	Signal Cy_interno: STD_LOGIC;
+	--Signal Cy_interno: STD_LOGIC;
 	Signal MUX_sin_CY_IR12_out: STD_LOGIC;
 	Signal Output_Carry: STD_LOGIC;
 	Signal Decoder_1_out: STD_LOGIC_VECTOR(15 downto 0);
 	Signal Decoder_2_out: STD_LOGIC_VECTOR(15 downto 0);
 	Signal sel_MUXs_outdata: STD_LOGIC_VECTOR(15 downto 0); --selectores dos multiplexers de saida de dados
 	Signal enable_decod1: STD_LOGIC;
+	
+	Signal teste: STD_LOGIC;
+	Signal teste_sel: STD_LOGIC;
+	
 begin
 		
 	-----------------
 	-- Shift MUXs
 	-----------------
+		teste_sel <= Shifter_Ctrl(1) or ((not Shifter_Ctrl(1)) and Shifter_Ctrl(2));
+	
 		--Bloco B/-B--
 		BlocoB: BnB PORT MAP (
-			IR11 => Shifter_Ctrl(1),
+			B_sel => teste_sel,
 			B => B,
 			B_negativo => BnB_sig);
 
@@ -69,7 +76,7 @@ begin
 		MUX_RC_CY_A15: MUX1x1bit PORT MAP( 
 			Sel => MUX_RC_CY_A15_sel,
 			In0 => A(15),
-		   In1 => Cy_interno,
+		   In1 => Cyin,
 			outdata => MUX_RC_CY_A15_out);
 		
 		MUX_sin_CY_IR12: MUX1x1bit PORT MAP( 
@@ -90,27 +97,30 @@ begin
 			
 		--mux de saida CY--
 		Mux_Carry: MUX1x1bit PORT MAP( 
-			Sel => Shifter_Ctrl(1), --IR11
+			Sel => Shifter_Ctrl(1), --IR11 NOT???????????????
 			In0 => shiftMuxs_out(15),
 			In1 => shiftMuxs_out(0),
 			outdata => Output_Carry);
 		
-		Cy_interno <= ((B(0) or B(1) or B(2) or B(3)) and Output_Carry);
-		Cy <= Cy_interno;
-		
+		Cy <= ((B(0) or B(1) or B(2) or B(3)) and Output_Carry);
+			
 	----------------------------------------
 	-- Select dos MUXs de saida
 	----------------------------------------	
 		--Decoders--
-		enable_decod1 <= (Shifter_Ctrl(1) and (not Shifter_Ctrl(2)));
+		--enable_decod1 <= (Shifter_Ctrl(1) and (not Shifter_Ctrl(2)));
+		enable_decod1 <= (Shifter_Ctrl(1) and (not Shifter_Ctrl(2))) or (Shifter_Ctrl(2) and  (not Shifter_Ctrl(1)) and Shifter_Ctrl(0));
 		
 		Decoder_1: Decoder4bits PORT MAP( 
 			E => enable_decod1, --IR11 AND nIR12 (apenas activo no SHR) 
 			S => B,
 			O => Decoder_1_out);
 			
+		
+		teste <= (not Shifter_Ctrl(2) and  not Shifter_Ctrl(1));
+		
 		Decoder_2: Decoder4bits PORT MAP( 
-			E => (not Shifter_Ctrl(1)),	--nIR11
+			E => teste,	--nIR11
 			S => B,
 			O => Decoder_2_out);			
 		

@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   15:14:40 05/08/2017
+-- Create Date:   22:34:21 08/28/2017
 -- Design Name:   
--- Module Name:   F:/Projecto/github repo/VHDL/TB_Alu.vhd
+-- Module Name:   D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/TB_Alu.vhd
 -- Project Name:  work
 -- Target Device:  
 -- Tool versions:  
@@ -33,14 +33,6 @@ USE ieee.std_logic_1164.ALL;
 --USE ieee.numeric_std.ALL;
  
 ENTITY TB_Alu IS
-
-------------------------------------------------------------------------------
---FALTA CORRIGIR E TESTAR OS ROTATES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
---FALTA CORRIGIR E TESTAR OS ROTATES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
---FALTA CORRIGIR E TESTAR OS ROTATES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
---FALTA CORRIGIR E TESTAR OS ROTATES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-------------------------------------------------------------------------------
-
 END TB_Alu;
  
 ARCHITECTURE behavior OF TB_Alu IS 
@@ -49,11 +41,10 @@ ARCHITECTURE behavior OF TB_Alu IS
  
     COMPONENT Alu
     PORT(
-         Oper : IN  std_logic_vector(3 downto 0);
-         LnA : IN  std_logic;
-         B : IN  std_logic_vector(15 downto 0);
-         A : IN  std_logic_vector(15 downto 0);
+         aluFunc : IN  std_logic_vector(5 downto 0);
          CyBw : IN  std_logic;
+         A : IN  std_logic_vector(15 downto 0);
+         B : IN  std_logic_vector(15 downto 0);
          R : OUT  std_logic_vector(15 downto 0);
          flags : OUT  std_logic_vector(3 downto 0)
         );
@@ -61,424 +52,257 @@ ARCHITECTURE behavior OF TB_Alu IS
     
 
    --Inputs
-   signal Oper : std_logic_vector(3 downto 0) := (others => '0');
-   signal LnA : std_logic := '0';
-   signal B : std_logic_vector(15 downto 0) := (others => '0');
-   signal A : std_logic_vector(15 downto 0) := (others => '0');
+   signal aluFunc : std_logic_vector(5 downto 0) := (others => '0');
    signal CyBw : std_logic := '0';
+   signal A : std_logic_vector(15 downto 0) := (others => '0');
+   signal B : std_logic_vector(15 downto 0) := (others => '0');
 
  	--Outputs
    signal R : std_logic_vector(15 downto 0);
    signal flags : std_logic_vector(3 downto 0);
-   -- No clocks detected in port list. Replace <clock> below with 
-   -- appropriate port name 
  
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
    uut: Alu PORT MAP (
-          Oper => Oper,
-          LnA => LnA,
-          B => B,
-          A => A,
+          aluFunc => aluFunc,
           CyBw => CyBw,
+          A => A,
+          B => B,
           R => R,
           flags => flags
         );
 
    -- Stimulus process
-	stim_proc: process
+   stim_proc: process
    begin		
       -- hold reset state for 100 ns.
---		wait for 100 ns;
+      wait for 100 ns;	
+
+      -- insert stimulus here 
+--	aluFunc : IN  std_logic_vector(5 downto 0);
+--	CyBw : IN  std_logic;
+--	A : IN  std_logic_vector(15 downto 0);
+--	B : IN  std_logic_vector(15 downto 0);	
+		
+		
 ---- ADD RD,RM,RN sem carry - Teste sem dar carry
---		Oper 	<= "0000"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		B 		<= "0000000000000010"; -- 2
---		A 		<= "0000000000000101"; -- 5
---		CyBw 	<= '0';
---		wait for 100 ns;
----- ADD RD,RM,RN sem carry - Teste para dar carry
---		Oper 	<= "0000"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		B 		<= "0000000000000010"; -- 2
---		A 		<= "1111111111111111"; -- 7
---		CyBw 	<= '0';
---		wait for 100 ns;
----- ADD RD,RM,RN com carry - Teste sem dar carry
---		Oper 	<= "0000"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		B 		<= "0000000000000010"; -- 2
---		A 		<= "0000000000000101"; -- 5
---		CyBw 	<= '1';
---		wait for 100 ns;
----- ADD RD,RM,RN com carry - Teste para dar carry
---		Oper 	<= "0000"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		B 		<= "0000000000000010"; -- 2
---		A 		<= "1111111111111111"; -- 7
---		CyBw 	<= '1';
---		
---		
---		wait for 100 ns;
----- ADDC RD,RM,RN com carry - Teste sem dar carry
---		Oper 	<= "0100"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		B 		<= "0000000000000010"; -- 2
---		A 		<= "0000000000000100"; -- 4
---		CyBw 	<= '1';
---		wait for 100 ns;
----- ADDC RD,RM,RN com carry - Teste para dar carry
---		Oper 	<= "0100"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		B 		<= "0000000000000010"; -- 2
---		A 		<= "1111111111111111"; -- 7
---		CyBw 	<= '1';
---		wait for 100 ns;
----- ADDC RD,RM,RN sem carry - Teste sem dar carry
---		Oper 	<= "0100"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		B 		<= "0000000000000010"; -- 2
---		A 		<= "0000000000000100"; -- 4
---		CyBw 	<= '0';
---		wait for 100 ns;
----- ADDC RD,RM,RN sem carry - Teste para dar carry
---		Oper 	<= "0100"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		B 		<= "0000000000000010"; -- 2
---		A 		<= "1111111111111111"; -- 7
---		CyBw 	<= '0';
-		
-		
---		wait for 100 ns;
+--	aluFunc <= "100000"; 		-- 0-IR10 1-IR11 2-IR12 3-IR13 4-IR14 5-IR15
+--	CyBw <= '0';
+--	A <= "0000000000000101"; -- 5
+--	B <= "0000000000000010"; -- 2
+--	wait for 13 ns;
+--
+------ ADD RD,RM,RN sem carry - Teste para dar carry
+--	aluFunc <= "100000"; 		
+--	CyBw <= '1';
+--	A <= "1111111111111111";
+--	B <= "0000000000000010";
+--	wait for 13 ns;
+
+---- ADDc RD,RM,RN - Teste sem dar carry
+--	aluFunc <= "100100"; 		-- 0-IR10 1-IR11 2-IR12 3-IR13 4-IR14 5-IR15
+--	CyBw <= '1';
+--	A <= "0000000000000101"; -- 5
+--	B <= "0000000000000010"; -- 2
+--	wait for 13 ns;
+	
+---- ADDc RD,RM,RN - Teste para dar carry
+--	aluFunc <= "100100"; 		
+--	CyBw <= '1';
+--	A <= "1111111111111111";
+--	B <= "0000000000000010";
+--	wait for 13 ns;
+
 ---- ADD RD,RM,#cons4 sem carry - Teste sem dar carry
---		Oper 	<= "1000"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		B 		<= "0000000000000010"; -- 2
---		A 		<= "0000000000000101"; -- 5
---		CyBw 	<= '0';
---		wait for 100 ns;
+--	aluFunc <= "101000"; 		-- 0-IR10 1-IR11 2-IR12 3-IR13 4-IR14 5-IR15
+--	CyBw <= '1';
+--	A <= "0000000000000101"; -- 5
+--	B <= "0000000000000010"; -- 2
+--	wait for 13 ns;	
+
 ---- ADD RD,RM,#cons4 sem carry - Teste para dar carry
---		Oper 	<= "1000"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		B 		<= "0000000000000010"; -- 2
---		A 		<= "1111111111111111"; -- 7
---		CyBw 	<= '0';
---		wait for 100 ns;
----- ADD RD,RM,#cons4 com carry - Teste sem dar carry
---		Oper 	<= "1000"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		B 		<= "0000000000000010"; -- 2
---		A 		<= "0000000000000101"; -- 5
---		CyBw 	<= '1';
---		wait for 100 ns;
----- ADD RD,RM,#cons4 com carry - Teste para dar carry
---		Oper 	<= "1000"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		B 		<= "0000000000000010"; -- 2
---		A 		<= "1111111111111111"; -- 7
---		CyBw 	<= '1';
---		
---		
---		wait for 100 ns;
----- ADDC RD,RM,#cons4 com carry - Teste sem dar carry
---		Oper 	<= "1100"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		B 		<= "0000000000000010"; -- 2
---		A 		<= "0000000000000100"; -- 4
---		CyBw 	<= '1';
---		wait for 100 ns;
+--	aluFunc <= "101000"; 		
+--	CyBw <= '1';
+--	A <= "1111111111111111";
+--	B <= "0000000000000010";
+--	wait for 13 ns;
+
+---- ADDc RD,RM,#cons4 com carry - Teste sem dar carry
+--	aluFunc <= "101100"; 		-- 0-IR10 1-IR11 2-IR12 3-IR13 4-IR14 5-IR15
+--	CyBw <= '1';
+--	A <= "0000000000000101"; -- 5
+--	B <= "0000000000000010"; -- 2
+--	wait for 13 ns;	
+
 ---- ADDC RD,RM,#cons4 com carry - Teste para dar carry
---		Oper 	<= "1100"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		B 		<= "0000000000000010"; -- 2
---		A 		<= "1111111111111111"; -- 7
---		CyBw 	<= '1';
---		wait for 100 ns;
----- ADDC RD,RM,#cons4 sem carry - Teste sem dar carry
---		Oper 	<= "1100"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		B 		<= "0000000000000010"; -- 2
---		A 		<= "0000000000000100"; -- 4
---		CyBw 	<= '0';
---		wait for 100 ns;
----- ADDC RD,RM,#cons4 sem carry - Teste para dar carry
---		Oper 	<= "1100"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		B 		<= "0000000000000010"; -- 2
---		A 		<= "1111111111111111"; -- 7
---		CyBw 	<= '0';
+--	aluFunc <= "101100"; 		
+--	CyBw <= '1';
+--	A <= "1111111111111111";
+--	B <= "0000000000000010";
+--	wait for 13 ns;
 
 
-
---		wait for 100 ns;
+--	********** SUB ***************
+--	******************************
+	
 ---- SUB RD,RM,RN sem borrow - Teste sem dar borrow
---		Oper 	<= "0010"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		B 		<= "0000000000000010"; -- 2
---		A 		<= "0000000000000101"; -- 5
---		CyBw 	<= '0';
---		wait for 100 ns;
+--	aluFunc <= "100010"; 		-- 0-IR10 1-IR11 2-IR12 3-IR13 4-IR14 5-IR15
+--	CyBw <= '0';
+--	A <= "0000000000000101"; -- 5
+--	B <= "0000000000000010"; -- 2
+--	wait for 13 ns;
+
 ---- SUB RD,RM,RN sem borrow - Teste para dar borrow
---		Oper 	<= "0010"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		A 		<= "0000000000000010"; -- 2
---		B 		<= "0000000000000111"; -- 7
---		CyBw 	<= '0';
---		wait for 100 ns;
----- SUB RD,RM,RN com borrow - Teste sem dar borrow
---		Oper 	<= "0010"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		B 		<= "0000000000000010"; -- 2
---		A 		<= "0000000000000101"; -- 5
---		CyBw 	<= '1';
---		wait for 100 ns;
----- SUB RD,RM,RN com borrow - Teste para dar borrow
---		Oper 	<= "0010"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		A 		<= "0000000000000010"; -- 2
---		B 		<= "0000000000000111"; -- 7
---		CyBw 	<= '1';
---		
---		
---		wait for 100 ns;
----- SBB RD,RM,RN com borrow - Teste sem dar borrow
---		Oper 	<= "0110"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		B 		<= "0000000000000010"; -- 2
---		A 		<= "0000000000000100"; -- 4
---		CyBw 	<= '1';
---		wait for 100 ns;
+--	aluFunc <= "100010"; 		
+--	CyBw <= '1';
+--	A <= "0000000000000010";
+--	B <= "0000000000000101";
+--	wait for 13 ns;
+
+---- SBB RD,RM,RN - Teste sem dar borrow
+--	aluFunc <= "100110"; 		-- 0-IR10 1-IR11 2-IR12 3-IR13 4-IR14 5-IR15
+--	CyBw <= '1';
+--	A <= "0000000000000101"; -- 5
+--	B <= "0000000000000010"; -- 2
+--	wait for 13 ns;
+	
 ---- SBB RD,RM,RN com borrow - Teste para dar borrow
---		Oper 	<= "0110"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		A 		<= "0000000000000010"; -- 2
---		B 		<= "0000000000000111"; -- 7
---		CyBw 	<= '1';
---		wait for 100 ns;
----- SBB RD,RM,RN sem borrow - Teste sem dar borrow
---		Oper 	<= "0110"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		B 		<= "0000000000000010"; -- 2
---		A 		<= "0000000000000100"; -- 4
---		CyBw 	<= '0';
---		wait for 100 ns;
----- SBB RD,RM,RN sem borrow - Teste para dar borrow
---		Oper 	<= "0110"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		A 		<= "0000000000000010"; -- 2
---		B 		<= "0000000000000111"; -- 7
---		CyBw 	<= '0';
+--	aluFunc <= "100110"; 		
+--	CyBw <= '1';
+--	A <= "0000000000000010";
+--	B <= "0000000000000101";
+--	wait for 13 ns;
 
-
---wait for 100 ns;
 ---- SUB RD,RM,#const4 sem borrow - Teste sem dar borrow
---		Oper 	<= "1010"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		B 		<= "0000000000000010"; -- 2
---		A 		<= "0000000000000101"; -- 5
---		CyBw 	<= '0';
---		wait for 100 ns;
+--	aluFunc <= "101010"; 		-- 0-IR10 1-IR11 2-IR12 3-IR13 4-IR14 5-IR15
+--	CyBw <= '1';
+--	A <= "0000000000000101"; -- 5
+--	B <= "0000000000000010"; -- 2
+--	wait for 13 ns;	
+
 ---- SUB RD,RM,#const4 sem borrow - Teste para dar borrow
---		Oper 	<= "1010"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		A 		<= "0000000000000010"; -- 2
---		B 		<= "0000000000000111"; -- 7
---		CyBw 	<= '0';
---		wait for 100 ns;
----- SUB RD,RM,#const4 com borrow - Teste sem dar borrow
---		Oper 	<= "1010"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		B 		<= "0000000000000010"; -- 2
---		A 		<= "0000000000000101"; -- 5
---		CyBw 	<= '1';
---		wait for 100 ns;
----- SUB RD,RM,#const4 com borrow - Teste para dar borrow
---		Oper 	<= "1010"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		A 		<= "0000000000000010"; -- 2
---		B 		<= "0000000000000111"; -- 7
---		CyBw 	<= '1';
---		
---		
---		wait for 100 ns;
+--	aluFunc <= "101010"; 		
+--	CyBw <= '1';
+--	A <= "0000000000000010";
+--	B <= "0000000000000101";
+--	wait for 13 ns;
+
 ---- SBB RD,RM,#const4 com borrow - Teste sem dar borrow
---		Oper 	<= "1110"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		B 		<= "0000000000000010"; -- 2
---		A 		<= "0000000000000100"; -- 4
---		CyBw 	<= '1';
---		wait for 100 ns;
+--	aluFunc <= "101110"; 		-- 0-IR10 1-IR11 2-IR12 3-IR13 4-IR14 5-IR15
+--	CyBw <= '1';
+--	A <= "0000000000000101"; -- 5
+--	B <= "0000000000000010"; -- 2
+--	wait for 13 ns;	
+
 ---- SBB RD,RM,#const4 com borrow - Teste para dar borrow
---		Oper 	<= "1110"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		A 		<= "0000000000000010"; -- 2
---		B 		<= "0000000000000111"; -- 7
---		CyBw 	<= '1';
---		wait for 100 ns;
----- SBB RD,RM,#const4 sem borrow - Teste sem dar borrow
---		Oper 	<= "1110"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		B 		<= "0000000000000010"; -- 2
---		A 		<= "0000000000000100"; -- 4
---		CyBw 	<= '0';
---		wait for 100 ns;
----- SBB RD,RM,#const4 sem borrow - Teste para dar borrow
---		Oper 	<= "1110"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '0';		--IR14
---		A 		<= "0000000000000010"; -- 2
---		B 		<= "0000000000000111"; -- 7
---		CyBw 	<= '0';
+--	aluFunc <= "101110"; 		
+--	CyBw <= '1';
+--	A <= "0000000000000010";
+--	B <= "0000000000000101";
+--	wait for 13 ns;
+	
 
+--	********** AND ***************
+--	******************************
 
---wait for 100 ns;
----- ANL - Teste sem dar zero
---		Oper 	<= "0000"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '1';		--IR14
---		B 		<= "0000000000001010"; -- 
---		A 		<= "0000000000001101"; -- 
---		CyBw 	<= '1';
---		wait for 100 ns;
 ---- ANL - Teste para dar zero
---		Oper 	<= "0000"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '1';		--IR14
---		B 		<= "0000000000001010"; -- 
---		A 		<= "0000000000000101"; -- 
---		CyBw 	<= '1';
---		wait for 100 ns;
+--	aluFunc <= "110000"; 		-- 0-IR10 1-IR11 2-IR12 3-IR13 4-IR14 5-IR15
+--	CyBw <= '1';
+--	A <= "0000000000000101"; -- 5
+--	B <= "0000000000000010"; -- 2
+--	wait for 13 ns;	
+
+---- ANL - Teste sem dar zero
+--	aluFunc <= "110000"; 		-- 0-IR10 1-IR11 2-IR12 3-IR13 4-IR14 5-IR15
+--	CyBw <= '1';
+--	A <= "0000000000000111"; -- 7
+--	B <= "0000000000000010"; -- 2
+--	wait for 13 ns;
+
+
+--	********** OR ****************
+--	******************************	
+
 ---- ORL - Teste sem dar zero
---		Oper 	<= "0010"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '1';		--IR14
---		B 		<= "0000000000001010"; -- 
---		A 		<= "0000000000001101"; -- 
---		CyBw 	<= '1';
---		wait for 100 ns;
----- ORL - Teste para dar zero
---		Oper 	<= "0010"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '1';		--IR14
---		B 		<= "0000000000000000"; -- 
---		A 		<= "0000000000000000"; -- 
---		CyBw 	<= '1';
---		wait for 100 ns;
+--	aluFunc <= "110010"; 		-- 0-IR10 1-IR11 2-IR12 3-IR13 4-IR14 5-IR15
+--	CyBw <= '1';
+--	A <= "0000000000001101";
+--	B <= "0000000000001010";
+--	wait for 13 ns;
+	
+	
+--	********** XOR ***************
+--	******************************
+
 ---- XRL - Teste sem dar zero
---		Oper 	<= "0100"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '1';		--IR14
---		B 		<= "0000000000001010"; -- 
---		A 		<= "0000000000001101"; -- 
---		CyBw 	<= '1';
---		wait for 100 ns;
----- XRL - Teste para dar zero
---		Oper 	<= "0100"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '1';		--IR14
---		B 		<= "0000000000001111"; -- 
---		A 		<= "0000000000001111"; -- 
---		CyBw 	<= '1';
---		wait for 100 ns;
+--	aluFunc <= "110100"; 		-- 0-IR10 1-IR11 2-IR12 3-IR13 4-IR14 5-IR15
+--	CyBw <= '1';
+--	A <= "0000000000001101";
+--	B <= "0000000000001010";
+--	wait for 13 ns;
+	
+	
+--	********** NOT ***************
+--	******************************
+
 ---- NOT - Teste sem dar zero
---		Oper 	<= "0110"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '1';		--IR14
---		B 		<= "0000000000001010"; -- 
---		A 		<= "1111111111111110"; -- 
---		CyBw 	<= '1';
---		wait for 100 ns;
----- NOT - Teste para dar zero
---		Oper 	<= "0110"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '1';		--IR14
---		B 		<= "0000000000000000"; -- 
---		A 		<= "1111111111111111"; -- 
---		CyBw 	<= '1';
+--	aluFunc <= "110110"; 		-- 0-IR10 1-IR11 2-IR12 3-IR13 4-IR14 5-IR15
+--	CyBw <= '1';
+--	A <= "0000000000001101";
+--	B <= "0000000000001010";
+--	wait for 13 ns;
 
 
---wait for 100 ns;
+--	********** SH ****************
+--	******************************
+
 ---- SHL - Teste sem dar Carry e sem introdução de sinal
---		Oper 	<= "1000"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '1';		--IR14
---		B 		<= "0000000000000010"; -- 
---		A 		<= "0000000000001101"; -- 
---		CyBw 	<= '1';
---		wait for 100 ns;
----- SHL - Teste sem dar Carry e com introdução de sinal
---		Oper 	<= "1001"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '1';		--IR14
---		B 		<= "0000000000000010"; -- 
---		A 		<= "0000000000001101"; -- 
---		CyBw 	<= '1';
---		wait for 100 ns;
----- SHL - Teste a dar Carry e com introdução de sinal
---		Oper 	<= "1001"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '1';		--IR14
---		B 		<= "0000000000000010"; -- 
---		A 		<= "1100000000001101"; -- 
---		CyBw 	<= '1';
---		wait for 100 ns;
----- SHL - Teste a dar Carry e sem introdução de sinal
---		Oper 	<= "1000"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '1';		--IR14
---		B 		<= "0000000000000010"; -- 
---		A 		<= "1100000000001101"; -- 
---		CyBw 	<= '1';
---wait for 100 ns;
----- SHR - Teste sem dar Carry e sem introdução de sinal
---		Oper 	<= "1010"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '1';		--IR14
---		B 		<= "0000000000000010"; -- 
---		A 		<= "0000000000001101"; -- 
---		CyBw 	<= '1';
---		wait for 100 ns;
----- SHR - Teste sem dar Carry e com introdução de sinal
---		Oper 	<= "1011"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '1';		--IR14
---		B 		<= "0000000000000010"; -- 
---		A 		<= "0000000000001101"; -- 
---		CyBw 	<= '1';
---		wait for 100 ns;
+--	aluFunc <= "111000"; 		-- 0-IR10 1-IR11 2-IR12 3-IR13 4-IR14 5-IR15
+--	CyBw <= '1';
+--	A <= "0000000000001101";
+--	B <= "0000000000001010";
+--	wait for 13 ns;
+
+---- SHL - Teste para dar Carry e com introdução de sinal
+--	aluFunc <= "111001"; 		-- 0-IR10 1-IR11 2-IR12 3-IR13 4-IR14 5-IR15
+--	CyBw <= '1';
+--	A <= "0000000000001101";
+--	B <= "0000000000001101";
+--	wait for 13 ns;
+	
 ---- SHR - Teste a dar Carry e com introdução de sinal
---		Oper 	<= "1011"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '1';		--IR14
---		B 		<= "0000000000000010"; -- 
---		A 		<= "1000000000001111"; -- 
---		CyBw 	<= '1';
---		wait for 100 ns;
----- SHR - Teste a dar Carry e sem introdução de sinal
---		Oper 	<= "1010"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
---		LnA 	<= '1';		--IR14
---		B 		<= "0000000000000010"; -- 
---		A 		<= "1000000000001111"; -- 
---		CyBw 	<= '1';
-		
-wait for 100 ns;
--- RRL - Teste sem dar Carry
-		Oper 	<= "1100"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
-		LnA 	<= '1';		--IR14
-		B 		<= "0000000000000010"; -- 
-		A 		<= "0000000000001101"; -- 
-		CyBw 	<= '1';
-wait for 100 ns;
--- RRL - Teste a dar Carry
-		Oper 	<= "1100"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
-		LnA 	<= '1';		--IR14
-		B 		<= "0000000000000010"; -- 
-		A 		<= "0000000000001111"; -- 
-		CyBw 	<= '1';		
-wait for 100 ns;
--- RRM - Teste sem dar Carry
-		Oper 	<= "1101"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
-		LnA 	<= '1';		--IR14
-		B 		<= "0000000000000010"; -- 
-		A 		<= "1000000000001101"; -- 
-		CyBw 	<= '1';
-wait for 100 ns;
--- RRM - Teste a dar Carry
-		Oper 	<= "1101"; 	-- 0-IR10 1-IR11 2-IR12 3-IR13
-		LnA 	<= '1';		--IR14
-		B 		<= "0000000000000010"; -- 
-		A 		<= "0000000000001111"; -- 
-		CyBw 	<= '1';	
+--	aluFunc <= "111011"; 		-- 0-IR10 1-IR11 2-IR12 3-IR13 4-IR14 5-IR15
+--	CyBw <= '1';
+--	A <= "0000000000001101";
+--	B <= "0000000000000011";
+--	wait for 13 ns;
+	
+
+--	********** RR ****************
+--	******************************
+---- RRL - Teste a dar Carry
+	aluFunc <= "111100"; 		-- 0-IR10 1-IR11 2-IR12 3-IR13 4-IR14 5-IR15
+	CyBw <= '1';
+	A <= "0000000000001101";
+	B <= "0000000000000011";
+	wait for 13 ns;
+	
+---- RRM - Teste sem dar Carry
+	aluFunc <= "111101"; 		-- 0-IR10 1-IR11 2-IR12 3-IR13 4-IR14 5-IR15
+	CyBw <= '1';
+	A <= "1000000000001101";
+	B <= "0000000000000010";
+	wait for 13 ns;
+	
+	
+
+------------------------------------------------------------------------	
 
 
 		
 		
-		
+
       wait;
    end process;
 

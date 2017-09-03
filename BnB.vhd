@@ -19,7 +19,7 @@ use work.pds16_types.ALL;
 
 
 entity BnB is
-    Port ( IR11 : in  STD_LOGIC;
+    Port ( B_sel: in  STD_LOGIC;
 			  B : in  STD_LOGIC_VECTOR(3 downto 0);
            B_negativo : out  STD_LOGIC_VECTOR(3 downto 0));
 end BnB;
@@ -28,9 +28,9 @@ architecture Behavioral of BnB is
 
 begin
 
-	process(B,IR11)	
+	process(B,B_sel)
 		begin
-			if (IR11 = '1') then
+			if (B_sel = '1') then
 				B_negativo <= unsigned(not(B)) + 1;
 			else 
 				B_negativo <= B;

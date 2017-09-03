@@ -2,15 +2,15 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   18:32:48 07/23/2016
+-- Create Date:   01:00:52 08/29/2017
 -- Design Name:   
--- Module Name:   C:/Documents and Settings/Administrator/My Documents/Dropbox/Documentos Universidade/SV1516/projecto/Trabalho/vhdl1/TB_Decoder3_8.vhd
--- Project Name:  vhdl1
+-- Module Name:   D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/TB_Alu_logico.vhd
+-- Project Name:  work
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
 -- 
--- VHDL Test Bench Created by ISE for module: Decoder3_8
+-- VHDL Test Bench Created by ISE for module: Alu_Logico
 -- 
 -- Dependencies:
 -- 
@@ -25,11 +25,12 @@
 -- to guarantee that the testbench will bind correctly to the post-implementation 
 -- simulation model.
 --------------------------------------------------------------------------------
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_ARITH.ALL;
-use IEEE.STD_LOGIC_UNSIGNED.ALL;
-use work.pds16_types.ALL;
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+ 
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--USE ieee.numeric_std.ALL;
  
 ENTITY TB_Alu_logico IS
 END TB_Alu_logico;
@@ -38,51 +39,55 @@ ARCHITECTURE behavior OF TB_Alu_logico IS
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT Alu_logico is
-    Port ( Input_B : in  bit_16;
-           Input_A : in  bit_16;
-           Op : in  STD_LOGIC_VECTOR(1 downto 0);--IR11, 12
-           Output : out  bit_16
-			);
+    COMPONENT Alu_Logico
+    PORT(
+         Input_A : IN  std_logic_vector(15 downto 0);
+         Input_B : IN  std_logic_vector(15 downto 0);
+         Op : IN  std_logic_vector(1 downto 0);
+         Output : OUT  std_logic_vector(15 downto 0)
+        );
     END COMPONENT;
     
 
    --Inputs
-   signal A1 : bit_16;
-   signal B1 : bit_16;
-	signal Op1 : STD_LOGIC_VECTOR(1 downto 0);--AND, OR, XOR e NOT
+   signal Input_A : std_logic_vector(15 downto 0) := (others => '0');
+   signal Input_B : std_logic_vector(15 downto 0) := (others => '0');
+   signal Op : std_logic_vector(1 downto 0) := (others => '0');
 
  	--Outputs
-   signal Output1 : bit_16;
- 
+   signal Output : std_logic_vector(15 downto 0);
+
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: Alu_logico Port map( 
-			Input_B => B1,
-         Input_A => A1,
-         Op => Op1,
-         Output => Output1
-		);
- 
+   uut: Alu_Logico PORT MAP (
+          Input_A => Input_A,
+          Input_B => Input_B,
+          Op => Op,
+          Output => Output
+        );
+
    -- Stimulus process
    stim_proc: process
-   begin
-		A1 	<= ("0001000000001000");--0
-		B1 	<= ("0000000000001001");--1
-		Op1	<= "00";--ANL
+   begin		
+      -- hold reset state for 100 ns.
+      wait for 100 ns;	
+      -- insert stimulus here 
+			
+		Input_A 	<= ("0001000000001000");--0
+		Input_B 	<= ("0000000000001001");--1
+		Op	<= "00";--ANL
       wait for 2 ns;
-		A1 	<= ("0001000000001000");--0
-		B1 	<= ("0000000000001001");--1
-		Op1	<= "01";--OR
+
+		Op	<= "01";--OR
       wait for 2 ns;
-		A1 	<= ("0001000000001000");--0
-		B1 	<= ("0000000000001001");--1
-		Op1	<= "10";--XOR
+
+		Op	<= "10";--XOR
       wait for 2 ns;
-		A1 	<= ("0001000000001000");--0
-		B1 	<= ("0000000000001001");--1
-		Op1	<= "11";--NOT
-		wait;
+
+		Op	<= "11";--NOT
+
+      wait;
    end process;
+
 END;

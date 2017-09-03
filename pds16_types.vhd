@@ -77,8 +77,6 @@ package pds16_types is
            Cin : in  STD_LOGIC;
            Result : out  STD_LOGIC_VECTOR(15 downto 0);
            Flags_out : out  STD_LOGIC_VECTOR(1 downto 0));
-  
-  
 	end Component;
 	
 	Component Mplex16bit_5to1 is
@@ -89,7 +87,7 @@ package pds16_types is
 	end Component;
 	
 	Component Sig_Ext is
-    Port ( Const8x2 : in  STD_LOGIC_VECTOR(7 downto 0);
+    Port ( Const8x2 : in  STD_LOGIC_VECTOR(8 downto 0);
            Output16bit : out  bit_16);
 	end Component;
 	
@@ -99,21 +97,20 @@ package pds16_types is
 	end Component;
 	
 	Component Alu is
-    Port ( Oper : in  STD_LOGIC_VECTOR(3 downto 0); --IR10 , 11, 12, 13
-           LnA : in  STD_LOGIC; --IR14
-           B : in  bit_16; 
-           A : in  bit_16; 
-           CyBw : in  STD_LOGIC;
-           R : out  bit_16;
-           flags : out  STD_LOGIC_VECTOR(3 downto 0) --P,Z,CyBw,GE
-		);
+    Port ( aluFunc : in STD_LOGIC_VECTOR(5 downto 0); -- 0-IR10 1-IR11 2-IR12 3-IR13 4-IR14 5-IR15
+			  CyBw : in STD_LOGIC; 
+			  A : in STD_LOGIC_VECTOR(15 downto 0);
+			  B : in STD_LOGIC_VECTOR(15 downto 0);
+			  R : out STD_LOGIC_VECTOR(15 downto 0);
+			  flags : out  STD_LOGIC_VECTOR(3 downto 0) -- 0-Zero 1-CyBw 2-GE 3-Parity 
+		); 
 	end Component;
 		
 	Component Alu_logico is
-    Port ( Input_B : in  bit_16;
-           Input_A : in  bit_16;
-           Op : in  STD_LOGIC_VECTOR(1 downto 0);
-           Output : out  bit_16);
+    Port ( Input_A : in  STD_LOGIC_VECTOR(15 downto 0);
+           Input_B : in  STD_LOGIC_VECTOR(15 downto 0);
+           Op : in  STD_LOGIC_VECTOR(1 downto 0); -- IR12 IR11
+           Output : out  STD_LOGIC_VECTOR(15 downto 0));
 	end Component;
 	
 --	Component Mplex16to1 is
@@ -167,12 +164,13 @@ package pds16_types is
 			);
 	end Component;
 	
-	Component Barrel_shift is
-    Port ( A : in  bit_16;
-           B : in  STD_LOGIC_VECTOR(3 downto 0);
-           Output : out  bit_16;
-           Ctl_3bit : in  STD_LOGIC_VECTOR(2 downto 0); --IR10 , 11, 12
-           Cy : out  STD_LOGIC);
+	component Barrel_shift is
+    Port ( A : in STD_LOGIC_VECTOR(15 downto 0);
+           B : in STD_LOGIC_VECTOR(3 downto 0);
+			  Cyin: in STD_LOGIC;
+           Shifter_Ctrl : in STD_LOGIC_VECTOR(2 downto 0); --IR12 IR11 IR10
+			  Output : out STD_LOGIC_VECTOR(15 downto 0);
+           Cy : out STD_LOGIC);
 	end Component;
 	
 	Component Mplex4to1 is
@@ -370,8 +368,8 @@ package pds16_types is
 --	end component;
 	
 	component BnB is
-    Port ( B : in  STD_LOGIC_VECTOR(3 downto 0);
-           IR11 : in  STD_LOGIC;
+    Port ( B_sel : in  STD_LOGIC;
+			  B : in  STD_LOGIC_VECTOR(3 downto 0);
            B_negativo : out  STD_LOGIC_VECTOR(3 downto 0));
 	end component;
 	

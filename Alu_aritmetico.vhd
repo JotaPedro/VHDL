@@ -93,6 +93,6 @@ begin
 	end process;
 	
 	-- Cy --
-		Flags_out(1) <= Carry(16);
+		Flags_out(1) <= Carry(16) xor Op(0);
 
 end structural;

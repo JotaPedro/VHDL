@@ -17,7 +17,7 @@ use work.pds16_types.ALL;
 
 
 entity Sig_Ext is
-    Port ( Const8x2 : in  STD_LOGIC_VECTOR(7 downto 0);
+    Port ( Const8x2 : in  STD_LOGIC_VECTOR(8 downto 0);
            Output16bit : out  STD_LOGIC_VECTOR(15 downto 0));
 end Sig_Ext;
 
@@ -32,8 +32,8 @@ begin
 --	
 --	Output16bit <= SXT(Const8x2, Output16bit'LENGTH);
 
-	Output16bit(15 downto 8) <= (others => Const8x2(7));
-	Output16bit(7 downto 0)  <= Const8x2;
+	Output16bit(15 downto 8) <= (others => Const8x2(8));
+	Output16bit(7 downto 0)  <= Const8x2(7 downto 0);
 
 end Behavioral;
 
