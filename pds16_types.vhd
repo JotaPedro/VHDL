@@ -530,6 +530,56 @@ end component;
            out_Block: out  STD_LOGIC_VECTOR(15 downto 0)); 
 end component;
 
+component RegisterFileBS is
+    Port ( RFC : in  STD_LOGIC_VECTOR (9 downto 0);
+			  destData : in  STD_LOGIC_VECTOR (15 downto 0);
+           flagsIn : in  STD_LOGIC_VECTOR (5 downto 0);
+           AddrSD : in  STD_LOGIC_VECTOR (3 downto 0);
+           AddrA : in  STD_LOGIC_VECTOR (3 downto 0);
+           AddrB : in  STD_LOGIC_VECTOR (3 downto 0);
+           RES : in  STD_LOGIC;
+			  interrupt : in  STD_LOGIC;
+           flagsOut : out  STD_LOGIC_VECTOR (5 downto 0);
+           PCout : out  STD_LOGIC_VECTOR (15 downto 0);
+           OpA : out  STD_LOGIC_VECTOR (15 downto 0);
+           OpB : out  STD_LOGIC_VECTOR (15 downto 0);
+           Sc : out  STD_LOGIC_VECTOR (15 downto 0));
+end component;
+
+component Decoder1bit is
+    Port ( E : in  STD_LOGIC;
+           S : in  STD_LOGIC;
+           O : out  STD_LOGIC_VECTOR (1 downto 0));
+end component;
+
+component RegisterBank0_5 is
+    Port ( clk : in  STD_LOGIC;
+			  enable : in STD_LOGIC_VECTOR (5 downto 0);
+           dataIn : in bit_16_array(5 downto 0);		--array 6x16
+			  dataOut: out bit_16_array(5 downto 0));		--array 6x16
+end component;
+
+component MUX4x16bits is
+    Port ( Sel : in  STD_LOGIC_VECTOR (3 downto 0);
+           In0 : in  STD_LOGIC_VECTOR (15 downto 0);
+           In1 : in  STD_LOGIC_VECTOR (15 downto 0);
+			  In2 : in  STD_LOGIC_VECTOR (15 downto 0);
+			  In3 : in  STD_LOGIC_VECTOR (15 downto 0);
+			  In4 : in  STD_LOGIC_VECTOR (15 downto 0);
+			  In5 : in  STD_LOGIC_VECTOR (15 downto 0);
+			  In6 : in  STD_LOGIC_VECTOR (15 downto 0);
+			  In7 : in  STD_LOGIC_VECTOR (15 downto 0);
+			  In8 : in  STD_LOGIC_VECTOR (15 downto 0);
+			  In9 : in  STD_LOGIC_VECTOR (15 downto 0);
+			  In10 : in  STD_LOGIC_VECTOR (15 downto 0);
+			  In11 : in  STD_LOGIC_VECTOR (15 downto 0);
+			  In12 : in  STD_LOGIC_VECTOR (15 downto 0);
+			  In13 : in  STD_LOGIC_VECTOR (15 downto 0);
+			  In14 : in  STD_LOGIC_VECTOR (15 downto 0);
+			  In15 : in  STD_LOGIC_VECTOR (15 downto 0);
+			  outdata: out STD_LOGIC_VECTOR (15 downto 0));
+end component;
+
 --  type <new_type> is
 --    record
 --        <type_name>        : std_logic_vector( 7 downto 0);
