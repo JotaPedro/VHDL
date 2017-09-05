@@ -18,14 +18,14 @@ use work.pds16_types.ALL;
 
 entity RegisterFileBS is
     Port ( clock : in  STD_LOGIC;
-			  RFC : in  STD_LOGIC_VECTOR (12 downto 0);
+			  RFC : in  STD_LOGIC_VECTOR (13 downto 0);
 			  destData : in  STD_LOGIC_VECTOR (15 downto 0);
            flagsIn : in  STD_LOGIC_VECTOR (5 downto 0);
            AddrSD : in  STD_LOGIC_VECTOR (2 downto 0);
            AddrA : in  STD_LOGIC_VECTOR (2 downto 0);
            AddrB : in  STD_LOGIC_VECTOR (2 downto 0);
-           CL : in  STD_LOGIC;								--é o sinal exterior de reset ou clear do control???
-			  interrupt : in  STD_LOGIC;
+           RES : in  STD_LOGIC;					--SINAL DE SAIDA DO FF DE RESET
+			  --interrupt : in  STD_LOGIC;
            flagsOut : out  STD_LOGIC_VECTOR (5 downto 0);
            PCout : out  STD_LOGIC_VECTOR (15 downto 0);
            OpA : out  STD_LOGIC_VECTOR (15 downto 0);
@@ -44,6 +44,7 @@ architecture Structural of RegisterFileBS is
 	Signal ER: STD_LOGIC_VECTOR(7 downto 0);
 	Signal ERi: STD_LOGIC_VECTOR(5 downto 0);
 	
+	Signal R0_5dataIn: bit_16_array(5 downto 0);
 	Signal R5D: STD_LOGIC_VECTOR(15 downto 0);
 	Signal In1R6dataIn: STD_LOGIC_VECTOR(15 downto 0);
 	Signal In3R6dataIn: STD_LOGIC_VECTOR(15 downto 0);
@@ -54,6 +55,7 @@ architecture Structural of RegisterFileBS is
 	Signal R0_5Q: bit_16_array(5 downto 0);		--array 6x16
 	Signal R6Q: STD_LOGIC_VECTOR(15 downto 0);
 	Signal R7Q: STD_LOGIC_VECTOR(15 downto 0);
+	Signal R0i_5idataIn: bit_16_array(5 downto 0);	
 	Signal R0iD: STD_LOGIC_VECTOR(15 downto 0);
 	Signal R5iD: STD_LOGIC_VECTOR(15 downto 0);
 	Signal R0i_5iQ: bit_16_array(5 downto 0);		--array 6x16
@@ -62,8 +64,7 @@ architecture Structural of RegisterFileBS is
 	Signal Sel_outMuxA: STD_LOGIC_VECTOR(3 downto 0);
 	Signal Sel_outMuxB: STD_LOGIC_VECTOR(3 downto 0);
 	Signal Sel_outMuxSC: STD_LOGIC_VECTOR(3 downto 0);
-	Signal unused: STD_LOGIC_VECTOR(15 downto 0);
-	
+
 	
 begin
 	--------------------------
@@ -99,14 +100,14 @@ begin
 	ER(3) <= outDecodR0_R5(3);
 	ER(4) <= outDecodR0_R5(4);
 	ER(5) <= outDecodR0_R5(5) OR outDecodR5_R5i(0);
-	ER(6) <= outDecodR6_R7(0) OR interrupt OR RFC(2);	--en_psw
-	ER(7) <= outDecodR6_R7(1) OR interrupt OR RFC(3);	--en_pc
-	ERi(0) <= interrupt OR outDecodR0i_R5i(0);
+	ER(6) <= outDecodR6_R7(0) OR RFC(13) OR RFC(2);	--en_psw
+	ER(7) <= outDecodR6_R7(1) OR RFC(13) OR RFC(3);	--en_pc
+	ERi(0) <= RFC(13) OR outDecodR0i_R5i(0);
 	ERi(1) <= outDecodR0i_R5i(1);
 	ERi(2) <= outDecodR0i_R5i(2);
 	ERi(3) <= outDecodR0i_R5i(3);
 	ERi(4) <= outDecodR0i_R5i(4);
-	ERi(5) <= outDecodR0i_R5i(5) OR outDecodR5_R5i(1) OR interrupt;
+	ERi(5) <= outDecodR0i_R5i(5) OR outDecodR5_R5i(1) OR RFC(13);
 	
 	
 	--------------------------
@@ -120,16 +121,18 @@ begin
 		In1 => R7Q,
 		outdata => R5D);
 	
+	R0_5dataIn (5 downto 0) <= (5 => R5D, 4 => destData, 3 => destData, 2 => destData, 1 => destData, 0 => destData);
+	
 	R0_R5: component RegisterBank0_5 port map(
 		clk => clock,
 		enable => ER(5 downto 0),
-		dataIn => R5D & destData & destData & destData & destData & destData,
-		--dataIn => (R5D & (others <= destData)),
+		dataIn => R0_5dataIn,
+--		dataIn => R5D & destData & destData & destData & destData & destData,
 		dataOut => R0_5Q);
 	
 	-- Registo R6
 	In1R6dataIn(15 downto 0) <= "0000000000" & flagsIn;
-	In3R6dataIn(15 downto 0) <= R6Q AND ("00000000000" & RFC(12) & "00000"); --NAO DEVE SER ISTO!!!!
+	In3R6dataIn(15 downto 0) <= R6Q AND ("00000000000" & RFC(12) & "00000"); --NAO É ISTO!!!!
 	
 	R6dataIn: component MUX2x16bits port map(
 		Sel => RFC(7 downto 6),		--SPSW
@@ -142,7 +145,7 @@ begin
 	R6: component Register16bitsCL port map(
 		clkReg => clock,
 		En => ER(6),
-		Cl => CL,
+		Cl => RES,
 		D => R6D,
       Q => R6Q);
 		
@@ -166,7 +169,7 @@ begin
 	R7: component Register16bitsCL port map(
 		clkReg => clock,
 		En => ER(7),
-		Cl => CL,
+		Cl => RES,
 		D => R7D,
       Q => R7Q);
 		
@@ -185,17 +188,21 @@ begin
 		In1 => R7Q,
 		outdata => R5iD);	
 
+
+	R0i_5idataIn (5 downto 0) <= (5 => R5iD, 4 => destData, 3 => destData, 2 => destData, 1 => destData, 0 => R0iD);
+
 	R0i_R5i: component RegisterBank0_5 port map(
 		clk => clock,
 		enable => ERi(5 downto 0),
-		dataIn => R5iD & destData & destData & destData & destData & R0iD,
+--		dataIn => R5iD & destData & destData & destData & destData & R0iD,
+		dataIn => R0i_5idataIn,
 		dataOut => R0i_5iQ);
 
 		
 	--------------------------
 	-- OutData
 	--------------------------
-	unused <= "0000000000000000";
+
 	-- OpA
 	mux_OutMuxA: component MUX1x3bits port map(
 		Sel => RFC(4),
@@ -221,8 +228,8 @@ begin
 		In11 => R0i_5iQ(3),
 		In12 => R0i_5iQ(4),
 		In13 => R0i_5iQ(5),
-		In14 => unused,
-		In15 => unused,
+		In14 => R6Q,
+		In15 => R7Q,
 		outdata => OpA);
 	
 	-- OpB
@@ -244,8 +251,8 @@ begin
 		In11 => R0i_5iQ(3),
 		In12 => R0i_5iQ(4),
 		In13 => R0i_5iQ(5),
-		In14 => unused,
-		In15 => unused,
+		In14 => R6Q,
+		In15 => R7Q,
 		outdata => OpB);
 		
 	-- Sc
@@ -267,10 +274,12 @@ begin
 		In11 => R0i_5iQ(3),
 		In12 => R0i_5iQ(4),
 		In13 => R0i_5iQ(5),
-		In14 => unused,
-		In15 => unused,
+		In14 => R6Q,
+		In15 => R7Q,
 		outdata => Sc);
 	
+	flagsOut <= R6Q(5 downto 0);
+	PCout <= R7Q;
 	
 end Structural;
 
