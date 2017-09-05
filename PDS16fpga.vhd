@@ -97,8 +97,14 @@ begin
 		En => '1',
 		D => NOT RESET,
       Q => reset);
-	
-	clear <= RESET OR reset;
+		
+--------------------------------------------------------------------------------	
+	-- Isto está bem??
+
+	clear <= Not RESET OR reset;
+--------------------------------------------------------------------------------	
+
+
 	
 	--------------------------
 	-- INSTRUCTION REGISTER
@@ -149,7 +155,7 @@ begin
 		AddrSD => instruction (2 downto 0),			--RFC(2)-OR Reg R6
 		DestData => DestData_sig,						--RFC(3)-OR Reg R7
 		flagsIN => flags_sig,							--RFC(4)-MUX do MUXaddrA
-		OpA => OpA_sig,
+		OpA => OpA_sig,									--RFC(5)-Enable R7
 		OpB => OpB_sig,
 		SC => DataOut_sig,
 		flagsOUT => flagsCtrl_sig,
@@ -187,62 +193,37 @@ begin
 	------------------------
 	-- BUS INTERFACE UNIT
 	------------------------
-	
---	NOTA: É preciso corrigir este componente
 
-
---	BIU: BIU PORT MAP(
---		Clock : in  STD_LOGIC;
---		CL : in  STD_LOGIC;
---		Addr : in  STD_LOGIC_VECTOR(14 downto 0);--Addr 15 downto 1
---		DataOut : in  STD_LOGIC_VECTOR(15 downto 0);
---		BusCtr : in  STD_LOGIC_VECTOR(3 downto 0);-- 0-WrByte, 1-DataOut, 2-Addr, 3-Ale
---		Sync : out  STD_LOGIC_VECTOR(1 downto 0);-- 0- BRQ, 1-RDY
---		AD : inout  STD_LOGIC_VECTOR(15 downto 0);
---		ALE : out  STD_LOGIC;
---		S0_in : in  STD_LOGIC;
---		S1_in : in  STD_LOGIC;
---		S0_out : out  STD_LOGIC;
---		S1_out : out  STD_LOGIC;
---		RD : in  STD_LOGIC;
---		WRL : in  STD_LOGIC;
---		WRH : in  STD_LOGIC;
---		nRD : out  STD_LOGIC;
---		nWRL : out  STD_LOGIC;
---		nWRH : out  STD_LOGIC;
---		RDY : in  STD_LOGIC;
---		BRQ : in  STD_LOGIC;
---		BGT_in : in  STD_LOGIC;
---		BGT_out : out  STD_LOGIC;
---		RESOUT : out  STD_LOGIC;
---		DataIn : out  STD_LOGIC_VECTOR (15 downto 0)
---	);
 	
 	-----------------
 	-- CONTROL
 	-----------------
---		Control: component Control PORT MAP(
---		WL 		: in  STD_LOGIC;
---		Flags 	: in  STD_LOGIC_VECTOR(2 downto 0);-- 0-Zero 1-Carry 2-GE
---		OpCode 	: in  STD_LOGIC_VECTOR(6 downto 0);-- bits de 15 a 9
---		INTP 		: in  STD_LOGIC;
---		Clock 	: in  STD_LOGIC;
---		CL 		: in  STD_LOGIC;
---		Sync 		: in  STD_LOGIC_VECTOR(1 downto 0); -- 0- BRQ, 1-RDY
---		BusCtr 	: out  STD_LOGIC_VECTOR(3 downto 0); -- 0-WrByte, 1-DataOut, 2-Addr, 3-ALE
---		RFC 		: out  STD_LOGIC_VECTOR(4 downto 0);
---		ALUC 		: out  STD_LOGIC_VECTOR(2 downto 0);
---		SelAddr 	: out  STD_LOGIC_VECTOR(1 downto 0);
---		SelData	: out  STD_LOGIC_VECTOR(1 downto 0);
---		Sellmm 	: out  STD_LOGIC;
---		
---		RD 		: out	 STD_LOGIC; -- ACTIVE LOW
---		WR			: out  STD_LOGIC_VECTOR(1 downto 0); -- 0-WRL, 1-WRH
---		BGT		: out	 STD_LOGIC;
---		S0 		: out	 STD_LOGIC;
---		S1 		: out	 STD_LOGIC;
---		EIR		: out	 STD_LOGIC
---	);
+	
+	Controlo: Control PORT MAP(
+		A0 		=>	Addr_sig(0), 					-- A0 obtido da saída do multiplexer SelAddr
+		Flags 	=>	flagsCtrl_sig(2 downto 0), -- 0-Zero 1-Carry 2-GE
+		OpCode 	=> instruction( 15 downto 9), -- bits de 15 a 9
+		INTP 		=> INTP_sig, 						-- bit para indicar uma interrupção?
+		Clock 	=>	MCLK,
+		CL 		=>	clear,
+		Sync 		=> --: in  STD_LOGIC_VECTOR(1 downto 0); -- 0- BRQ, 1-RDY
+		BusCtr 	=> --: out  STD_LOGIC_VECTOR(3 downto 0); -- 0-WrByte, 1-DataOut, 2-Addr, 3-ALE
+		RFC 		=> RFC_sig, -- 0-Decoder, 1-OR Reg R5/SelMuxR5, 2-OR Reg R6/SelMuxR6, 3-OR Reg R7/SelMuxR7, 4-MUXaddrA, 5-enable Reg R7(para os jumps)
+
+------------------------------------------------------------------------------------------------------		
+-- Falta tratar deste sinal internamente. Na alu mudou.
+		ALUC 		=> --: out  STD_LOGIC_VECTOR(2 downto 0);
+------------------------------------------------------------------------------------------------------
+		
+		SelAddr 	=> SelAddr_sig,
+		SelData	=> SelData_sig,
+		Sellmm 	=> SelImm_sig, 
+		RD 		=> --: out	 STD_LOGIC; -- ACTIVE LOW
+		WR			=> --: out  STD_LOGIC_VECTOR(1 downto 0); -- 0-WRL, 1-WRH
+		BGT		=> --: out	 STD_LOGIC;
+		S1S0 		=> --: out	 STD_LOGIC_VECTOR(1 downto 0);
+		EIR		=> --: out	 STD_LOGIC);
+
 	
 	
 end Behavioral;

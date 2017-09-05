@@ -46,10 +46,10 @@ entity Control is
 			  WR			: out  STD_LOGIC_VECTOR(1 downto 0); -- 0-WRL, 1-WRH
 			  BGT			: out	 STD_LOGIC;
 			  S1S0 		: out	 STD_LOGIC_VECTOR(1 downto 0);
-			  EIR			: out	 STD_LOGIC;
+			  EIR			: out	 STD_LOGIC
 			  --Apartir daqui os signais são apenas para ver no testbench (apagar depois)
-			  CState		:out STATE_TYPE;
-			  inst		: out INST_TYPE
+--			  CState		:out STATE_TYPE;
+--			  inst		: out INST_TYPE
 	);
 end Control;
 

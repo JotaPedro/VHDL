@@ -272,25 +272,55 @@ package pds16_types is
 	end component;
 	
 	component Control is
-	 Port ( 	WL 			: in  STD_LOGIC;
-				Flags 		: in  STD_LOGIC_VECTOR(2 downto 0);-- 0-Zero 1-Carry 2-GE
-				OpCode 	: in  STD_LOGIC_VECTOR(6 downto 0);-- bits de 15 a 9
-				INTP 		: in  STD_LOGIC;
-				Clock 		: in  STD_LOGIC;
-				CL 			: in  STD_LOGIC;
-				Sync 		: in  STD_LOGIC_VECTOR(1 downto 0); -- 0- BRQ, 1-RDY
-				BusCtr 	: out  STD_LOGIC_VECTOR(3 downto 0); -- 0-WrByte, 1-DataOut, 2-Addr, 3-ALE
-				RFC 		: out  STD_LOGIC_VECTOR(4 downto 0);
-				ALUC 		: out  STD_LOGIC_VECTOR(2 downto 0);
-				SelAddr 	: out  STD_LOGIC_VECTOR(1 downto 0);
-				SelData	: out  STD_LOGIC_VECTOR(1 downto 0);
-				Sellmm 	: out  STD_LOGIC;
-				RD 			: out	 STD_LOGIC; -- ACTIVE LOW
-				WR			: out  STD_LOGIC_VECTOR(1 downto 0); -- 0-WRL, 1-WRH
-				BGT			: out	 STD_LOGIC;
-				S1S0 		: out	 STD_LOGIC_VECTOR(1 downto 0);
-				EIR			: out	 STD_LOGIC);
+    Port ( A0 			: in  STD_LOGIC;
+           Flags 		: in  STD_LOGIC_VECTOR(2 downto 0);-- 0-Zero 1-Carry 2-GE
+           OpCode 	: in  STD_LOGIC_VECTOR(6 downto 0);-- bits de 15 a 9
+           INTP 		: in  STD_LOGIC;
+           Clock 		: in  STD_LOGIC;
+           CL 			: in  STD_LOGIC;
+           Sync 		: in  STD_LOGIC_VECTOR(1 downto 0); -- 0- BRQ, 1-RDY
+           BusCtr 	: out  STD_LOGIC_VECTOR(3 downto 0); -- 0-WrByte, 1-DataOut, 2-Addr, 3-ALE
+           RFC 		: out  STD_LOGIC_VECTOR(5 downto 0); -- 0-Decoder, 1-OR Reg R5/SelMuxR5, 2-OR Reg R6/SelMuxR6, 3-OR Reg R7/SelMuxR7, 4-MUXaddrA, 5-enable Reg R7(para os jumps)
+           ALUC 		: out  STD_LOGIC_VECTOR(2 downto 0);
+           SelAddr 	: out  STD_LOGIC_VECTOR(1 downto 0);
+           SelData	: out  STD_LOGIC_VECTOR(1 downto 0);
+           Sellmm 	: out  STD_LOGIC;
+			  RD 			: out	 STD_LOGIC; -- ACTIVE LOW
+			  WR			: out  STD_LOGIC_VECTOR(1 downto 0); -- 0-WRL, 1-WRH
+			  BGT			: out	 STD_LOGIC;
+			  S1S0 		: out	 STD_LOGIC_VECTOR(1 downto 0);
+			  EIR			: out	 STD_LOGIC
+		);
 	end component;
+	
+	
+	
+	
+	
+--	component Control is
+--	 Port ( 	WL 			: in  STD_LOGIC;
+--				Flags 		: in  STD_LOGIC_VECTOR(2 downto 0);-- 0-Zero 1-Carry 2-GE
+--				OpCode 	: in  STD_LOGIC_VECTOR(6 downto 0);-- bits de 15 a 9
+--				INTP 		: in  STD_LOGIC;
+--				Clock 		: in  STD_LOGIC;
+--				CL 			: in  STD_LOGIC;
+--				Sync 		: in  STD_LOGIC_VECTOR(1 downto 0); -- 0- BRQ, 1-RDY
+--				BusCtr 	: out  STD_LOGIC_VECTOR(3 downto 0); -- 0-WrByte, 1-DataOut, 2-Addr, 3-ALE
+--				RFC 		: out  STD_LOGIC_VECTOR(4 downto 0);
+--				ALUC 		: out  STD_LOGIC_VECTOR(2 downto 0);
+--				SelAddr 	: out  STD_LOGIC_VECTOR(1 downto 0);
+--				SelData	: out  STD_LOGIC_VECTOR(1 downto 0);
+--				Sellmm 	: out  STD_LOGIC;
+--				RD 			: out	 STD_LOGIC; -- ACTIVE LOW
+--				WR			: out  STD_LOGIC_VECTOR(1 downto 0); -- 0-WRL, 1-WRH
+--				BGT			: out	 STD_LOGIC;
+--				S1S0 		: out	 STD_LOGIC_VECTOR(1 downto 0);
+--				EIR			: out	 STD_LOGIC);
+--	end component;
+	
+		
+
+	
 	
 	component BIU is
 	 Port ( Clock : in  STD_LOGIC;
@@ -345,20 +375,19 @@ package pds16_types is
 	end component;
 	
 	component RegisterFile8x16 is
-	 Port ( clock : in  STD_LOGIC;
-           addressSD : in  STD_LOGIC_VECTOR(2 downto 0);
-           flags : in  STD_LOGIC_VECTOR(3 downto 0); -- 0-Zero 1-Carry 2-GE 3-Parity
-           RFC : in  STD_LOGIC_VECTOR (4 downto 0); -- como � que os bits est�o distribuidos? 1-enablers 2-mplexr5 3-mplexr6 4-mplexr7 5-mplexAddrA
+    Port ( clock : in  STD_LOGIC;
            CL : in  STD_LOGIC;
-           addrA : in  STD_LOGIC_VECTOR(2 downto 0);
-           addrB : in  STD_LOGIC_VECTOR(2 downto 0);
-           DestData : in  bit_16;
-           flags_output : out  STD_LOGIC_VECTOR(2 downto 0); -- 0-Zero 1-Carry 2-GE
-           PC : inout  bit_16;
-           Output_A : out  bit_16;
-           Output_B : out  bit_16;
-           Output_Sc : out  bit_16
-			  );
+           RFC : in  STD_LOGIC_VECTOR (5 downto 0);				
+           AddrA : in  STD_LOGIC_VECTOR (2 downto 0);				--RFC(0)-Enable Decoder
+           AddrB : in  STD_LOGIC_VECTOR (2 downto 0);				--RFC(1)-OR Reg R5 / SelMuxR5
+           AddrSD : in  STD_LOGIC_VECTOR (2 downto 0);			--RFC(2)-OR Reg R6
+           DestData : in  STD_LOGIC_VECTOR (15 downto 0);		--RFC(3)-OR Reg R7
+           flagsIN : in  STD_LOGIC_VECTOR (3 downto 0);			--RFC(4)-MUX do MUXaddrA
+           OpA : out  STD_LOGIC_VECTOR (15 downto 0);				--RFC(5)-enable Reg R7(para os jumps)
+           OpB : out  STD_LOGIC_VECTOR (15 downto 0);
+           SC : out  STD_LOGIC_VECTOR (15 downto 0);
+           flagsOUT : out  STD_LOGIC_VECTOR (4 downto 0);
+           PCout : out  STD_LOGIC_VECTOR (15 downto 0));
 	end component;
 	
 --	component Shifter_Sel_mplex2to1 is
