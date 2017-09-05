@@ -1,5 +1,0 @@
-set -tmpdir "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/xst/projnav.tmp"
-set -xsthdpdir "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/xst"
-elaborate
--ifn Barrel_shift.prj
--ifmt mixed

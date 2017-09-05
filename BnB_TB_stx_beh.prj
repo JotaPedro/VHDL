@@ -1,3 +1,0 @@
-vhdl isim_temp "pds16_types.vhd"
-vhdl isim_temp "BnB.vhd"
-vhdl isim_temp "BnB_TB.vhd"

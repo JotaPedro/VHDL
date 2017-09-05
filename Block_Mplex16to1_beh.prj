@@ -1,3 +1,0 @@
-vhdl work "pds16_types.vhd"
-vhdl work "Mux_16In.vhd"
-vhdl work "Block_Mplex16to1.vhd"

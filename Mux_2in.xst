@@ -1,5 +1,0 @@
-set -tmpdir "F:/Projecto/github repo/VHDL/xst/projnav.tmp"
-set -xsthdpdir "F:/Projecto/github repo/VHDL/xst"
-elaborate
--ifn Mux_2in.prj
--ifmt mixed

@@ -1,2 +1,0 @@
-vhdtdtfi -prj work -o "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Block_MUX4x16bits.vhi" -module Block_MUX4x16bits -template C:/Xilinx/14.7/ISE_DS/ISE//data/vhdlinst.tft -deleteonerror -lib work MUX4x1bit.vhd -lib work Block_MUX4x16bits.vhd 
-vhdtdtfi -prj work -o "D:/ISEL/3o Ano/6o Semestre/PFC/VHDL/Github/VHDL/Block_MUX4x16bits.vhi" -module Block_MUX4x16bits -template C:/Xilinx/14.7/ISE_DS/ISE//data/vhdlinst.tft -deleteonerror -lib work MUX4x1bit.vhd -lib work Block_MUX4x16bits.vhd 

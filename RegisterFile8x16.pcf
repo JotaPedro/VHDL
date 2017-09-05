@@ -1,9 +1,0 @@
-//! **************************************************************************
-// Written by: Map P.20131013 on Thu Apr 13 15:27:35 2017
-//! **************************************************************************
-
-SCHEMATIC START;
-NET "clock_BUFGP/IBUFG" BEL "clock_BUFGP/BUFG.GCLKMUX" USELOCALCONNECT;
-NET "RFC_0_BUFGP/IBUFG" BEL "RFC_0_BUFGP/BUFG.GCLKMUX" USELOCALCONNECT;
-SCHEMATIC END;
-

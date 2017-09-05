@@ -1,8 +1,0 @@
-INTSTYLE=ise
-INFILE=F:\Projecto\github repo\VHDL\RegisterFile8x16.ncd
-OUTFILE=F:\Projecto\github repo\VHDL\RegisterFile8x16.bit
-FAMILY=Spartan3E
-PART=xc3s500e-4fg320
-WORKINGDIR=F:\Projecto\github repo\VHDL
-LICENSE=WebPack
-USER_INFO=211163532_0_0_935
