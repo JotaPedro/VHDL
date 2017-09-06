@@ -2,7 +2,7 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   22:17:01 08/23/2017
+-- Create Date:   22:54:57 09/05/2017
 -- Design Name:   
 -- Module Name:   F:/Projecto/github repo/VHDL/TB_Ram2.vhd
 -- Project Name:  work
@@ -41,61 +41,59 @@ ARCHITECTURE behavior OF TB_Ram2 IS
  
     COMPONENT Ram2
     PORT(
-
-         AD : IN  std_logic_vector(15 downto 0);
-         DATA : INOUT  std_logic_vector(15 downto 0);
+         AD : INOUT  std_logic_vector(15 downto 0);
          nWR : IN  std_logic_vector(1 downto 0);
-         nRD : IN  std_logic
+         nRD : IN  std_logic;
+         ALE : IN  std_logic
         );
     END COMPONENT;
     
 
    --Inputs
-   signal AD : std_logic_vector(15 downto 0) := (others => '0');
    signal nWR : std_logic_vector(1 downto 0) := (others => '0');
    signal nRD : std_logic := '0';
+   signal ALE : std_logic := '0';
 
 	--BiDirs
-   signal DATA : std_logic_vector(15 downto 0);
-	
+   signal AD : std_logic_vector(15 downto 0);
 
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
    uut: Ram2 PORT MAP (
-
           AD => AD,
-          DATA => DATA,
           nWR => nWR,
-          nRD => nRD
+          nRD => nRD,
+          ALE => ALE
         );
 
    -- Stimulus process
    stim_proc: process
    begin		
-      
-		AD	<= x"0000";
-		DATA 		<= x"0101";
+      AD	<= x"0000";
+		ALE<= '1';
+		wait for 50 ns;
+		ALE<= '0';
+		AD <= x"F0F0";
 		wait for 50 ns;
 		nWR 		<= "11";-- write word
+		
 --		wait for 50 ns;-- write byte high
 --		nWR 		<= "10";
 --		AD	<= x"0001";
 --		DATA 		<= x"FF11";
-		wait for 50 ns;-- write byte low
-		DATA 		<= x"EE22";
-		AD	<= x"0001";
-		nWR 		<= "01";
+--		wait for 50 ns;-- write byte low
+--		DATA 		<= x"EE22";
+--		AD	<= x"0001";
+--		nWR 		<= "01";
+--		wait for 50 ns;
+
 		wait for 50 ns;
-		DATA 		<= (others => 'Z');
-		AD	<= x"0000";
-		nWR 		<= "00";
-		nRD 		<= '1';
+		nWR<= "00";
+		AD <= (others => 'Z');
 		wait for 50 ns;
-		AD	<= x"0001";
-      wait;
-		
-      wait;
+		nRD<= '1';
+		wait;
    end process;
 
 END;

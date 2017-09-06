@@ -40,11 +40,7 @@ entity BIU is
            
 			  S1S0_in	: in	STD_LOGIC_VECTOR(1 downto 0); -- 0-S0, 1-S1
 			  S1S0_out	: out	STD_LOGIC_VECTOR(1 downto 0); -- 0-S0, 1-S1			  
---			  S0_in 		: in  STD_LOGIC;
---         S1_in 		: in  STD_LOGIC;
---			  S0_out 	: out  STD_LOGIC;
---         S1_out 	: out  STD_LOGIC;
-		
+	
 			  RD 			: in  STD_LOGIC;
 			  nRD 		: out  STD_LOGIC;
            WRL 		: in  STD_LOGIC;
@@ -58,12 +54,7 @@ entity BIU is
 			  BGT_out 	: out  STD_LOGIC;
            DataIn 	: out  STD_LOGIC_VECTOR (15 downto 0);
 			  Sync 		: out  STD_LOGIC_VECTOR(1 downto 0);-- 0- BRQ, 1-RDY
-			  A0			: out STD_LOGIC;
-			  
-			  Addr_out 	: out  STD_LOGIC_VECTOR(14 downto 0);--Addr 15 downto 1
-			  --para teste
---			  ALE_flipflop_out : out STD_LOGIC;
-			  
+	  
 			  ALE			: out STD_LOGIC;
 			  RESOUT 	: out  STD_LOGIC
 			  );
@@ -76,43 +67,16 @@ architecture Behavioral of BIU is
 	Signal TS_DataOut_Enable	: STD_LOGIC;
 	Signal TS_Addr_Enable		: STD_LOGIC;
 	Signal TS_Addr_Input			: STD_LOGIC_VECTOR(15 downto 0);
-	Signal ALE_out					: STD_LOGIC;
 	Signal ALE_flipflop			: STD_LOGIC;
 	
 begin
-	--Sinais que apenas são passados da entrada para uma saída.
---	nRD 		<= (not RD);
---	nWRL		<= (not WRL);
---	nWRH		<= (not WRH);
---	RESOUT 	<= CL;
---	S1S0_out <= S1S0_in;
---	BGT_out <= BGT_in;
-	
+
 	nRD 		<= (RD) when BGT_in='0' else 'Z';
 	nWRL		<= (WRL) when BGT_in='0' else 'Z';
 	nWRH		<= (WRH) when BGT_in='0' else 'Z';
---	nRD 		<= (not RD) when BGT_in='0' else 'Z';
---	nWRL		<= (not WRL) when BGT_in='0' else 'Z';
---	nWRH		<= (not WRH) when BGT_in='0' else 'Z';
 	RESOUT 	<= CL;
 	S1S0_out <= S1S0_in;
 	BGT_out <= BGT_in;
-	
-	
---	process(RD,WRH,WRL,BGT_in)
---	begin
---		if BGT_in='0' then
---			nRD  <= NOT RD;
---			nWRH <= NOT WRH;
---			nWRL <= NOT WRL;
---			else if BGT_in='1' then
---				nWRH <= 'Z';
---				nWRL <= 'Z';
---				nRD  <= 'Z';
---			end if;
---		end if;
---	end process;
-	
 	
 	-----------------------
 	-- MBR: Memory bus register
@@ -127,28 +91,18 @@ begin
 	-----------------------
 	-- Multiplexer DataOut
 	-----------------------
-	
---	Mplex_DataOut_input(0) <= DataOut(15 downto 8);
---	Mplex_DataOut_input(1) <= DataOut(7 downto 0);
---Data_to_mem <= x"00" & DataOut(7 downto 0); Isto era o quê?
-	
+
 	Mplex_DataOut: MplexWrByte PORT MAP(
 		Input0 => DataOut(15 downto 8),
 		Input1 => DataOut(7 downto 0),
       Sel => BusCtr(0), -- BusCtr(WrByte)
       Output => Data_to_mem -- dados a entrar no tristate DataOut.
 	);
-	
-	--Data_to_mem <= Data_to_mem(15 downto 8) & DataOut(7 downto 0);
-	
+
 	-----------------------
 	-- Tristate DataOut
 	-----------------------
-	
-	-- Tri-State Buffer control
-	-- Data_to_mem input :
-	--AD <= Data_to_mem when (WRL = '1' or WRH = '1') else (others=>'Z');	
-	
+
 	TS_DataOut_Enable	<= (BusCtr(1) and (not BGT_in)); --BusCtr(DataOut) and (not BGT)
 	
 	TS_DataOut: Tristate PORT MAP(
@@ -179,7 +133,6 @@ begin
       Q => Sync(1),--Sync(RDY)
       Clk => Clock,
 		En => Clock
-     -- CL => '0'
 	);
 	
 	
@@ -188,7 +141,6 @@ begin
       Q => Sync(0),--Sync(BRQ)
       Clk => Clock,
       En => Clock
-		--CL => '0'
 	);
 	
 	
@@ -197,35 +149,22 @@ begin
       Q => ALE_flipflop,
       Clk => Clock,
       En => Clock
-		--CL => '0'
 	);
 	
-	--para teste apenas
---	ALE_flipflop_out <= ALE_flipflop;
+	ALE <= (BusCtr(3) AND (NOT ALE_flipflop));
 	
-	ALE_out <= (BusCtr(3) AND (NOT ALE_flipflop));
-	ALE	  <= ALE_out;
-	
-	-----------------------
-	-- LATCH ADDRESS
-	-----------------------
+--	-----------------------
+--	-- LATCH ADDRESS
+--	-----------------------
+--
+--	-- Latch for the address storing when acessing ram
+--	-- não deve ter clock.
+--	Latch: Latch16bits
+--	Port map( D 		=> AD,
+--				 Q 		=> Addr_out,
+--				 En 		=> ALE_out,
+--				 A0		=> A0
+--				);
 
-	-- Latch for the address storing when acessing ram
-	-- não deve ter clock.
-	Latch: Latch16bits
-	Port map( D 		=> AD,
-				 --Q 		=> AD,
-				 Q 		=> Addr_out,
-				 En 		=> ALE_out,
-				 --clkReg 	=> Clock,
-				 A0		=> A0
-				);
-
-
-
-
-------------------------------------------------------
--- 			FIQUEI POR AQUI!!!!!!!!!!!!!!!!!!!
-------------------------------------------------------
 
 end Behavioral;

@@ -64,6 +64,10 @@ architecture Structural of PDS16fpga is
 	Signal func_sig: STD_LOGIC_VECTOR (2 downto 0);
 	Signal DirZFout: STD_LOGIC_VECTOR (15 downto 0);
 	Signal SelAddr_sig: STD_LOGIC (1 downto 0);
+	Signal BusCtr_sig: STD_LOGIC(3 downto 0);
+	Signal AD: std_logic_vector (15 downto 0);
+	Signal S1S0_sig: STD_LOGIC (1 downto 0);
+	Signal S1S0_sig_out: STD_LOGIC (1 downto 0);
 	
 	--Signal Reset_flipflop_output: STD_LOGIC;
 	--Signal RES: STD_LOGIC:= Reset_flipflop_output OR (NOT RESET);
@@ -97,15 +101,9 @@ begin
 		En => '1',
 		D => NOT RESET,
       Q => reset);
-		
---------------------------------------------------------------------------------	
-	-- Isto está bem??
 
 	clear <= Not RESET OR reset;
---------------------------------------------------------------------------------	
 
-
-	
 	--------------------------
 	-- INSTRUCTION REGISTER
 	--------------------------
@@ -190,11 +188,7 @@ begin
 		In3 => "0000000000000000", -- Entrada não utilizada
 		outdata => Addr_sig);	
 
-	------------------------
-	-- BUS INTERFACE UNIT
-	------------------------
 
-	
 	-----------------
 	-- CONTROL
 	-----------------
@@ -207,24 +201,64 @@ begin
 		Clock 	=>	MCLK,
 		CL 		=>	clear,
 		Sync 		=> --: in  STD_LOGIC_VECTOR(1 downto 0); -- 0- BRQ, 1-RDY
-		BusCtr 	=> --: out  STD_LOGIC_VECTOR(3 downto 0); -- 0-WrByte, 1-DataOut, 2-Addr, 3-ALE
+		BusCtr 	=> BusCtr_sig,--: out  STD_LOGIC_VECTOR(3 downto 0); -- 0-WrByte, 1-DataOut, 2-Addr, 3-ALE
 		RFC 		=> RFC_sig, -- 0-Decoder, 1-OR Reg R5/SelMuxR5, 2-OR Reg R6/SelMuxR6, 3-OR Reg R7/SelMuxR7, 4-MUXaddrA, 5-enable Reg R7(para os jumps)
-
-------------------------------------------------------------------------------------------------------		
--- Falta tratar deste sinal internamente. Na alu mudou.
-		ALUC 		=> --: out  STD_LOGIC_VECTOR(2 downto 0);
-------------------------------------------------------------------------------------------------------
-		
+		ALUC 		=> ALUCtrl_sig--: out  STD_LOGIC_VECTOR(2 downto 0);
 		SelAddr 	=> SelAddr_sig,
 		SelData	=> SelData_sig,
 		Sellmm 	=> SelImm_sig, 
 		RD 		=> --: out	 STD_LOGIC; -- ACTIVE LOW
 		WR			=> --: out  STD_LOGIC_VECTOR(1 downto 0); -- 0-WRL, 1-WRH
 		BGT		=> --: out	 STD_LOGIC;
-		S1S0 		=> --: out	 STD_LOGIC_VECTOR(1 downto 0);
+		S1S0 		=> S1S0_sig,--: out	 STD_LOGIC_VECTOR(1 downto 0);
 		EIR		=> --: out	 STD_LOGIC);
 
 	
+	------------------------
+	-- BUS INTERFACE UNIT
+	------------------------
+
+	S0 <= S1S0_sig_out(0):
+	S1 <= S1S0_sig_out(1);
+
+	Bus_interface: BIU PORT MAP(
+		Clock 	=> N_MCLK,--	: in  STD_LOGIC;
+		CL 		=> clear,--	: in  STD_LOGIC; 
+		DataOut 	=> DataOut_sig,--: in  STD_LOGIC_VECTOR(15 downto 0);
+		BusCtr 	=> BusCtr_sig,--: in  STD_LOGIC_VECTOR(3 downto 0);-- 0-WrByte, 1-DataOut, 2-Addr, 3-Ale
+		Addr 		=> Addr_sig(15 downto 1),--: in  STD_LOGIC_VECTOR(14 downto 0);--Addr 15 downto 1
+		AD 		=> AD,--	: inout  STD_LOGIC_VECTOR(15 downto 0); --Bus address and data
+		S1S0_in	=> S1S0_sig,--: in	STD_LOGIC_VECTOR(1 downto 0); -- 0-S0, 1-S1
+		S1S0_out	=> S1S0_sig_out,--: out	STD_LOGIC_VECTOR(1 downto 0); -- 0-S0, 1-S1			  
+		RD 		=> ,--	: in  STD_LOGIC;
+		nRD 		=> ,--: out  STD_LOGIC;
+		WRL 		=> ,--: in  STD_LOGIC;
+		nWRL 		=> ,--: out  STD_LOGIC;
+		WRH 		=> ,--: in  STD_LOGIC;
+		nWRH 		=> ,--: out  STD_LOGIC;
+		RDY 		=> ,--: in  STD_LOGIC; -- do lado da memoria
+		BRQ 		=> ,--: in  STD_LOGIC; -- do lado da memoria
+		BGT_in 	=> ,--: in  STD_LOGIC;
+		BGT_out 	=> ,--: out  STD_LOGIC;
+		DataIn 	=> ,--: out  STD_LOGIC_VECTOR (15 downto 0);
+		Sync 		=> ,--: out  STD_LOGIC_VECTOR(1 downto 0);-- 0- BRQ, 1-RDY
+		ALE		=> ,--	: out STD_LOGIC;
+		RESOUT 	=>  --: out  STD_LOGIC
+		);
 	
+	------------------------
+	-- RAM
+	------------------------
+	
+	entity Ram2 is
+    port (
+        AD   	=> AD,--:inout std_logic_vector (15 downto 0);  -- bi-directional data/address
+        nWR    => ,--:in    std_logic_vector(1 downto 0);             -- Write Enable (High/Low)
+        nRD    => ,--:in    std_logic;                                 	-- Read Enable
+		  ALE		=>  --:in	 std_logic
+		  );
+	
+	
+
 end Behavioral;
 
