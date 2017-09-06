@@ -68,8 +68,8 @@ architecture Behavioral of Control is
 	
 begin
 	
-	CState <= CurrentState;
-	inst <= instruction;
+--	CState <= CurrentState;
+--	inst <= instruction;
 	
 	id: InstDecode Port map(
 		OpCode 		=> OpCode,

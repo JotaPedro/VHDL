@@ -18,9 +18,9 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 
 entity HiZeroFill is
-    Port ( Input : in  STD_LOGIC_VECTOR(7 downto 0);
+    Port ( Input : in  STD_LOGIC_VECTOR (7 downto 0);
 			  --A0 : in STD_LOGIC;
-           Output : out  STD_LOGIC_VECTOR(15 downto 0));
+           Output : out  STD_LOGIC_VECTOR (15 downto 0));
 end HiZeroFill;
 
 architecture Behavioral of HiZeroFill is

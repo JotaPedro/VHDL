@@ -26,20 +26,7 @@ package pds16_types is
 				Sel : in  STD_LOGIC;
 				Output : out  std_logic_vector(15 downto 0));
 	end Component;
-	
-	Component Ram2 is
-    port (
-
-        AD 		:in    std_logic_vector (14 downto 0);  		-- address Input
-        DATA   :inout std_logic_vector (15 downto 0);  -- data bi-directional
-        nWR    :in    std_logic_vector(1 downto 0);             -- Write Enable (High/Low)
-        nRD    :in    std_logic                                 	-- Read Enable
-    );
-	end Component;
-	
-	
-	
-	
+		
 	Component DFlipFlop is
     Port ( D : in  STD_LOGIC;
            Q : out  STD_LOGIC;
@@ -267,8 +254,8 @@ package pds16_types is
 	end component;
 	
 	component HiZeroFill is
-    Port ( Input : in  STD_LOGIC;
-           Output : out  STD_LOGIC);
+    Port ( Input : in  STD_LOGIC_VECTOR(7 downto 0);
+           Output : out  STD_LOGIC_VECTOR(15 downto 0));
 	end component;
 	
 	component Control is
