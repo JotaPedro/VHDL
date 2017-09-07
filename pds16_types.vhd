@@ -527,14 +527,15 @@ end component;
 end component;
 
 component RegisterFileBS is
-    Port ( RFC : in  STD_LOGIC_VECTOR (9 downto 0);
+    Port ( clock : in  STD_LOGIC;
+			  RFC : in  STD_LOGIC_VECTOR (13 downto 0);
 			  destData : in  STD_LOGIC_VECTOR (15 downto 0);
            flagsIn : in  STD_LOGIC_VECTOR (5 downto 0);
-           AddrSD : in  STD_LOGIC_VECTOR (3 downto 0);
-           AddrA : in  STD_LOGIC_VECTOR (3 downto 0);
-           AddrB : in  STD_LOGIC_VECTOR (3 downto 0);
-           RES : in  STD_LOGIC;
-			  interrupt : in  STD_LOGIC;
+           AddrSD : in  STD_LOGIC_VECTOR (2 downto 0);
+           AddrA : in  STD_LOGIC_VECTOR (2 downto 0);
+           AddrB : in  STD_LOGIC_VECTOR (2 downto 0);
+           RES : in  STD_LOGIC;					--SINAL DE SAIDA DO FF DE RESET
+			  --interrupt : in  STD_LOGIC;
            flagsOut : out  STD_LOGIC_VECTOR (5 downto 0);
            PCout : out  STD_LOGIC_VECTOR (15 downto 0);
            OpA : out  STD_LOGIC_VECTOR (15 downto 0);
@@ -574,6 +575,29 @@ component MUX4x16bits is
 			  In14 : in  STD_LOGIC_VECTOR (15 downto 0);
 			  In15 : in  STD_LOGIC_VECTOR (15 downto 0);
 			  outdata: out STD_LOGIC_VECTOR (15 downto 0));
+end component;
+
+component BlockRotate_MUX1x1bit is
+    Port ( Sel : in  STD_LOGIC;
+			  in_block_0 : in  STD_LOGIC_VECTOR(15 downto 0);
+			  in_block_1 : in  STD_LOGIC_VECTOR(15 downto 0);
+           out_block : out  STD_LOGIC_VECTOR(15 downto 0));
+end component;
+
+component rotateBitBlock is
+    Port ( in0 : in STD_LOGIC_VECTOR(15 downto 0);
+			  in1 : in STD_LOGIC_VECTOR(15 downto 0);
+			  sel_LnR : in STD_LOGIC;
+			  sel_rotate : in STD_LOGIC_VECTOR(3 downto 0);
+			  out_rotate_bit : out STD_LOGIC );
+end component;
+
+component Rotate_Block is
+    Port ( A : in STD_LOGIC_VECTOR(15 downto 0);
+			  CyIn : in STD_LOGIC;
+			  Sel : in STD_LOGIC_VECTOR(3 downto 0);
+			  LnR : in STD_LOGIC;
+			  out_rotate : out STD_LOGIC_VECTOR(15 downto 0));
 end component;
 
 --  type <new_type> is
