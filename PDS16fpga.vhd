@@ -32,7 +32,14 @@ entity PDS16fpga is
            WRL : out  STD_LOGIC;
            WRH : out  STD_LOGIC;
            BGT : out  STD_LOGIC;
-           RESOUT : out  STD_LOGIC);
+           RESOUT : out  STD_LOGIC;
+			  -- Saídas para teste apenas
+			  DataIn_sig_out: out STD_LOGIC_VECTOR (15 downto 0);
+			  instruction_out: out STD_LOGIC_VECTOR (15 downto 0);
+			  PC_sig_out: out STD_LOGIC_VECTOR (15 downto 0);
+			  Addr_sig_out: out STD_LOGIC_VECTOR (15 downto 0)
+			  
+			  );
 end PDS16fpga;	
 
 architecture Structural of PDS16fpga is
@@ -80,6 +87,8 @@ architecture Structural of PDS16fpga is
 	Signal BGT_port_sig: STD_LOGIC;
 	Signal BRQ_sig: STD_LOGIC;
 	Signal RESOUT_sig: STD_LOGIC;
+	Signal EXINT_FF_D: STD_LOGIC;
+	Signal Reset_FF_D: STD_LOGIC;
 	
 	--Signal Reset_flipflop_output: STD_LOGIC;
 	--Signal RES: STD_LOGIC:= Reset_flipflop_output OR (NOT RESET);
@@ -94,7 +103,7 @@ architecture Structural of PDS16fpga is
 	--Mplex_selAddr_input(0) <= 
 	--Mplex_selAddr_input(1) <= 
 
-begin
+begin	
 	
 	IE <= flagsCtrl_sig(4); --flagsCtrl_sig(4)=IE
 	LSB_sig <= DataOut_sig(7 downto 0);
@@ -102,22 +111,28 @@ begin
 	-----------------------
 	-- External Interrupt
 	-----------------------
+	
+	EXINT_FF_D	<= NOT EXINT;
+	
 	EXINT_FF: component DFlipFlop PORT MAP(
 		Clk => N_MCLK,
 		En => IE,
-		D => NOT EXINT,
+		D => EXINT_FF_D,
       Q => INTP_sig); 		--sinal INTP do Control
 
 	-----------------
 	-- Reset
 	-----------------
+	
+	Reset_FF_D	<= NOT RESET;
+	
 	Reset_FF: component DFlipFlop PORT MAP(
 		Clk => N_MCLK,
 		En => '1',
-		D => NOT RESET,
+		D => Reset_FF_D,
       Q => reset_q_sig);
 
-	clear <= Not RESET OR reset_q_sig;
+	clear <= Reset_FF_D OR reset_q_sig;
 
 	--------------------------
 	-- INSTRUCTION REGISTER
@@ -132,7 +147,7 @@ begin
 	-- Seleção do destino da DATA
 	-- para o REGISTER FILE
 	--------------------------------
-	ImmZeroFill: component ImmZeroFill PORT MAP( 
+	ImmZF: component ImmZeroFill PORT MAP( 
 		SelImm => SelImm_sig, --sinal de saida do CONTROL
 		LSB => LSB_sig,
 		Input => instruction (10 downto 3),
@@ -144,7 +159,7 @@ begin
 		In1 => DataIn_sig (7 downto 0),
 		outdata => HiZFin);
 	
-	HiZeroFill: component HiZeroFill PORT MAP(
+	HiZF: component HiZeroFill PORT MAP(
 		Input => HiZFin,
       Output => HiZFout);	
 	
@@ -191,7 +206,7 @@ begin
 	-- Seleção da origem do
 	-- ADDRESS para a BIU
 	---------------------------
-	DirZeroFill: DirZeroFill PORT MAP( 
+	DirZF: DirZeroFill PORT MAP( 
 		Input => instruction (9 downto 3),
       Output => DirZFout);
 	
@@ -236,6 +251,9 @@ begin
 
 	S0 <= S1S0_port_out(0);
 	S1 <= S1S0_port_out(1);
+	ALE <= ALE_sig;
+	
+	
 
 	Bus_interface: BIU PORT MAP(
 		Clock 	=> N_MCLK,--	: in  STD_LOGIC;
@@ -266,6 +284,8 @@ begin
 	-- RAM
 	------------------------
 	
+	
+	
 	Ram: Ram2 PORT MAP(
 		AD   	=> AD,--:inout std_logic_vector (15 downto 0);  -- bi-directional data/address
 		nWR   => WR_ram_sig,--:in    std_logic_vector(1 downto 0);             -- Write Enable (High/Low)
@@ -273,6 +293,10 @@ begin
 		ALE	=> ALE_sig --:in	 std_logic
 		);
 
+	DataIn_sig_out		<= DataIn_sig;
+	instruction_out	<= instruction;
+	PC_sig_out			<= PC_sig;
+	Addr_sig_out		<= Addr_sig;
 	
 
 end Structural;

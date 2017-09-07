@@ -29,8 +29,10 @@ architecture rtl of Ram2 is
 
     signal data_out :std_logic_vector (15 downto 0);
 
-    type RAM is array (integer range <>)of std_logic_vector (15 downto 0);
-    signal mem : RAM (0 to RAM_DEPTH-1);
+--    type RAM is array (integer range <>)of std_logic_vector (15 downto 0);
+	 type RAM is array (0 to RAM_DEPTH-1) of std_logic_vector (15 downto 0);
+    signal mem : RAM := ("0000000001111000", others => (others => '0'));
+	 
 begin
 	
 	-----------------------

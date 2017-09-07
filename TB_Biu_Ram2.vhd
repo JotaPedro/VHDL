@@ -38,7 +38,6 @@ END TB_Biu_Ram2;
 ARCHITECTURE behavior OF TB_Biu_Ram2 IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
- 
     COMPONENT BIU
     PORT(
          Clock : IN  std_logic;
@@ -61,8 +60,7 @@ ARCHITECTURE behavior OF TB_Biu_Ram2 IS
          BGT_out : OUT  std_logic;
          DataIn : OUT  std_logic_vector(15 downto 0);
          Sync : OUT  std_logic_vector(1 downto 0);
-         A0 : OUT  std_logic;
-         Addr_out : OUT  std_logic_vector(14 downto 0);
+			ALE			: out STD_LOGIC;
          RESOUT : OUT  std_logic
         );
     END COMPONENT;
@@ -93,8 +91,6 @@ ARCHITECTURE behavior OF TB_Biu_Ram2 IS
    signal BGT_out : std_logic;
    signal DataIn : std_logic_vector(15 downto 0);
    signal Sync : std_logic_vector(1 downto 0);
-   signal A0 : std_logic;
-   signal Addr_out : std_logic_vector(14 downto 0);
    signal RESOUT : std_logic;
 
 ----------------------------------------------------------------------   
@@ -103,15 +99,16 @@ ARCHITECTURE behavior OF TB_Biu_Ram2 IS
     COMPONENT Ram2
     PORT(
 
-         AD : IN  std_logic_vector(14 downto 0);
-         DATA : INOUT  std_logic_vector(15 downto 0);
+         AD : INOUT  std_logic_vector(15 downto 0);
          nWR : IN  std_logic_vector(1 downto 0);
-         nRD : IN  std_logic
+         nRD : IN  std_logic;
+			ALE : in STD_LOGIC
         );
     END COMPONENT;
     
 
    --Inputs
+	signal ALE : STD_LOGIC := '0';
    signal nWR : std_logic_vector(1 downto 0) := (others => '0');
 	
 ----------------------------------------------------------------------   
@@ -144,8 +141,7 @@ BEGIN
           BGT_out => BGT_out,
           DataIn => DataIn,
           Sync => Sync,
-          A0 => A0,
-          Addr_out => Addr_out,
+			 ALE	=> ALE,
           RESOUT => RESOUT
         );
 		  
@@ -154,10 +150,10 @@ BEGIN
 	-- Instantiate the Unit Under Test (UUT)
    uut2: Ram2 PORT MAP (
 
-          AD => Addr_out,
-          DATA => AD,
+          AD => AD,
           nWR => nWR,
-          nRD => nRD
+          nRD => nRD,
+			 ALE	=> ALE
         );
 
    -- Clock process definitions

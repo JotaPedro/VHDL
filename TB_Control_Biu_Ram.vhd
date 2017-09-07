@@ -113,21 +113,17 @@ ARCHITECTURE behavior OF TB_Control_Biu_Ram IS
          BGT_out : OUT  std_logic;
          DataIn : OUT  std_logic_vector(15 downto 0);
          Sync : OUT  std_logic_vector(1 downto 0);
-         A0 : OUT  std_logic;
-         Addr_out : OUT  std_logic_vector(14 downto 0);
+			ALE			: out STD_LOGIC;
          RESOUT : OUT  std_logic
         );
     END COMPONENT;
     
 
    --Inputs
-   signal Clock : std_logic := '0';
-   signal CL : std_logic := '0';
    signal DataOut : std_logic_vector(15 downto 0) := (others => '0');
-   signal BusCtr : std_logic_vector(3 downto 0) := (others => '0');
    signal Addr : std_logic_vector(14 downto 0) := (others => '0');
    signal S1S0_in : std_logic_vector(1 downto 0) := (others => '0');
-   signal RD : std_logic := '0';
+   
    signal WRL : std_logic := '0';
    signal WRH : std_logic := '0';
    signal RDY : std_logic := '0';
@@ -144,8 +140,8 @@ ARCHITECTURE behavior OF TB_Control_Biu_Ram IS
    signal nWRH : std_logic;
    signal BGT_out : std_logic;
    signal DataIn : std_logic_vector(15 downto 0);
-   signal Sync : std_logic_vector(1 downto 0);
-   signal A0 : std_logic;
+ 
+
    signal Addr_out : std_logic_vector(14 downto 0);
    signal RESOUT : std_logic;
 
@@ -205,7 +201,7 @@ BEGIN
           BusCtr => BusCtr,
           Addr => Addr,
           AD => AD,
-          S1S0_in => S1S0_in,
+          S1S0_in => S1S0,
           S1S0_out => S1S0_out,
           RD => RD,
           nRD => nRD,
@@ -215,12 +211,11 @@ BEGIN
           nWRH => nWRH,
           RDY => RDY,
           BRQ => BRQ,
-          BGT_in => BGT_in,
+          BGT_in => BGT,
           BGT_out => BGT_out,
           DataIn => DataIn,
           Sync => Sync,
-          A0 => A0,
-          Addr_out => Addr_out,
+			 
           RESOUT => RESOUT
         );
 		  

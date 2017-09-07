@@ -76,7 +76,7 @@ ARCHITECTURE behavior OF TB_RegisterFile IS
    signal PCout : std_logic_vector(15 downto 0);
 
    -- Clock period definitions
-   constant clock_period : time := 10 ns;
+   constant clock_period : time := 50 ns;
  
 BEGIN
  
@@ -125,30 +125,31 @@ BEGIN
 
 --Teste aos registos
 		-- R0 --> OpA
+--		CL			<= '0';
+--		RFC		<= "000001";	--escreve apenas num registo
+--		AddrA		<= "000";
+--		AddrB		<= "000";
+--		AddrSD	<= "000";
+--		DestData	<= "0001000100010001";
+--		flagsIN	<= "0000";
+--		
+--		wait for 13ns;				--escrever R7 e sair em OpB
+--		AddrB		<= "111";
+--		AddrSD	<= "111";
+--		DestData	<= "0000000011111111";
+--
+--		
+--		wait for 13ns;
+--		RFC		<= "000010";	-- R5(Link) grava o PC	
+--		AddrA		<= "101";
+--		
+--		wait for 13ns;
+--		RFC		<= "000100";	-- R6(PSW) grava flags_in
+--		AddrA		<= "110";
+--		flagsIN	<= "0110";
+		CL			<= '1';
+		wait for 50 ns;
 		CL			<= '0';
-		RFC		<= "000001";	--escreve apenas num registo
-		AddrA		<= "000";
-		AddrB		<= "000";
-		AddrSD	<= "000";
-		DestData	<= "0001000100010001";
-		flagsIN	<= "0000";
-		
-		wait for 13ns;				--escrever R7 e sair em OpB
-		AddrB		<= "111";
-		AddrSD	<= "111";
-		DestData	<= "0000000011111111";
-
-		
-		wait for 13ns;
-		RFC		<= "000010";	-- R5(Link) grava o PC	
-		AddrA		<= "101";
-		
-		wait for 13ns;
-		RFC		<= "000100";	-- R6(PSW) grava flags_in
-		AddrA		<= "110";
-		flagsIN	<= "0110";
-
-		wait for 13ns;
 		RFC		<= "001000";	-- inc PC
 --		
 		--flagsIN	<= "0000";
