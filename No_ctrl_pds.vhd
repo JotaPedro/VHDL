@@ -254,13 +254,8 @@ begin
 	S0 <= S1S0_port_out(0);
 	S1 <= S1S0_port_out(1);
 	ALE <= ALE_sig;
-	AD0_15 <= AD;
-	RD <= RD_ram_sig;
-   WRL <= WR_ram_sig(0);
-   WRH <= WR_ram_sig(1);
-   BGT <= BGT_out;
-   RESOUT <= RESOUT_sig;
-
+	
+	
 
 	Bus_interface: BIU PORT MAP(
 		Clock 	=> N_MCLK,--	: in  STD_LOGIC;
@@ -293,12 +288,12 @@ begin
 	
 	
 	
---	Ram: Ram2 PORT MAP(
---		AD   	=> AD,--:inout std_logic_vector (15 downto 0);  -- bi-directional data/address
---		nWR   => WR_ram_sig,--:in    std_logic_vector(1 downto 0);             -- Write Enable (High/Low)
---		nRD   => RD_ram_sig,--:in    std_logic;                                 	-- Read Enable
---		ALE	=> ALE_sig --:in	 std_logic
---		);
+	Ram: Ram2 PORT MAP(
+		AD   	=> AD,--:inout std_logic_vector (15 downto 0);  -- bi-directional data/address
+		nWR   => WR_ram_sig,--:in    std_logic_vector(1 downto 0);             -- Write Enable (High/Low)
+		nRD   => RD_ram_sig,--:in    std_logic;                                 	-- Read Enable
+		ALE	=> ALE_sig --:in	 std_logic
+		);
 
 	DataIn_sig_out		<= DataIn_sig;
 	instruction_out	<= instruction;

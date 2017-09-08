@@ -132,7 +132,7 @@ begin
 		D => RDY,
       Q => Sync(1),--Sync(RDY)
       Clk => Clock,
-		En => Clock
+		CL => '0'
 	);
 	
 	
@@ -140,7 +140,7 @@ begin
 		D => BRQ,
       Q => Sync(0),--Sync(BRQ)
       Clk => Clock,
-      En => Clock
+      CL => '0'
 	);
 	
 	
@@ -148,7 +148,7 @@ begin
 		D => BusCtr(3),--BusCtr(ALE)
       Q => ALE_flipflop,
       Clk => Clock,
-      En => Clock
+      CL => '0'
 	);
 	
 	ALE <= (BusCtr(3) AND (NOT ALE_flipflop));

@@ -31,7 +31,7 @@ package pds16_types is
     Port ( D : in  STD_LOGIC;
            Q : out  STD_LOGIC;
            Clk : in  STD_LOGIC;
-          En : in  STD_LOGIC
+          CL : in  STD_LOGIC
 			 );
 	end Component;
 	

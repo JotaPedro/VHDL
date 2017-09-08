@@ -19,7 +19,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity DFlipFlop is
     Port ( Clk : in  STD_LOGIC;
-			  En : in  STD_LOGIC;
+			  CL : in  STD_LOGIC;
 			  D : in  STD_LOGIC;
            Q : out  STD_LOGIC );
 end DFlipFlop;
@@ -27,25 +27,15 @@ end DFlipFlop;
 architecture Behavioral of DFlipFlop is
 
 begin
-	process (Clk)
-	begin
-		if (rising_edge(Clk)) then
-			if En='1' then 
-				
+	process(Clk,CL)
+		begin
+		if CL='1' then 
+			Q <= '0';
+			else if (rising_edge(Clk)) then  
 				Q <= D;
-
 			end if;
-		end if; 
-	end process;			
-				
-				
---		if CL='1' then 
---			Q <= '0';
---			else if (rising_edge(Clk)) then  
---				Q <= D;
---			end if;
---		end if;
---	end process;
+		end if;
+	end process;
  
 end Behavioral;
 
