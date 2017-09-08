@@ -31,7 +31,7 @@ entity Register16bitsCL is
 
 architecture Behavioral of Register16bitsCL is
 	begin
-		process(clkReg)
+		process(clkReg,Cl)
 		begin
 			if Cl = '1' then
 				Q <= "0000000000000000";

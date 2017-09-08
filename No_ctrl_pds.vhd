@@ -18,7 +18,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 use work.pds16_types.ALL;
 
 
-entity PDS16fpga is
+entity No_ctrl_pds is
     Port ( EXINT : in  STD_LOGIC;
            MCLK : in  STD_LOGIC;
            RESET : in  STD_LOGIC;
@@ -37,12 +37,24 @@ entity PDS16fpga is
 			  DataIn_sig_out: out STD_LOGIC_VECTOR (15 downto 0);
 			  instruction_out: out STD_LOGIC_VECTOR (15 downto 0);
 			  PC_sig_out: out STD_LOGIC_VECTOR (15 downto 0);
-			  Addr_sig_out: out STD_LOGIC_VECTOR (15 downto 0)
+			  Addr_sig_out: out STD_LOGIC_VECTOR (15 downto 0);
+			  -- entradas para controlo manual
+				BusCtr_sig: in  STD_LOGIC_VECTOR(3 downto 0); -- 0-WrByte, 1-DataOut, 2-Addr, 3-ALE
+				RFC_sig: in  STD_LOGIC_VECTOR(5 downto 0); -- 0-Decoder, 1-OR Reg R5/SelMuxR5, 2-OR Reg R6/SelMuxR6, 3-OR Reg R7/SelMuxR7, 4-MUXaddrA, 5-enable Reg R7(para os jumps)
+				ALUCtrl_sig: in  STD_LOGIC_VECTOR(2 downto 0);
+				SelAddr_sig: in  STD_LOGIC_VECTOR(1 downto 0);
+				SelData_sig: in  STD_LOGIC_VECTOR(1 downto 0);
+				SelImm_sig: in	 STD_LOGIC; 
+				RD_ctrl_sig: in	 STD_LOGIC; -- ACTIVE LOW
+				WR_ctrl_sig: in	 STD_LOGIC_VECTOR(1 downto 0);-- 0-WRL, 1-WRH
+				BGT_sig: in	 STD_LOGIC;
+				S1S0_sig: in	 STD_LOGIC_VECTOR(1 downto 0);
+				EIR_sig: in	 STD_LOGIC
 			  
 			  );
-end PDS16fpga;	
+end No_ctrl_pds;	
 
-architecture Structural of PDS16fpga is
+architecture Structural of No_ctrl_pds is
 	Signal N_MCLK: STD_LOGIC:= NOT MCLK;
 	Signal INTP_sig: STD_LOGIC;
 	Signal IE: STD_LOGIC;	--flagsCtrl_sig(4)=IE
@@ -50,39 +62,39 @@ architecture Structural of PDS16fpga is
 --	Signal reset: STD_LOGIC;	
 	Signal clear: STD_LOGIC;	
 	Signal DataIn_sig: STD_LOGIC_VECTOR (15 downto 0); 
-	Signal EIR_sig: STD_LOGIC;
+--	Signal EIR_sig: STD_LOGIC;
 	Signal instruction: STD_LOGIC_VECTOR (15 downto 0); --saída (Q) do InstReg
-	Signal SelImm_sig: STD_LOGIC;
+--	Signal SelImm_sig: STD_LOGIC;
 	Signal LSB_sig: STD_LOGIC_VECTOR (7 downto 0);
 	Signal ImmZFout: STD_LOGIC_VECTOR (15 downto 0); --saída ImmZeroFill
 	Signal Addr_sig: STD_LOGIC_VECTOR (15 downto 0); 
 	Signal HiZFout: STD_LOGIC_VECTOR (15 downto 0); --saída HiZeroFill
 	Signal HiZFin: STD_LOGIC_VECTOR (7 downto 0); --entrada HiZeroFill
-	Signal SelData_sig: STD_LOGIC_VECTOR (1 downto 0);
+--	Signal SelData_sig: STD_LOGIC_VECTOR (1 downto 0);
 	Signal Result_sig: STD_LOGIC_VECTOR (15 downto 0);
 	Signal DestData_sig: STD_LOGIC_VECTOR (15 downto 0);
-	Signal RFC_sig: STD_LOGIC_VECTOR (5 downto 0);
+--	Signal RFC_sig: STD_LOGIC_VECTOR (5 downto 0);
 	Signal flags_sig: STD_LOGIC_VECTOR (3 downto 0);
 	Signal OpA_sig: STD_LOGIC_VECTOR (15 downto 0);
 	Signal OpB_sig: STD_LOGIC_VECTOR (15 downto 0);
 	Signal DataOut_sig: STD_LOGIC_VECTOR (15 downto 0);
 	Signal flagsCtrl_sig: STD_LOGIC_VECTOR (4 downto 0);
 	Signal PC_sig: STD_LOGIC_VECTOR (15 downto 0);
-	Signal ALUCtrl_sig: STD_LOGIC_VECTOR (2 downto 0);
+--	Signal ALUCtrl_sig: STD_LOGIC_VECTOR (2 downto 0);
 	Signal func_sig: STD_LOGIC_VECTOR (2 downto 0);
 	Signal DirZFout: STD_LOGIC_VECTOR (15 downto 0);
-	Signal SelAddr_sig: STD_LOGIC_VECTOR (1 downto 0);
-	Signal BusCtr_sig: STD_LOGIC_VECTOR(3 downto 0);
+--	Signal SelAddr_sig: STD_LOGIC_VECTOR (1 downto 0);
+--	Signal BusCtr_sig: STD_LOGIC_VECTOR(3 downto 0);
 	Signal AD: std_logic_vector (15 downto 0);
-	Signal S1S0_sig: STD_LOGIC_VECTOR (1 downto 0);
+--	Signal S1S0_sig: STD_LOGIC_VECTOR (1 downto 0);
 	Signal S1S0_port_out: STD_LOGIC_VECTOR (1 downto 0);
-	Signal RD_ctrl_sig: STD_LOGIC;
+--	Signal RD_ctrl_sig: STD_LOGIC;
 	Signal RD_ram_sig: STD_LOGIC;
-	Signal WR_ctrl_sig: STD_LOGIC_VECTOR (1 downto 0);
+--	Signal WR_ctrl_sig: STD_LOGIC_VECTOR (1 downto 0);
 	Signal WR_ram_sig: STD_LOGIC_VECTOR (1 downto 0);
 	Signal ALE_sig: STD_LOGIC;
 	Signal RDY_sig: STD_LOGIC;
-	Signal BGT_sig: STD_LOGIC;
+--	Signal BGT_sig: STD_LOGIC;
 	Signal Sync_sig: STD_LOGIC_VECTOR (1 downto 0);
 	Signal BGT_port_sig: STD_LOGIC;
 	Signal BRQ_sig: STD_LOGIC;
@@ -225,26 +237,26 @@ begin
 	-- CONTROL
 	-----------------
 	
-	Controlo: Control PORT MAP(
-		A0 		=>	Addr_sig(0), 					-- A0 obtido da saída do multiplexer SelAddr
-		Flags 	=>	flagsCtrl_sig(2 downto 0), -- 0-Zero 1-Carry 2-GE
-		OpCode 	=> instruction( 15 downto 9), -- bits de 15 a 9
-		INTP 		=> INTP_sig, 						-- bit para indicar uma interrupção?
-		Clock 	=>	MCLK,
-		CL 		=>	clear,
-		Sync 		=> Sync_sig,--: in  STD_LOGIC_VECTOR(1 downto 0); -- 0- BRQ, 1-RDY
-		BusCtr 	=> BusCtr_sig,--: out  STD_LOGIC_VECTOR(3 downto 0); -- 0-WrByte, 1-DataOut, 2-Addr, 3-ALE
-		RFC 		=> RFC_sig, -- 0-Decoder, 1-OR Reg R5/SelMuxR5, 2-OR Reg R6/SelMuxR6, 3-OR Reg R7/SelMuxR7, 4-MUXaddrA, 5-enable Reg R7(para os jumps)
-		ALUC 		=> ALUCtrl_sig,--: out  STD_LOGIC_VECTOR(2 downto 0);
-		SelAddr 	=> SelAddr_sig,
-		SelData	=> SelData_sig,
-		Sellmm 	=> SelImm_sig, 
-		RD 		=> RD_ctrl_sig,--: out	 STD_LOGIC; -- ACTIVE LOW
-		WR			=> WR_ctrl_sig, -- 0-WRL, 1-WRH
-		BGT		=> BGT_sig,--: out	 STD_LOGIC;
-		S1S0 		=> S1S0_sig,--: out	 STD_LOGIC_VECTOR(1 downto 0);
-		EIR		=> EIR_sig--: out	 STD_LOGIC
-		);
+--	Controlo: Control PORT MAP(
+--		A0 		=>	Addr_sig(0), 					-- A0 obtido da saída do multiplexer SelAddr
+--		Flags 	=>	flagsCtrl_sig(2 downto 0), -- 0-Zero 1-Carry 2-GE
+--		OpCode 	=> instruction( 15 downto 9), -- bits de 15 a 9
+--		INTP 		=> INTP_sig, 						-- bit para indicar uma interrupção?
+--		Clock 	=>	MCLK,
+--		CL 		=>	clear,
+--		Sync 		=> Sync_sig,--: in  STD_LOGIC_VECTOR(1 downto 0); -- 0- BRQ, 1-RDY
+--		BusCtr 	=> BusCtr_sig,--: out  STD_LOGIC_VECTOR(3 downto 0); -- 0-WrByte, 1-DataOut, 2-Addr, 3-ALE
+--		RFC 		=> RFC_sig, -- 0-Decoder, 1-OR Reg R5/SelMuxR5, 2-OR Reg R6/SelMuxR6, 3-OR Reg R7/SelMuxR7, 4-MUXaddrA, 5-enable Reg R7(para os jumps)
+--		ALUC 		=> ALUCtrl_sig,--: out  STD_LOGIC_VECTOR(2 downto 0);
+--		SelAddr 	=> SelAddr_sig,
+--		SelData	=> SelData_sig,
+--		Sellmm 	=> SelImm_sig, 
+--		RD 		=> RD_ctrl_sig,--: out	 STD_LOGIC; -- ACTIVE LOW
+--		WR			=> WR_ctrl_sig, -- 0-WRL, 1-WRH
+--		BGT		=> BGT_sig,--: out	 STD_LOGIC;
+--		S1S0 		=> S1S0_sig,--: out	 STD_LOGIC_VECTOR(1 downto 0);
+--		EIR		=> EIR_sig--: out	 STD_LOGIC
+--		);
 
 	
 	------------------------
@@ -254,8 +266,13 @@ begin
 	S0 <= S1S0_port_out(0);
 	S1 <= S1S0_port_out(1);
 	ALE <= ALE_sig;
-	
-	
+	AD0_15 <= AD;
+	RD <= RD_ram_sig;
+   WRL <= WR_ram_sig(0);
+   WRH <= WR_ram_sig(1);
+   BGT <= BGT_port_sig;
+   RESOUT <= RESOUT_sig;
+
 
 	Bus_interface: BIU PORT MAP(
 		Clock 	=> N_MCLK,--	: in  STD_LOGIC;
@@ -281,19 +298,7 @@ begin
 		ALE		=> ALE_sig,--	: out STD_LOGIC;
 		RESOUT 	=> RESOUT_sig --: out  STD_LOGIC
 		);
-	
-	------------------------
-	-- RAM
-	------------------------
-	
-	
-	
-	Ram: Ram2 PORT MAP(
-		AD   	=> AD,--:inout std_logic_vector (15 downto 0);  -- bi-directional data/address
-		nWR   => WR_ram_sig,--:in    std_logic_vector(1 downto 0);             -- Write Enable (High/Low)
-		nRD   => RD_ram_sig,--:in    std_logic;                                 	-- Read Enable
-		ALE	=> ALE_sig --:in	 std_logic
-		);
+
 
 	DataIn_sig_out		<= DataIn_sig;
 	instruction_out	<= instruction;
@@ -302,4 +307,3 @@ begin
 	
 
 end Structural;
-

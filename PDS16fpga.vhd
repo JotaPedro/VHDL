@@ -258,7 +258,7 @@ begin
 	RD <= RD_ram_sig;
    WRL <= WR_ram_sig(0);
    WRH <= WR_ram_sig(1);
-   BGT <= BGT_out;
+   BGT <= BGT_port_sig;
    RESOUT <= RESOUT_sig;
 
 
