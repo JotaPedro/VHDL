@@ -18,19 +18,21 @@ use work.pds16_types.ALL;
 
 entity RegisterFileBS is
     Port ( clock : in  STD_LOGIC;
-			  RFC : in  STD_LOGIC_VECTOR (13 downto 0);
+			  RFC : in  STD_LOGIC_VECTOR (12 downto 0);
 			  destData : in  STD_LOGIC_VECTOR (15 downto 0);
-           flagsIn : in  STD_LOGIC_VECTOR (5 downto 0);
+           flagsIn : in  STD_LOGIC_VECTOR (3 downto 0);
            AddrSD : in  STD_LOGIC_VECTOR (2 downto 0);
            AddrA : in  STD_LOGIC_VECTOR (2 downto 0);
            AddrB : in  STD_LOGIC_VECTOR (2 downto 0);
-           RES : in  STD_LOGIC;					--SINAL DE SAIDA DO FF DE RESET
+           CL : in  STD_LOGIC;					--SINAL DE SAIDA DO FF DE RESET
 			  --interrupt : in  STD_LOGIC;
            flagsOut : out  STD_LOGIC_VECTOR (5 downto 0);
-           PCout : out  STD_LOGIC_VECTOR (15 downto 0);
+           PC : out  STD_LOGIC_VECTOR (15 downto 0);
            OpA : out  STD_LOGIC_VECTOR (15 downto 0);
            OpB : out  STD_LOGIC_VECTOR (15 downto 0);
            Sc : out  STD_LOGIC_VECTOR (15 downto 0));
+			  
+			  
 end RegisterFileBS;
 
 architecture Structural of RegisterFileBS is
@@ -100,14 +102,14 @@ begin
 	ER(3) <= outDecodR0_R5(3);
 	ER(4) <= outDecodR0_R5(4);
 	ER(5) <= outDecodR0_R5(5) OR outDecodR5_R5i(0);
-	ER(6) <= outDecodR6_R7(0) OR RFC(13) OR RFC(2);	--en_psw
-	ER(7) <= outDecodR6_R7(1) OR RFC(13) OR RFC(3);	--en_pc
-	ERi(0) <= RFC(13) OR outDecodR0i_R5i(0);
+	ER(6) <= outDecodR6_R7(6) OR RFC(12) OR RFC(2);	--en_psw
+	ER(7) <= outDecodR6_R7(7) OR RFC(12) OR RFC(3);	--en_pc
+	ERi(0) <= RFC(12) OR outDecodR0i_R5i(0);
 	ERi(1) <= outDecodR0i_R5i(1);
 	ERi(2) <= outDecodR0i_R5i(2);
 	ERi(3) <= outDecodR0i_R5i(3);
 	ERi(4) <= outDecodR0i_R5i(4);
-	ERi(5) <= outDecodR0i_R5i(5) OR outDecodR5_R5i(1) OR RFC(13);
+	ERi(5) <= outDecodR0i_R5i(5) OR outDecodR5_R5i(1) OR RFC(12);
 	
 	
 	--------------------------
@@ -131,8 +133,8 @@ begin
 		dataOut => R0_5Q);
 	
 	-- Registo R6
-	In1R6dataIn(15 downto 0) <= "0000000000" & flagsIn;
-	In3R6dataIn(15 downto 0) <= R6Q AND ("00000000000" & RFC(12) & "00000"); --NAO É ISTO!!!!
+	In1R6dataIn(15 downto 0) <= R6Q (15 downto 4) & flagsIn;
+	In3R6dataIn(15 downto 0) <= (R6Q OR "0000000000100000") AND "1111111111101111"; 
 	
 	R6dataIn: component MUX2x16bits port map(
 		Sel => RFC(7 downto 6),		--SPSW
@@ -145,7 +147,7 @@ begin
 	R6: component Register16bitsCL port map(
 		clkReg => clock,
 		En => ER(6),
-		Cl => RES,
+		Cl => CL,
 		D => R6D,
       Q => R6Q);
 		
@@ -161,7 +163,7 @@ begin
 	R7dataIn: component MUX2x16bits port map(
 		Sel => RFC(9 downto 8),		--SPSW
 		In0 => destData,
-		In1 => int_vec,
+		In1 => "0000000000000010", 
 		In2 => IncPC,
 		In3 => R0i_5iQ(5),
 		outdata => R7D);
@@ -169,7 +171,7 @@ begin
 	R7: component Register16bitsCL port map(
 		clkReg => clock,
 		En => ER(7),
-		Cl => RES,
+		Cl => CL,
 		D => R7D,
       Q => R7Q);
 		
@@ -279,7 +281,9 @@ begin
 		outdata => Sc);
 	
 	flagsOut <= R6Q(5 downto 0);
-	PCout <= R7Q;
+	PC <= R7Q;
+	
+	
 	
 end Structural;
 
