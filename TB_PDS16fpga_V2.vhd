@@ -46,6 +46,8 @@ ARCHITECTURE behavior OF TB_PDS16fpga_V2 IS
          RESET : IN  std_logic;
          EXINT : IN  std_logic;
          AD0_15 : INOUT  std_logic_vector(15 downto 0);
+			RDY : in  STD_LOGIC;
+			BRQ : in  STD_LOGIC;
          ALE : OUT  std_logic;
          S0 : OUT  std_logic;
          S1 : OUT  std_logic;
@@ -62,6 +64,8 @@ ARCHITECTURE behavior OF TB_PDS16fpga_V2 IS
    signal MCLK : std_logic := '0';
    signal RESET : std_logic := '1';
    signal EXINT : std_logic := '1';
+	signal RDY : STD_LOGIC :='1';
+	signal BRQ : STD_LOGIC :='0';
 
 	--BiDirs
    signal AD0_15 : std_logic_vector(15 downto 0);
@@ -77,7 +81,7 @@ ARCHITECTURE behavior OF TB_PDS16fpga_V2 IS
    signal RESOUT : std_logic;
 
    -- Clock period definitions
-   constant MCLK_period : time := 10 ns;
+   constant MCLK_period : time := 60 ns;
 	
 	
 	signal WR_ram_sig: std_logic_vector(1 downto 0);
@@ -90,6 +94,8 @@ BEGIN
           RESET => RESET,
           EXINT => EXINT,
           AD0_15 => AD0_15,
+			 RDY	=> RDY,
+			 BRQ	=> BRQ,
           ALE => ALE,
           S0 => S0,
           S1 => S1,
@@ -129,7 +135,7 @@ BEGIN
    begin		
       -- hold reset state for 100 ns.
       RESET <= '0';
-		wait for 10 ns;
+		wait for 100 ns;
 		RESET <= '1';
 
       -- insert stimulus here 

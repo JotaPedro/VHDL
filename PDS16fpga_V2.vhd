@@ -22,6 +22,8 @@ entity PDS16fpga_V2 is
            RESET : in  STD_LOGIC;
            EXINT : in  STD_LOGIC;
 			  AD0_15 : inout  STD_LOGIC_VECTOR (15 downto 0);
+			  RDY : in  STD_LOGIC;
+			  BRQ : in  STD_LOGIC;
 			  ALE : out  STD_LOGIC;
            S0 : out  STD_LOGIC;
            S1 : out  STD_LOGIC;
@@ -88,6 +90,8 @@ architecture Structural of PDS16fpga_V2 is
 begin
 
 	N_MCLK <= NOT MCLK;
+	BRQ_sig  <= BRQ;
+	RDY_sig	<= RDY;
 
 	-----------------------
 	-- External Interrupt
@@ -166,7 +170,7 @@ begin
 		RFC => RFC,				
 		AddrA => IR (5 downto 3),			--RFC(0)-Enable Decoder
 		AddrB => IR(8 downto 6),			--RFC(1)-OR Reg R5 / SelMuxR5
-		AddrSD => "001",	--IR(2 downto 0),			--RFC(2)-OR Reg R6
+		AddrSD => IR(2 downto 0),			--RFC(2)-OR Reg R6
 		DestData => DestData_sig,						--RFC(3)-OR Reg R7
 		flagsIN => flags_sig,							--RFC(4)-MUX do MUXaddrA
 		OpA => OpA_sig,									--RFC(5)-Enable R7

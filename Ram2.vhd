@@ -21,7 +21,6 @@ end entity;
 architecture rtl of Ram2 is
 
 
-	Signal A0		: STD_LOGIC;
 	Signal Addr_out: std_logic_vector(14 downto 0); 
 
     ----------------Internal variables----------------
@@ -31,7 +30,18 @@ architecture rtl of Ram2 is
 
 --    type RAM is array (integer range <>)of std_logic_vector (15 downto 0);
 	 type RAM is array (0 to RAM_DEPTH-1) of std_logic_vector (15 downto 0);
-    signal mem : RAM := ("0000000001111000", others => (others => '0'));
+    
+	 -- código teste1.asm
+	 signal mem : RAM := (x"6027",
+								 x"0014",
+								 x"0002",
+								 x"0001",
+								 x"0064",
+								 x"0020",
+								 x"0800",
+								 x"1411",
+								 x"1C02",
+								others => (others => '0'));
 	 
 begin
 	
@@ -43,8 +53,7 @@ begin
 	Latch: Latch16bits
 	Port map( D 		=> AD,
 				 Q 		=> Addr_out,
-				 En 		=> ALE,
-				 A0		=> A0
+				 En 		=> ALE
 				);
 	
 	

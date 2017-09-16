@@ -220,8 +220,7 @@ begin
     ---------------------------------------------------------------------------
 
 -- 0-WrByte	 
-		BusCtr(0)	<= '0' when (OpCode(1) = '1') and ((instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed)) and (CurrentState = SExec_RW)	else -- Word
-							'1' when (OpCode(1) = '0') and ((instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed)) and (CurrentState = SExec_RW)	else 
+		BusCtr(0)	<= '1' when (OpCode(1) = '0') and ((instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed)) and (CurrentState = SExec_RW)	else 
 							'0';
 -- 1-DataOut							
 		BusCtr(1)	<= '1' when ((instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed)) and (CurrentState = SExec_RW)	else
@@ -245,7 +244,7 @@ begin
 		RFC(3)		<= '1' when (CurrentState = SFetch_Inst) or ((((Flags(0) = '1') and (instruction = JZ)) or ((Flags(0) = '0') and (instruction = JNZ)) or ((Flags(1) = '1') and (instruction = JC)) or ((Flags(1) = '0') and (instruction = JNC)) or (instruction = JMP) or (instruction = JMPL)) and (CurrentState = SExecution)) else -- Quando estamos no estado T2 Fetch Instruction, para incrementar o PC
 							'0';
 --s_jmp	
-		RFC(4)		<= '1' when (((Flags(0) = '1') and (instruction = JZ)) or ((Flags(0) = '0') and (instruction = JNZ)) or ((Flags(1) = '1') and (instruction = JC)) or ((Flags(1) = '0') and (instruction = JNC)) or (instruction = JMP) or (instruction = JMPL)) and (CurrentState = SFetch_Decod)	else
+		RFC(4)		<= '1' when (((Flags(0) = '1') and (instruction = JZ)) or ((Flags(0) = '0') and (instruction = JNZ)) or ((Flags(1) = '1') and (instruction = JC)) or ((Flags(1) = '0') and (instruction = JNC)) or (instruction = JMP) or (instruction = JMPL)) and ((CurrentState = SFetch_Decod) or (CurrentState = SExecution))	else
 							'0';
 --SLink		
 		RFC(5)		<= '1' when (instruction = JMPL and CurrentState = SFetch_Decod) else
@@ -267,7 +266,7 @@ begin
 		RFC(11)		<= '1' when (CurrentState = SInterrupt) else
 							'0';	
 --interrupt		
-		RFC(11)		<= '1' when (CurrentState = SInterrupt) else
+		RFC(12)		<= '1' when (CurrentState = SInterrupt) else
 							'0';	
 --ALUC
 		ALUC			<= "000" when (((Flags(0) = '1') and (instruction = JZ)) or ((Flags(0) = '0') and (instruction = JNZ)) or ((Flags(1) = '1') and (instruction = JC)) or ((Flags(1) = '0') and (instruction = JNC)) or (instruction = JMP) or (instruction = JMPL)) and (CurrentState = SFetch_Decod)	else
@@ -289,19 +288,19 @@ begin
 							"11" when (((instruction = ADD) or (instruction = ADDC) or (instruction = ADD_const) or (instruction = ADDC_const) or (instruction = SUB) or (instruction = SBB) or (instruction = SUB_const) or (instruction = SBB_const) or (instruction = ANL) or (instruction = ORL) or (instruction = XRL) or (instruction = NT) or (instruction = SHL) or (instruction = SHR) or (instruction = RRL) or (instruction = RRM) or (instruction = RCR) or (instruction = RCL) ) and (CurrentState = SFetch_Decod)) or ((((Flags(0) = '1') and (instruction = JZ)) or ((Flags(0) = '0') and (instruction = JNZ)) or ((Flags(1) = '1') and (instruction = JC)) or ((Flags(1) = '0') and (instruction = JNC)) or (instruction = JMP) or (instruction = JMPL)) and (CurrentState = SExecution))	else
 							"00";
 							
-		Sellmm		<= '1' when ((instruction = LDIH) ) and (CurrentState = SFetch_Decod)	else
-							'0' when ((instruction = LDI) ) and (CurrentState = SFetch_Decod)	else
+		Sellmm		<= '1' when ((instruction = LDIH) ) and ((CurrentState = SFetch_Decod) or (CurrentState = SExecution))	else
+							'0' when ((instruction = LDI) ) and ((CurrentState = SFetch_Decod) or (CurrentState = SExecution))	else
 							'0';
 							
 		RD 			<= '1' when (CurrentState = SFetch_Inst) or ((CurrentState = SExec_RW) and ((instruction = LD_Direct) or (instruction = LD_IndConst) or (instruction = LD_Indexed))) else
 							'0';
 --LOW									
-		WR(0)			<= '0' when ((OpCode(1) = '0') and (A0 = '0') and ((instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed))) and (CurrentState = SExec_RW)	else -- Word
-							'1' when (((OpCode(1) = '1') or ((OpCode(1) = '0') and (A0 = '1') )) and ((instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed))) and (CurrentState = SExec_RW)	else
+		WR(0)			<= '1' when ((OpCode(1) = '0') and (A0 = '1') and ((instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed))) and (CurrentState = SExec_RW)	else -- Word
+							'1' when ((OpCode(1) = '1') and ((instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed))) and (CurrentState = SExec_RW)	else
 							'0';
 --HIGH
-		WR(1)			<= '0' when ((OpCode(1) = '0') and (A0 = '1') and ((instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed))) and (CurrentState = SExec_RW)	else
-							'1' when (((OpCode(1) = '1') or ((OpCode(1) = '0') and (A0 = '0') )) and ((instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed))) and (CurrentState = SExec_RW)	else
+		WR(1)			<= '1' when ((OpCode(1) = '0') and (A0 = '0') and ((instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed))) and (CurrentState = SExec_RW)	else
+							'1' when ((OpCode(1) = '1') and ((instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed))) and (CurrentState = SExec_RW)	else
 							'0';
 -- Indica se a instrução é de acesso há memória.		
 		LDST			<= '1' when (instruction = LD_Direct) or (instruction = LD_IndConst) or (instruction = LD_Indexed) or (instruction = ST_Direct) or (instruction = ST_IndConst) or (instruction = ST_Indexed)	else --LDI
