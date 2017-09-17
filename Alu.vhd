@@ -67,7 +67,7 @@ begin
 	-----------------
 	op_shifter <= (aluFunc(5) AND aluFunc(2)) & (aluFunc(5) AND aluFunc(1)) & (aluFunc(5) AND aluFunc(0)); -- IR12 IR11 IR10
 	
-	Shifter: component Barrel_shift PORT MAP( 
+	Shifter: component Barrel_Shift_V2 PORT MAP( 
 		A => A,
 		B => B(3 downto 0),
 		Cyin => CyBw,

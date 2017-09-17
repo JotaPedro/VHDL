@@ -32,15 +32,45 @@ architecture rtl of Ram2 is
 	 type RAM is array (0 to RAM_DEPTH-1) of std_logic_vector (15 downto 0);
     
 	 -- código teste1.asm
-	 signal mem : RAM := (x"6027",
+	 signal mem : RAM := (x"601F",		-- jmp		main
 								 x"0014",
-								 x"0002",
-								 x"0001",
-								 x"0064",
-								 x"0020",
-								 x"0800",
-								 x"1411",
-								 x"1C02",
+								 x"0005",
+								 x"0000",
+								 x"0086",		-- ldi r6, #0x10
+								 x"0018",		-- ldi r0,#3
+								 x"07F9",		-- ldi r1,#0xFF
+								 x"0FF9",		-- ldih r1,#0xFF
+								 
+--								 x"8242",		-- addf r2,r0,r1
+--								 x"8642",		-- add r2,r0,r1
+--								 x"9683",		-- adc r3,r0,r2
+--								 x"A5CA",		-- add r2, r1, #0x7
+--								 x"B4C3",		-- adc r3, r0, #0x04
+								
+								 x"8A42",		-- subf r2, r0, r1	
+								 x"8E43",		-- sub r3, r0, r1
+								 x"BFCA",		-- sbb r2, r1, #0xF
+								 x"ACC5",		-- sub r5, r0, #3
+								 
+								 x"C752",		-- anl r2, r2, r5	
+								 x"CEDC",		-- orl r4, r3, r3
+								 x"D653",		-- xrl r3, r2, r1
+								 x"DE24",		-- not r4, r4
+								 
+								 x"0018",			
+								 x"E781",		--
+								 x"E049",		-- 
+								 x"EC42",		-- 
+								 x"E852",		--
+								 x"F081",		-- 
+								 x"F0C2",		-- 
+								 x"F4C1",		--
+								 x"F701",		--	
+								 x"F803",		-- 
+								 x"FC1B",		-- 
+			
+				
+
 								others => (others => '0'));
 	 
 begin

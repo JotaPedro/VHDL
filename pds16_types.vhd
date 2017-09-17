@@ -279,6 +279,28 @@ package pds16_types is
 			  EIR			: out	 STD_LOGIC
 		);
 	end component;
+
+	component Control_V2 is
+    Port ( A0 			: in  STD_LOGIC;
+           Flags 		: in  STD_LOGIC_VECTOR(2 downto 0);-- 0-Zero 1-Carry 2-GE
+           OpCode 	: in  STD_LOGIC_VECTOR(6 downto 0);-- bits de 15 a 9
+           INTP 		: in  STD_LOGIC;
+           Clock 		: in  STD_LOGIC;
+           CL 			: in  STD_LOGIC;
+           Sync 		: in  STD_LOGIC_VECTOR(1 downto 0); -- 0- BRQ, 1-RDY
+           BusCtr 	: out  STD_LOGIC_VECTOR(3 downto 0); -- 0-WrByte, 1-DataOut, 2-Addr, 3-ALE
+           RFC 		: out  STD_LOGIC_VECTOR(12 downto 0); -- 0-Decoder, 1-OR Reg R5/SelMuxR5, 2-OR Reg R6/SelMuxR6, 3-OR Reg R7/SelMuxR7, 4-MUXaddrA, 5-enable Reg R7(para os jumps)
+           ALUC 		: out  STD_LOGIC_VECTOR(2 downto 0);
+           SelAddr 	: out  STD_LOGIC_VECTOR(1 downto 0);
+           SelData	: out  STD_LOGIC_VECTOR(1 downto 0);
+           Sellmm 	: out  STD_LOGIC;
+			  RD 			: out	 STD_LOGIC; -- ACTIVE LOW
+			  WR			: out  STD_LOGIC_VECTOR(1 downto 0); -- 0-WRL, 1-WRH
+			  BGT			: out	 STD_LOGIC;
+			  S1S0 		: out	 STD_LOGIC_VECTOR(1 downto 0);
+			  EIR			: out	 STD_LOGIC
+		);
+	end component;
 	
 	component BIU is
     Port ( Clock 		: in  STD_LOGIC;
@@ -486,6 +508,13 @@ end component;
 				FlagUpdate: out STD_LOGIC
 			);
 	end component;
+
+	component InstDecode_V2 is
+    Port (  OpCode 	: in  STD_LOGIC_VECTOR(6 downto 0);
+				Inst		: out INST_TYPE;
+				FlagUpdate: out STD_LOGIC
+			);
+	end component;
 	
 	component MUX4x1bit is
 	Port ( Sel : in  STD_LOGIC_VECTOR (3 downto 0);
@@ -528,16 +557,16 @@ end component;
 
 component RegisterFileBS is
     Port ( clock : in  STD_LOGIC;
-			  RFC : in  STD_LOGIC_VECTOR (13 downto 0);
+			  RFC : in  STD_LOGIC_VECTOR (12 downto 0);
 			  destData : in  STD_LOGIC_VECTOR (15 downto 0);
-           flagsIn : in  STD_LOGIC_VECTOR (5 downto 0);
+           flagsIn : in  STD_LOGIC_VECTOR (3 downto 0);
            AddrSD : in  STD_LOGIC_VECTOR (2 downto 0);
            AddrA : in  STD_LOGIC_VECTOR (2 downto 0);
            AddrB : in  STD_LOGIC_VECTOR (2 downto 0);
-           RES : in  STD_LOGIC;					--SINAL DE SAIDA DO FF DE RESET
+           CL : in  STD_LOGIC;					--SINAL DE SAIDA DO FF DE RESET
 			  --interrupt : in  STD_LOGIC;
            flagsOut : out  STD_LOGIC_VECTOR (5 downto 0);
-           PCout : out  STD_LOGIC_VECTOR (15 downto 0);
+           PC : out  STD_LOGIC_VECTOR (15 downto 0);
            OpA : out  STD_LOGIC_VECTOR (15 downto 0);
            OpB : out  STD_LOGIC_VECTOR (15 downto 0);
            Sc : out  STD_LOGIC_VECTOR (15 downto 0));
@@ -598,6 +627,22 @@ component Rotate_Block is
 			  Sel : in STD_LOGIC_VECTOR(3 downto 0);
 			  LnR : in STD_LOGIC;
 			  out_rotate : out STD_LOGIC_VECTOR(15 downto 0));
+end component;
+
+component Block_4MUX1x1bit is
+    Port ( Sel : in  STD_LOGIC;
+			  in0 : in  STD_LOGIC_VECTOR(3 downto 0);
+			  in1 : in  STD_LOGIC_VECTOR(3 downto 0);
+           out_block : out  STD_LOGIC_VECTOR(3 downto 0));
+end component;
+
+component Barrel_Shift_V2 is
+    Port ( A : in STD_LOGIC_VECTOR(15 downto 0);
+           B : in STD_LOGIC_VECTOR(3 downto 0);
+			  Cyin : in STD_LOGIC;
+           Shifter_Ctrl : in STD_LOGIC_VECTOR(2 downto 0); --IR12 IR11 IR10
+			  Output : out STD_LOGIC_VECTOR(15 downto 0);
+           Cy : out STD_LOGIC);
 end component;
 
 --  type <new_type> is
