@@ -121,7 +121,7 @@ begin
 		In3 => shift_flag,
 		outdata => muxCyBr_out);
 		
-	flags(1) <= (muxCyBr_out AND (NOT aluFunc(4)));
+	flags(1) <= (muxCyBr_out AND (NOT aluFunc(4) OR aluFunc(3)));
 		--GE
 	flags(2) <= (alu_flags(0) AND (NOT aluFunc(4)));
 		--parity

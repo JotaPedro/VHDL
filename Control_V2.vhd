@@ -271,7 +271,7 @@ begin
 --ALUC
 		ALUC			<= "000" when (((Flags(0) = '1') and (instruction = JZ)) or ((Flags(0) = '0') and (instruction = JNZ)) or ((Flags(1) = '1') and (instruction = JC)) or ((Flags(1) = '0') and (instruction = JNC)) or (instruction = JMP) or (instruction = JMPL)) and ((CurrentState = SFetch_Decod) or (CurrentState = SExecution))	else
 							"001" when ((OpCode(1) = '0') and ((instruction = LD_IndConst) or (instruction = ST_IndConst)) and  ((CurrentState = SFetch_Decod) or (CurrentState = SExec_Addr))) else
-							"001" when ((instruction = ADD_const) or (instruction = ADDC_const) or (instruction = SUB_const) or (instruction = SBB_const) or (instruction = SHL) or (instruction = SHR) or (instruction = RRL)) and ((CurrentState = SFetch_Decod) or (CurrentState = SExecution))	else
+							"001" when ((instruction = ADD_const) or (instruction = ADDC_const) or (instruction = SUB_const) or (instruction = SBB_const) or (instruction = SHL) or (instruction = SHR) or (instruction = RRL) or (instruction = RRM)) and ((CurrentState = SFetch_Decod) or (CurrentState = SExecution))	else
 							"010" when ((OpCode(1) = '1') and ((instruction = LD_IndConst) or (instruction = ST_IndConst))) and ((CurrentState = SFetch_Decod) or (CurrentState = SExec_Addr))	else
 							"011" when ((OpCode(1) = '0') and ((instruction = LD_Indexed) or (instruction = ST_Indexed)) and ((CurrentState = SFetch_Decod) or (CurrentState = SExec_Addr)))	else
 							"011" when ((instruction = ADD) or (instruction = ADDC) or (instruction = SUB) or (instruction = SBB) or (instruction = ANL) or (instruction = ORL) or (instruction = XRL) or (instruction = NT)) and ((CurrentState = SFetch_Decod) or (CurrentState = SExecution))	else

@@ -132,7 +132,7 @@ begin
 			In1 => shiftMuxs_out(15),
 			outdata => Output_Carry);
 				
-		Cy <= ((B(0) or B(1) or B(2) or B(3)) and Output_Carry);
+		Cy <= ((selB_out(0) or selB_out(1) or selB_out(2) or selB_out(3)) and Output_Carry);
 
 
 
