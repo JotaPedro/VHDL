@@ -42,7 +42,7 @@ end Latch16bits;
 architecture Behavioural of Latch16bits is
 begin
 
-	process(En)
+	process(En,D)
 	begin
 		if(En='1') then
 			

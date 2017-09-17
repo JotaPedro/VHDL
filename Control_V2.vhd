@@ -241,7 +241,7 @@ begin
 		RFC(2)		<= '1' when (flagUpdate = '1' or instruction = IRET) and (CurrentState = SExecution)	else
 							'0';
 --en_pc							
-		RFC(3)		<= '1' when (CurrentState = SFetch_Inst) or ((((Flags(0) = '1') and (instruction = JZ)) or ((Flags(0) = '0') and (instruction = JNZ)) or ((Flags(1) = '1') and (instruction = JC)) or ((Flags(1) = '0') and (instruction = JNC)) or (instruction = JMP) or (instruction = JMPL)) and (CurrentState = SExecution)) else -- Quando estamos no estado T2 Fetch Instruction, para incrementar o PC
+		RFC(3)		<= '1' when (CurrentState = SFetch_Inst) or ((instruction = IRET) and (CurrentState = SExecution)) or ((((Flags(0) = '1') and (instruction = JZ)) or ((Flags(0) = '0') and (instruction = JNZ)) or ((Flags(1) = '1') and (instruction = JC)) or ((Flags(1) = '0') and (instruction = JNC)) or (instruction = JMP) or (instruction = JMPL)) and (CurrentState = SExecution)) else -- Quando estamos no estado T2 Fetch Instruction, para incrementar o PC
 							'0';
 --s_jmp	
 		RFC(4)		<= '1' when (((Flags(0) = '1') and (instruction = JZ)) or ((Flags(0) = '0') and (instruction = JNZ)) or ((Flags(1) = '1') and (instruction = JC)) or ((Flags(1) = '0') and (instruction = JNC)) or (instruction = JMP) or (instruction = JMPL)) and ((CurrentState = SFetch_Decod) or (CurrentState = SExecution))	else
@@ -250,14 +250,14 @@ begin
 		RFC(5)		<= '1' when (instruction = JMPL and CurrentState = SFetch_Decod) else
 							'0';
 --SPSW		
-		RFC(7 downto 6)	<= "01" when ((instruction = ADD) or (instruction = ADDC) or (instruction = ADD_const) or (instruction = ADDC_const) or (instruction = SUB) or (instruction = SBB) or (instruction = SUB_const) or (instruction = SBB_const) or (instruction = ANL) or (instruction = ORL) or (instruction = XRL) or (instruction = NT) or (instruction = SHL) or (instruction = SHR) or (instruction = RRL) or (instruction = RRM) or (instruction = RCR) or (instruction = RCL)) and (CurrentState = SFetch_Decod) else
-									"10" when (instruction = IRET and CurrentState = SFetch_Decod) else
+		RFC(7 downto 6)	<= "01" when ((instruction = ADD) or (instruction = ADDC) or (instruction = ADD_const) or (instruction = ADDC_const) or (instruction = SUB) or (instruction = SBB) or (instruction = SUB_const) or (instruction = SBB_const) or (instruction = ANL) or (instruction = ORL) or (instruction = XRL) or (instruction = NT) or (instruction = SHL) or (instruction = SHR) or (instruction = RRL) or (instruction = RRM) or (instruction = RCR) or (instruction = RCL)) and ((CurrentState = SFetch_Decod) or (CurrentState = SExecution)) else
+									"10" when (instruction = IRET and ((CurrentState = SFetch_Decod) or (CurrentState = SExecution))) else
 									"11" when (CurrentState = SInterrupt) else
 									"00";
 --SPC		
 		RFC(9 downto 8)	<= "01" when (CurrentState = SInterrupt) else
 									"10" when (CurrentState = SFetch_Inst) else
-									"11" when (instruction = IRET and CurrentState = SFetch_Decod) else
+									"11" when (instruction = IRET and ((CurrentState = SFetch_Decod) or (CurrentState = SExecution))) else
 									"00";						
 --SR0i		
 		RFC(10)		<= '1' when (CurrentState = SInterrupt) else
@@ -269,23 +269,26 @@ begin
 		RFC(12)		<= '1' when (CurrentState = SInterrupt) else
 							'0';	
 --ALUC
-		ALUC			<= "000" when (((Flags(0) = '1') and (instruction = JZ)) or ((Flags(0) = '0') and (instruction = JNZ)) or ((Flags(1) = '1') and (instruction = JC)) or ((Flags(1) = '0') and (instruction = JNC)) or (instruction = JMP) or (instruction = JMPL)) and (CurrentState = SFetch_Decod)	else
-							"001" when (((OpCode(1) = '0') and ((instruction = LD_IndConst) or (instruction = ST_IndConst))) or ((instruction = ADD_const) or (instruction = ADDC_const) or (instruction = SUB_const) or (instruction = SBB_const) or (instruction = SHL) or (instruction = SHR) or (instruction = RRL) or (instruction = RRM))) and (CurrentState = SFetch_Decod)	else
-							"010" when ((OpCode(1) = '1') and ((instruction = LD_IndConst) or (instruction = ST_IndConst))) and (CurrentState = SFetch_Decod)	else
-							"011" when (((OpCode(1) = '0') and ((instruction = LD_Indexed) or (instruction = ST_Indexed))) or ((instruction = ADD) or (instruction = ADDC) or (instruction = SUB) or (instruction = SBB) or (instruction = ANL) or (instruction = ORL) or (instruction = XRL) or (instruction = NT))) and (CurrentState = SFetch_Decod)	else
-							"100" when ((OpCode(1) = '1') and ((instruction = LD_Indexed) or (instruction = ST_Indexed))) and (CurrentState = SFetch_Decod)	else
+		ALUC			<= "000" when (((Flags(0) = '1') and (instruction = JZ)) or ((Flags(0) = '0') and (instruction = JNZ)) or ((Flags(1) = '1') and (instruction = JC)) or ((Flags(1) = '0') and (instruction = JNC)) or (instruction = JMP) or (instruction = JMPL)) and ((CurrentState = SFetch_Decod) or (CurrentState = SExecution))	else
+							"001" when ((OpCode(1) = '0') and ((instruction = LD_IndConst) or (instruction = ST_IndConst)) and  ((CurrentState = SFetch_Decod) or (CurrentState = SExec_Addr))) else
+							"001" when ((instruction = ADD_const) or (instruction = ADDC_const) or (instruction = SUB_const) or (instruction = SBB_const) or (instruction = SHL) or (instruction = SHR) or (instruction = RRL)) and ((CurrentState = SFetch_Decod) or (CurrentState = SExecution))	else
+							"010" when ((OpCode(1) = '1') and ((instruction = LD_IndConst) or (instruction = ST_IndConst))) and ((CurrentState = SFetch_Decod) or (CurrentState = SExec_Addr))	else
+							"011" when ((OpCode(1) = '0') and ((instruction = LD_Indexed) or (instruction = ST_Indexed)) and ((CurrentState = SFetch_Decod) or (CurrentState = SExec_Addr)))	else
+							"011" when ((instruction = ADD) or (instruction = ADDC) or (instruction = SUB) or (instruction = SBB) or (instruction = ANL) or (instruction = ORL) or (instruction = XRL) or (instruction = NT)) and ((CurrentState = SFetch_Decod) or (CurrentState = SExecution))	else
+							"100" when ((OpCode(1) = '1') and ((instruction = LD_Indexed) or (instruction = ST_Indexed))) and ((CurrentState = SFetch_Decod) or (CurrentState = SExec_Addr))	else
 							"000";
 
 -- LDI, LDIH, LD_Direct, LD_IndConst, LD_Indexed, ST_Direct, ST_IndConst, ST_Indexed, ADD, ADDC, ADD_const, ADDC_const, SUB, 
 -- SBB, SUB_const, SBB_const, ANL, ORL, XRL, NT, SHL,SHR,RRL,RRM,RCR,RCL,JZ,JNZ,JC,JNC,JMP,JMPL,IRET,NOP		
 					
-		SelAddr		<= "01" when ((instruction = LD_IndConst) or (instruction = LD_Indexed) or (instruction = ST_IndConst) or (instruction = ST_Indexed)) and (CurrentState = SFetch_Decod)	else
-							"10" when ((instruction = LD_Direct) or (instruction = ST_Direct)) and (CurrentState = SFetch_Decod)	else
+		SelAddr		<= "01" when ((instruction = LD_IndConst) or (instruction = LD_Indexed) or (instruction = ST_IndConst) or (instruction = ST_Indexed)) and ((CurrentState = SFetch_Decod) or (CurrentState = SExec_Addr) or (CurrentState = SExecution))	else
+							"10" when ((instruction = LD_Direct) or (instruction = ST_Direct)) and ((CurrentState = SFetch_Decod) or (CurrentState = SExec_Addr) or (CurrentState = SExecution))	else
 							"00";
 							
-		SelData		<= "01" when (OpCode(1) = '1') and ((instruction = LD_Direct) or (instruction = LD_IndConst) or (instruction = LD_Indexed)) and (CurrentState = SExec_RW)	else
-							"10" when (OpCode(1) = '0') and ((instruction = LD_Direct) or (instruction = LD_IndConst) or (instruction = LD_Indexed)) and (CurrentState = SExec_RW)	else
-							"11" when (((instruction = ADD) or (instruction = ADDC) or (instruction = ADD_const) or (instruction = ADDC_const) or (instruction = SUB) or (instruction = SBB) or (instruction = SUB_const) or (instruction = SBB_const) or (instruction = ANL) or (instruction = ORL) or (instruction = XRL) or (instruction = NT) or (instruction = SHL) or (instruction = SHR) or (instruction = RRL) or (instruction = RRM) or (instruction = RCR) or (instruction = RCL) ) and (CurrentState = SFetch_Decod)) or ((((Flags(0) = '1') and (instruction = JZ)) or ((Flags(0) = '0') and (instruction = JNZ)) or ((Flags(1) = '1') and (instruction = JC)) or ((Flags(1) = '0') and (instruction = JNC)) or (instruction = JMP) or (instruction = JMPL)) and (CurrentState = SExecution))	else
+		SelData		<= "01" when (OpCode(1) = '1') and ((instruction = LD_Direct) or (instruction = LD_IndConst) or (instruction = LD_Indexed)) and ((CurrentState = SExec_RW) or (CurrentState = SExecution))	else
+							"10" when (OpCode(1) = '0') and ((instruction = LD_Direct) or (instruction = LD_IndConst) or (instruction = LD_Indexed)) and ((CurrentState = SExec_RW) or (CurrentState = SExecution))	else
+							"11" when ((instruction = ADD) or (instruction = ADDC) or (instruction = ADD_const) or (instruction = ADDC_const) or (instruction = SUB) or (instruction = SBB) or (instruction = SUB_const) or (instruction = SBB_const) or (instruction = ANL) or (instruction = ORL) or (instruction = XRL) or (instruction = NT) or (instruction = SHL) or (instruction = SHR) or (instruction = RRL) or (instruction = RRM) or (instruction = RCR) or (instruction = RCL) ) and ((CurrentState = SFetch_Decod) or (CurrentState = SExecution)) else
+							"11" when (( ((Flags(0) = '1') and (instruction = JZ)) or ((Flags(0) = '0') and (instruction = JNZ)) or ((Flags(1) = '1') and (instruction = JC)) or ((Flags(1) = '0') and (instruction = JNC)) or (instruction = JMP) or (instruction = JMPL)) and (CurrentState = SExecution))	else
 							"00";
 							
 		Sellmm		<= '1' when ((instruction = LDIH) ) and ((CurrentState = SFetch_Decod) or (CurrentState = SExecution))	else
