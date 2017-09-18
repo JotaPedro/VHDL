@@ -28,7 +28,7 @@ use work.pds16_types.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity Control_V2 is
+entity Control is
     Port ( A0 			: in  STD_LOGIC;
            Flags 		: in  STD_LOGIC_VECTOR(2 downto 0);-- 0-Zero 1-Carry 2-GE
            OpCode 	: in  STD_LOGIC_VECTOR(6 downto 0);-- bits de 15 a 9
@@ -48,9 +48,9 @@ entity Control_V2 is
 			  S1S0 		: out	 STD_LOGIC_VECTOR(1 downto 0);
 			  EIR			: out	 STD_LOGIC
 	);
-end Control_V2;
+end Control;
 
-architecture Behavioral of Control_V2 is
+architecture Behavioral of Control is
 
 	--type STATE_TYPE is (SReset, SFetch_Addr, SFetch_Inst, SFetch_Decod, SExecution, SExec_Addr, SExec_RW, SInterrupt, SBreak, SHold_Fetch, SHold_Exec, SWait_Fetch, SWait_Exec);
 	signal CurrentState 	: STATE_TYPE := SReset;
@@ -73,7 +73,7 @@ begin
 --		Inst			=> instruction,
 --		FlagUpdate	=> flagUpdate
 --	);
-	inst: InstDecode_V2 Port map (  
+	inst: InstDecode Port map (  
 		OpCode 		=>  OpCode,
 		Inst			=> instruction,
 		FlagUpdate	=> flagUpdate

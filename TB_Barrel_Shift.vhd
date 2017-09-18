@@ -32,14 +32,14 @@ USE ieee.std_logic_1164.ALL;
 -- arithmetic functions with Signed or Unsigned values
 --USE ieee.numeric_std.ALL;
  
-ENTITY TB_Barrel_Shift_V2 IS
-END TB_Barrel_Shift_V2;
+ENTITY TB_Barrel_Shift IS
+END TB_Barrel_Shift;
  
-ARCHITECTURE behavior OF TB_Barrel_Shift_V2 IS 
+ARCHITECTURE behavior OF TB_Barrel_Shift IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT Barrel_Shift_V2
+    COMPONENT Barrel_Shift
     PORT(
          A : IN  std_logic_vector(15 downto 0);
          B : IN  std_logic_vector(3 downto 0);
@@ -64,7 +64,7 @@ ARCHITECTURE behavior OF TB_Barrel_Shift_V2 IS
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: Barrel_Shift_V2 PORT MAP (
+   uut: Barrel_Shift PORT MAP (
           A => A,
           B => B,
           Cyin => Cyin,

@@ -9,14 +9,14 @@ use work.pds16_types.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity InstDecode_V2 is
+entity InstDecode is
     Port (  OpCode 	: in  STD_LOGIC_VECTOR(6 downto 0);-- bits de 15 a 9
 				Inst		: out INST_TYPE; --Que instrução é a descodificada.
 				FlagUpdate: out STD_LOGIC --Se é para atualizar o registo de flags. true/false
 	);
-end InstDecode_V2;
+end InstDecode;
 
-architecture Behavioral of InstDecode_V2 is
+architecture Behavioral of InstDecode is
 	
 	--type INST_TYPE is (LDI, LDIH, LD_Direct, LD_IndConst, LD_Indexed, ST_Direct, ST_IndConst, ST_Indexed, ADD, ADDC, ADD_const, ADDC_const, SUB, SBB, SUB_const, SBB_const, ANL, ORL, XRL, NT, SHL,SHR,RRL,RRM,RCR,RCL,JZ,JNZ,JC,JNC,JMP,JMPL,IRET,NOP);
 	signal instruction : INST_TYPE;

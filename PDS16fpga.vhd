@@ -17,7 +17,7 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 use work.pds16_types.ALL;
 
-entity PDS16fpga_V2 is
+entity PDS16fpga is
     Port ( MCLK : in  STD_LOGIC;
            RESET : in  STD_LOGIC;
            EXINT : in  STD_LOGIC;
@@ -32,9 +32,9 @@ entity PDS16fpga_V2 is
            WRH : out  STD_LOGIC;
            BGT : out  STD_LOGIC;
            RESOUT : out  STD_LOGIC);
-end PDS16fpga_V2;
+end PDS16fpga;
 
-architecture Structural of PDS16fpga_V2 is
+architecture Structural of PDS16fpga is
 
 
 	Signal N_MCLK: STD_LOGIC;
@@ -246,7 +246,7 @@ begin
 	-- CONTROL
 	-----------------
 	
-	Controlo: Control_V2 PORT MAP(
+	Controlo: Control PORT MAP(
 		A0 		=>	Addr_sig(0), 					-- A0 obtido da saída do multiplexer SelAddr
 		Flags 	=>	flagsCtrl_sig(2 downto 0), -- 0-Zero 1-Carry 2-GE
 		OpCode 	=> IR( 15 downto 9), -- bits de 15 a 9

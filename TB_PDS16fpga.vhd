@@ -33,14 +33,14 @@ use work.pds16_types.ALL;
 -- arithmetic functions with Signed or Unsigned values
 --USE ieee.numeric_std.ALL;
  
-ENTITY TB_PDS16fpga_V2 IS
-END TB_PDS16fpga_V2;
+ENTITY TB_PDS16fpga IS
+END TB_PDS16fpga;
  
-ARCHITECTURE behavior OF TB_PDS16fpga_V2 IS 
+ARCHITECTURE behavior OF TB_PDS16fpga IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT PDS16fpga_V2
+    COMPONENT PDS16fpga
     PORT(
          MCLK : IN  std_logic;
          RESET : IN  std_logic;
@@ -89,7 +89,7 @@ ARCHITECTURE behavior OF TB_PDS16fpga_V2 IS
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: PDS16fpga_V2 PORT MAP (
+   uut: PDS16fpga PORT MAP (
           MCLK => MCLK,
           RESET => RESET,
           EXINT => EXINT,

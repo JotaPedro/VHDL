@@ -17,16 +17,16 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 use work.pds16_types.ALL;
 
-entity Barrel_Shift_V2 is
+entity Barrel_Shift is
     Port ( A : in STD_LOGIC_VECTOR(15 downto 0);
            B : in STD_LOGIC_VECTOR(3 downto 0);
 			  Cyin : in STD_LOGIC;
            Shifter_Ctrl : in STD_LOGIC_VECTOR(2 downto 0); --IR12 IR11 IR10
 			  Output : out STD_LOGIC_VECTOR(15 downto 0);
            Cy : out STD_LOGIC);
-end Barrel_Shift_V2;
+end Barrel_Shift;
 
-architecture Structural of Barrel_Shift_V2 is
+architecture Structural of Barrel_Shift is
 
 	-- Bloco de seleção de operações p/ a esquerda (left) ou direita (right) 
 	Signal left_op : STD_LOGIC;
