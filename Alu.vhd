@@ -11,12 +11,7 @@
 -- Additional Comments: 
 --
 ----------------------------------------------------------------------------------
--- Para implementar (no register file):
--- Não afectar PSW quando se faz operações de processamento de dados e o bit "f" está activo. --IR10
 
--- Para implementar:
--- Flag de borrow, só activa quando não há borrow. Confirmar.
-----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
@@ -78,7 +73,7 @@ begin
 
 	-----------------
 	-- Aritmetic
-	-----------------							--op(0)=IR15 AND IR12 / op(1)=IR15 AND IR11
+	-----------------							
 	op_aritmetico <= (aluFunc(5) AND aluFunc(2)) & (aluFunc(5) AND aluFunc(1));
 		
 	Aritmetico: component Alu_aritmetico PORT MAP( 
@@ -98,10 +93,10 @@ begin
       In1 => Output_shifter,	
       outdata => muxIR13out);
 		
-		sel_muxIR14 <= aluFunc(5) AND aluFunc(4); -- IR15 AND IR14
+		sel_muxIR14 <= aluFunc(5) AND aluFunc(4);
 		
 	muxIR14: component MUX1x16bits port map(
-		Sel => sel_muxIR14, -- IR15 AND IR14
+		Sel => sel_muxIR14, 
 		In0 => Output_aritmetico,
       In1 => muxIR13out,	
       outdata => muxIR14out);

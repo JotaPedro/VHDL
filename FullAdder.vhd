@@ -30,6 +30,5 @@ architecture structural of FullAdder is
 begin
 	Sx		 <= ((Ax xor Bx) xor Cin);
 	Cout	 <= ((Ax and Bx) or ((Ax xor Bx) and Cin));
-	--Cout	 <= ((Ax and Bx) or (Cin and Ax) or (Cin and Bx));
 end structural;
 

@@ -25,13 +25,6 @@ architecture Behavioral of Sig_Ext is
 
 begin
 
---	process(Const8x2)
---		begin
---			Output16bit <= SXT(Const8x2, Output16bit'LENGTH);
---	end process;
---	
---	Output16bit <= SXT(Const8x2, Output16bit'LENGTH);
-
 	Output16bit(15 downto 8) <= (others => Const8x2(8));
 	Output16bit(7 downto 0)  <= Const8x2(7 downto 0);
 

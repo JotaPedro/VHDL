@@ -4,7 +4,7 @@
 -- Autors:	  João Botelho nº31169
 --				  Tiago Ramos  nº32125
 
--- Module Name:  Or_tree - Descrição Hardware
+-- Module Name:  Selector_mplex - Descrição Hardware
 
 -- Description: 
 --

@@ -27,7 +27,7 @@ end Block_MUX4x16bits;
 
 architecture Structural of Block_MUX4x16bits is
 
-	Signal Block_input: bit_16_array(15 downto 0); --array de 2D 16x16 - entradas dos multiplexers 16to1
+	Signal Block_input: bit_16_array(15 downto 0); 
 
 begin
 	process(A)
@@ -133,7 +133,5 @@ begin
 				Mux_In => Block_input(0),
 				outdata => out_Block(0)
 			);
-
-
 end Structural;
 

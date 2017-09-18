@@ -7,9 +7,6 @@
 -- Module Name:  Alu_Logico - Descrição Comportamental
 
 -- Description: 
--- Este modulo é referente ao bloco existente na ALU do PDS16 com o nome "Lógico".
--- Tem como objetivo diponibilizar as seguintes funções lógicas.
--- Operações Lógicas AND, OR, XOR e NOT
 --
 -- Additional Comments: 
 --
@@ -23,7 +20,7 @@ use work.pds16_types.ALL;
 entity Alu_Logico is
     Port ( Input_A : in  STD_LOGIC_VECTOR(15 downto 0);
            Input_B : in  STD_LOGIC_VECTOR(15 downto 0);
-           Op : in  STD_LOGIC_VECTOR(1 downto 0); -- IR12 IR11
+           Op : in  STD_LOGIC_VECTOR(1 downto 0); 			-- IR12 IR11
            Output : out  STD_LOGIC_VECTOR(15 downto 0)
 			 );
 end Alu_Logico;

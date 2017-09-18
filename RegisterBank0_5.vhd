@@ -19,8 +19,8 @@ use work.pds16_types.ALL;
 entity RegisterBank0_5 is
     Port ( clk : in  STD_LOGIC;
 			  enable : in STD_LOGIC_VECTOR (5 downto 0);
-           dataIn : in bit_16_array(5 downto 0);		--array 6x16
-			  dataOut: out bit_16_array(5 downto 0));		--array 6x16
+           dataIn : in bit_16_array(5 downto 0);	
+			  dataOut: out bit_16_array(5 downto 0));		
 end RegisterBank0_5;
 
 architecture Structural of RegisterBank0_5 is

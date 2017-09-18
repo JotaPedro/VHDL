@@ -1,10 +1,16 @@
--------------------------------------------------------
--- Design Name : ram_sp_ar_aw
--- File Name   : ram_sp_ar_aw.vhd
--- Function    : Asynchronous read write RAM 
--- Coder       : Deepak Kumar Tala (Verilog)
--- Translator  : Alexander H Pham (VHDL)
--------------------------------------------------------
+----------------------------------------------------------------------------------
+-- Project Name: PDS16fpga
+
+-- Autors:	  João Botelho nº31169
+--				  Tiago Ramos  nº32125
+
+-- Module Name:  Control - Descrição Comportamental
+
+-- Description: 
+--
+-- Additional Comments: 
+--
+----------------------------------------------------------------------------------
 library ieee;
     use ieee.std_logic_1164.all;
     use ieee.std_logic_unsigned.all;
@@ -13,8 +19,8 @@ library ieee;
 entity Ram2 is
     port (
         AD   :inout std_logic_vector (15 downto 0);  -- bi-directional data/address
-        nWR    :in    std_logic_vector(1 downto 0);             -- Write Enable (High/Low)
-        nRD    :in    std_logic;                                 	-- Read Enable
+        nWR    :in    std_logic_vector(1 downto 0);  -- Write Enable (High/Low)
+        nRD    :in    std_logic;                     -- Read Enable
 		  ALE		:in	 std_logic
     );
 end entity;
@@ -79,7 +85,6 @@ begin
 	-- LATCH ADDRESS
 	-----------------------
 	-- Latch for the address storing when acessing ram
-	-- não deve ter clock.
 	Latch: Latch16bits
 	Port map( D 		=> AD,
 				 Q 		=> Addr_out,
@@ -87,9 +92,8 @@ begin
 				);
 	
 	
-    ----------------Code Starts Here------------------
+
     -- Tri-State Buffer control
---    DATA <= data_out when (nRD = '1' and nWR = "00") else (others=>'Z');
 		AD <= data_out when (nRD = '1' and nWR = "00") else (others=>'Z');
 	 
     -- Memory Write Block

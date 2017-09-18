@@ -14,7 +14,6 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
-
 entity MUX3x16bits is
 Generic (
 	WIDTH : NATURAL := 16 );

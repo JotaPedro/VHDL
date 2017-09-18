@@ -40,32 +40,28 @@ architecture Structural of Data_Processor is
 	Signal muxOpB_In2: STD_LOGIC_VECTOR(15 downto 0);
 	Signal muxOpB_In4: STD_LOGIC_VECTOR(15 downto 0);
 
-
 begin
 
 	-----------------
 	-- Const
 	-----------------
 	ZeroFill: component Zero_Fill PORT MAP(
-		Const4bit => Const (6 downto 3), --const4
+		Const4bit => Const (6 downto 3), 
 		Output16bit => ZeroFillOut);
 		
 	
-	SigExt_In <= Const(7 downto 0) & '0';		--shift offset8 de forma a apontar sempre p/ word
+	SigExt_In <= Const(7 downto 0) & '0';	
 	
 	SigExt: component Sig_Ext PORT MAP(
 		Const8x2 => SigExt_In,
-		Output16bit => SigExtOut);		 			--: out  bit_16
+		Output16bit => SigExtOut);	
 				
 	-----------------
 	-- OpB Selector
 	-----------------	
-	muxOpB_In2 <= ZeroFillOut (14 downto 0) & '0'; --x2 = shift
-	muxOpB_In4 <= OpB (14 downto 0) & '0'; --x2 = shift,
-			-- PERGUNTAR 
-	
-	
-	
+	muxOpB_In2 <= ZeroFillOut (14 downto 0) & '0'; 
+	muxOpB_In4 <= OpB (14 downto 0) & '0'; 
+
 	muxOpB: component MUX3x16bits PORT MAP(
 		Sel => Ctr,			--OpB => 0-SigExt 1-ZeroFill 2-ZeroFillx2 3-OpB 4-OpBx2
 		In0 => SigExtOut,

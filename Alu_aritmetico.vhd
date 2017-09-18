@@ -19,14 +19,13 @@ use work.pds16_types.ALL;
 
 
 entity Alu_aritmetico is
-    Port ( Op : in STD_LOGIC_VECTOR(1 downto 0) ; -- IR12 IR11
+    Port ( Op : in STD_LOGIC_VECTOR(1 downto 0) ; 			-- IR12 IR11
 			  A : in  STD_LOGIC_VECTOR(15 downto 0);
            B : in  STD_LOGIC_VECTOR(15 downto 0);
            Cin : in  STD_LOGIC;
            Result : out  STD_LOGIC_VECTOR(15 downto 0);
-           Flags_out : out  STD_LOGIC_VECTOR(1 downto 0)-- 0-GE, 1-Carry
-			  );
-			  
+           Flags_out : out  STD_LOGIC_VECTOR(1 downto 0)	-- 0-GE, 1-Carry
+			  );		  
 end Alu_aritmetico;
 
 
@@ -42,8 +41,6 @@ begin
 	process(B,Op(0))
 		begin
 		
-		
-		-- Xor gate para decidir se vamos fazer uma soma ou uma subtração.
 		B_input(0) <= B(0) xor Op(0);
 		B_input(1) <= B(1) xor Op(0);
 		B_input(2) <= B(2) xor Op(0);
@@ -60,11 +57,8 @@ begin
 		B_input(13) <= B(13) xor Op(0);
 		B_input(14) <= B(14) xor Op(0);
 		B_input(15) <= B(15) xor Op(0);
-		
-		
 	end process;
 
-		
 		Carry(0)<= ((Cin AND OP(1)) XOR Op(0));
 		
 		Adder:
@@ -81,7 +75,6 @@ begin
 	-------------
 	--Flags
 	-------------		
-		--melhorar este processo, passar para portas lógicas!!!!
 	-- GE --
 	process(A,B)
 		begin

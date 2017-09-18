@@ -68,7 +68,7 @@ begin
 		selB_sel <= Shifter_Ctrl(2) and Shifter_Ctrl(1);
 		
 		selB: Block_4MUX1x1bit PORT MAP (
-			Sel => selB_sel,		--RC
+			Sel => selB_sel,	
 			in0 => B,
 			in1 => "0001",
 			out_block => selB_out);
@@ -76,8 +76,6 @@ begin
 	-----------------
 	-- Shift MUXs
 	-----------------
-
-	
 		--Bloco B/-B--
 		BlocoB: BnB PORT MAP (
 			B_sel => right_op,
@@ -86,9 +84,9 @@ begin
 
 		-- MUX 4x16bits para1el --
 		Block_shiftMUXs: Block_MUX4x16bits PORT MAP (
-          Sel => BnB_sig, 					--selector
-			 A => A,								--Entradas dos Mplex
-			 out_Block => shiftMuxs_out	--Saidas dos Mplex
+          Sel => BnB_sig, 					
+			 A => A,								
+			 out_Block => shiftMuxs_out	
       );
 
 
@@ -96,24 +94,19 @@ begin
 	-- SIN, MSb, CY MUXs
 	--------------------------------
 		--multiplexers 16 entradas a 1 bit--
-		
-		--MUX_RC_CY_A15_sel <= (Shifter_Ctrl(2) and Shifter_Ctrl(1)); --Activa quando é Rotate with Carry=IR12 adn IR11
-		
 		MUX_sin_MSb: MUX1x1bit PORT MAP( 
 			Sel => Shifter_Ctrl(2),
-			In0 => Shifter_Ctrl(0), --sin
+			In0 => Shifter_Ctrl(0), 		--sin
 		   In1 => A(15),
 			outdata => MUX_sin_MSb_out);
 		
 		MUX_sin_MSb_CY_sel <= Shifter_Ctrl(2) and Shifter_Ctrl(1);
 		
 		MUX_sin_MSb_CY: MUX1x1bit PORT MAP( 
-			Sel => MUX_sin_MSb_CY_sel,	--RC
+			Sel => MUX_sin_MSb_CY_sel,
 			In0 => MUX_sin_MSb_out,
 		   In1 => Cyin,
 			outdata => MUX_sin_MSb_CY_out);
-
-
 
 	-------------
 	-- Out MUXs
@@ -133,8 +126,6 @@ begin
 			outdata => Output_Carry);
 				
 		Cy <= ((selB_out(0) or selB_out(1) or selB_out(2) or selB_out(3)) and Output_Carry);
-
-
 
 	----------------------------------------
 	-- Select dos MUXs de saida

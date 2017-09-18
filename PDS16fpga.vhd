@@ -168,12 +168,12 @@ begin
 		clock => N_MCLK,
 		CL => CL,
 		RFC => RFC,				
-		AddrA => IR (5 downto 3),			--RFC(0)-Enable Decoder
-		AddrB => IR(8 downto 6),			--RFC(1)-OR Reg R5 / SelMuxR5
-		AddrSD => IR(2 downto 0),			--RFC(2)-OR Reg R6
-		DestData => DestData_sig,						--RFC(3)-OR Reg R7
-		flagsIN => flags_sig,							--RFC(4)-MUX do MUXaddrA
-		OpA => OpA_sig,									--RFC(5)-Enable R7
+		AddrA => IR (5 downto 3),			
+		AddrB => IR(8 downto 6),			
+		AddrSD => IR(2 downto 0),			
+		DestData => DestData_sig,				
+		flagsIN => flags_sig,					
+		OpA => OpA_sig,						
 		OpB => OpB_sig,
 		SC => DataOut_sig,
 		flagsOUT => flagsCtrl_sig,
@@ -187,11 +187,11 @@ begin
 		OpA => OpA_sig,
 		OpB => OpB_sig,
 		CYin => flagsCtrl_sig(1),
-		Func => IR (15 downto 10),	--IR10 , 11, 12, 13, 14, 15
+		Func => IR (15 downto 10),	
 		Const => IR (10 downto 3),
-		Ctr => ALUCtrl_sig,						--0-SigExt 1-ZeroFill 2-ZeroFillx2 3-OpB 4-OpBx2
+		Ctr => ALUCtrl_sig,			--0-SigExt 1-ZeroFill 2-ZeroFillx2 3-OpB 4-OpBx2
 		Result => Result_sig,
-		FlagsOut => flags_sig);					-- 0-Zero 1-CyBw 2-GE 3-Parity 
+		FlagsOut => flags_sig);		-- 0-Zero 1-CyBw 2-GE 3-Parity 
 		
 		
 	---------------------------
@@ -207,13 +207,12 @@ begin
 		In0 => PC_sig, 
 		In1 => Result_sig,
 		In2 => DirZFout,
-		In3 => "0000000000000000", -- Entrada não utilizada
+		In3 => "0000000000000000", -- (Entrada não utilizada)
 		outdata => Addr_sig);	
 
 	------------------------
 	-- BUS INTERFACE UNIT
 	------------------------
-
 	S0 <= S1S0_port_out(0);
 	S1 <= S1S0_port_out(1);
 
@@ -222,8 +221,8 @@ begin
 		CL 		=> CL,
 		DataOut 	=> DataOut_sig,
 		BusCtr 	=> BusCtr_sig,					-- 0-WrByte, 1-DataOut, 2-Addr, 3-Ale
-		Addr 		=> Addr_sig(15 downto 1),	--Addr 15 downto 1
-		AD 		=> AD0_15,						--Bus address and data
+		Addr 		=> Addr_sig(15 downto 1),	-- Addr 1_15
+		AD 		=> AD0_15,						-- Bus address and data
 		S1S0_in	=> S1S0_sig,					-- 0-S0, 1-S1
 		S1S0_out	=> S1S0_port_out,				-- 0-S0, 1-S1			  
 		RD 		=> RD_ctrl_sig,
@@ -232,8 +231,8 @@ begin
 		nWRL 		=> WRL,
 		WRH 		=> WR_ctrl_sig(1),
 		nWRH 		=> WRH,
-		RDY 		=> RDY_sig,				-- do lado da memoria
-		BRQ 		=> BRQ_sig,				-- do lado da memoria
+		RDY 		=> RDY_sig,				
+		BRQ 		=> BRQ_sig,		
 		BGT_in 	=> BGT_sig,
 		BGT_out 	=> BGT,
 		DataIn 	=> DataIn_sig,
@@ -245,26 +244,25 @@ begin
 	-----------------
 	-- CONTROL
 	-----------------
-	
 	Controlo: Control PORT MAP(
-		A0 		=>	Addr_sig(0), 					-- A0 obtido da saída do multiplexer SelAddr
+		A0 		=>	Addr_sig(0), 					
 		Flags 	=>	flagsCtrl_sig(2 downto 0), -- 0-Zero 1-Carry 2-GE
-		OpCode 	=> IR( 15 downto 9), -- bits de 15 a 9
-		INTP 		=> INTP_sig, 						-- bit para indicar uma interrupção?
+		OpCode 	=> IR( 15 downto 9), 			-- IR9_15
+		INTP 		=> INTP_sig, 						
 		Clock 	=>	N_MCLK,
 		CL 		=>	CL,
-		Sync 		=> Sync_sig,--: in  STD_LOGIC_VECTOR(1 downto 0); -- 0- BRQ, 1-RDY
-		BusCtr 	=> BusCtr_sig,--: out  STD_LOGIC_VECTOR(3 downto 0); -- 0-WrByte, 1-DataOut, 2-Addr, 3-ALE
-		RFC 		=> RFC, -- 0-Decoder, 1-OR Reg R5/SelMuxR5, 2-OR Reg R6/SelMuxR6, 3-OR Reg R7/SelMuxR7, 4-MUXaddrA, 5-enable Reg R7(para os jumps)
-		ALUC 		=> ALUCtrl_sig,--: out  STD_LOGIC_VECTOR(2 downto 0);
+		Sync 		=> Sync_sig,					-- 0- BRQ, 1-RDY
+		BusCtr 	=> BusCtr_sig,					-- 0-WrByte, 1-DataOut, 2-Addr, 3-ALE
+		RFC 		=> RFC, 
+		ALUC 		=> ALUCtrl_sig,		
 		SelAddr 	=> SelAddr,
 		SelData	=> SelData,
 		Sellmm 	=> SelImm, 
-		RD 		=> RD_ctrl_sig,--: out	 STD_LOGIC; -- ACTIVE LOW
-		WR			=> WR_ctrl_sig, -- 0-WRL, 1-WRH
-		BGT		=> BGT_sig,--: out	 STD_LOGIC;
-		S1S0 		=> S1S0_sig,--: out	 STD_LOGIC_VECTOR(1 downto 0);
-		EIR		=> EIR--: out	 STD_LOGIC
+		RD 		=> RD_ctrl_sig,	
+		WR			=> WR_ctrl_sig, 				-- 0-WRL, 1-WRH
+		BGT		=> BGT_sig,
+		S1S0 		=> S1S0_sig,
+		EIR		=> EIR
 		);
 
 

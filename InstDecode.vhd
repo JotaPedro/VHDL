@@ -1,24 +1,32 @@
+----------------------------------------------------------------------------------
+-- Project Name: PDS16fpga
+
+-- Autors:	  João Botelho nº31169
+--				  Tiago Ramos  nº32125
+
+-- Module Name:  InstDecode - Descrição Comportamental
+
+-- Description: 
+--
+-- Additional Comments: 
+--
+----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 use work.pds16_types.ALL;
 
----- Uncomment the following library declaration if instantiating
----- any Xilinx primitives in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity InstDecode is
-    Port (  OpCode 	: in  STD_LOGIC_VECTOR(6 downto 0);-- bits de 15 a 9
-				Inst		: out INST_TYPE; --Que instrução é a descodificada.
-				FlagUpdate: out STD_LOGIC --Se é para atualizar o registo de flags. true/false
+    Port (  OpCode 	: in  STD_LOGIC_VECTOR(6 downto 0);	-- IR9_15
+				Inst		: out INST_TYPE; 
+				FlagUpdate: out STD_LOGIC 
 	);
 end InstDecode;
 
 architecture Behavioral of InstDecode is
 	
-	--type INST_TYPE is (LDI, LDIH, LD_Direct, LD_IndConst, LD_Indexed, ST_Direct, ST_IndConst, ST_Indexed, ADD, ADDC, ADD_const, ADDC_const, SUB, SBB, SUB_const, SBB_const, ANL, ORL, XRL, NT, SHL,SHR,RRL,RRM,RCR,RCL,JZ,JNZ,JC,JNC,JMP,JMPL,IRET,NOP);
 	signal instruction : INST_TYPE;
 	
 begin
@@ -73,13 +81,11 @@ begin
 			when others => instruction	<=	NOP;
 		end case;
 	
---	FlagUpdate <= OpCode(1); -- Apenas faz sentido quando a instrução é logica/aritmética com 3 registos e aritmética com constante, mas não lógica com constante.
---	Inst <= instruction;
 	end process;
 	
 	
 	FlagUpdate <= '1' when (OpCode(6 downto 4) = "111") OR (((OpCode(6 downto 4) = "110") OR (OpCode(6 downto 5) = "10")) and (OpCode(1) = '1')) else 
-					  '0'; -- Apenas faz sentido quando a instrução é logica/aritmética com 3 registos e aritmética com constante, mas não lógica com constante.
+					  '0';
 	Inst <= instruction;
 	
 end Behavioral;

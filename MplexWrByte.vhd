@@ -1,19 +1,13 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date:    21:46:22 08/21/2017 
--- Design Name: 
--- Module Name:    MplexWrByte - Behavioral 
--- Project Name: 
--- Target Devices: 
--- Tool versions: 
+-- Project Name: PDS16fpga
+
+-- Autors:	  João Botelho nº31169
+--				  Tiago Ramos  nº32125
+
+-- Module Name:  MplexWrByte - Descrição Comportamental
+
 -- Description: 
 --
--- Dependencies: 
---
--- Revision: 
--- Revision 0.01 - File Created
 -- Additional Comments: 
 --
 ----------------------------------------------------------------------------------
@@ -23,10 +17,6 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 use work.pds16_types.ALL;
 
----- Uncomment the following library declaration if instantiating
----- any Xilinx primitives in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity MplexWrByte is
     Port ( 	Input0 : in  std_logic_vector(7 downto 0); -- Parte Alta

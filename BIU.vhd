@@ -1,19 +1,13 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date:    15:17:10 04/25/2016 
--- Design Name: 
--- Module Name:    BIU - Behavioral 
--- Project Name: 
--- Target Devices: 
--- Tool versions: 
+-- Project Name: PDS16fpga
+
+-- Autors:	  João Botelho nº31169
+--				  Tiago Ramos  nº32125
+
+-- Module Name:  BIU - Descrição Hardware
+
 -- Description: 
 --
--- Dependencies: 
---
--- Revision: 
--- Revision 0.01 - File Created
 -- Additional Comments: 
 --
 ----------------------------------------------------------------------------------
@@ -23,18 +17,14 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 use work.pds16_types.ALL;
 
----- Uncomment the following library declaration if instantiating
----- any Xilinx primitives in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity BIU is
     Port ( Clock 		: in  STD_LOGIC;
            CL 			: in  STD_LOGIC; 
 			 
            DataOut 	: in  STD_LOGIC_VECTOR(15 downto 0);
-           BusCtr 	: in  STD_LOGIC_VECTOR(3 downto 0);-- 0-WrByte, 1-DataOut, 2-Addr, 3-Ale
-           Addr 		: in  STD_LOGIC_VECTOR(14 downto 0);--Addr 15 downto 1
+           BusCtr 	: in  STD_LOGIC_VECTOR(3 downto 0);	-- 0-WrByte, 1-DataOut, 2-Addr, 3-Ale
+           Addr 		: in  STD_LOGIC_VECTOR(14 downto 0);--Addr 1_15
 			  
 			  AD 			: inout  STD_LOGIC_VECTOR(15 downto 0); --Bus address and data
            
@@ -48,8 +38,8 @@ entity BIU is
 			  WRH 		: in  STD_LOGIC;
 			  nWRH 		: out  STD_LOGIC;
 			  
-           RDY 		: in  STD_LOGIC; -- do lado da memoria
-           BRQ 		: in  STD_LOGIC; -- do lado da memoria
+           RDY 		: in  STD_LOGIC; 
+           BRQ 		: in  STD_LOGIC;
            BGT_in 	: in  STD_LOGIC;
 			  BGT_out 	: out  STD_LOGIC;
            DataIn 	: out  STD_LOGIC_VECTOR (15 downto 0);
@@ -62,7 +52,6 @@ end BIU;
 
 architecture Behavioral of BIU is
 
-	--Variaveis confirmadas
 	Signal Data_to_mem			: STD_LOGIC_VECTOR(15 downto 0);
 	Signal TS_DataOut_Enable	: STD_LOGIC;
 	Signal TS_Addr_Enable		: STD_LOGIC;
@@ -81,7 +70,6 @@ begin
 	-----------------------
 	-- MBR: Memory bus register
 	-----------------------
-	
 	Membusreg: MBR PORT MAP( 
 		enable => RD,
 		d => AD,
@@ -91,18 +79,16 @@ begin
 	-----------------------
 	-- Multiplexer DataOut
 	-----------------------
-
 	Mplex_DataOut: MplexWrByte PORT MAP(
 		Input0 => DataOut(15 downto 8),
 		Input1 => DataOut(7 downto 0),
-      Sel => BusCtr(0), -- BusCtr(WrByte)
-      Output => Data_to_mem -- dados a entrar no tristate DataOut.
+      Sel => BusCtr(0), 			-- BusCtr(WrByte)
+      Output => Data_to_mem 
 	);
 
 	-----------------------
 	-- Tristate DataOut
 	-----------------------
-
 	TS_DataOut_Enable	<= (BusCtr(1) and (not BGT_in)); --BusCtr(DataOut) and (not BGT)
 	
 	TS_DataOut: Tristate PORT MAP(
@@ -114,9 +100,8 @@ begin
 	-----------------------
 	-- Tristate Address
 	-----------------------
-	
 	TS_Addr_Enable 	<= (BusCtr(2) and (not BGT_in)); --BusCtr(Addr) and (not BGT)
-	TS_Addr_Input		<= Addr & '0'; -- para quê a introdução de um 0 se não vai ser usado?
+	TS_Addr_Input		<= Addr & '0';
 	
 	TS_Addr: Tristate PORT MAP(
 		Input => TS_Addr_Input,
@@ -127,10 +112,9 @@ begin
 	-----------------------
 	-- Flipflops
 	-----------------------
-
 	RDY_flipflop: DFlipFlop PORT MAP(
 		D => RDY,
-      Q => Sync(1),--Sync(RDY)
+      Q => Sync(1),		--Sync(RDY)
       Clk => Clock,
 		CL => '0'
 	);
@@ -138,14 +122,14 @@ begin
 	
 	BRQ_flipflop: DFlipFlop PORT MAP(
 		D => BRQ,
-      Q => Sync(0),--Sync(BRQ)
+      Q => Sync(0),		--Sync(BRQ)
       Clk => Clock,
       CL => '0'
 	);
 	
 	
 	ALE_ff: DFlipFlop PORT MAP(
-		D => BusCtr(3),--BusCtr(ALE)
+		D => BusCtr(3),	--BusCtr(ALE)
       Q => ALE_flipflop,
       Clk => Clock,
       CL => '0'
@@ -153,18 +137,4 @@ begin
 	
 	ALE <= (BusCtr(3) AND (NOT ALE_flipflop));
 	
---	-----------------------
---	-- LATCH ADDRESS
---	-----------------------
---
---	-- Latch for the address storing when acessing ram
---	-- não deve ter clock.
---	Latch: Latch16bits
---	Port map( D 		=> AD,
---				 Q 		=> Addr_out,
---				 En 		=> ALE_out,
---				 A0		=> A0
---				);
-
-
 end Behavioral;

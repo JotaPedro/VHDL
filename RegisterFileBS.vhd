@@ -24,19 +24,17 @@ entity RegisterFileBS is
            AddrSD : in  STD_LOGIC_VECTOR (2 downto 0);
            AddrA : in  STD_LOGIC_VECTOR (2 downto 0);
            AddrB : in  STD_LOGIC_VECTOR (2 downto 0);
-           CL : in  STD_LOGIC;					--SINAL DE SAIDA DO FF DE RESET
-			  --interrupt : in  STD_LOGIC;
+           CL : in  STD_LOGIC;					
            flagsOut : out  STD_LOGIC_VECTOR (5 downto 0);
            PC : out  STD_LOGIC_VECTOR (15 downto 0);
            OpA : out  STD_LOGIC_VECTOR (15 downto 0);
            OpB : out  STD_LOGIC_VECTOR (15 downto 0);
-           Sc : out  STD_LOGIC_VECTOR (15 downto 0));
-			  
-			  
+           Sc : out  STD_LOGIC_VECTOR (15 downto 0));		  
 end RegisterFileBS;
 
 architecture Structural of RegisterFileBS is
 
+	-- Registers Enable
 	Signal en_decodR0_R5: STD_LOGIC;
 	Signal outDecodR0_R5: STD_LOGIC_VECTOR(7 downto 0);
 	Signal en_decodR0i_R5i: STD_LOGIC;
@@ -45,7 +43,7 @@ architecture Structural of RegisterFileBS is
 	Signal outDecodR6_R7: STD_LOGIC_VECTOR(7 downto 0);
 	Signal ER: STD_LOGIC_VECTOR(7 downto 0);
 	Signal ERi: STD_LOGIC_VECTOR(5 downto 0);
-	
+	-- Aplication Bank	
 	Signal R0_5dataIn: bit_16_array(5 downto 0);
 	Signal R5D: STD_LOGIC_VECTOR(15 downto 0);
 	Signal In1R6dataIn: STD_LOGIC_VECTOR(15 downto 0);
@@ -53,14 +51,15 @@ architecture Structural of RegisterFileBS is
 	Signal R6D: STD_LOGIC_VECTOR(15 downto 0);
 	Signal IncPC: STD_LOGIC_VECTOR(15 downto 0);
 	Signal R7D: STD_LOGIC_VECTOR(15 downto 0);
-	Signal R0_5Q: bit_16_array(5 downto 0);		--array 6x16
+	Signal R0_5Q: bit_16_array(5 downto 0);		
 	Signal R6Q: STD_LOGIC_VECTOR(15 downto 0);
 	Signal R7Q: STD_LOGIC_VECTOR(15 downto 0);
+	-- Interrupt Bank
 	Signal R0i_5idataIn: bit_16_array(5 downto 0);	
 	Signal R0iD: STD_LOGIC_VECTOR(15 downto 0);
 	Signal R5iD: STD_LOGIC_VECTOR(15 downto 0);
-	Signal R0i_5iQ: bit_16_array(5 downto 0);		--array 6x16
-		
+	Signal R0i_5iQ: bit_16_array(5 downto 0);		
+	-- OutData
 	Signal SelOpA: STD_LOGIC_VECTOR(2 downto 0);
 	Signal Sel_outMuxA: STD_LOGIC_VECTOR(3 downto 0);
 	Signal Sel_outMuxB: STD_LOGIC_VECTOR(3 downto 0);
@@ -71,14 +70,14 @@ begin
 	--------------------------
 	-- Registers Enable
 	--------------------------
-	en_decodR0_R5 <= RFC(0) AND (NOT R6Q(5));	--en_dest_data AND (NOT BS)
+	en_decodR0_R5 <= RFC(0) AND (NOT R6Q(5));	--R6Q(5) = BS flag
 	
 	decodR0_R5: component Decoder3bits port map(
 		E => en_decodR0_R5,
 		S => AddrSD,
 		O => outDecodR0_R5);
 	
-	en_decodR0i_R5i <= RFC(0) AND R6Q(5);		--en_dest_data AND BS
+	en_decodR0i_R5i <= RFC(0) AND R6Q(5);		--R6Q(5) = BS flag
 	
 	decodR0i_R5i: component Decoder3bits port map(
 		E => en_decodR0i_R5i,
@@ -86,12 +85,12 @@ begin
 		O => outDecodR0i_R5i);
 	
 	decodR5_R5i: component Decoder1bit port map(
-		E => RFC(1),			--en_link
-		S => R6Q(5),			--BS
+		E => RFC(1),			
+		S => R6Q(5),
 		O => outDecodR5_R5i);
 	
 	decodR6_R7: component Decoder3bits port map(
-		E => RFC(0),			--en_dest_data
+		E => RFC(0),
 		S => AddrSD,
 		O => outDecodR6_R7);
 		
@@ -101,8 +100,8 @@ begin
 	ER(3) <= outDecodR0_R5(3);
 	ER(4) <= outDecodR0_R5(4);
 	ER(5) <= outDecodR0_R5(5) OR outDecodR5_R5i(0);
-	ER(6) <= outDecodR6_R7(6) OR RFC(12) OR RFC(2);	--en_psw
-	ER(7) <= outDecodR6_R7(7) OR RFC(12) OR RFC(3);	--en_pc
+	ER(6) <= outDecodR6_R7(6) OR RFC(12) OR RFC(2);
+	ER(7) <= outDecodR6_R7(7) OR RFC(12) OR RFC(3);
 	ERi(0) <= RFC(12) OR outDecodR0i_R5i(0);
 	ERi(1) <= outDecodR0i_R5i(1);
 	ERi(2) <= outDecodR0i_R5i(2);
@@ -114,10 +113,9 @@ begin
 	--------------------------
 	-- Aplication Bank
 	--------------------------
-	
 	-- Registos R0 --> R5
 	R5dataIn: component MUX1x16bits port map(
-		Sel => RFC(5),		--SLINK
+		Sel => RFC(5),	
 		In0 => destData,
 		In1 => R7Q,
 		outdata => R5D);
@@ -128,7 +126,6 @@ begin
 		clk => clock,
 		enable => ER(5 downto 0),
 		dataIn => R0_5dataIn,
---		dataIn => R5D & destData & destData & destData & destData & destData,
 		dataOut => R0_5Q);
 	
 	-- Registo R6
@@ -136,7 +133,7 @@ begin
 	In3R6dataIn(15 downto 0) <= (R6Q OR "0000000000100000") AND "1111111111101111"; 
 	
 	R6dataIn: component MUX2x16bits port map(
-		Sel => RFC(7 downto 6),		--SPSW
+		Sel => RFC(7 downto 6),	
 		In0 => destData,
 		In1 => In1R6dataIn,
 		In2 => R0i_5iQ(0),
@@ -152,7 +149,7 @@ begin
 		
 	-- Registo R7
 	Somador: component Alu_aritmetico port map(
-		Op => "00", --soma
+		Op => "00", --(Operação Soma)
 		A => R7Q,
 	   B => "0000000000000010", 
 	   Cin => '0',
@@ -160,7 +157,7 @@ begin
 	   Flags_out => open);
 		
 	R7dataIn: component MUX2x16bits port map(
-		Sel => RFC(9 downto 8),		--SPSW
+		Sel => RFC(9 downto 8),
 		In0 => destData,
 		In1 => "0000000000000010", 
 		In2 => IncPC,
@@ -178,13 +175,13 @@ begin
 	-- Interrupt Bank
 	--------------------------
 	R0idataIn: component MUX1x16bits port map(
-		Sel => RFC(10),		--SR0i
+		Sel => RFC(10),
 		In0 => destData,
 		In1 => R6Q,
 		outdata => R0iD);
 		
 	R5idataIn: component MUX1x16bits port map(
-		Sel => RFC(11),		--SR5i
+		Sel => RFC(11),
 		In0 => destData,
 		In1 => R7Q,
 		outdata => R5iD);	
@@ -195,7 +192,6 @@ begin
 	R0i_R5i: component RegisterBank0_5 port map(
 		clk => clock,
 		enable => ERi(5 downto 0),
---		dataIn => R5iD & destData & destData & destData & destData & R0iD,
 		dataIn => R0i_5idataIn,
 		dataOut => R0i_5iQ);
 
@@ -203,7 +199,6 @@ begin
 	--------------------------
 	-- OutData
 	--------------------------
-
 	-- OpA
 	mux_OutMuxA: component MUX1x3bits port map(
 		Sel => RFC(4),

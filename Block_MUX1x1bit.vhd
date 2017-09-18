@@ -23,25 +23,9 @@ entity Block_MUX1x1bit is
 			  in_block_0 : in  STD_LOGIC_VECTOR(15 downto 0);
 			  in_block_1 : in STD_LOGIC;
            out_block : out  STD_LOGIC_VECTOR(15 downto 0));
-			  --Output_Carry: out STD_LOGIC;
-           --ir11 : in STD_LOGIC);
 end Block_MUX1x1bit;
 
 architecture Structural of Block_MUX1x1bit is
-
---	component MUX1x1bit is
---		 Port ( Sel : in  STD_LOGIC;
---				  In0 : in  STD_LOGIC;
---				  In1 : in  STD_LOGIC;
---				  outdata : out  STD_LOGIC);
---			 
---			 
-----				  Input: in STD_LOGIC_VECTOR(1 downto 0);
-----				  Output: out STD_LOGIC;
-----				  Sel: in STD_LOGIC
-----				 );
---	end component;
-	--está aqui o componente pq estava a dar erro de compilação não faço ideia pq.
 
 begin
 			
@@ -53,14 +37,6 @@ begin
 					In1 => in_block_1,
 					outdata => out_block(i));
 			end generate;
-			
-			
---			Mplex_Carry: Mux_2in PORT MAP( 
---				Input(0) => Input1(0),
---				Input(1) => Input1(15),
---				Output => Output_Carry,
---				Sel => ir11
---			);
 
 end Structural;
 
