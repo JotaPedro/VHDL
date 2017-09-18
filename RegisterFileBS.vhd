@@ -52,7 +52,6 @@ architecture Structural of RegisterFileBS is
 	Signal In3R6dataIn: STD_LOGIC_VECTOR(15 downto 0);
 	Signal R6D: STD_LOGIC_VECTOR(15 downto 0);
 	Signal IncPC: STD_LOGIC_VECTOR(15 downto 0);
-	Signal int_vec: STD_LOGIC_VECTOR(15 downto 0);
 	Signal R7D: STD_LOGIC_VECTOR(15 downto 0);
 	Signal R0_5Q: bit_16_array(5 downto 0);		--array 6x16
 	Signal R6Q: STD_LOGIC_VECTOR(15 downto 0);

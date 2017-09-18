@@ -7,3 +7,4 @@
 
 # ...even if they are in subdirectories
 !*/
+netgen/par/PDS16fpga_V2_timesim.vhd
