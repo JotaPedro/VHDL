@@ -81,7 +81,7 @@ ARCHITECTURE behavior OF TB_PDS16fpga IS
    signal RESOUT : std_logic;
 
    -- Clock period definitions
-   constant MCLK_period : time := 60 ns;
+   constant MCLK_period : time := 40 ns;
 	
 	
 	signal WR_ram_sig: std_logic_vector(1 downto 0);
@@ -135,8 +135,22 @@ BEGIN
    begin		
       -- hold reset state for 100 ns.
       RESET <= '0';
-		wait for 100 ns;
+		wait for 60 ns;
 		RESET <= '1';
+		wait for 440 ns;	-- 500ns
+		EXINT	<=	'0';
+		wait for 170 ns;	-- 670 ns
+		EXINT	<=	'1';
+		wait for 1100 ns;	-- 1770 ns
+		EXINT	<=	'0';
+		wait for 170 ns;	-- 1940 ns
+		EXINT	<=	'1';
+		wait for 2060 ns;	-- 4000 ns
+		RESET	<= '0';
+		wait for 10 ns;	
+		RESET	<= '1';
+		
+		
 
       -- insert stimulus here 
 
